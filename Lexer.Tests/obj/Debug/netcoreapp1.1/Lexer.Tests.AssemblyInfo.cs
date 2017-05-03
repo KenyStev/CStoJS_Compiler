@@ -3,11 +3,11 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("Compiler")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Lexer.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyDescriptionAttribute("Package Description")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("Compiler")]
-[assembly: System.Reflection.AssemblyTitleAttribute("Compiler")]
+[assembly: System.Reflection.AssemblyProductAttribute("Lexer.Tests")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Lexer.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

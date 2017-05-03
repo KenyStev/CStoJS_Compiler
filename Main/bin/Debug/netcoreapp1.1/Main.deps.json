@@ -6,15 +6,28 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "compiler/1.0.0": {
+      "main/1.0.0": {
+        "dependencies": {
+          "Lexer": "1.0.0"
+        },
         "runtime": {
-          "Compiler.dll": {}
+          "Main.dll": {}
+        }
+      },
+      "lexer/1.0.0": {
+        "runtime": {
+          "Lexer.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "compiler/1.0.0": {
+    "main/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "lexer/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

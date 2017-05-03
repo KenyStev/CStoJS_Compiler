@@ -1,8 +1,6 @@
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Lexer.deps.json
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Lexer.runtimeconfig.json
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Lexer.runtimeconfig.dev.json
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Lexer.dll
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Lexer.pdb
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/obj/Debug/netcoreapp1.1/Lexer.AssemblyInfo.cs
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/obj/Debug/netcoreapp1.1/Lexer.dll
-/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/obj/Debug/netcoreapp1.1/Lexer.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Lexer\bin\Debug\netcoreapp1.1\Lexer.deps.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Lexer\bin\Debug\netcoreapp1.1\Lexer.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Lexer\bin\Debug\netcoreapp1.1\Lexer.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Lexer\obj\Debug\netcoreapp1.1\Lexer.AssemblyInfo.cs
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Lexer\obj\Debug\netcoreapp1.1\Lexer.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Lexer\obj\Debug\netcoreapp1.1\Lexer.pdb

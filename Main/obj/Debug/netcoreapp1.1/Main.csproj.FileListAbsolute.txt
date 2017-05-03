@@ -1,0 +1,10 @@
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.deps.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.runtimeconfig.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.runtimeconfig.dev.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Lexer.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Lexer.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.AssemblyInfo.cs
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.pdb

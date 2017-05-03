@@ -15,6 +15,8 @@ namespace Compiler
         LIT_INT,
         PAREN_OPEN,
         PAREN_CLOSE,
-        END_STATEMENT
+        END_STATEMENT,
+        RW_INT,
+        RW_STRING
     }
 }

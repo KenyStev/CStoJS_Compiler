@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Compiler;
 
 namespace Main
 {
@@ -6,10 +8,13 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            var inputString = new InputString(@"print IDTEST = 5595 + ( TRE ) - QUATTRO * UNO//Hola
-IDDUE/ALGO;");
+            //var inputString = new InputString(@"print IDTEST = 5595 + ( TRE ) - QUATTRO * UNO//Hola IDDUE/ALGO;");
 
-            var lexer = new Lexer(inputString);
+            var inputString = new InputString(@"int hola string adios como_0101");
+
+            var tokenGenerators = getTokenGenerators();
+
+            var lexer = new Lexer(inputString, tokenGenerators);
 
             Token token = lexer.GetNextToken();
 
@@ -33,6 +38,16 @@ IDDUE/ALGO;");
             }*/
 
             System.Console.ReadKey();
+        }
+
+        private static List<ITokenGenerator> getTokenGenerators()
+        {
+            var tokenGenerators = new List<ITokenGenerator>();
+            
+            tokenGenerators.Add(new IdTokenGenerator());
+            tokenGenerators.Add(new EOFTokenGenerator());
+
+            return tokenGenerators;
         }
     }
 }

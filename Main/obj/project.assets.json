@@ -2264,6 +2264,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
+      },
+      "Lexer/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.1",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.1"
+        },
+        "compile": {
+          "bin/placeholder/netcoreapp1.1/Lexer.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/netcoreapp1.1/Lexer.dll": {}
+        }
       }
     }
   },
@@ -7067,10 +7080,16 @@
         "system.xml.xpath.xdocument.4.0.1.nupkg.sha512",
         "system.xml.xpath.xdocument.nuspec"
       ]
+    },
+    "Lexer/1.0.0": {
+      "type": "project",
+      "path": "../Lexer/Lexer.csproj",
+      "msbuildProject": "../Lexer/Lexer.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
+      "Lexer >= 1.0.0",
       "Microsoft.NETCore.App >= 1.1.1"
     ]
   },
@@ -7080,20 +7099,24 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj",
-      "projectName": "Lexer",
-      "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj",
-      "outputPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\obj\\",
+      "projectUniqueName": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\Main.csproj",
+      "projectName": "Main",
+      "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\Main.csproj",
+      "outputPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Lexer.dll": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\bin\\placeholder\\netcoreapp1.1\\Lexer.dll"
+        "lib/netcoreapp1.1/Main.dll": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\bin\\placeholder\\netcoreapp1.1\\Main.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj": {
+              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj"
+            }
+          }
         }
       }
     },
