@@ -1,0 +1,8 @@
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Compiler.deps.json
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Compiler.runtimeconfig.json
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Compiler.runtimeconfig.dev.json
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Compiler.dll
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/bin/Debug/netcoreapp1.1/Compiler.pdb
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/obj/Debug/netcoreapp1.1/Compiler.AssemblyInfo.cs
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/obj/Debug/netcoreapp1.1/Compiler.dll
+/run/media/kenystev/Datos/Backup/Unitec/2017/II Modulo/Compiladores_1/Lexer/obj/Debug/netcoreapp1.1/Compiler.pdb
