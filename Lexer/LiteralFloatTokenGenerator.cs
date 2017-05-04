@@ -16,7 +16,7 @@ namespace Compiler{
             {
                 currentSymbol = inputString.GetNextSymbol();
                 if(!Char.IsDigit(currentSymbol.character))
-                    throw new ExpectedDigitBeforeException("Expected [0-9] before '"+ currentSymbol.character +"'.");
+                    throw new ExpectedDigitBeforeException("Expected [0-9] before '"+ currentSymbol.character +"'. line:"+lexemeRow+","+lexemeCol);
 
                 do{
                     lexeme.Append(currentSymbol.character);
@@ -24,7 +24,7 @@ namespace Compiler{
                 }while(Char.IsDigit(currentSymbol.character));
 
                 if(!setLiteralFloatSufix())
-                    throw new LiteralFloatMustHaveSufixException("The literal '"+lexeme.ToString()+"' must end with: [fF].");
+                    throw new InvalidNumberException("The literal '"+lexeme.ToString()+"' must end with: [fF]. line:"+lexemeRow+","+lexemeCol);
                 return new Token(TokenType.LIT_FLOAT,lexeme.ToString(),lexemeRow,lexemeCol);
             }
             currentSymbol = inputString.GetNextSymbol();

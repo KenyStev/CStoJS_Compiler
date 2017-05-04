@@ -11,6 +11,10 @@ namespace Compiler{
 
         public override Token getToken()
         {
+            lexeme.Append(currentSymbol.character);
+            currentSymbol = inputString.GetNextSymbol();
+            if(!("01".IndexOf(currentSymbol.character)>=0))
+                throw new InvalidNumberException("Bad construction of [BINARY] number. line:"+lexemeRow+","+lexemeCol);
             do{
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
