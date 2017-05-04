@@ -10,7 +10,9 @@ namespace Main
         {
             //var inputString = new InputString(@"print IDTEST = 5595 + ( TRE ) - QUATTRO * UNO//Hola IDDUE/ALGO;");
 
-            var inputString = new InputString(@"int hola string adios como_0101 123 12 0x2bc3a 0b0100 0X5d6a3 0B01110 8 0");
+            var inputString = new InputString(@"int hola string adios como_0101 
+            123 12 0x2bc3a 0b0100 0X5d6a3 0B01110 8 0 485hola
+            123f 12F 8.58f 0.05F");
 
             var tokenGenerators = getTokenGenerators();
 

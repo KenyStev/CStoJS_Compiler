@@ -20,6 +20,7 @@ namespace Compiler
         RW_FALSE,
         RW_FLOAT,
         RW_CHAR,
-        RW_BOOL
+        RW_BOOL,
+        LIT_FLOAT
     }
 }

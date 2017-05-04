@@ -20,7 +20,7 @@ namespace Compiler{
 
         public override bool validStart(Symbol currentSymbol)
         {
-            if(currentSymbol.character == 'x' || currentSymbol.character == 'X')
+            if("xX".IndexOf(currentSymbol.character)>=0)
                 return true;
             return false;
         }

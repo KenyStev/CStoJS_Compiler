@@ -51,8 +51,24 @@ namespace Lexer.Tests
             int i =0;
             do{
                 Assert.True(currentToken.type == TokenType.LIT_INT);
-                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_INT);
                 Assert.True(currentToken.lexeme == expectedLexemes[i++]);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_INT);
+                currentToken = lexer.GetNextToken();
+            }while(currentToken.type != TokenType.EOF);
+        }
+
+        [Fact]
+        public void ValidLiteralFloat()
+        {
+            var inputString = new InputString("123f 12F 8.58f 0.05F");
+            var expectedLexemes = new string[]{"123f", "12F", "8.58f", "0.05F"};
+            var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
+            var currentToken = lexer.GetNextToken();
+            int i =0;
+            do{
+                Assert.True(currentToken.type == TokenType.LIT_FLOAT);
+                Assert.True(currentToken.lexeme == expectedLexemes[i++]);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_FLOAT);
                 currentToken = lexer.GetNextToken();
             }while(currentToken.type != TokenType.EOF);
         }
