@@ -148,7 +148,7 @@ namespace Lexer.Tests
             do{
                 Assert.True(currentToken.type == TokenType.LIT_STRING);
                 Assert.True(currentToken.lexeme == expectedLexemes[i++]);
-                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_FLOAT);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_STRING);
                 currentToken = lexer.GetNextToken();
             }while(currentToken.type != TokenType.EOF);
         } 
