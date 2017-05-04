@@ -37,7 +37,10 @@ namespace Compiler
                 }
             }
 
-            throw new LexicalException("Symbol not supported.");
+            throw new LexicalException("Symbol '"
+                + currentSymbol.character +"' not supported line:"
+                + currentSymbol.rowCount +","
+                + currentSymbol.colCount +".");
         }
     }
 }

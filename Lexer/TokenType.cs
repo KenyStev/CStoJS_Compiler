@@ -5,8 +5,6 @@ namespace Compiler
         ID,
         EOF,
         OP_SUM,
-        PRINT_CALL,
-        READ_CALL,
         OP_SUBSTRACT,
         OP_DIVISION,
         OP_MULTIPLICATION,
@@ -17,6 +15,11 @@ namespace Compiler
         PAREN_CLOSE,
         END_STATEMENT,
         RW_INT,
-        RW_STRING
+        RW_STRING,
+        RW_TRUE,
+        RW_FALSE,
+        RW_FLOAT,
+        RW_CHAR,
+        RW_BOOL
     }
 }

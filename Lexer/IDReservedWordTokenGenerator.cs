@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Compiler;
 
 namespace Compiler
 {
-    public class IdTokenGenerator : ITokenGenerator
+    public class IDReservedWordTokenGenerator : ITokenGenerator
     {
         private Dictionary<string, TokenType> reservedWordsDict;
 
-        public IdTokenGenerator()
+        public IDReservedWordTokenGenerator()
         {
             InitReservedWordsDictionary();
         }
@@ -23,7 +22,7 @@ namespace Compiler
             {
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
-            } while (Char.IsLetter(currentSymbol.character) || Char.IsDigit(currentSymbol.character) || '_' == currentSymbol.character);
+            } while (Char.IsLetterOrDigit(currentSymbol.character) || '_' == currentSymbol.character);
 
             var tokenType = reservedWordsDict.ContainsKey(lexeme.ToString()) ? 
                 reservedWordsDict[lexeme.ToString()] : TokenType.ID;
@@ -50,6 +49,11 @@ namespace Compiler
             reservedWordsDict = new Dictionary<string, TokenType>();
             reservedWordsDict["int"] = TokenType.RW_INT;
             reservedWordsDict["string"] = TokenType.RW_STRING;
+            reservedWordsDict["float"] = TokenType.RW_FLOAT;
+            reservedWordsDict["char"] = TokenType.RW_CHAR;
+            reservedWordsDict["bool"] = TokenType.RW_BOOL;
+            reservedWordsDict["true"] = TokenType.RW_TRUE;
+            reservedWordsDict["false"] = TokenType.RW_FALSE;
         }
     }
 }

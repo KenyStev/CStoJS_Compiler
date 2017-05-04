@@ -4,13 +4,13 @@ using Compiler;
 
 namespace Main
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             //var inputString = new InputString(@"print IDTEST = 5595 + ( TRE ) - QUATTRO * UNO//Hola IDDUE/ALGO;");
 
-            var inputString = new InputString(@"int hola string adios como_0101");
+            var inputString = new InputString(@"int hola string adios como_0101 123 12 0x2bc3a 0b0100 0X5d6a3 0B01110 8 0");
 
             var tokenGenerators = getTokenGenerators();
 
@@ -44,7 +44,8 @@ namespace Main
         {
             var tokenGenerators = new List<ITokenGenerator>();
             
-            tokenGenerators.Add(new IdTokenGenerator());
+            tokenGenerators.Add(new IDReservedWordTokenGenerator());
+            tokenGenerators.Add(new LiteralIntTokenGenerator());
             tokenGenerators.Add(new EOFTokenGenerator());
 
             return tokenGenerators;

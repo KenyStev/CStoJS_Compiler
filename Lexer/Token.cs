@@ -3,21 +3,21 @@ namespace Compiler
     public class Token
     {
         public TokenType type;
-        private int column;
-        private int row;
-        private string lexema;
+        public int column;
+        public int row;
+        public string lexeme;
         
-        public Token(TokenType type, string lexema, int row, int column)
+        public Token(TokenType type, string lexeme, int row, int column)
         {
             this.type = type;
-            this.lexema = lexema;
+            this.lexeme = lexeme;
             this.row = row;
             this.column = column;
         }
 
         public override string ToString()
         {
-            return lexema + " of type " + type;
+            return lexeme + " of type " + type;
         }
     }
 }
