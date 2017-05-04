@@ -19,7 +19,7 @@ namespace Lexer.Tests
             }while(currentSymbol.character != '\0');
 
             inputString = new InputString("hola Hola abd142_ hola_ adios_1542 true false");
-            var expectedTypes = new TokenType[]{TokenType.ID, TokenType.ID,TokenType.ID,TokenType.ID,TokenType.ID,TokenType.RW_BOOL,TokenType.RW_BOOL};
+            var expectedTypes = new TokenType[]{TokenType.ID, TokenType.ID,TokenType.ID,TokenType.ID,TokenType.ID,TokenType.LIT_BOOL,TokenType.LIT_BOOL};
             var expectedLexemes = new string[]{"hola", "Hola", "abd142_", "hola_", "adios_1542", "true", "false"};
             var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
             var currentToken = lexer.GetNextToken();
