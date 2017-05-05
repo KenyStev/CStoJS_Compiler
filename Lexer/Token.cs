@@ -17,7 +17,7 @@ namespace Compiler
 
         public override string ToString()
         {
-            return lexeme + " of type " + type;
+            return lexeme + " of type " + type + " line("+row+","+column+")";
         }
     }
 }

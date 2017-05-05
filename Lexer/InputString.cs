@@ -38,5 +38,20 @@ namespace Compiler
 
             return new Symbol('\0', rowCount, colCount);
         }
+
+        public Symbol LookAheadSymbol()
+        {
+            if (currentChar < initialInput.Length)
+            {
+                var returnSymbol = new Symbol(
+                    initialInput[currentChar],
+                    rowCount,
+                    colCount);
+
+                return returnSymbol;
+            }
+
+            return new Symbol('\0', rowCount, colCount);
+        }
     }
 }

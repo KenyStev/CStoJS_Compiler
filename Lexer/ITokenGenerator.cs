@@ -3,7 +3,7 @@ namespace Compiler
     public abstract class ITokenGenerator
     {
         protected Symbol currentSymbol;
-        protected InputString inputString;
+        protected IInput inputString;
         public abstract bool validStart(Symbol currentSymbol);
         public abstract Token getToken();
         public Symbol getCurrentSymbol()
@@ -11,7 +11,7 @@ namespace Compiler
             return currentSymbol;
         }
 
-        public InputString getInputString()
+        public IInput getInputString()
         {
             return inputString;
         }
@@ -21,7 +21,7 @@ namespace Compiler
             this.currentSymbol = currentSymbol;
         }
 
-        public void setInputString(InputString inputString)
+        public void setInputString(IInput inputString)
         {
             this.inputString = inputString;
         }

@@ -52,8 +52,8 @@ namespace Compiler
             reservedWordsDict["float"] = TokenType.RW_FLOAT;
             reservedWordsDict["char"] = TokenType.RW_CHAR;
             reservedWordsDict["bool"] = TokenType.RW_BOOL;
-            reservedWordsDict["true"] = TokenType.RW_TRUE;
-            reservedWordsDict["false"] = TokenType.RW_FALSE;
+            reservedWordsDict["true"] = TokenType.LIT_BOOL;
+            reservedWordsDict["false"] = TokenType.LIT_BOOL;
         }
     }
 }

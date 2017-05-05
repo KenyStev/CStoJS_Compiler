@@ -16,11 +16,12 @@ namespace Compiler
         END_STATEMENT,
         RW_INT,
         RW_STRING,
-        RW_TRUE,
-        RW_FALSE,
         RW_FLOAT,
         RW_CHAR,
         RW_BOOL,
-        LIT_FLOAT
+        LIT_FLOAT,
+        LIT_BOOL,
+        LIT_CHAR,
+        LIT_STRING
     }
 }

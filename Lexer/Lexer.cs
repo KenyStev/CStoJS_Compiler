@@ -6,11 +6,11 @@ namespace Compiler
 {
     public class Lexer
     {
-        private InputString inputString;
+        private IInput inputString;
         private Symbol currentSymbol;
         private List<ITokenGenerator> tokenGenerators;
 
-        public Lexer(InputString inputString, List<ITokenGenerator> tokenGenerators)
+        public Lexer(IInput inputString, List<ITokenGenerator> tokenGenerators)
         {
             this.inputString = inputString;
             this.tokenGenerators = tokenGenerators;

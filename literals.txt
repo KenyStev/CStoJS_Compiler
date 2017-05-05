@@ -1,0 +1,20 @@
+int a  10
+
+int b  20
+22							
+
+0xAF2323F5					
+0b00100010					
+51.37f						
+51.37F						
+true						
+false						
+'c'									
+hello
+@"Hola 
+
+
+	\r\nsoy ""Jesus"""
+
+
+"dsodlaosd sdoasfd s\n\r\nadios"
