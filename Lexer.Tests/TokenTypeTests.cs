@@ -152,5 +152,28 @@ namespace Lexer.Tests
                 currentToken = lexer.GetNextToken();
             }while(currentToken.type != TokenType.EOF);
         } 
+
+        [Fact]
+        public void ValidLiteralVerbatimString()
+        {
+            var inputString = new InputString(@"@""Hola como """"estan todos""""   
+            nada \mas\ que 'hacer',....."" @""otra ves{](0)""");
+            var expectedLexemes = new string[]{@"@""Hola como """"estan todos""""   
+            nada \mas\ que 'hacer',.....""",@"@""otra ves{](0)"""};
+
+            // var inputString = new InputString("@\"Hola como \"\"estan todos\"\" nada \\mas\\ que 'hacer',.....\" @\"otra ves{](0)\"");
+            // var expectedLexemes = new string[]{"@\"Hola como \"\"estan todos\"\" nada \\mas\\ que 'hacer',.....\""
+            // ,"@\"otra ves{](0)\""};
+
+            var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
+            var currentToken = lexer.GetNextToken();
+            int i =0;
+            do{
+                Assert.True(currentToken.type == TokenType.LIT_STRING);
+                Assert.True(currentToken.lexeme == expectedLexemes[i++]);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_STRING);
+                currentToken = lexer.GetNextToken();
+            }while(currentToken.type != TokenType.EOF);
+        } 
     }
 }
