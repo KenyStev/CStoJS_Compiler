@@ -161,15 +161,107 @@ namespace Lexer.Tests
             var expectedLexemes = new string[]{@"@""Hola como """"estan todos""""   
             nada \mas\ que 'hacer',.....""",@"@""otra ves{](0)"""};
 
-            // var inputString = new InputString("@\"Hola como \"\"estan todos\"\" nada \\mas\\ que 'hacer',.....\" @\"otra ves{](0)\"");
-            // var expectedLexemes = new string[]{"@\"Hola como \"\"estan todos\"\" nada \\mas\\ que 'hacer',.....\""
-            // ,"@\"otra ves{](0)\""};
-
             var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
             var currentToken = lexer.GetNextToken();
             int i =0;
             do{
                 Assert.True(currentToken.type == TokenType.LIT_STRING);
+                Assert.True(currentToken.lexeme == expectedLexemes[i++]);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_STRING);
+                currentToken = lexer.GetNextToken();
+            }while(currentToken.type != TokenType.EOF);
+        } 
+
+        [Fact]
+        public void ValidOperators()
+        {
+            var inputString = new InputString(@"= += -=	*= /= %= <<= >>= &= ^= |= & | ^ ~ << >>
+            && || ! sizeof type ? ?? is as == != > < >= <= + - * / % ++ --");
+            var expectedLexemes = new string[]{@"
+            = 
+            += 
+            -= 
+            *= 
+            /= 
+            %= 
+            <<= 
+            >>= 
+            &= 
+            ^= 
+            |= 
+            & 
+            | 
+            ^ 
+            ~ 
+            << 
+            >>
+            && 
+            || 
+            ! 
+            sizeof 
+            ? 
+            ?? 
+            is 
+            as 
+            == 
+            != 
+            > 
+            < 
+            >= 
+            <= 
+            + 
+            - 
+            * 
+            / 
+            % 
+            ++ 
+            --"};
+            var expectedTypes = new TokenType[]{
+                TokenType.OP_ASSIGN
+                ,TokenType.OP_ASSIGN_SUM
+                ,TokenType.OP_ASSIGN_SUBSTRACT
+                ,TokenType.OP_ASSIGN_MULTIPLICATION
+                ,TokenType.OP_ASSIGN_DIVISION
+                ,TokenType.OP_ASSIGN_MODULO
+                ,TokenType.OP_ASSIGN_SHIFT_LEFT
+                ,TokenType.OP_ASSIGN_SHIFT_RIGHT
+                ,TokenType.OP_ASSIGN_SHIFT_LEFT
+                ,TokenType.OP_ASSIGN_BITWISE_AND
+                ,TokenType.OP_ASSIGN_XOR
+                ,TokenType.OP_ASSIGN_BITWISE_OR
+                ,TokenType.OP_BITWISE_AND
+                ,TokenType.OP_BITWISE_OR
+                ,TokenType.OP_XOR
+                ,TokenType.OP_BITWISE_NOT
+                ,TokenType.OP_SHIFT_LEFT
+                ,TokenType.OP_SHIFT_RIGHT
+                ,TokenType.OP_AND
+                ,TokenType.OP_OR
+                ,TokenType.OP_NOT
+                ,TokenType.OP_SIZEOF
+                ,TokenType.OP_TERNARY
+                ,TokenType.OP_NULL_COALESCING
+                ,TokenType.OP_IS
+                ,TokenType.OP_AS
+                ,TokenType.OP_EQUAL
+                ,TokenType.OP_DISTINCT
+                ,TokenType.OP_MORE_THAN
+                ,TokenType.OP_LESS_THAN
+                ,TokenType.OP_MORE_AND_EQUAL_THAN
+                ,TokenType.OP_LESS_AND_EQUAL_THAN
+                ,TokenType.OP_SUM
+                ,TokenType.OP_SUBSTRACT
+                ,TokenType.OP_MULTIPLICATION
+                ,TokenType.OP_DIVISION
+                ,TokenType.OP_MODULO
+                ,TokenType.OP_PLUS_PLUS
+                ,TokenType.OP_MINUS_MINUS};
+
+            var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
+            var currentToken = lexer.GetNextToken();
+            int i =0;
+            do{
+                Assert.True(currentToken.type == expectedTypes[i]);
                 Assert.True(currentToken.lexeme == expectedLexemes[i++]);
                 Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_STRING);
                 currentToken = lexer.GetNextToken();

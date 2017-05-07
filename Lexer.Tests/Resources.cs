@@ -14,6 +14,7 @@ namespace Lexer.Tests
             tokenGenerators.Add(new LiteralIntTokenGenerator());
             tokenGenerators.Add(new LiteralCharTokenGenerator());
             tokenGenerators.Add(new LiteralStringTokenGenerator());
+            tokenGenerators.Add(new OperatorsTokenGenerator());
             tokenGenerators.Add(new EOFTokenGenerator());
 
             return tokenGenerators;
