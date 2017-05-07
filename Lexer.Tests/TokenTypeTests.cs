@@ -8,6 +8,57 @@ namespace Lexer.Tests
     public class TokenTypeTest
     {
         [Fact]
+        void LookAheadSymbolInputString()
+        {
+            var inputString = new InputString("abc");
+
+            Assert.True('a'==inputString.GetNextSymbol().character);
+            Assert.True('b'==inputString.LookAheadSymbol().character);
+            Assert.True('b'==inputString.LookAheadSymbol(0).character);
+            Assert.True('c'==inputString.LookAheadSymbol(1).character);
+            Assert.True('b'==inputString.GetNextSymbol().character);
+            Assert.True('c'==inputString.LookAheadSymbol().character);
+            Assert.True('c'==inputString.LookAheadSymbol(0).character);
+            Assert.True('c'==inputString.GetNextSymbol().character);
+            Assert.True('\0'==inputString.LookAheadSymbol().character);
+        }
+
+        void LookAheadSymbolInputFile()
+        {
+            var inputString = new InputFile(@"C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\lookAheadTry.txt");
+
+            Assert.True('a'==inputString.GetNextSymbol().character);
+            Assert.True('b'==inputString.LookAheadSymbol().character);
+            Assert.True('b'==inputString.LookAheadSymbol(0).character);
+            Assert.True('c'==inputString.LookAheadSymbol(1).character);
+            Assert.True('b'==inputString.GetNextSymbol().character);
+            Assert.True('c'==inputString.LookAheadSymbol().character);
+            Assert.True('c'==inputString.LookAheadSymbol(0).character);
+            Assert.True('c'==inputString.GetNextSymbol().character);
+            Assert.True('\0'==inputString.LookAheadSymbol().character);
+        }
+
+        [Fact]
+        void ValirReadAllTokensFromFile()
+        {
+            var inputString = new InputFile(@"C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\lexer_test.txt");
+            var tokenGenerators = Resources.getTokenGenerators();
+
+            var lexer = new Compiler.Lexer(inputString, tokenGenerators);
+
+            Token token = lexer.GetNextToken();
+
+            while (token.type != TokenType.EOF)
+            {
+                System.Console.Out.WriteLine(token);
+                token = lexer.GetNextToken();
+            }
+
+            System.Console.Out.WriteLine(token);
+            Assert.True(token.type==TokenType.EOF);
+        }
+
+        [Fact]
         public void ValidIDReservedWord()
         {
             var inputString = new InputString("abc");
@@ -116,7 +167,7 @@ namespace Lexer.Tests
             do{
                 Assert.True(currentToken.type == TokenType.LIT_BOOL);
                 Assert.True(currentToken.lexeme == expectedLexemes[i++]);
-                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_FLOAT);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_BOOL);
                 currentToken = lexer.GetNextToken();
             }while(currentToken.type != TokenType.EOF);
         }
@@ -272,15 +323,15 @@ namespace Lexer.Tests
         public void ValidPuntuation()
         {
             var inputString = new InputString(@"
-:						
-,						
-;						
-(						
-)						
-{						
-}              			
-[                		
-]");
+:						// ':'
+,						// ','
+;						// ';'
+(						// '('
+)						// ')'
+{						// '{'
+}              			// '}'
+[                		// '['
+]               		// ']'");
             var expectedLexemes = new string[]{
             ":" 
             ,"," 
