@@ -176,46 +176,46 @@ namespace Lexer.Tests
         public void ValidOperators()
         {
             var inputString = new InputString(@"= += -=	*= /= %= <<= >>= &= ^= |= & | ^ ~ << >>
-            && || ! sizeof type ? ?? is as == != > < >= <= + - * / % ++ --");
-            var expectedLexemes = new string[]{@"
-            = 
-            += 
-            -= 
-            *= 
-            /= 
-            %= 
-            <<= 
-            >>= 
-            &= 
-            ^= 
-            |= 
-            & 
-            | 
-            ^ 
-            ~ 
-            << 
-            >>
-            && 
-            || 
-            ! 
-            sizeof 
-            ? 
-            ?? 
-            is 
-            as 
-            == 
-            != 
-            > 
-            < 
-            >= 
-            <= 
-            + 
-            - 
-            * 
-            / 
-            % 
-            ++ 
-            --"};
+            && || ! sizeof ? ?? is as == != > < >= <= + - * / % ++ --");
+            var expectedLexemes = new string[]{
+            "=" 
+            ,"+=" 
+            ,"-=" 
+            ,"*=" 
+            ,"/=" 
+            ,"%=" 
+            ,"<<=" 
+            ,">>=" 
+            ,"&=" 
+            ,"^=" 
+            ,"|=" 
+            ,"&" 
+            ,"|" 
+            ,"^" 
+            ,"~" 
+            ,"<<" 
+            ,">>"
+            ,"&&" 
+            ,"||" 
+            ,"!" 
+            ,"sizeof" 
+            ,"?" 
+            ,"??" 
+            ,"is" 
+            ,"as" 
+            ,"==" 
+            ,"!=" 
+            ,">" 
+            ,"<" 
+            ,">=" 
+            ,"<=" 
+            ,"+" 
+            ,"-" 
+            ,"*" 
+            ,"/" 
+            ,"%" 
+            ,"++" 
+            ,"--"};
             var expectedTypes = new TokenType[]{
                 TokenType.OP_ASSIGN
                 ,TokenType.OP_ASSIGN_SUM
@@ -225,7 +225,6 @@ namespace Lexer.Tests
                 ,TokenType.OP_ASSIGN_MODULO
                 ,TokenType.OP_ASSIGN_SHIFT_LEFT
                 ,TokenType.OP_ASSIGN_SHIFT_RIGHT
-                ,TokenType.OP_ASSIGN_SHIFT_LEFT
                 ,TokenType.OP_ASSIGN_BITWISE_AND
                 ,TokenType.OP_ASSIGN_XOR
                 ,TokenType.OP_ASSIGN_BITWISE_OR
@@ -262,9 +261,56 @@ namespace Lexer.Tests
             int i =0;
             do{
                 Assert.True(currentToken.type == expectedTypes[i]);
-                Assert.True(currentToken.lexeme == expectedLexemes[i++]);
-                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+TokenType.LIT_STRING);
+                Assert.True(currentToken.lexeme == expectedLexemes[i]);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+expectedTypes[i]);
                 currentToken = lexer.GetNextToken();
+                i++;
+            }while(currentToken.type != TokenType.EOF);
+        } 
+
+        [Fact]
+        public void ValidPuntuation()
+        {
+            var inputString = new InputString(@"
+:						
+,						
+;						
+(						
+)						
+{						
+}              			
+[                		
+]");
+            var expectedLexemes = new string[]{
+            ":" 
+            ,"," 
+            ,";" 
+            ,"(" 
+            ,")" 
+            ,"{" 
+            ,"}" 
+            ,"[" 
+            ,"]"};
+            var expectedTypes = new TokenType[]{
+                TokenType.PUNT_COLON
+                ,TokenType.PUNT_COMMA
+                ,TokenType.PUNT_END_STATEMENT_SEMICOLON
+                ,TokenType.PUNT_PAREN_OPEN
+                ,TokenType.PUNT_PAREN_CLOSE
+                ,TokenType.PUNT_CURLY_BRACKET_OPEN
+                ,TokenType.PUNT_CURLY_BRACKET_CLOSE
+                ,TokenType.PUNT_SQUARE_BRACKET_OPEN
+                ,TokenType.PUNT_SQUARE_BRACKET_CLOSE};
+
+            var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
+            var currentToken = lexer.GetNextToken();
+            int i =0;
+            do{
+                Assert.True(currentToken.type == expectedTypes[i]);
+                Assert.True(currentToken.lexeme == expectedLexemes[i]);
+                Console.WriteLine("lexeme: "+currentToken.lexeme+" | TokenType: "+expectedTypes[i]);
+                currentToken = lexer.GetNextToken();
+                i++;
             }while(currentToken.type != TokenType.EOF);
         } 
     }
