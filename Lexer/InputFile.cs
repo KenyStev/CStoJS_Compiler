@@ -39,13 +39,22 @@ namespace Compiler
             return new Symbol('\0', rowCount, colCount);
         }
 
-        public Symbol LookAheadSymbol()
+        public Symbol LookAheadSymbol(int offset)
         {
-            if(file.BaseStream.Position < file.BaseStream.Length)
+            if(file.BaseStream.Position + offset < file.BaseStream.Length)
             {
-                return new Symbol((char)file.PeekChar(), rowCount, colCount);
+                var currentPos = file.BaseStream.Position;
+                file.BaseStream.Seek(currentPos + offset, SeekOrigin.Begin);
+                var symbolToRetorn = new Symbol((char)file.PeekChar(), rowCount, colCount);
+                file.BaseStream.Seek(currentPos, SeekOrigin.Begin);
+                return symbolToRetorn;
             }
             return new Symbol('\0', rowCount, colCount);
+        }
+
+        public Symbol LookAheadSymbol()
+        {
+            return LookAheadSymbol(0);
         }
     }
 }

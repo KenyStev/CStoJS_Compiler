@@ -4,5 +4,6 @@ namespace Compiler
     {
         Symbol GetNextSymbol();
         Symbol LookAheadSymbol();
+        Symbol LookAheadSymbol(int offset);
     }
 }

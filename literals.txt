@@ -18,3 +18,6 @@ hello
 
 
 "dsodlaosd sdoasfd s\n\r\nadios"
+
+= += -=	*= /= %= <<= >>= &= ^= |= & | ^ ~ << >>
+            && || ! sizeof ? ?? is as == != > < >= <= + - * / % ++ --

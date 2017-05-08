@@ -25,8 +25,8 @@ namespace Compiler
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
                 checkEOFbeforeClose();
-                if(!("abfnrtv\'\"\\?".IndexOf(currentSymbol.character)>=0))
-                    throw new InvalidEscapeCharacterException("excpected [abfnrtv\'\"\\?] before "+currentSymbol.character+". line:"+lexemeRow+","+lexemeCol);
+                if(!("0abfnrtv\'\"\\?".IndexOf(currentSymbol.character)>=0))
+                    throw new InvalidEscapeCharacterException("excpected [0abfnrtv\'\"\\?] before "+currentSymbol.character+". line:"+lexemeRow+","+lexemeCol);
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
                 checkEOFbeforeClose();

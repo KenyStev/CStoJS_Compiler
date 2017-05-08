@@ -39,10 +39,8 @@ sizeof						// 'sizeof()'
 type						// 'type()'
 ?							// '? :'
 ??							// '??'
-?.							// '?.'
 is							// 'is'
 as							// 'as'
-->							// '->'
 .							// '.'
 hello					//Identifier
 :						// ':'
@@ -60,7 +58,7 @@ hello					//Identifier
 <						// '<'
 >=						// '>='
 <=						// '<='
-@"Foo ""Bar"" Baz ""Quux"" this?	//Verbatim String
+@"Foo ""Bar"" Baz ""Quux"" this?"	//Verbatim String
 +							// '+'
 -							// '-'
 *							// '*'

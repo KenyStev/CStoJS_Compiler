@@ -19,9 +19,9 @@ namespace Compiler
 
         public Token GetNextToken()
         {
-            while(Char.IsWhiteSpace(currentSymbol.character))
+            if(checkForCommentOrWitheSpace())
             {
-                currentSymbol = inputString.GetNextSymbol();
+                return GetNextToken();
             }
 
             foreach(var tokenGenerator in tokenGenerators)
@@ -41,6 +41,43 @@ namespace Compiler
                 + currentSymbol.character +"' not supported line:"
                 + currentSymbol.rowCount +","
                 + currentSymbol.colCount +".");
+        }
+
+        private bool checkForCommentOrWitheSpace()
+        {
+            bool detected = false;
+            while(Char.IsWhiteSpace(currentSymbol.character))
+            {
+                currentSymbol = inputString.GetNextSymbol();
+                detected = true;
+            }
+            var mayBeComment = new StringBuilder();
+            var nextOne = inputString.LookAheadSymbol();
+            mayBeComment.Append(currentSymbol.character);
+            mayBeComment.Append(nextOne.character);
+            if(mayBeComment.ToString()=="//")
+            {
+                detected = true;
+                do{
+                    currentSymbol = inputString.GetNextSymbol();
+                }while(!("\n\0".IndexOf(currentSymbol.character)>=0));
+            }else if(mayBeComment.ToString()=="/*")
+            {
+                detected = true;
+                currentSymbol = inputString.GetNextSymbol();
+                do{
+                    mayBeComment.Clear();
+                    currentSymbol = inputString.GetNextSymbol();
+                    nextOne = inputString.LookAheadSymbol();
+
+                    if(nextOne.character=='\0')
+                        throw new BlockCommentMustBeCloseException("*/ Expected before End of File. line:"+currentSymbol.rowCount+","+currentSymbol.colCount);
+
+                    mayBeComment.Append(currentSymbol.character);
+                    mayBeComment.Append(nextOne.character);
+                }while(mayBeComment.ToString()!="*/");
+            }
+            return detected;
         }
     }
 }

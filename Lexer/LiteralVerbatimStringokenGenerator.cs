@@ -50,6 +50,7 @@ namespace Compiler
                     currentSymbol = inputString.GetNextSymbol();
                     lexeme.Append(currentSymbol.character);
                     currentSymbol = inputString.GetNextSymbol();
+                    checkForEscapeCharacter();
                 }
             }
             checkEOFbeforeClose();

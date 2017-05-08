@@ -46,11 +46,8 @@ namespace Compiler
 
         private void checkForValidString()
         {
-            if(!(Char.IsLetterOrDigit(currentSymbol.character) 
-            || Char.IsPunctuation(currentSymbol.character) 
-            || Char.IsWhiteSpace(currentSymbol.character))
-            || ("\n".IndexOf(currentSymbol.character)>=0))
-                throw new InvalidConstantStringException("Bad construction of constant string. line:"+lexemeRow+","+lexemeCol);
+            if(("\n".IndexOf(currentSymbol.character)>=0))
+                throw new InvalidConstantStringException("unexpected: "+currentSymbol.character+ "Bad construction of constant string. line:"+lexemeRow+","+lexemeCol);
 
             if(currentSymbol.character!='"')
             {
@@ -67,8 +64,8 @@ namespace Compiler
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
                 checkEOFbeforeClose();
-                if(!("abfnrtv\'\"\\?".IndexOf(currentSymbol.character)>=0))
-                    throw new InvalidEscapeCharacterException("excpected [abfnrtv\'\"\\?] before "+currentSymbol.character+". line:"+lexemeRow+","+lexemeCol);
+                if(!("0abfnrtv\'\"\\?".IndexOf(currentSymbol.character)>=0))
+                    throw new InvalidEscapeCharacterException("excpected [0abfnrtv\'\"\\?] before "+currentSymbol.character+". line:"+lexemeRow+","+lexemeCol);
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
             }

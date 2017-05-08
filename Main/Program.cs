@@ -35,7 +35,7 @@ namespace Main
 // hello					
 // ");
 
-            var inputString = new InputFile(@"..\literals.txt");
+            var inputString = new InputFile(@"..\Lexer.Tests\TokenTypeTests.cs");
             var tokenGenerators = getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
@@ -50,7 +50,7 @@ namespace Main
 
             System.Console.Out.WriteLine(token);
 
-            System.Console.ReadKey();
+            // System.Console.ReadKey();
 
             // var br = new BinaryReader(File.Open(@"..\literals.txt",FileMode.Open,FileAccess.Read) ,Encoding.UTF8,true);
             // var nextChar = br.ReadChar();
@@ -75,6 +75,8 @@ namespace Main
             tokenGenerators.Add(new LiteralIntTokenGenerator());
             tokenGenerators.Add(new LiteralCharTokenGenerator());
             tokenGenerators.Add(new LiteralStringTokenGenerator());
+            tokenGenerators.Add(new OperatorsTokenGenerator());
+            tokenGenerators.Add(new PuntuationTokenGenerator());
 
             return tokenGenerators;
         }

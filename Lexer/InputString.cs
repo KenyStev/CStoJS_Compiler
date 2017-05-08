@@ -39,12 +39,12 @@ namespace Compiler
             return new Symbol('\0', rowCount, colCount);
         }
 
-        public Symbol LookAheadSymbol()
+        public Symbol LookAheadSymbol(int offset)
         {
-            if (currentChar < initialInput.Length)
+            if (currentChar + offset < initialInput.Length)
             {
                 var returnSymbol = new Symbol(
-                    initialInput[currentChar],
+                    initialInput[currentChar + offset],
                     rowCount,
                     colCount);
 
@@ -52,6 +52,11 @@ namespace Compiler
             }
 
             return new Symbol('\0', rowCount, colCount);
+        }
+
+        public Symbol LookAheadSymbol()
+        {
+            return LookAheadSymbol(0);
         }
     }
 }
