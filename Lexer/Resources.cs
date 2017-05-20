@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using Compiler;
 
-namespace Lexer.Tests
+namespace Compiler
 {
-    internal class Resources
+    public class Resources
     {
-        internal static List<ITokenGenerator> getTokenGenerators()
+        public static List<ITokenGenerator> getTokenGenerators()
         {
             var tokenGenerators = new List<ITokenGenerator>();
             
