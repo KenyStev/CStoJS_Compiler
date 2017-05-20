@@ -1,0 +1,15 @@
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\xunit.runner.utility.netstandard15.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\xunit.runner.reporters.netstandard15.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.Tests.deps.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.Tests.runtimeconfig.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.Tests.runtimeconfig.dev.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.Tests.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.Tests.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Lexer.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Parser.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\bin\Debug\netcoreapp1.1\Lexer.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\obj\Debug\netcoreapp1.1\Parser.Tests.AssemblyInfo.cs
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\obj\Debug\netcoreapp1.1\Parser.Tests.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser.Tests\obj\Debug\netcoreapp1.1\Parser.Tests.pdb
