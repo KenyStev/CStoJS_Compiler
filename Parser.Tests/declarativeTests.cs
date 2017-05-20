@@ -29,5 +29,17 @@ namespace Parser.Tests
             parser.parse();
             Console.Out.WriteLine("Parsed Successfully");
         }
+
+        [Fact]
+        public void classDeclarationStmtTest()
+        {
+            var inputString = new InputFile(@"..\..\..\testFiles\classDeclarationTests.txt");
+            var tokenGenerators = Resources.getTokenGenerators();
+
+            var lexer = new Lexer(inputString, tokenGenerators);
+            var parser = new Compiler.Parser(lexer); 
+            parser.parse();
+            Console.Out.WriteLine("Parsed Successfully");
+        }
     }
 }
