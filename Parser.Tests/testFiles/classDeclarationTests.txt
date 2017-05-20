@@ -22,3 +22,8 @@ class nuevaClase
 {
     
 }
+
+class heredadaDe : figura
+{
+    
+}

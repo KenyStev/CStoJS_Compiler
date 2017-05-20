@@ -15,7 +15,7 @@ namespace Parser.Tests
             var lexer = new Lexer(inputString, tokenGenerators);
             var parser = new Compiler.Parser(lexer); 
             parser.parse();
-            Console.Out.WriteLine("Parsed Successfully");
+            Console.Out.WriteLine("Parsed Successfully -> usings");
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace Parser.Tests
             var lexer = new Lexer(inputString, tokenGenerators);
             var parser = new Compiler.Parser(lexer); 
             parser.parse();
-            Console.Out.WriteLine("Parsed Successfully");
+            Console.Out.WriteLine("Parsed Successfully -> namespace");
         }
 
         [Fact]
@@ -39,7 +39,31 @@ namespace Parser.Tests
             var lexer = new Lexer(inputString, tokenGenerators);
             var parser = new Compiler.Parser(lexer); 
             parser.parse();
-            Console.Out.WriteLine("Parsed Successfully");
+            Console.Out.WriteLine("Parsed Successfully -> class");
+        }
+
+        [Fact]
+        public void enumDeclarationStmtTest()
+        {
+            var inputString = new InputFile(@"..\..\..\testFiles\enumDeclarationTests.txt");
+            var tokenGenerators = Resources.getTokenGenerators();
+
+            var lexer = new Lexer(inputString, tokenGenerators);
+            var parser = new Compiler.Parser(lexer); 
+            parser.parse();
+            Console.Out.WriteLine("Parsed Successfully -> enum");
+        }
+
+        [Fact]
+        public void interfaceDeclarationStmtTest()
+        {
+            var inputString = new InputFile(@"..\..\..\testFiles\interfaceDeclarationTests.txt");
+            var tokenGenerators = Resources.getTokenGenerators();
+
+            var lexer = new Lexer(inputString, tokenGenerators);
+            var parser = new Compiler.Parser(lexer); 
+            parser.parse();
+            Console.Out.WriteLine("Parsed Successfully -> enum");
         }
     }
 }

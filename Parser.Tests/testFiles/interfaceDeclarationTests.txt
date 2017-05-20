@@ -1,0 +1,6 @@
+interface ISampleInterface
+{
+    void SampleMethod();
+    void SampleMethod(int number, char n);
+    Figura SampleMethod(Figura r, int number, char n);
+}
