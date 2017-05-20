@@ -9,7 +9,19 @@ namespace Parser.Tests
         [Fact]
         public void usingStmtTest()
         {
-            var inputString = new InputFile(@"..\..\..\testFiles\declarativeTests.txt");
+            var inputString = new InputFile(@"..\..\..\testFiles\usingTests.txt");
+            var tokenGenerators = Resources.getTokenGenerators();
+
+            var lexer = new Lexer(inputString, tokenGenerators);
+            var parser = new Compiler.Parser(lexer); 
+            parser.parse();
+            Console.Out.WriteLine("Parsed Successfully");
+        }
+
+        [Fact]
+        public void namespacesStmtTest()
+        {
+            var inputString = new InputFile(@"..\..\..\testFiles\namespaceTests.txt");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
