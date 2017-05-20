@@ -28,6 +28,11 @@ class heredadaDe : figura
     
 }
 
+class multipleheredadaDe : figura, figura2, figura3
+{
+    
+}
+
 class ImplementationClass : ISampleInterface
 {
      // private field

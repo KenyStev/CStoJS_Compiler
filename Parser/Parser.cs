@@ -169,7 +169,7 @@ namespace Compiler
             | EPSILON */
         private void identifiers_list_p()
         {
-            if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
+            if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
                 identifiers_list();

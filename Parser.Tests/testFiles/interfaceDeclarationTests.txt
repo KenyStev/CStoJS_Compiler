@@ -10,6 +10,11 @@ interface otra
     
 }
 
+interface variasHerencias : heredada1, heredada2, heredada3
+{
+    
+}
+
 interface heredadaDe : Figura
 {
     void SampleMethod();

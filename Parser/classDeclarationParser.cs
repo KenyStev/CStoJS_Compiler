@@ -70,9 +70,6 @@ namespace Compiler
         }
 
         /*
-        ; SEMANTIC: void solo puede ir en un method.
-        ; SEMANTIC: optional-modifier no puede ir en contructor ni en un field
-        ; SEMANTIC: solo un constructor puede llevar : "base" '(' argument-list ')'
         ; SEMANTIC: validar que el constructor no tenga tipo de retorno
         class-member-declaration-options:
             | optional-modifier type-or-void identifier field-or-method-or-constructor */
@@ -80,27 +77,102 @@ namespace Compiler
         {
             printIfDebug("class_member_declaration_options");
             if(pass(optionalModifierTypes))
+            {
+                Token oprionalModifierToken = token;
+                consumeToken();
+                if(!pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+                    throwError("type-or-void expected");
+                consumeToken();
+                if(!pass(TokenType.ID))
+                    throwError("identifier expected");
+                if(oprionalModifierToken.type==TokenType.RW_STATIC)
+                {
+                    field_or_method_declaration();
+                }else{
+                    consumeToken();
+                    method_declaration();
+                }
+            }else if(pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            {
+                Token oldToken = token;
                 consumeToken();
 
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
-                consumeToken();
-            if(pass(TokenType.ID))
-                consumeToken();
-            
-            field_or_method_or_constructor();
+                if(oldToken.type==TokenType.ID)
+                {
+                    if(pass(TokenType.ID))
+                    {
+                        field_or_method_declaration();
+                    }else if(pass(TokenType.PUNT_PAREN_OPEN)){
+                        constructor_declaration();
+                    }
+                }else{
+                    if(!pass(TokenType.ID))
+                        throwError("identifier expected");
+                    field_or_method_declaration();
+                }
+            }else{
+                constructor_declaration();
+            }
         }
 
-        /*field-or-method-or-constructor:
-            | field-declaration
-            | method-or-constructor-declaration */
-        private void field_or_method_or_constructor()
+        private void constructor_declaration()
         {
-            printIfDebug("field_or_method_or_constructor");
+            printIfDebug("constructor_declaration");
+            if(!pass(TokenType.PUNT_PAREN_OPEN))
+                throwError("'(' expected");
+            consumeToken();
+            fixed_parameters();
+            if(!pass(TokenType.PUNT_PAREN_CLOSE))
+                throwError("')' expected");
+            consumeToken();
+            constructor_initializer();
+            maybe_empty_block();
+        }
+
+        private void field_or_method_declaration()
+        {
+            printIfDebug("field_or_method_declaration");
+            if(!pass(TokenType.ID))
+                throwError("identifier expected");
+            consumeToken();
             if(pass(TokenType.PUNT_PAREN_OPEN))
             {
-                method_or_constructor_declaration();
+                method_declaration();
             }else{
                 field_declaration();
+            }
+        }
+
+        private void method_declaration()
+        {
+            if(!pass(TokenType.PUNT_PAREN_OPEN))
+                throwError("'(' expected");
+            consumeToken();
+            fixed_parameters();
+            if(!pass(TokenType.PUNT_PAREN_CLOSE))
+                throwError("')' expected");
+            consumeToken();
+            maybe_empty_block();
+        }
+
+        /*maybe-empty-block:
+            | '{' optional-statement-list '}'
+            | ';' */
+        private void maybe_empty_block()
+        {
+            printIfDebug("maybe_empty_block");
+            if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
+            {
+                consumeToken();
+                optional_statement_list();
+                if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
+                    throwError("'}' expected");
+                consumeToken();
+            }else if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
+            {
+                consumeToken();
+            }else{
+                throwError("'{' or ';' expected");
             }
         }
 
@@ -223,45 +295,6 @@ namespace Compiler
                 variable_initializer_list();
             }else{
                 //EPSILON
-            }
-        }
-
-        /*; SEMANTIC: Validar que si la clase es abstract, el metodo no debe llevar cuerpo.
-        ; SEMANTIC: solo un constructor puede llevar : "base" '(' argument-list ')'
-        method-or-constructor-declaration:
-            | '(' fixed-parameters ')' constructor-initializer maybe-empty-block */
-        private void method_or_constructor_declaration()
-        {
-            printIfDebug("method_or_constructor_declaration");
-            if(!pass(TokenType.PUNT_PAREN_OPEN))
-                throwError("'(' expected");
-            consumeToken();
-            fixed_parameters();
-            if(!pass(TokenType.PUNT_PAREN_CLOSE))
-                throwError("')' expected");
-            consumeToken();
-            constructor_initializer();
-            maybe_empty_block();
-        }
-
-        /*maybe-empty-block:
-            | '{' optional-statement-list '}'
-            | ';' */
-        private void maybe_empty_block()
-        {
-            printIfDebug("maybe_empty_block");
-            if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
-            {
-                consumeToken();
-                optional_statement_list();
-                if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
-                    throwError("'}' expected");
-                consumeToken();
-            }else if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
-            {
-                consumeToken();
-            }else{
-                throwError("'{' or ';' expected");
             }
         }
 
