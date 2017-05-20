@@ -2,7 +2,7 @@ using System;
 
 namespace Compiler
 {
-    internal class SyntaxTokenExpectedException : Exception
+    public class SyntaxTokenExpectedException : Exception
     {
         public SyntaxTokenExpectedException()
         {
