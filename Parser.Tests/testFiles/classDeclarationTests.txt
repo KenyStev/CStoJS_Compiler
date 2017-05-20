@@ -27,3 +27,42 @@ class heredadaDe : figura
 {
     
 }
+
+class ImplementationClass : ISampleInterface
+{
+     // private field
+    private DateTime date;
+
+    // public field (Generally not recommended.)
+    public string day;
+
+    ImplementationClass()
+    {
+
+    }
+
+    ImplementationClass(int num) : base(5)
+    {
+
+    }
+
+    private ImplementationClass()
+    {
+        
+    }
+
+    void SampleMethod()
+    {
+        // Method implementation.
+    }
+
+    static void Main()
+    {
+        
+    }
+
+     public TimeSpan GetTimeSpan(string dateString)
+    {
+        
+    }
+}

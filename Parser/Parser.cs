@@ -17,7 +17,7 @@ namespace Compiler
 
         public Parser(Lexer lexer)
         {
-            debug = false;
+            debug = true;
             this.lexer = lexer;
             token = lexer.GetNextToken();
         }

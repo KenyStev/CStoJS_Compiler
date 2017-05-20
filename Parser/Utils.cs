@@ -9,6 +9,7 @@ namespace Compiler
         TokenType [] typesdeclarationOptions = {TokenType.RW_ABSTRACT, TokenType.RW_CLASS, TokenType.RW_INTERFACE,TokenType.RW_ENUM};
         TokenType [] optionalModifierTypes = {TokenType.RW_ABSTRACT,TokenType.RW_STATIC,TokenType.RW_OVERRIDE,TokenType.RW_VIRTUAL};
         TokenType [] typesOptions = {TokenType.RW_INT,TokenType.RW_CHAR,TokenType.RW_STRING,TokenType.RW_BOOL,TokenType.RW_FLOAT,TokenType.ID};
+        TokenType [] expressionOptions = {TokenType.LIT_INT};
         private bool pass(params TokenType [] types)
         {
             return types.Contains(token.type);

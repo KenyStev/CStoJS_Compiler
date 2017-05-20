@@ -22,3 +22,12 @@ public enum Publicado
     SI,
     NO
 }
+
+enum mixed
+{
+    uno = 2,
+    adios,
+    nada,
+    otro = 9,
+    que
+}

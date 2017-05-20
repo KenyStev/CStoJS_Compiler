@@ -43,29 +43,6 @@ namespace Compiler
                 + currentSymbol.colCount +".");
         }
 
-        public Token LookAheadToken()
-        {
-            if(checkForCommentOrWitheSpace())
-            {
-                return GetNextToken();
-            }
-
-            foreach(var tokenGenerator in tokenGenerators)
-            {
-                if(tokenGenerator.validStart(currentSymbol))
-                {
-                    tokenGenerator.setCurrentSymbol(currentSymbol);
-                    tokenGenerator.setInputString(inputString);
-                    return tokenGenerator.getToken();
-                }
-            }
-
-            throw new LexicalException("Symbol '"
-                + currentSymbol.character +"' not supported line:"
-                + currentSymbol.rowCount +","
-                + currentSymbol.colCount +".");
-        }
-
         private bool checkForCommentOrWitheSpace()
         {
             bool detected = false;
