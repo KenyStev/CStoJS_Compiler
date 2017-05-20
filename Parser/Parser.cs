@@ -12,12 +12,12 @@ namespace Compiler
         private void printIfDebug(string msj)
         {
             if(debug)
-                Console.Out.WriteLine("-->"+msj);
+                Console.Out.WriteLine(msj+" ==> "+token.type+" <==");
         }
 
         public Parser(Lexer lexer)
         {
-            debug = true;
+            debug = false;
             this.lexer = lexer;
             token = lexer.GetNextToken();
         }
@@ -43,7 +43,7 @@ namespace Compiler
                 optional_using_directive();
             }
             TokenType[] namespaceType = {TokenType.RW_NAMESPACE};
-            if(pass(namespaceType.Concat(encapsulationTypes).Concat(typesdeclarationOptions).ToArray()))
+            if(pass(namespaceType,encapsulationTypes,typesdeclarationOptions))
             {
                 optional_namespace_member_declaration();
             }else{
@@ -72,7 +72,7 @@ namespace Compiler
         private void type_declaration_list()
         {
             printIfDebug("type_declaration_list");
-            if(pass(encapsulationTypes.Concat(typesdeclarationOptions).ToArray()))
+            if(pass(encapsulationTypes,typesdeclarationOptions))
             {
                 type_declaration();
                 type_declaration_list();
@@ -86,7 +86,7 @@ namespace Compiler
         private void type_declaration()
         {
             printIfDebug("type_declaration");
-             if(!pass(encapsulationTypes.Concat(typesdeclarationOptions).ToArray()))
+             if(!pass(encapsulationTypes,typesdeclarationOptions))
             {
                 throwError("expected member declaration");
             }
@@ -121,22 +121,19 @@ namespace Compiler
             }
         }
 
-        private void enum_declaration()
-        {
-            printIfDebug("enum_declaration");
-            throw new NotImplementedException();
-        }
-
-        private void interface_declaration()
-        {
-            printIfDebug("interface_declaration");
-            throw new NotImplementedException();
-        }
-
+        /*optional-body-end:
+            | ';'
+            | EPSILON */
         private void optional_body_end()
         {
             printIfDebug("optional_body_end");
-            throw new NotImplementedException();
+            if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
+            {
+                consumeToken();
+            }else{
+                //EPSILON
+            }
+            
         }
 
         /*identifier-attribute:
@@ -148,10 +145,34 @@ namespace Compiler
             if(pass(TokenType.PUNT_ACCESOR))
             {
                 consumeToken();
-                if(token.type!=TokenType.ID)
+                if(!pass(TokenType.ID))
                     throwError("identifier expected");
                 consumeToken();
                 identifier_attribute();
+            }else{
+                //EPSILON
+            }
+        }
+
+        /*identifiers-list:
+	        | identifier identifiers-list-p */
+        private void identifiers_list()
+        {
+            if(!pass(TokenType.ID))
+                throwError("identifier expected");
+            consumeToken();
+            identifiers_list_p();
+        }
+
+        /*identifiers-list-p:
+            | ',' identifier identifiers-list-p
+            | EPSILON */
+        private void identifiers_list_p()
+        {
+            if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
+            {
+                consumeToken();
+                identifiers_list();
             }else{
                 //EPSILON
             }

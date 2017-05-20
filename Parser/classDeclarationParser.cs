@@ -22,20 +22,58 @@ namespace Compiler
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             class_body();
-            if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
-                optional_body_end();
+            optional_body_end();
         }
 
+        /*class-body:
+	        | '{' optional-class-member-declaration-list '}' */
         private void class_body()
         {
             printIfDebug("class_body");
+            if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
+                throwError("'{' expected");
+            consumeToken();
+            optional_class_member_declaration_list();
+            if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
+                throwError("'}' expected");
+            consumeToken();
+        }
+
+        /*optional-class-member-declaration-list:
+            | class-member-declaration optional-class-member-declaration-list
+            | EPSILON */
+        private void optional_class_member_declaration_list()
+        {
+            printIfDebug("optional_class_member_declaration_list");
+            if(pass(encapsulationTypes,optionalModifierTypes,typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            {
+                class_member_declaration();
+            }else{
+                //EPSILON
+            }
+        }
+
+        /*class-member-declaration: 
+	        | encapsulation-modifier class-member-declaration-options */
+        private void class_member_declaration()
+        {
+            printIfDebug("class_member_declaration");
             throw new NotImplementedException();
         }
 
+        /*inheritance-base:
+            | ':' identifiers-list
+            | EPSILON */
         private void inheritance_base()
         {
             printIfDebug("inheritance_base");
-            throw new NotImplementedException();
+            if(pass(TokenType.PUNT_COLON))
+            {
+                consumeToken();
+                identifiers_list();
+            }else{
+                //EPSILON
+            }
         }
     }
 }

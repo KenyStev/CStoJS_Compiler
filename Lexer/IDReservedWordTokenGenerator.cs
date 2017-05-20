@@ -90,7 +90,7 @@ namespace Compiler
             reservedWordsDict["this"] = TokenType.RW_THIS;
             reservedWordsDict["void"] = TokenType.RW_VOID;
             reservedWordsDict["while"] = TokenType.RW_WHILE;
-
+            reservedWordsDict["virtual"] = TokenType.RW_VIRTUAL;
 
         }
     }

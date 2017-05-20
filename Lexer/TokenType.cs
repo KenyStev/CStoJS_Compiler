@@ -86,6 +86,7 @@ namespace Compiler
         RW_SWITCH,
         RW_THIS,
         RW_VOID,
-        RW_WHILE
+        RW_WHILE,
+        RW_VIRTUAL
     }
 }
