@@ -7,7 +7,7 @@ class nuevaClase
         //TestClassWithInlineFieldWithExpression
         int LUNES = ((5 + 3) + (4 + 3));
         int MARTES = ((5 * 9 / 3) - 7 + (2 * 7 + 4) / ( (128 >> 5 * 5) - (1 << 7 * 46) / 3 )) + 15;
-        int MIERCOLES = 0;
+        var MIERCOLES = 0;
         int x = y = z = w = MARTES / 2;
         Kevin kevin = new Kevin();
 
@@ -32,7 +32,7 @@ class nuevaClase
         //TestClassWithEqualityOperatorsInExpression
         int LUNES =  (1 == 5);
         bool boleano = (x!=5);
-        int otro = 10 != (otro==mama); 
+        var otro = 10 != (otro==mama); 
         float f = (mama == (0!=5));
 
         //TestClassWithShiftOperatorsInExpression
