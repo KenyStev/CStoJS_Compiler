@@ -434,7 +434,7 @@ namespace Compiler
             {
                 consumeToken();
                 argument_list();
-                if(!pass(TokenType.PUNT_PAREN_CLOSE));
+                if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
             }else if(pass(TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS))
