@@ -459,7 +459,7 @@ namespace Compiler
                     throwError("type expected");
                 consumeToken();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
-                    throwError("type expected");
+                    throwError(") expected");
                 consumeToken();
             }else if(pass(StatementsOptions))
             {
