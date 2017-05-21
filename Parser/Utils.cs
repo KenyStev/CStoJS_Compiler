@@ -13,6 +13,7 @@ namespace Compiler
         TokenType [] selectionsOptionsStatements = {TokenType.RW_IF,TokenType.RW_SWITCH};
         TokenType [] iteratorsOptionsStatements = {TokenType.RW_FOR,TokenType.RW_FOREACH,TokenType.RW_DO,TokenType.RW_WHILE};
         TokenType [] jumpsOptionsStatements = {TokenType.RW_BREAK,TokenType.RW_CONTINUE,TokenType.RW_RETURN};
+        TokenType[] primaryOptionsPrime = {TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS,TokenType.PUNT_ACCESOR};
         TokenType [] StatementsOptions = {
             TokenType.PUNT_PAREN_OPEN,
             TokenType.OP_SUM,
