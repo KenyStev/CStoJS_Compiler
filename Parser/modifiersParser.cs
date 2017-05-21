@@ -12,7 +12,7 @@ namespace Compiler
         private void encapsulation_modifier()
         {
             printIfDebug("encapsulation_modifier");
-            if(pass(encapsulationTypes))
+            if(pass(encapsulationOptions))
             {
                 consumeToken();
             }else

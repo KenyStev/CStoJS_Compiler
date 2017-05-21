@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Compiler
@@ -8,6 +9,7 @@ namespace Compiler
         private Lexer lexer;
         private Token token;
         private bool debug;
+        private List<Token> look_ahead;
 
         private void printIfDebug(string msj)
         {
@@ -20,6 +22,7 @@ namespace Compiler
             debug = true;
             this.lexer = lexer;
             token = lexer.GetNextToken();
+            look_ahead = new List<Token>();
         }
 
         public void parse(){
@@ -43,7 +46,7 @@ namespace Compiler
                 optional_using_directive();
             }
             TokenType[] namespaceType = {TokenType.RW_NAMESPACE};
-            if(pass(namespaceType,encapsulationTypes,typesdeclarationOptions))
+            if(pass(namespaceType,encapsulationOptions,typesDeclarationOptions))
             {
                 optional_namespace_member_declaration();
             }else{
@@ -72,7 +75,7 @@ namespace Compiler
         private void type_declaration_list()
         {
             printIfDebug("type_declaration_list");
-            if(pass(encapsulationTypes,typesdeclarationOptions))
+            if(pass(encapsulationOptions,typesDeclarationOptions))
             {
                 type_declaration();
                 type_declaration_list();
@@ -86,15 +89,15 @@ namespace Compiler
         private void type_declaration()
         {
             printIfDebug("type_declaration");
-             if(!pass(encapsulationTypes,typesdeclarationOptions))
+             if(!pass(encapsulationOptions,typesDeclarationOptions))
             {
                 throwError("expected member declaration");
             }
-            if(pass(encapsulationTypes))
+            if(pass(encapsulationOptions))
             {
                 encapsulation_modifier();
             }
-            if(pass(typesdeclarationOptions))
+            if(pass(typesDeclarationOptions))
             {
                 group_declaration();
             }

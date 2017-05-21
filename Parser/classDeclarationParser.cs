@@ -45,7 +45,7 @@ namespace Compiler
         private void optional_class_member_declaration_list()
         {
             printIfDebug("optional_class_member_declaration_list");
-            if(pass(encapsulationTypes,optionalModifierTypes,typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(pass(encapsulationOptions,optionalModifiersOptions,typesOptions,new TokenType[]{TokenType.RW_VOID}))
             {
                 class_member_declaration();
                 optional_class_member_declaration_list();
@@ -59,13 +59,13 @@ namespace Compiler
         private void class_member_declaration()
         {
             printIfDebug("class_member_declaration");
-            if(pass(encapsulationTypes))
+            if(pass(encapsulationOptions))
                 encapsulation_modifier();
-            if(pass(optionalModifierTypes,typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(pass(optionalModifiersOptions,typesOptions,new TokenType[]{TokenType.RW_VOID}))
             {
                 class_member_declaration_options();
             }else{
-                throwError(optionalModifierTypes.ToString() + " or "+ typesOptions.ToString() +"or void expected");
+                throwError(optionalModifiersOptions.ToString() + " or "+ typesOptions.ToString() +"or void expected");
             }
         }
 
@@ -76,7 +76,7 @@ namespace Compiler
         private void class_member_declaration_options()
         {
             printIfDebug("class_member_declaration_options");
-            if(pass(optionalModifierTypes))
+            if(pass(optionalModifiersOptions))
             {
                 Token oprionalModifierToken = token;
                 consumeToken();
@@ -264,7 +264,7 @@ namespace Compiler
         private void optional_variable_initializer_list()
         {
             printIfDebug("optional_variable_initializer_list");
-            if(pass(new TokenType[]{TokenType.PUNT_CURLY_BRACKET_OPEN},expressionOptions))
+            if(pass(new TokenType[]{TokenType.PUNT_CURLY_BRACKET_OPEN},expressionOptions()))
             {
                 variable_initializer_list();
             }else{
@@ -277,7 +277,7 @@ namespace Compiler
         private void variable_initializer_list()
         {
             printIfDebug("variable_initializer_list");
-            if(!pass(new TokenType[]{TokenType.PUNT_CURLY_BRACKET_OPEN},expressionOptions))
+            if(!pass(new TokenType[]{TokenType.PUNT_CURLY_BRACKET_OPEN},expressionOptions()))
                 throwError("expression or variable-initializer expected");
             variable_initializer();
             variable_initializer_list_p();
@@ -296,14 +296,6 @@ namespace Compiler
             }else{
                 //EPSILON
             }
-        }
-
-        /*optional-statement-list:
-            | statement-list
-            | EPSILON */
-        private void optional_statement_list()
-        {
-            // throw new NotImplementedException();
         }
 
         /*constructor-initializer:
@@ -336,7 +328,7 @@ namespace Compiler
         private void argument_list()
         {
             printIfDebug("argument_list");
-            if(pass(expressionOptions))
+            if(pass(expressionOptions()))
             {
                 expression();
                 argument_list_p();

@@ -8,8 +8,8 @@ namespace Compiler
         private void expression()
         {
             printIfDebug("expression");
-            if(!pass(TokenType.LIT_INT))
-                throwError("LIT_INT expected");
+            if(!pass(expressionOptions()))
+                throwError(expressionOptions().ToString()+" expected");
             consumeToken();
         }
     }

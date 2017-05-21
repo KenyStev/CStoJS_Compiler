@@ -1,0 +1,8 @@
+class nuevaClase
+{
+    public static void Main()
+    {
+        int edad;
+        float saldo = 600;
+    }   
+}

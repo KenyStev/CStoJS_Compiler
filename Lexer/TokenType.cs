@@ -88,6 +88,7 @@ namespace Compiler
         RW_VOID,
         RW_WHILE,
         RW_VIRTUAL,
-        RW_BASE
+        RW_BASE,
+        RW_VAR
     }
 }
