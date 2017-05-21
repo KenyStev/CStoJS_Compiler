@@ -40,24 +40,12 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                     throwError("; expected");
                 consumeToken();
-            }else if(pass(maybeEmptyBlockOptions,selectionsOptionsStatements,iteratorsOptionsStatements,jumpsOptionsStatements,StatementsOptions))
+            }else if(pass(embededOptions()))
             {
                 embedded_statement();
             }else{
                 throwError("statement expected");
             }
-        }
-
-        /*embedded-statement:
-            | maybe-empty-block
-            | statement-expression ';'
-            | selection-statement
-            | iteration-statement
-            | jump-statement ';' */
-        private void embedded_statement()
-        {
-            printIfDebug("embedded_statement");
-            throw new NotImplementedException();
         }
 
         /*local-variable-declaration:

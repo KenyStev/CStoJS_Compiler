@@ -155,27 +155,6 @@ namespace Compiler
             maybe_empty_block();
         }
 
-        /*maybe-empty-block:
-            | '{' optional-statement-list '}'
-            | ';' */
-        private void maybe_empty_block()
-        {
-            printIfDebug("maybe_empty_block");
-            if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
-            {
-                consumeToken();
-                optional_statement_list();
-                if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
-                    throwError("'}' expected");
-                consumeToken();
-            }else if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
-            {
-                consumeToken();
-            }else{
-                throwError("'{' or ';' expected");
-            }
-        }
-
         /*field-declaration: 
 	        | variable-assigner variable-declarator-list-p ';' */
         private void field_declaration()

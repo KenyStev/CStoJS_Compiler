@@ -93,6 +93,8 @@ namespace Compiler
             reservedWordsDict["virtual"] = TokenType.RW_VIRTUAL;
             reservedWordsDict["base"] = TokenType.RW_BASE;
             reservedWordsDict["var"] = TokenType.RW_VAR;
+            reservedWordsDict["in"] = TokenType.RW_IN;
+            reservedWordsDict["default"] = TokenType.RW_DEFAULT;
         }
     }
 }

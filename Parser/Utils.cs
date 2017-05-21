@@ -11,6 +11,7 @@ namespace Compiler
         TokenType [] typesOptions = {TokenType.RW_INT,TokenType.RW_CHAR,TokenType.RW_STRING,TokenType.RW_BOOL,TokenType.RW_FLOAT,TokenType.ID};
         TokenType [] maybeEmptyBlockOptions = {TokenType.PUNT_CURLY_BRACKET_OPEN,TokenType.PUNT_END_STATEMENT_SEMICOLON};
         TokenType [] selectionsOptionsStatements = {TokenType.RW_IF,TokenType.RW_SWITCH};
+        TokenType [] switchLabelOptions = {TokenType.RW_CASE,TokenType.RW_DEFAULT};
         TokenType [] iteratorsOptionsStatements = {TokenType.RW_FOR,TokenType.RW_FOREACH,TokenType.RW_DO,TokenType.RW_WHILE};
         TokenType [] jumpsOptionsStatements = {TokenType.RW_BREAK,TokenType.RW_CONTINUE,TokenType.RW_RETURN};
         TokenType[] primaryOptionsPrime = {TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS,TokenType.PUNT_ACCESOR};
@@ -99,6 +100,12 @@ namespace Compiler
                 Concat(Is_AsOperatorOptions).Concat(shiftOperatorOptions).Concat(additiveOperatorOptions).
                 Concat(multiplicativeOperatorOptions).Concat(assignmentOperatorOptions).Concat(unaryOperatorOptions)
                 .Concat(literalOptions).ToArray();
+        }
+
+        private TokenType[] embededOptions()
+        {
+            return maybeEmptyBlockOptions.Concat(selectionsOptionsStatements).Concat(iteratorsOptionsStatements)
+            .Concat(jumpsOptionsStatements).Concat(StatementsOptions).ToArray();
         }
         
         private bool pass(params TokenType [] types)
