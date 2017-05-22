@@ -34,7 +34,8 @@ namespace Compiler
         private void statement()
         {
             printIfDebug("statement");
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR}))
+            addLookAhead(lexer.GetNextToken()); 
+            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR}) && look_ahead[0].type == TokenType.ID)
             {
                 local_variable_declaration();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))

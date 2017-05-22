@@ -18,7 +18,7 @@ namespace Compiler
             if(pass(maybeEmptyBlockOptions))
             {
                 maybe_empty_block();
-            }else if(pass(StatementsOptions))
+            }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
             {
                 statement_expression();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
@@ -414,13 +414,30 @@ namespace Compiler
         }
 
         /*statement-expression:
-	        | optional-unary-expression primary-expression statement-expression-p */
+	        | unary-expression statement-expression-factorized */
         private void statement_expression()
         {
             printIfDebug("statement_expression");
-            optional_unary_expression();
-            primary_expression();
-            statement_expression_p();
+            unary_expression();
+            statement_expression_factorized();
+        }
+        
+        /*statement-expression-factorized:
+	        | assignment-operator expresion statement-expresion-p
+            | statement-expresion-p */
+        private void statement_expression_factorized()
+        {
+            printIfDebug("statement_expression_factorized");
+            if (pass(assignmentOperatorOptions))
+            {
+                consumeToken();
+                expression();
+                statement_expression_p();
+            }
+            else
+            {
+                statement_expression_p();
+            }
         }
 
         /*statement-expression-p:

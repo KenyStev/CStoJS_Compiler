@@ -86,6 +86,11 @@ namespace Compiler
             TokenType.OP_DIVISION,
             TokenType.OP_MODULO
         };
+
+        TokenType[] unaryExpressionOptions = {
+            TokenType.PUNT_PAREN_OPEN,TokenType.RW_NEW, TokenType.ID,
+            TokenType.RW_THIS
+        };
                                                 
         private TokenType [] expressionOptions()
         {
@@ -105,7 +110,8 @@ namespace Compiler
         private TokenType[] embededOptions()
         {
             return maybeEmptyBlockOptions.Concat(selectionsOptionsStatements).Concat(iteratorsOptionsStatements)
-            .Concat(jumpsOptionsStatements).Concat(StatementsOptions).ToArray();
+            .Concat(jumpsOptionsStatements).Concat(StatementsOptions).Concat(unaryOperatorOptions)
+            .Concat(literalOptions).Concat(unaryExpressionOptions).ToArray();
         }
         
         private bool pass(params TokenType [] types)
