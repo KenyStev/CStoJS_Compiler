@@ -72,6 +72,51 @@ class stmtTests
         }
     }
 
+    public static void statementsExpressions()
+    {
+        namespace1.namespace2.namespace.MuClass nameVar = new namespace1.namespace2.namespace.MuClass();
+        namespace1.namespace2.namespace.MuClass[] nameVar = new namespace1.namespace2.namespace.MuClass[]{};
+        namespace1.namespace2.namespace.MuClass[][] nameVar = new namespace1.namespace2.namespace.MuClass[][]{};
+        namespace1.namespace2.namespace.MuClass[,,] nameVar = new namespace1.namespace2.namespace.MuClass[,,]{};
+
+        Persona[] varName2 = createPrenson("Carlos");
+        varName2.edad = birthy_ear - current_year;
+        varName2.sueldo *= 1.5;
+        varName2.carros.add(new Ferrarry());
+
+        Lol que = new Lol[6][];
+        Lol que = new Lol[][]{};
+        Lol que = new Lol[,,,]{};
+
+        hola = "adios";
+
+        hola[2] = "adios";
+        Console.WriteLine("Hello!");
+
+        namespace1.namespace2.namespace.MuClass[0] = "Ing.";
+        namespace1.namespace2.MuClass[1] = "no";
+        namespace1.MuClass[2] = "nos";
+        namespace1.namespace2.MuClass[3] = "viole";
+        namespace1.namespace2.namespace.MuClass[3] = "plox";
+        namespace1.namespace2.namespace.MuClass[3] = "plox X2";
+
+        int THREE = 3,
+        FOUR = 4;
+
+        float[5] rangos;
+        rangos[0] = 5.25f;
+        rangos[1] = 5.25F;
+        rangos[2] = (float)9.8;
+        rangos[3] = 5.25f;
+        rangos[FOUR] = 200f;
+
+        this.myField = new Fielded(otroParam);
+        this.myField2[THREE] = new Fielded(otroParam);
+
+        this.myField3.id1.id2[THREE] = new Fielded(otroParam);
+        this.myField3.id1 = new ID1(otroParam,otroParam2,otroParam3);
+    }
+
     private static TokenType [] jumpsStmt()
     {
         TokenType[] nuevo = {TokenType.OP_TERNARY, TokenType.PUNT_COLON,

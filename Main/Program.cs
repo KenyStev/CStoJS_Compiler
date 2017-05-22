@@ -11,7 +11,21 @@ namespace Main
         static void Main(string[] args)
         {
             // var inputString = new InputFile(@"..\Lexer.Tests\TokenTypeTests.cs");
-            var inputString = new InputFile(@"..\Parser\unaryExpression.cs");
+            // var inputString = new InputFile(@"..\Parser\unaryExpression.cs");
+            var inputString = new InputString(@"
+            class MyClass
+            {
+                MyClass(Nombre val)
+                {
+
+                }
+
+                public me()
+                {
+                    
+                }
+            }
+            ");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
