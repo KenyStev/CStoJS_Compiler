@@ -106,9 +106,9 @@ class stmtTests
         float[] rangos = new float[5];
         rangos[0] = 5.25f;
         rangos[1] = 5.25F;
-        rangos[2] = (float)9.8;
+        rangos[2] = (float)9;
         rangos[3] = 5.25f;
-        rangos[FOUR] = 200f;
+        rangos[FOUR] = (float)200;
 
         this.myField = new Fielded(otroParam);
         this.myField2[THREE] = new Fielded(otroParam);
