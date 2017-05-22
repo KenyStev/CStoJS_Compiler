@@ -81,7 +81,7 @@ class stmtTests
 
         Persona[] varName2 = createPrenson("Carlos");
         varName2.edad = birthy_ear - current_year;
-        varName2.sueldo *= 1.5;
+        varName2.sueldo *= 1.5f;
         varName2.carros.add(new Ferrarry());
 
         Lol que = new Lol[6][];
