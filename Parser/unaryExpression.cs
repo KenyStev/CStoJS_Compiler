@@ -22,9 +22,24 @@ namespace Compiler
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
                 addLookAhead(lexer.GetNextToken());
-                addLookAhead(lexer.GetNextToken());
-                if (typesOptions.Contains(look_ahead[0].type) && (look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE
-                || look_ahead[1].type == TokenType.PUNT_ACCESOR))
+                // addLookAhead(lexer.GetNextToken());
+                // if (typesOptions.Contains(look_ahead[0].type) && (look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE
+                // || look_ahead[1].type == TokenType.PUNT_ACCESOR))
+                int first = look_ahead.Count() - 1;
+                Token placehold = look_ahead[look_ahead.Count() - 1];
+                bool accept = false;
+                while (typesOptions.Contains(placehold.type) || placehold.type == TokenType.PUNT_ACCESOR
+                    || placehold.type == TokenType.PUNT_SQUARE_BRACKET_OPEN || placehold.type == TokenType.PUNT_SQUARE_BRACKET_CLOSE
+                    || placehold.type == TokenType.OP_LESS_THAN || placehold.type == TokenType.OP_MORE_THAN
+                    || placehold.type == TokenType.PUNT_COMMA)
+                {
+                    addLookAhead(lexer.GetNextToken());
+                    placehold = look_ahead[look_ahead.Count() - 1];
+                    accept = true;
+                }
+                // DebugInfoMethod("PH" + placehold.type+ " "+look_ahead[first].type);
+                if (typesOptions.Contains(look_ahead[first].type) && accept && 
+                    (placehold.type == TokenType.PUNT_PAREN_CLOSE))
                 {
                     consumeToken();
                     if (!pass(typesOptions))
@@ -77,11 +92,11 @@ namespace Compiler
             {
                 consumeToken();
                 expression();
-                if(pass(primaryOptionsPrime))
-                    primary_expression_p();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
+                if(pass(primaryOptionsPrime))
+                    primary_expression_p();
             }else if(pass(TokenType.RW_THIS))
             {
                 consumeToken();
