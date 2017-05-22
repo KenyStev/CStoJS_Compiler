@@ -115,6 +115,14 @@ class stmtTests
 
         this.myField3.id1.id2[THREE] = new Fielded(otroParam);
         this.myField3.id1 = new ID1(otroParam,otroParam2,otroParam3);
+
+        string[getSize()] nombres1;
+        string[this.getSize()] nombres2;
+        string[(Numbers.Count>3)?8:3] nombres3;
+
+        namespace1.MyBool[size *= 3] = new namespace1.MyBool[]{};
+        namespace1.MyBool[size += 3] = new namespace1.MyBool[]{};
+        namespace1.MyBool[((size -= 3)>0)?size:0] = new namespace1.MyBool[]{};
     }
 
     private static TokenType [] jumpsStmt()
