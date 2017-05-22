@@ -14,7 +14,12 @@ namespace Compiler
         TokenType [] switchLabelOptions = {TokenType.RW_CASE,TokenType.RW_DEFAULT};
         TokenType [] iteratorsOptionsStatements = {TokenType.RW_FOR,TokenType.RW_FOREACH,TokenType.RW_DO,TokenType.RW_WHILE};
         TokenType [] jumpsOptionsStatements = {TokenType.RW_BREAK,TokenType.RW_CONTINUE,TokenType.RW_RETURN};
-        TokenType[] primaryOptionsPrime = {TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS,TokenType.PUNT_ACCESOR};
+        TokenType[] primaryOptionsPrime = {
+            TokenType.OP_PLUS_PLUS,
+            TokenType.OP_MINUS_MINUS,
+            TokenType.PUNT_ACCESOR,
+            TokenType.PUNT_PAREN_OPEN,
+            TokenType.PUNT_SQUARE_BRACKET_OPEN};
         TokenType [] StatementsOptions = {
             TokenType.PUNT_PAREN_OPEN,
             TokenType.OP_SUM,

@@ -13,8 +13,6 @@ namespace Compiler
         private void embedded_statement()
         {
             printIfDebug("embedded_statement");
-            if(!pass(embededOptions()))
-                throwError("statement expected");
             if(pass(maybeEmptyBlockOptions))
             {
                 maybe_empty_block();
@@ -421,7 +419,7 @@ namespace Compiler
             unary_expression();
             statement_expression_factorized();
         }
-        
+
         /*statement-expression-factorized:
 	        | assignment-operator expresion statement-expresion-p
             | statement-expresion-p */

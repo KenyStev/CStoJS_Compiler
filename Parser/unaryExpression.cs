@@ -23,16 +23,13 @@ namespace Compiler
             {
                 addLookAhead(lexer.GetNextToken());
                 addLookAhead(lexer.GetNextToken());
-                if (typesOptions.Contains(look_ahead[0].type) && look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE
-                || look_ahead[1].type == TokenType.PUNT_ACCESOR)
+                if (typesOptions.Contains(look_ahead[0].type) && (look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE
+                || look_ahead[1].type == TokenType.PUNT_ACCESOR))
                 {
                     consumeToken();
                     if (!pass(typesOptions))
                         throwError("type expected");
-                    consumeToken();
-
-                    if(pass(TokenType.PUNT_ACCESOR))
-                        identifier_attribute();
+                    types();
 
                     if (!pass(TokenType.PUNT_PAREN_CLOSE))
                         throwError("')' expected");
@@ -96,7 +93,8 @@ namespace Compiler
         }
 
         /*primary-expression-p:
-            | '.' identifier optional-funct-or-array-call primary-expression-p
+            | '.' identifier primary-expression-p
+            | optional-funct-or-array-call primary-expression-p
             | increment-decrement primary-expression-p 
             | EPSILON  */
         private void primary_expression_p()
@@ -108,9 +106,11 @@ namespace Compiler
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
                 consumeToken();
+                primary_expression_p();
+            }else if(pass(TokenType.PUNT_PAREN_OPEN,TokenType.PUNT_SQUARE_BRACKET_OPEN))
+            {
                 optional_funct_or_array_call();
-                if(pass(primaryOptionsPrime))
-                    primary_expression_p();
+                primary_expression_p();
             }else if(pass(TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS))
             {
                 consumeToken();
@@ -122,7 +122,7 @@ namespace Compiler
 
         /*optional-funct-or-array-call:
             | '(' argument-list ')'
-            | optional-array-access-list 
+            | optional-array-access-list
             | EPSILON */
         private void optional_funct_or_array_call()
         {
@@ -132,7 +132,7 @@ namespace Compiler
                 consumeToken();
                 argument_list();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
-                    throwError("] expected");
+                    throwError(") expected");
                 consumeToken();
             }else if(pass(TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
