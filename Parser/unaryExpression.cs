@@ -171,13 +171,14 @@ namespace Compiler
         }
 
         /*optional-expression-list:
-            | expression-list
+            | ',' expression-list
             | EPSILON */
         private void optional_expression_list()
         {
             printIfDebug("optional_expression_list");
-            if(pass(expressionOptions()))
+            if(pass(TokenType.PUNT_COMMA))
             {
+                consumeToken();
                 expression_list();
             }else{
                 //EPSILON
