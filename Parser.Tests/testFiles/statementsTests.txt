@@ -130,7 +130,7 @@ class stmtTests
 
         int size = 5;
         float[] val = new float[8];
-        val[size *= 3] = (float)5.5;
+        val[size *= 3] = (float)5.5F;
     }
 
     private static TokenType [] jumpsStmt()
