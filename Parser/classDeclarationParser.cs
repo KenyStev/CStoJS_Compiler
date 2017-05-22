@@ -82,7 +82,7 @@ namespace Compiler
                 consumeToken();
                 if(!pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
                     throwError("type-or-void expected");
-                consumeToken();
+                type_or_void();
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
                 if(oprionalModifierToken.type==TokenType.RW_STATIC)
@@ -95,7 +95,7 @@ namespace Compiler
             }else if(pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
             {
                 Token oldToken = token;
-                consumeToken();
+                type_or_void();
 
                 if(oldToken.type==TokenType.ID)
                 {

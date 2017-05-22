@@ -241,7 +241,7 @@ namespace Compiler
         }
 
         /*foreach-statement:
-	        | "foreach" '(' type identifier "in" expression ')' embedded-statement */
+	        | "foreach" '(' type-or-var identifier "in" expression ')' embedded-statement */
         private void foreach_statement()
         {
             printIfDebug("foreach_statement");
@@ -251,9 +251,9 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            if(!pass(typesOptions))
-                throwError("type expected");
-            consumeToken();
+            if(!pass(typesOptions,new TokenType[]{TokenType.RW_VAR}))
+                throwError("type-or-var expected");
+            type_or_var();
             if(!pass(TokenType.ID))
                 throwError("identifier  expected");
             consumeToken();
@@ -457,7 +457,7 @@ namespace Compiler
                 consumeToken();
                 if(!pass(typesOptions))
                     throwError("type expected");
-                consumeToken();
+                types();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();

@@ -275,6 +275,7 @@ namespace Compiler
                 consumeToken();
                 if(!pass(typesOptions))
                     throwError("type expected");
+                types();
                 if(pass(relationalOperatorOptions,Is_AsOperatorOptions))
                     relational_expression_p();
             }else{

@@ -139,6 +139,16 @@ namespace Compiler
             
         }
 
+        /*qualified-identifier:
+	        | identifier identifier-attribute */
+        private void qualified_identifier()
+        {
+            if(!pass(TokenType.ID))
+                throwError("identifier expected");
+            consumeToken();
+            identifier_attribute();
+        }
+
         /*identifier-attribute:
             | '.' identifier identifier-attribute
             | EPSILON */
@@ -158,27 +168,83 @@ namespace Compiler
         }
 
         /*identifiers-list:
-	        | identifier identifiers-list-p */
+	        | qualified-identifier identifiers-list-p */
         private void identifiers_list()
         {
-            if(!pass(TokenType.ID))
-                throwError("identifier expected");
-            consumeToken();
+            qualified_identifier();
             identifiers_list_p();
         }
 
         /*identifiers-list-p:
-            | ',' identifier identifiers-list-p
+            | ',' qualified-identifier identifiers-list-p
             | EPSILON */
         private void identifiers_list_p()
         {
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                identifiers_list();
+                qualified_identifier();
+                identifiers_list_p();
             }else{
                 //EPSILON
             }
+        }
+
+        /*type:
+            | built-in-type optional-rank-specifier-list
+            | qualified-identifier optional-rank-specifier-list */
+        private void types()
+        {
+            printIfDebug("types");
+            if(pass(typesOptions) && !pass(TokenType.ID))
+            {
+                built_in_type();
+                optional_rank_specifier_list();
+            }else if(pass(TokenType.ID))
+            {
+                qualified_identifier();
+                optional_rank_specifier_list();
+            }else{
+                throwError("type expected");
+            }
+        }
+
+        /*built-in-type:
+            | "int"
+            | "char"
+            | "string"
+            | "bool"
+            | "float" */
+        private void built_in_type()
+        {
+            printIfDebug("built_in_type");
+            if(!pass(typesOptions))
+                throwError("primary type expected");
+            consumeToken();
+        }
+
+        /*type-or-void:
+            | type
+            | "void" */
+        private void type_or_void()
+        {
+            printIfDebug("type_or_void");
+            if(pass(TokenType.RW_VOID))
+                consumeToken();
+            else
+                types();
+        }
+
+        /*type-or-var:
+            | type
+            | "var" */
+        private void type_or_var()
+        {
+            printIfDebug("type_or_var");
+            if(pass(TokenType.RW_VAR))
+                consumeToken();
+            else
+                types();
         }
     }
 }

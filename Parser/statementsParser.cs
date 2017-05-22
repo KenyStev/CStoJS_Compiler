@@ -55,7 +55,7 @@ namespace Compiler
             printIfDebug("local_variable_declaration");
             if(!pass(typesOptions,new TokenType[]{TokenType.RW_VAR}))
                 throwError("type-or-var expected");
-            consumeToken();
+            type_or_var();
             variable_declarator_list();
         }
     }

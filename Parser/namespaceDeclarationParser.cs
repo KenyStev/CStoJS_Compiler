@@ -6,17 +6,14 @@ namespace Compiler
     public partial class Parser
     {
         /*using-directive:
-	        | "using" identifier identifier-attribute ';' optional-using-directive */
+	        | "using" qualified-identifier ';' optional-using-directive */
         private void using_directive()
         {
             printIfDebug("using_directive");
             if(!pass(TokenType.RW_USING))
                 throwError("'using' expected");
             consumeToken();
-            if(!pass(TokenType.ID))
-                throwError("identifier expected");
-            consumeToken();
-            identifier_attribute();
+            qualified_identifier();
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();
@@ -55,16 +52,14 @@ namespace Compiler
         }
 
         /*namespace-declaration:
-	        | "namespace" identifier identifier-attribute namespace-body */
+	        | "namespace" qualified-identifier identifier-attribute namespace-body */
         private void namespace_declaration()
         {
             printIfDebug("namespace_declaration");
             if(!pass(TokenType.RW_NAMESPACE))
                 throwError("'namespace' expected");
             consumeToken();
-            if(!pass(TokenType.ID))
-                throwError("identifier expected");
-            consumeToken();
+            qualified_identifier();
             identifier_attribute();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");

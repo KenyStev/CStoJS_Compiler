@@ -136,7 +136,9 @@ abstract class Test : SomeClass2, Hey, System.Some.Thing
     {
         while (true)
         {
-            
+            Lol que = new Lol[6][];
+            Lol que = new Lol[][]{};
+            Lol que = new Lol[,,,]{};
         }
 
         for (int x = 0, j = 1; true;)

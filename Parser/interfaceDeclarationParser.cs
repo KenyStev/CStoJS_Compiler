@@ -60,7 +60,7 @@ namespace Compiler
             printIfDebug("interface_method_header");
             if(!pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
                 throwError("type-or-void expected");
-            consumeToken();
+            type_or_void();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
             consumeToken();
@@ -112,7 +112,7 @@ namespace Compiler
             printIfDebug("fixed_parameter");
             if(!pass(typesOptions))
                 throwError("type expected");
-            consumeToken();
+            types();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
             consumeToken();

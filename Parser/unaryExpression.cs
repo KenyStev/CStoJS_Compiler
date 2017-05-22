@@ -23,12 +23,16 @@ namespace Compiler
             {
                 addLookAhead(lexer.GetNextToken());
                 addLookAhead(lexer.GetNextToken());
-                if (typesOptions.Contains(look_ahead[0].type) && look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE)
+                if (typesOptions.Contains(look_ahead[0].type) && look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE
+                || look_ahead[1].type == TokenType.PUNT_ACCESOR)
                 {
                     consumeToken();
                     if (!pass(typesOptions))
                         throwError("type expected");
                     consumeToken();
+
+                    if(pass(TokenType.PUNT_ACCESOR))
+                        identifier_attribute();
 
                     if (!pass(TokenType.PUNT_PAREN_CLOSE))
                         throwError("')' expected");
@@ -187,7 +191,12 @@ namespace Compiler
             printIfDebug("instance_expression");
             if(!pass(typesOptions))
                 throwError("type expected");
-            consumeToken();
+            if(pass(TokenType.ID))
+            {
+                qualified_identifier();
+            }else{
+                consumeToken();
+            }
             instance_expression_factorized();
         }
 
@@ -231,10 +240,10 @@ namespace Compiler
 
                 optional_rank_specifier_list();
                 optional_array_initializer();
-            }else if (pass(TokenType.PUNT_COMMA))
+            }else if (pass(TokenType.PUNT_COMMA,TokenType.PUNT_SQUARE_BRACKET_CLOSE))
             {
                 rank_specifier_list();
-                optional_array_initializer();
+                array_initializer();
             }
             else
             {
