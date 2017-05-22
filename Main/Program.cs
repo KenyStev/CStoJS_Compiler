@@ -10,7 +10,8 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            var inputString = new InputFile(@"..\Lexer.Tests\TokenTypeTests.cs");
+            // var inputString = new InputFile(@"..\Lexer.Tests\TokenTypeTests.cs");
+            var inputString = new InputFile(@"..\Parser\unaryExpression.cs");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
