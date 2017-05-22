@@ -74,10 +74,10 @@ class stmtTests
 
     public static void statementsExpressions()
     {
-        namespace1.namespace2.namespace.MuClass nameVar = new namespace1.namespace2.namespace.MuClass();
-        namespace1.namespace2.namespace.MuClass[] nameVar = new namespace1.namespace2.namespace.MuClass[]{};
-        namespace1.namespace2.namespace.MuClass[][] nameVar = new namespace1.namespace2.namespace.MuClass[][]{};
-        namespace1.namespace2.namespace.MuClass[,,] nameVar = new namespace1.namespace2.namespace.MuClass[,,]{};
+        namespace1.namespace2.namespace3.MuClass nameVar = new namespace1.namespace2.namespace3.MuClass();
+        namespace1.namespace2.namespace3.MuClass[] nameVar = new namespace1.namespace2.namespace3.MuClass[]{};
+        namespace1.namespace2.namespace3.MuClass[][] nameVar = new namespace1.namespace2.namespace3.MuClass[][]{};
+        namespace1.namespace2.namespace3.MuClass[,,] nameVar = new namespace1.namespace2.namespace3.MuClass[,,]{};
 
         Persona[] varName2 = createPrenson("Carlos");
         varName2.edad = birthy_ear - current_year;
@@ -93,12 +93,12 @@ class stmtTests
         hola[2] = "adios";
         Console.WriteLine("Hello!");
 
-        namespace1.namespace2.namespace.MuClass[0] = "Ing.";
+        namespace1.namespace2.namespace3.MuClass[0] = "Ing.";
         namespace1.namespace2.MuClass[1] = "no";
         namespace1.MuClass[2] = "nos";
         namespace1.namespace2.MuClass[3] = "viole";
-        namespace1.namespace2.namespace.MuClass[3] = "plox";
-        namespace1.namespace2.namespace.MuClass[3] = "plox X2";
+        namespace1.namespace2.namespace3.MuClass[3] = "plox";
+        namespace1.namespace2.namespace3.MuClass[3] = "plox X2";
 
         int THREE = 3,
         FOUR = 4;
