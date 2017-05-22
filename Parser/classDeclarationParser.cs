@@ -96,7 +96,7 @@ namespace Compiler
             {
                 Token oldToken = token;
                 type_or_void();
-
+                
                 if(oldToken.type==TokenType.ID)
                 {
                     if(pass(TokenType.ID))

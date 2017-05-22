@@ -97,13 +97,13 @@ class stmtTests
         namespace1.namespace2.MuClass[1] = "no";
         namespace1.MuClass[2] = "nos";
         namespace1.namespace2.MuClass[3] = "viole";
-        namespace1.namespace2.namespace3.MuClass[3] = "plox";
-        namespace1.namespace2.namespace3.MuClass[3] = "plox X2";
+        namespace1.namespace2.namespace3.MuClass[4] = "plox";
+        namespace1.namespace2.namespace3.MuClass[5] = "plox X2";
 
         int THREE = 3,
         FOUR = 4;
 
-        float[5] rangos;
+        float[] rangos = new float[5];
         rangos[0] = 5.25f;
         rangos[1] = 5.25F;
         rangos[2] = (float)9.8;
@@ -116,13 +116,21 @@ class stmtTests
         this.myField3.id1.id2[THREE] = new Fielded(otroParam);
         this.myField3.id1 = new ID1(otroParam,otroParam2,otroParam3);
 
-        string[getSize()] nombres1;
-        string[this.getSize()] nombres2;
-        string[(Numbers.Count>3)?8:3] nombres3;
+        string[] nombres1 = new namespace1.MyBool[getSize()];
+        string[] nombres2 = new namespace1.MyBool[this.getSize()];
+        string[] nombres2 = new namespace1.MyBool[(Numbers.Count>3)?8:3];
 
-        namespace1.MyBool[size *= 3] = new namespace1.MyBool[]{};
-        namespace1.MyBool[size += 3] = new namespace1.MyBool[]{};
-        namespace1.MyBool[((size -= 3)>0)?size:0] = new namespace1.MyBool[]{};
+        nombres1[getSize()-1] = "Imposible";
+        nombres1[this.getSize()-1] = "Thing";
+        nombres1[(Numbers.Count>3)?8:3] = "Last";
+
+        namespace1.MyBool[size *= 3] = value1;
+        namespace1.MyBool[size += 3] = value2;
+        namespace1.MyBool[((size -= 3)>0)?size:0] = value3;
+
+        int size = 5;
+        float[] val = new float[8];
+        val[size *= 3] = (float)5.5;
     }
 
     private static TokenType [] jumpsStmt()
