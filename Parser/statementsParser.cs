@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Compiler
 {
@@ -10,8 +11,9 @@ namespace Compiler
         private void optional_statement_list()
         {
             printIfDebug("optional_statement_list");
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR},maybeEmptyBlockOptions,selectionsOptionsStatements
-            ,iteratorsOptionsStatements,jumpsOptionsStatements,StatementsOptions))
+            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR},
+            maybeEmptyBlockOptions,selectionsOptionsStatements
+            ,iteratorsOptionsStatements,jumpsOptionsStatements,unaryOperatorOptions))
             {
                 statement_list();
             }else{
@@ -35,7 +37,12 @@ namespace Compiler
         {
             printIfDebug("statement");
             addLookAhead(lexer.GetNextToken()); 
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR}) && look_ahead[0].type == TokenType.ID)
+            addLookAhead(lexer.GetNextToken()); 
+            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR}) 
+            && (look_ahead[0].type == TokenType.ID 
+            || look_ahead[0].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
+            || look_ahead[0].type == TokenType.PUNT_ACCESOR)
+            && !literalOptions.Contains(look_ahead[1].type))
             {
                 local_variable_declaration();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))

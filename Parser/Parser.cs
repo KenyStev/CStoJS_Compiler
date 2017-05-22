@@ -14,7 +14,7 @@ namespace Compiler
         private void printIfDebug(string msj)
         {
             if(debug)
-                Console.Out.WriteLine(msj+" ==> "+token.type+" <==");
+                Console.Out.WriteLine(msj+" | "+token.type+" ::= "+token.lexeme);
         }
 
         public Parser(Lexer lexer)

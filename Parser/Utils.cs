@@ -20,15 +20,6 @@ namespace Compiler
             TokenType.PUNT_ACCESOR,
             TokenType.PUNT_PAREN_OPEN,
             TokenType.PUNT_SQUARE_BRACKET_OPEN};
-        TokenType [] StatementsOptions = {
-            TokenType.PUNT_PAREN_OPEN,
-            TokenType.OP_SUM,
-            TokenType.OP_SUBSTRACT,
-            TokenType.OP_PLUS_PLUS,
-            TokenType.OP_MINUS_MINUS,
-            TokenType.OP_NOT,
-            TokenType.OP_BITWISE_NOT,
-            TokenType.OP_MULTIPLICATION};
         
         TokenType[] literalOptions = {
             TokenType.LIT_INT,
@@ -115,7 +106,7 @@ namespace Compiler
         private TokenType[] embededOptions()
         {
             return maybeEmptyBlockOptions.Concat(selectionsOptionsStatements).Concat(iteratorsOptionsStatements)
-            .Concat(jumpsOptionsStatements).Concat(StatementsOptions).Concat(unaryOperatorOptions)
+            .Concat(jumpsOptionsStatements).Concat(unaryOperatorOptions)
             .Concat(literalOptions).Concat(unaryExpressionOptions).ToArray();
         }
         
@@ -139,6 +130,7 @@ namespace Compiler
 
         private void consumeToken()
         {
+            printIfDebug("\tA-consumir: ");
             if (look_ahead.Count > 0)
             {
                 token = look_ahead[0];
@@ -148,6 +140,7 @@ namespace Compiler
             {
                 token = lexer.GetNextToken();
             }
+            printIfDebug("\tConsumio: ");
         }
 
         private void removeLookAhead(int index)

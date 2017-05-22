@@ -215,11 +215,14 @@ namespace Compiler
         private void variable_initializer()
         {
             printIfDebug("variable_initializer");
-            if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
+            if(pass(expressionOptions()))
+            {
+                expression();
+            }else if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
             {
                 array_initializer();
             }else{
-                expression();
+                throwError("expression or array initializer '{'");
             }
         }
 

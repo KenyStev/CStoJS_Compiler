@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace Compiler
 {
@@ -190,7 +191,13 @@ namespace Compiler
         private void optional_for_initializer()
         {
             printIfDebug("optional_for_initializer");
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR}))
+            addLookAhead(lexer.GetNextToken());
+            addLookAhead(lexer.GetNextToken());
+            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR})
+            && (look_ahead[0].type == TokenType.ID 
+            || look_ahead[0].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
+            || look_ahead[0].type == TokenType.PUNT_ACCESOR)
+            && !literalOptions.Contains(look_ahead[1].type))
             {
                 local_variable_declaration();
             }else if(pass(selectionsOptionsStatements))
@@ -207,7 +214,7 @@ namespace Compiler
         private void optional_statement_expression_list()
         {
             printIfDebug("optional_statement_expression_list");
-            if(pass(StatementsOptions))
+            if(pass(unaryOperatorOptions))
             {
                 statement_expression_list();
             }else{
@@ -476,7 +483,7 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
-            }else if(pass(StatementsOptions))
+            }else if(pass(unaryOperatorOptions))
             {
                 if(!pass(unaryOperatorOptions))
                     throwError("unary operator expected");
