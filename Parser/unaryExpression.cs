@@ -12,7 +12,7 @@ namespace Compiler
         private void unary_expression()
         {
             TokenType[] nuevo = { TokenType.RW_NEW , TokenType.ID,
-                TokenType.PUNT_PAREN_OPEN, TokenType.RW_THIS
+                TokenType.PUNT_PAREN_OPEN, TokenType.RW_THIS,TokenType.RW_BASE
             };
             printIfDebug("unary_expression");
             if(pass(unaryOperatorOptions))
@@ -68,7 +68,8 @@ namespace Compiler
             | literal primary-expression-p
             | identifier primary-expression-p
             | '(' expression ')' primary-expression-p
-            | "this" primary-expression-p */
+            | "this" primary-expression-p
+            | "base" primary-expression-p */
         private void primary_expression()
         {
             printIfDebug("primary_expression");
@@ -98,6 +99,11 @@ namespace Compiler
                 if(pass(primaryOptionsPrime))
                     primary_expression_p();
             }else if(pass(TokenType.RW_THIS))
+            {
+                consumeToken();
+                if(pass(primaryOptionsPrime))
+                    primary_expression_p();
+            }else if(pass(TokenType.RW_BASE))
             {
                 consumeToken();
                 if(pass(primaryOptionsPrime))

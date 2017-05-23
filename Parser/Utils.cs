@@ -85,7 +85,7 @@ namespace Compiler
 
         TokenType[] unaryExpressionOptions = {
             TokenType.PUNT_PAREN_OPEN,TokenType.RW_NEW, TokenType.ID,
-            TokenType.RW_THIS
+            TokenType.RW_THIS,TokenType.RW_BASE
         };
                                                 
         private TokenType [] expressionOptions()
@@ -103,7 +103,7 @@ namespace Compiler
                 .Concat(literalOptions).ToArray();
         }
 
-        private TokenType[] embededOptions()
+        private TokenType[] embededOptions() //TOFIX delete: unaryOperatorOptions, literalOptionsunaryExpressionOptions
         {
             return maybeEmptyBlockOptions.Concat(selectionsOptionsStatements).Concat(iteratorsOptionsStatements)
             .Concat(jumpsOptionsStatements).Concat(unaryOperatorOptions)
