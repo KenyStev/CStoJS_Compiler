@@ -12,7 +12,7 @@ namespace Compiler
         {
             printIfDebug("optional_statement_list");
             if (pass(typesOptions, new TokenType[] { TokenType.RW_VAR },
-            embededOptions(), unaryOperatorOptions,unaryExpressionOptions,literalOptions))
+            embededOptions()))
             {
                 statement_list();
             }
@@ -80,25 +80,6 @@ namespace Compiler
             }else{
                 throwError("statement expected");
             }
-
-            /*addLookAhead(lexer.GetNextToken()); 
-            addLookAhead(lexer.GetNextToken()); 
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR}) 
-            && (look_ahead[0].type == TokenType.ID 
-            || look_ahead[0].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
-            || look_ahead[0].type == TokenType.PUNT_ACCESOR)
-            && !literalOptions.Contains(look_ahead[1].type))
-            {
-                local_variable_declaration();
-                if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
-                    throwError("; expected");
-                consumeToken();
-            }else if(pass(embededOptions()))
-            {
-                embedded_statement();
-            }else{
-                throwError("statement expected");
-            }*/
         }
 
         /*local-variable-declaration:

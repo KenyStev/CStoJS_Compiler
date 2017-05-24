@@ -103,7 +103,7 @@ namespace Compiler
                 .Concat(literalOptions).ToArray();
         }
 
-        private TokenType[] embededOptions() //TOFIX delete: unaryOperatorOptions, literalOptionsunaryExpressionOptions
+        private TokenType[] embededOptions() //TOFIX delete: unaryOperatorOptions, literalOptions, unaryExpressionOptions
         {
             return maybeEmptyBlockOptions.Concat(selectionsOptionsStatements).Concat(iteratorsOptionsStatements)
             .Concat(jumpsOptionsStatements).Concat(unaryOperatorOptions)

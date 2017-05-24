@@ -22,9 +22,6 @@ namespace Compiler
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
                 addLookAhead(lexer.GetNextToken());
-                // addLookAhead(lexer.GetNextToken());
-                // if (typesOptions.Contains(look_ahead[0].type) && (look_ahead[1].type == TokenType.PUNT_PAREN_CLOSE
-                // || look_ahead[1].type == TokenType.PUNT_ACCESOR))
                 int first = look_ahead.Count() - 1;
                 Token placehold = look_ahead[look_ahead.Count() - 1];
                 bool accept = false;
