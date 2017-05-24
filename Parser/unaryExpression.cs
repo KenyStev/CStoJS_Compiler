@@ -11,9 +11,6 @@ namespace Compiler
             | primary-expression */
         private void unary_expression()
         {
-            TokenType[] nuevo = { TokenType.RW_NEW , TokenType.ID,
-                TokenType.PUNT_PAREN_OPEN, TokenType.RW_THIS,TokenType.RW_BASE
-            };
             printIfDebug("unary_expression");
             if(pass(unaryOperatorOptions))
             {
@@ -34,7 +31,7 @@ namespace Compiler
                     placehold = look_ahead[look_ahead.Count() - 1];
                     accept = true;
                 }
-                // DebugInfoMethod("PH" + placehold.type+ " "+look_ahead[first].type);
+                
                 if (typesOptions.Contains(look_ahead[first].type) && accept && 
                     (placehold.type == TokenType.PUNT_PAREN_CLOSE))
                 {
@@ -52,7 +49,7 @@ namespace Compiler
                 {
                     primary_expression();
                 }
-            }else if(pass(nuevo,literalOptions))
+            }else if(pass(unaryExpressionOptions,literalOptions))
             {
                 primary_expression();
             }else{

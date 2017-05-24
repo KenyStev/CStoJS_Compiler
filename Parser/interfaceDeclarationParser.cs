@@ -41,7 +41,7 @@ namespace Compiler
         private void interface_method_declaration_list()
         {
             printIfDebug("interface_method_declaration_list");
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(pass(typesOptions,voidOption))
             {
                 interface_method_header();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
@@ -58,7 +58,7 @@ namespace Compiler
         private void interface_method_header()
         {
             printIfDebug("interface_method_header");
-            if(!pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(!pass(typesOptions,voidOption))
                 throwError("type-or-void expected");
             type_or_void();
             if(!pass(TokenType.ID))

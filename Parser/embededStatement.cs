@@ -190,13 +190,12 @@ namespace Compiler
             | EPSILON */
         private void optional_for_initializer()
         {
-            TokenType[] var = { TokenType.RW_VAR };
             printIfDebug("optional_for_initializer");
             addLookAhead(lexer.GetNextToken());
             int look_ahead_index = look_ahead.Count()-1;
             addLookAhead(lexer.GetNextToken());
             int look_ahead_index2 = look_ahead.Count() - 1;
-            if (pass(var.Concat(typesOptions).ToArray()) &&
+            if (pass(varOption,typesOptions) &&
                 (look_ahead[look_ahead_index].type == TokenType.ID
                 || look_ahead[look_ahead_index].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
                 || look_ahead[look_ahead_index].type == TokenType.PUNT_ACCESOR

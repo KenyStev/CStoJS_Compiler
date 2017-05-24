@@ -11,8 +11,7 @@ namespace Compiler
         private void optional_statement_list()
         {
             printIfDebug("optional_statement_list");
-            if (pass(typesOptions, new TokenType[] { TokenType.RW_VAR },
-            embededOptions()))
+            if (pass(typesOptions, varOption,embededOptions()))
             {
                 statement_list();
             }
@@ -87,7 +86,7 @@ namespace Compiler
         private void local_variable_declaration()
         {
             printIfDebug("local_variable_declaration");
-            if (!pass(typesOptions, new TokenType[] { TokenType.RW_VAR }))
+            if (!pass(typesOptions, varOption))
                 throwError("type-or-var expected");
             type_or_var();
             variable_declarator_list();

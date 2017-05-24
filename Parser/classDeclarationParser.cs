@@ -45,7 +45,7 @@ namespace Compiler
         private void optional_class_member_declaration_list()
         {
             printIfDebug("optional_class_member_declaration_list");
-            if(pass(encapsulationOptions,optionalModifiersOptions,typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(pass(encapsulationOptions,optionalModifiersOptions,typesOptions,voidOption))
             {
                 class_member_declaration();
                 optional_class_member_declaration_list();
@@ -61,7 +61,7 @@ namespace Compiler
             printIfDebug("class_member_declaration");
             if(pass(encapsulationOptions))
                 encapsulation_modifier();
-            if(pass(optionalModifiersOptions,typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(pass(optionalModifiersOptions,typesOptions,voidOption))
             {
                 class_member_declaration_options();
             }else{
@@ -80,7 +80,7 @@ namespace Compiler
             {
                 Token oprionalModifierToken = token;
                 consumeToken();
-                if(!pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+                if(!pass(typesOptions,voidOption))
                     throwError("type-or-void expected");
                 type_or_void();
                 if(!pass(TokenType.ID))
@@ -92,7 +92,7 @@ namespace Compiler
                     consumeToken();
                     method_declaration();
                 }
-            }else if(pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            }else if(pass(typesOptions,voidOption))
             {
                 Token oldToken = token;
                 type_or_void();

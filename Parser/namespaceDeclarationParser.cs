@@ -26,8 +26,7 @@ namespace Compiler
         private void optional_namespace_member_declaration()
         {
             printIfDebug("optional_namespace_member_declaration");
-            TokenType[] namespaceType = {TokenType.RW_NAMESPACE};
-            if(pass(namespaceType,encapsulationOptions,typesDeclarationOptions))
+            if(pass(namespaceOption,encapsulationOptions,typesDeclarationOptions))
             {
                 namespace_member_declaration();
             }else{
@@ -79,8 +78,7 @@ namespace Compiler
             {
                 optional_using_directive();
             }
-            TokenType[] namespaceType = {TokenType.RW_NAMESPACE};
-            if(pass(namespaceType,encapsulationOptions,typesDeclarationOptions))
+            if(pass(namespaceOption,encapsulationOptions,typesDeclarationOptions))
             {
                 optional_namespace_member_declaration();
             }else{

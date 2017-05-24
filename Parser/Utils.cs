@@ -87,6 +87,16 @@ namespace Compiler
             TokenType.PUNT_PAREN_OPEN,TokenType.RW_NEW, TokenType.ID,
             TokenType.RW_THIS,TokenType.RW_BASE
         };
+
+        TokenType[] voidOption = {TokenType.RW_VOID};
+
+        TokenType[] varOption = { TokenType.RW_VAR };
+
+        TokenType[] namespaceOption = {TokenType.RW_NAMESPACE};
+
+        TokenType[] nuevo = { TokenType.RW_NEW , TokenType.ID,
+            TokenType.PUNT_PAREN_OPEN, TokenType.RW_THIS,TokenType.RW_BASE
+        };
                                                 
         private TokenType [] expressionOptions()
         {
