@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes;
 
 namespace Compiler
 {
@@ -7,17 +9,19 @@ namespace Compiler
     {
         /*using-directive:
 	        | "using" qualified-identifier ';' optional-using-directive */
-        private void using_directive()
+        private List<UsingDeclarationStatement> using_directive()
         {
             printIfDebug("using_directive");
             if(!pass(TokenType.RW_USING))
                 throwError("'using' expected");
             consumeToken();
-            qualified_identifier();
+            var idValue = qualified_identifier();
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();
-            optional_using_directive();
+            var usingList = optional_using_directive();
+            usingList.Insert(0,new UsingDeclarationStatement(idValue));
+            return usingList;
         }
 
         /*optional-namespace-member-declaration:

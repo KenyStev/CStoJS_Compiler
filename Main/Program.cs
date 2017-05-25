@@ -27,13 +27,16 @@ namespace Main
                 }
                 ");}
             */
-            var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
+            // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
+            var inputString = new InputString(@"
+            using Kenystev;
+            using Kenystev.Collection;");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
             var parser = new Parser(lexer);
             try{
-                parser.parse();
+                var code = parser.parse();
                 System.Console.Out.WriteLine("Success!");
             }catch(SyntaxTokenExpectedException ex){
                 System.Console.Out.WriteLine(ex.Message);

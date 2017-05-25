@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes;
 
 namespace Compiler
 {
@@ -25,47 +26,52 @@ namespace Compiler
             look_ahead = new List<Token>();
         }
 
-        public void parse(){
+        public CompilationUnitNode parse(){
             printIfDebug("parse");
-            compilation_unit();
+            var compilationNode = compilation_unit();
             if(!pass(TokenType.EOF))
             {
                 throwError("end of file token expected.");
             }
+            return compilationNode;
         }
 
         /*compilation-unit:
             | optional-using-directive optional-namespace-member-declaration
             | optional-namespace-member-declaration
             | EPSILON */
-        private void compilation_unit()
+        private CompilationUnitNode compilation_unit()
         {
+            var compilation = new CompilationUnitNode();
             printIfDebug("compilation_unit");
             if(pass(TokenType.RW_USING))
             {
-                optional_using_directive();
+                var usingList = optional_using_directive();
+                compilation.setUsings(usingList);
+            }else{
+                //EPSILON
             }
-            TokenType[] namespaceType = {TokenType.RW_NAMESPACE};
-            if(pass(namespaceType,encapsulationOptions,typesDeclarationOptions))
+            if(pass(namespaceOption,encapsulationOptions,typesDeclarationOptions))
             {
                 optional_namespace_member_declaration();
             }else{
                 //EPSILON
             }
+            return compilation;
         }
 
 
         /*optional-using-directive:
             | using-directive
             | EPSILON */
-        private void optional_using_directive()
+        private List<UsingDeclarationStatement> optional_using_directive()
         {
             printIfDebug("optional_using_directive");
             if(pass(TokenType.RW_USING))
             {
-                using_directive();
+                return using_directive();
             }else{
-                //EPSILON
+                return new List<UsingDeclarationStatement>();
             }
         }
 
@@ -141,18 +147,20 @@ namespace Compiler
 
         /*qualified-identifier:
 	        | identifier identifier-attribute */
-        private void qualified_identifier()
+        private IdNode qualified_identifier()
         {
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var id = token.lexeme;
             consumeToken();
-            identifier_attribute();
+            var attr = identifier_attribute();
+            return new IdNode(id,attr);
         }
 
         /*identifier-attribute:
             | '.' identifier identifier-attribute
             | EPSILON */
-        private void identifier_attribute()
+        private List<IdNode> identifier_attribute()
         {
             printIfDebug("identifier_attribute");
             if(pass(TokenType.PUNT_ACCESOR))
@@ -160,10 +168,13 @@ namespace Compiler
                 consumeToken();
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
+                var idValue = token.lexeme;
                 consumeToken();
-                identifier_attribute();
+                var listIdNod = identifier_attribute();
+                listIdNod.Insert(0,new IdNode(idValue));
+                return listIdNod;
             }else{
-                //EPSILON
+                return new List<IdNode>();
             }
         }
 
