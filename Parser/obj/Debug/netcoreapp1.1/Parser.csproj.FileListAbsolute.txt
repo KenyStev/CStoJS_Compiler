@@ -1,0 +1,8 @@
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\bin\Debug\netcoreapp1.1\Parser.deps.json
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\bin\Debug\netcoreapp1.1\Parser.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\bin\Debug\netcoreapp1.1\Parser.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\obj\Debug\netcoreapp1.1\Parser.AssemblyInfo.cs
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\obj\Debug\netcoreapp1.1\Parser.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\obj\Debug\netcoreapp1.1\Parser.pdb
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\bin\Debug\netcoreapp1.1\Lexer.dll
+C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Parser\bin\Debug\netcoreapp1.1\Lexer.pdb

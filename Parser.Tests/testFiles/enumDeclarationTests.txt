@@ -1,0 +1,33 @@
+enum Comidas
+{
+    arroz,
+    frijoles,
+    pez
+}
+
+enum Nada 
+{
+
+}
+
+enum Asignados
+{
+    ONE = 1,
+    TWO = 2,
+    THREE = 3
+}
+
+public enum Publicado
+{
+    SI,
+    NO
+}
+
+enum mixed
+{
+    uno = 2,
+    adios,
+    nada,
+    otro = 9,
+    que
+}

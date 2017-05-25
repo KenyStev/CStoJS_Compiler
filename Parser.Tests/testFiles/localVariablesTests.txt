@@ -1,0 +1,80 @@
+class nuevaClase
+{
+    public static void Main()
+    {
+        int edad;
+        float saldo = 600.54f;
+        //TestClassWithInlineFieldWithExpression
+        int LUNES = ((5 + 3) + (4 + 3));
+        int MARTES = ((5 * 9 / 3) - 7 + (2 * 7 + 4) / ( (128 >> 5 * 5) - (1 << 7 * 46) / 3 )) + 15;
+        var MIERCOLES = 0;
+        int x = y = z = w = MARTES / 2;
+        Kevin kevin = new Kevin();
+
+        //TestClassWithLogicalOperatorsInExpression
+        int LUNES = (!(isVisible && isHere) || noEsta);
+        bool boleano = isNull ?? true;
+
+        //TestClassWithTernaryOperatorsInExpression
+        int LUNES = x==0? y=(5+3):z/2;
+        bool boleano = y>5? k--: (k>4? y++:k++);
+
+        //TestClassWithNullCoalescingOperatorsInExpression
+        int LUNES = x ?? ( y ?? (t??5) );
+        bool boleano = j ?? (k>4? y++:k++);
+
+        //TestClassWithBinaryOperatorsInExpression
+        int LUNES =  1 << 5;
+        bool boleano = 5;
+        int otro = 10; 
+        float f = (1 | (0 & 5) & (100^100));
+
+        //TestClassWithEqualityOperatorsInExpression
+        int LUNES =  (1 == 5);
+        bool boleano = (x!=5);
+        var otro = 10 != (otro==mama); 
+        float f = (mama == (0!=5));
+
+        //TestClassWithShiftOperatorsInExpression
+        int LUNES =  (1 << 5);
+        bool boleano = (x>>5);
+        int otro = 10 != (otro>>mama); 
+        float f = (mama <= (0<<5));
+
+        //TestClassWithAdittiveOperatorsInExpression
+        int LUNES =  (1 + 5);
+        bool boleano = (x-5);
+        int otro = 10 + (otro-mama); 
+        float f = (mama + (0-5));
+
+        //TestClassWithMultiplicativeOperatorsInExpression
+        int LUNES =  (1 * 5);
+        bool boleano = (x/5);
+        int otro = 10 * (otro%mama); 
+        float f = (mama / (0*5));
+
+        //TestClassWithUnaryOperatorsInExpression
+        int LUNES = (x += 5);
+        bool boleano = (y >>= 5);
+        int otro = ((x++));
+        int nuevo = + ++y;
+        float f = (~nada);
+        int t = (int)nada;
+        float mana = (float)(n.atributo);
+
+        //TestClassWithAccesMemoryOperatorsInExpression
+        float mana = (float)(n.atributo);
+        int funcion = persona.methodo(x=3).metodo;
+        float f = persona.tryParse(x);
+        Persona persona = this.atributo;
+        Persona persona = this.method(x,y,r,nada);
+
+        //TestClassWithArraysInExpression
+        float mana = new int[2][][][];
+        int arreglo =  new float[,,,,]{}; 
+        int arreglo = new int[2]{ 5,7 };
+        int arreglo = new int[2][]{ new int[5],new int[8]};
+        int arreglo = { new int[5], new int[4], array };
+        int value = new Persona(x,y,w).array[2];
+    }   
+}

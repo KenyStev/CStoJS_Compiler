@@ -76,6 +76,8 @@ namespace Compiler
                     mayBeComment.Append(currentSymbol.character);
                     mayBeComment.Append(nextOne.character);
                 }while(mayBeComment.ToString()!="*/");
+                currentSymbol = inputString.GetNextSymbol();
+                currentSymbol = inputString.GetNextSymbol();
             }
             return detected;
         }
