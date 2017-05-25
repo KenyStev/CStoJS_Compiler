@@ -190,20 +190,26 @@ namespace Compiler
             | EPSILON */
         private void optional_for_initializer()
         {
+            TokenType[] var = { TokenType.RW_VAR };
             printIfDebug("optional_for_initializer");
             addLookAhead(lexer.GetNextToken());
+            int look_ahead_index = look_ahead.Count()-1;
             addLookAhead(lexer.GetNextToken());
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VAR})
-            && (look_ahead[0].type == TokenType.ID 
-            || look_ahead[0].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
-            || look_ahead[0].type == TokenType.PUNT_ACCESOR)
-            && !literalOptions.Contains(look_ahead[1].type))
+            int look_ahead_index2 = look_ahead.Count() - 1;
+            if (pass(var.Concat(typesOptions).ToArray()) &&
+                (look_ahead[look_ahead_index].type == TokenType.ID
+                || look_ahead[look_ahead_index].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
+                || look_ahead[look_ahead_index].type == TokenType.PUNT_ACCESOR
+                || look_ahead[look_ahead_index].type == TokenType.OP_LESS_THAN) 
+                && !literalOptions.Contains(look_ahead[look_ahead_index2].type))
             {
                 local_variable_declaration();
-            }else if(pass(selectionsOptionsStatements))
+            }else if (pass(unaryExpressionOptions.Concat(unaryOperatorOptions).Concat(literalOptions).ToArray()))
             {
                 statement_expression_list();
-            }else{
+            }
+            else
+            {
                 //EPSILON
             }
         }
@@ -214,7 +220,7 @@ namespace Compiler
         private void optional_statement_expression_list()
         {
             printIfDebug("optional_statement_expression_list");
-            if(pass(unaryOperatorOptions))
+            if(pass(unaryOperatorOptions,unaryExpressionOptions,literalOptions))
             {
                 statement_expression_list();
             }else{
