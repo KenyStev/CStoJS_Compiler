@@ -1,4 +1,4 @@
-namespace Compiler.TreeNodes
+namespace Compiler.TreeNodes.Types
 {
     public class ClassTypeNode : TypeNode
     {

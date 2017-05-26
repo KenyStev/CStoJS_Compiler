@@ -1,5 +1,6 @@
 using System;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler
 {

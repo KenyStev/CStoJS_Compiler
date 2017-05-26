@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Compiler.TreeNodes.Statements;
 
-namespace Compiler.TreeNodes
+namespace Compiler.TreeNodes.Types
 {
     public class EnumTypeNode : TypeNode
     {

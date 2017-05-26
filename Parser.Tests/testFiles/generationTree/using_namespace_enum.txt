@@ -22,7 +22,7 @@ namespace Hola
     }
 }
 
-enum otroMas
+private enum otroMas
 {
     promise,
     nadaMas

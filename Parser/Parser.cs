@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler
 {
@@ -83,40 +84,42 @@ namespace Compiler
 
         /*type-declaration:
 	        | encapsulation-modifier group-declaration */
-        private TypeNode type_declaration() //TODO: encapsulationModifiers
+        private TypeNode type_declaration()
         {
             printIfDebug("type_declaration");
             if(!pass(encapsulationOptions,typesDeclarationOptions))
             {
                 throwError("expected member declaration");
             }
-            if(pass(encapsulationOptions))
-            {
-                encapsulation_modifier();
-            }
-            return group_declaration();
+            
+            var encapMod = encapsulation_modifier();
+            
+            return group_declaration(encapMod);
         }
 
         /*group-declaration:
             | class-declaration
             | interface-declaration
             | enum-declaration */
-        private TypeNode group_declaration() //TODO: Modifiers
+        private TypeNode group_declaration(EncapsulationNode encapMod)
         {
             printIfDebug("group_declaration");
+            TypeNode typeDeclaration = null;
             if(pass(TokenType.RW_ABSTRACT,TokenType.RW_CLASS))
             {
-                return class_declaration();
+                typeDeclaration = class_declaration();
             }else if(pass(TokenType.RW_INTERFACE))
             {
-                return interface_declaration();
+                typeDeclaration = interface_declaration();
             }else if(pass(TokenType.RW_ENUM))
             {
-                return enum_declaration();
+                typeDeclaration = enum_declaration();
             }else{
                 throwError("group-declaration expected [class|interface|enum]");
             }
-            return null;
+            if(typeDeclaration!=null)
+                typeDeclaration.setEncapsulationMode(encapMod);
+            return typeDeclaration;
         }
 
         /*optional-body-end:

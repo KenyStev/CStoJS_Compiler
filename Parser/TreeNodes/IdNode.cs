@@ -5,18 +5,18 @@ namespace Compiler.TreeNodes
     public class IdNode
     {
         private string id;
-        private List<IdNode> attr;
+        private List<IdNode> attributes;
 
         public IdNode(string idValue)
         {
             this.id = idValue;
-            attr = new List<IdNode>();
+            this.attributes = new List<IdNode>();
         }
 
         public IdNode(string id, List<IdNode> attr)
         {
             this.id = id;
-            this.attr = attr;
+            this.attributes = attr;
         }
     }
 }
