@@ -37,26 +37,15 @@ namespace Compiler
         }
 
         /*compilation-unit:
-            | optional-using-directive optional-namespace-member-declaration
-            | optional-namespace-member-declaration
+            | optional-using-directive optional-namespace-or-type-member-declaration
+            | optional-namespace-or-type-member-declaration
             | EPSILON */
         private CompilationUnitNode compilation_unit()
         {
-            var compilation = new CompilationUnitNode();
             printIfDebug("compilation_unit");
-            if(pass(TokenType.RW_USING))
-            {
-                var usingList = optional_using_directive();
-                compilation.setUsings(usingList);
-            }else{
-                //EPSILON
-            }
-            if(pass(namespaceOption,encapsulationOptions,typesDeclarationOptions))
-            {
-                optional_namespace_member_declaration();
-            }else{
-                //EPSILON
-            }
+            var usingList = optional_using_directive();
+            var compilation = new CompilationUnitNode(usingList);
+            optional_namespace_or_type_member_declaration(ref compilation,ref compilation.defaultNamespace);
             return compilation;
         }
 
@@ -64,38 +53,40 @@ namespace Compiler
         /*optional-using-directive:
             | using-directive
             | EPSILON */
-        private List<UsingDeclarationStatement> optional_using_directive()
+        private List<UsingNode> optional_using_directive()
         {
             printIfDebug("optional_using_directive");
             if(pass(TokenType.RW_USING))
             {
                 return using_directive();
             }else{
-                return new List<UsingDeclarationStatement>();
+                return new List<UsingNode>();
             }
         }
 
         /*type-declaration-list:
             | type-declaration type-declaration-list
             | EPSILON */
-        private void type_declaration_list()
+        private List<TypeNode> type_declaration_list()
         {
             printIfDebug("type_declaration_list");
             if(pass(encapsulationOptions,typesDeclarationOptions))
             {
-                type_declaration();
-                type_declaration_list();
+                var declaredType = type_declaration();
+                var listTypesDeclared = type_declaration_list();
+                listTypesDeclared.Insert(0,declaredType);
+                return listTypesDeclared;
             }else{
-                //EPSILON
+                return new List<TypeNode>();
             }
         }
 
         /*type-declaration:
 	        | encapsulation-modifier group-declaration */
-        private void type_declaration()
+        private TypeNode type_declaration() //TODO: encapsulationModifiers
         {
             printIfDebug("type_declaration");
-             if(!pass(encapsulationOptions,typesDeclarationOptions))
+            if(!pass(encapsulationOptions,typesDeclarationOptions))
             {
                 throwError("expected member declaration");
             }
@@ -103,31 +94,29 @@ namespace Compiler
             {
                 encapsulation_modifier();
             }
-            if(pass(typesDeclarationOptions))
-            {
-                group_declaration();
-            }
+            return group_declaration();
         }
 
         /*group-declaration:
             | class-declaration
             | interface-declaration
             | enum-declaration */
-        private void group_declaration()
+        private TypeNode group_declaration() //TODO: Modifiers
         {
             printIfDebug("group_declaration");
             if(pass(TokenType.RW_ABSTRACT,TokenType.RW_CLASS))
             {
-                class_declaration();
+                return class_declaration();
             }else if(pass(TokenType.RW_INTERFACE))
             {
-                interface_declaration();
+                return interface_declaration();
             }else if(pass(TokenType.RW_ENUM))
             {
-                enum_declaration();
+                return enum_declaration();
             }else{
                 throwError("group-declaration expected [class|interface|enum]");
             }
+            return null;
         }
 
         /*optional-body-end:

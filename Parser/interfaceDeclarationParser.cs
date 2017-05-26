@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Compiler.TreeNodes;
 
 namespace Compiler
 {
@@ -7,7 +8,7 @@ namespace Compiler
     {
         /*interface-declaration: 
 	        | "interface" identifier inheritance-base interface-body optional-body-end */
-        private void interface_declaration()
+        private InterfaceTypeNode interface_declaration() //TODO
         {
             printIfDebug("interface_declaration");
             if(!pass(TokenType.RW_INTERFACE))
@@ -19,6 +20,7 @@ namespace Compiler
             inheritance_base();
             interface_body();
             optional_body_end();
+            return null;
         }
 
         /*interface-body:

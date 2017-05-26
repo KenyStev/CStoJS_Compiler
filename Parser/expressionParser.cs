@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Compiler.TreeNodes.Expressions;
 
 namespace Compiler
 {
@@ -7,12 +8,13 @@ namespace Compiler
     {
         /*expression:
             | conditional-expression */
-        private void expression()
+        private ExpressionNode expression()
         {
             printIfDebug("expression");
             if(!pass(expressionOptions()))
                 throwError("Operator, identifier or literal in expression expected");
             conditional_expression();
+            return new LiteralIntNode(11); //TODO: return Expression tree
         }
 
         /*conditional-expression:

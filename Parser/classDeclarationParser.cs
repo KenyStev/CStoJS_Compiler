@@ -1,4 +1,5 @@
 using System;
+using Compiler.TreeNodes;
 
 namespace Compiler
 {
@@ -6,7 +7,7 @@ namespace Compiler
     {
         /*class-declaration: ;
 	        | class-modifier "class" identifier inheritance-base class-body optional-body-end */
-        private void class_declaration()
+        private ClassTypeNode class_declaration() //TODO
         {
             printIfDebug("class_declaration");
             if(pass(TokenType.RW_ABSTRACT))
@@ -23,6 +24,7 @@ namespace Compiler
                 throwError("'{' expected");
             class_body();
             optional_body_end();
+            return null;
         }
 
         /*class-body:

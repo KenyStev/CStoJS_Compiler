@@ -9,7 +9,7 @@ namespace Compiler
     {
         /*using-directive:
 	        | "using" qualified-identifier ';' optional-using-directive */
-        private List<UsingDeclarationStatement> using_directive()
+        private List<UsingNode> using_directive()
         {
             printIfDebug("using_directive");
             if(!pass(TokenType.RW_USING))
@@ -20,58 +20,62 @@ namespace Compiler
                 throwError("; expected");
             consumeToken();
             var usingList = optional_using_directive();
-            usingList.Insert(0,new UsingDeclarationStatement(idValue));
+            usingList.Insert(0,new UsingNode(idValue));
             return usingList;
         }
 
-        /*optional-namespace-member-declaration:
-            | namespace-member-declaration
+        /*optional-namespace-or-type-member-declaration:
+            | namespace-or-type-member-declaration
             | EPSILON */
-        private void optional_namespace_member_declaration()
+        private void optional_namespace_or_type_member_declaration(ref CompilationUnitNode compilation,ref NamespaceNode currentNamespace)
         {
-            printIfDebug("optional_namespace_member_declaration");
+            printIfDebug("optional_namespace_or_type_member_declaration");
             if(pass(namespaceOption,encapsulationOptions,typesDeclarationOptions))
             {
-                namespace_member_declaration();
+                namespace_or_type_member_declaration(ref compilation,ref currentNamespace);
             }else{
                 //EPSILON
             }
         }
 
-        /*namespace-member-declaration:
-            | namespace-declaration optional-namespace-member-declaration
-            | type-declaration-list optional-namespace-member-declaration */
-        private void namespace_member_declaration()
+        /*namespace-or-type-member-declaration:
+            | namespace-declaration optional-namespace-or-type-member-declaration
+            | type-declaration-list optional-namespace-or-type-member-declaration */
+        private void namespace_or_type_member_declaration(ref CompilationUnitNode compilation,ref NamespaceNode currentNamespace)
         {
-            printIfDebug("namespace_member_declaration");
+            printIfDebug("namespace_or_type_member_declaration");
             if(pass(TokenType.RW_NAMESPACE))
             {
-                namespace_declaration();
-                optional_namespace_member_declaration();
+                var namespaceDeclared = namespace_declaration(ref compilation);
+                compilation.addNamespace(namespaceDeclared);
+                optional_namespace_or_type_member_declaration(ref compilation, ref currentNamespace);
             }else{
-                type_declaration_list();
-                optional_namespace_member_declaration();
+                var listTypeDeclared = type_declaration_list();
+                currentNamespace.addTypeList(listTypeDeclared);
+                optional_namespace_or_type_member_declaration(ref compilation,ref currentNamespace);
             }
         }
 
         /*namespace-declaration:
 	        | "namespace" qualified-identifier identifier-attribute namespace-body */
-        private void namespace_declaration()
+        private NamespaceNode namespace_declaration(ref CompilationUnitNode compilation)
         {
             printIfDebug("namespace_declaration");
             if(!pass(TokenType.RW_NAMESPACE))
                 throwError("'namespace' expected");
             consumeToken();
-            qualified_identifier();
-            identifier_attribute();
+            var idNamespace = qualified_identifier();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
-            namespace_body();
+
+            var namespaceDeclaration = new NamespaceNode(idNamespace);
+            namespace_body(ref compilation, ref namespaceDeclaration);
+            return namespaceDeclaration;
         }
 
         /*namespace-body:
 	        | '{' optional-using-directive optional-namespace-member-declaration '}' */
-        private void namespace_body()
+        private void namespace_body(ref CompilationUnitNode compilation,ref NamespaceNode currentNamespace)
         {
             printIfDebug("namespace_body");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
@@ -80,11 +84,12 @@ namespace Compiler
 
             if(pass(TokenType.RW_USING))
             {
-                optional_using_directive();
+                var usingDirectives = optional_using_directive();
+                currentNamespace.setUsings(usingDirectives);
             }
             if(pass(namespaceOption,encapsulationOptions,typesDeclarationOptions))
             {
-                optional_namespace_member_declaration();
+                optional_namespace_or_type_member_declaration(ref compilation, ref currentNamespace);
             }else{
                 //EPSILON
             }

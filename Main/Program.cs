@@ -27,24 +27,8 @@ namespace Main
                 }
                 ");}
             */
-            var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
-            // var inputString = new InputString(@"
-            // using Kenystev;
-            // using Kenystev.Collection;
-            
-            // namespace Kevin
-            // {
-            //     using Hola;
-            //     namespace Javier
-            //     {
-
-            //     }
-            // }
-            // namespace Hola
-            // {
-
-            // }
-            // ");
+            // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
+            var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);

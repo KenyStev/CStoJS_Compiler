@@ -1,10 +1,10 @@
 namespace Compiler.TreeNodes
 {
-    public class UsingDeclarationStatement : DeclarationStement
+    public class UsingNode
     {
         private IdNode idNode;
 
-        public UsingDeclarationStatement(IdNode val)
+        public UsingNode(IdNode val)
         {
             this.idNode = val;
         }
