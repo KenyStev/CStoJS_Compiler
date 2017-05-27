@@ -3,9 +3,12 @@ using System.Xml.Serialization;
 
 namespace Compiler.TreeNodes.Types
 {
+    [XmlType("ArrayType")]
     public class ArrayTypeNode : TypeNode
     {
-        [XmlElement(typeof(TypeNode))]
+        [XmlElement(typeof(TypeNode)),
+        XmlElement(typeof(PrimitiveTypeNode),ElementName = "PrimitiveTypeNode"),
+        XmlElement(typeof(AbstractTypeNode),ElementName = "AbstractTypeNode")]
         public TypeNode DataType;
 
         [XmlArray("MultiDimArrays"),

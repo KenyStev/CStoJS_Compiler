@@ -4,7 +4,8 @@ namespace Compiler.TreeNodes.Types
 {
     public class PrimitiveTypeNode : TypeNode
     {
-        private TokenType DataType;
+        [XmlAttribute(AttributeName = "type")]
+        public TokenType DataType;
 
         private PrimitiveTypeNode()
         {

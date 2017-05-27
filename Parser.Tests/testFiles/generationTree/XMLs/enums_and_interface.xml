@@ -3,16 +3,16 @@
   <UsingDirectives>
     <Directive>
       <Identifier>
-        <Identifier>Kenystev</Identifier>
+        <Name>Kenystev</Name>
         <Attributes />
       </Identifier>
     </Directive>
     <Directive>
       <Identifier>
-        <Identifier>Kenystev</Identifier>
+        <Name>Kenystev</Name>
         <Attributes>
           <Identifier>
-            <Identifier>Collection</Identifier>
+            <Name>Collection</Name>
             <Attributes />
           </Identifier>
         </Attributes>
@@ -21,19 +21,19 @@
   </UsingDirectives>
   <defaultNamespace>
     <Identifier>
-      <Identifier>default</Identifier>
+      <Name>default</Name>
       <Attributes />
     </Identifier>
     <Enum>
       <encapsulation type="RW_PUBLIC" />
       <Identifier>
-        <Identifier>miEnum</Identifier>
+        <Name>miEnum</Name>
         <Attributes />
       </Identifier>
       <Items>
         <EnumItem>
           <Name>
-            <Identifier>ONE</Identifier>
+            <Name>ONE</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -42,7 +42,7 @@
         </EnumItem>
         <EnumItem>
           <Name>
-            <Identifier>TWO</Identifier>
+            <Name>TWO</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -51,7 +51,7 @@
         </EnumItem>
         <EnumItem>
           <Name>
-            <Identifier>THREE</Identifier>
+            <Name>THREE</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -60,7 +60,7 @@
         </EnumItem>
         <EnumItem>
           <Name>
-            <Identifier>FOUR</Identifier>
+            <Name>FOUR</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -69,7 +69,7 @@
         </EnumItem>
         <EnumItem>
           <Name>
-            <Identifier>FIVE</Identifier>
+            <Name>FIVE</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -81,13 +81,13 @@
     <Enum>
       <encapsulation type="RW_PRIVATE" />
       <Identifier>
-        <Identifier>otroMas</Identifier>
+        <Name>otroMas</Name>
         <Attributes />
       </Identifier>
       <Items>
         <EnumItem>
           <Name>
-            <Identifier>promise</Identifier>
+            <Name>promise</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -96,7 +96,7 @@
         </EnumItem>
         <EnumItem>
           <Name>
-            <Identifier>nadaMas</Identifier>
+            <Name>nadaMas</Name>
             <Attributes />
           </Name>
           <LiteralIntNode>
@@ -109,19 +109,19 @@
   <Namespaceses>
     <Namespace>
       <Identifier>
-        <Identifier>Hola</Identifier>
+        <Name>Hola</Name>
         <Attributes />
       </Identifier>
       <Enum>
         <encapsulation type="RW_PUBLIC" />
         <Identifier>
-          <Identifier>dentroDe</Identifier>
+          <Name>dentroDe</Name>
           <Attributes />
         </Identifier>
         <Items>
           <EnumItem>
             <Name>
-              <Identifier>Hola</Identifier>
+              <Name>Hola</Name>
               <Attributes />
             </Name>
             <LiteralIntNode>
@@ -130,7 +130,7 @@
           </EnumItem>
           <EnumItem>
             <Name>
-              <Identifier>adios</Identifier>
+              <Name>adios</Name>
               <Attributes />
             </Name>
             <LiteralIntNode>
@@ -142,13 +142,13 @@
     </Namespace>
     <Namespace>
       <Identifier>
-        <Identifier>Kevin</Identifier>
+        <Name>Kevin</Name>
         <Attributes />
       </Identifier>
       <UsingDirectives>
         <Directive>
           <Identifier>
-            <Identifier>Hola</Identifier>
+            <Name>Hola</Name>
             <Attributes />
           </Identifier>
         </Directive>
@@ -156,20 +156,20 @@
     </Namespace>
     <Namespace>
       <Identifier>
-        <Identifier>Javier</Identifier>
+        <Name>Javier</Name>
         <Attributes />
       </Identifier>
       <Interface>
         <encapsulation type="RW_PUBLIC" />
         <Identifier>
-          <Identifier>Iterable</Identifier>
+          <Name>Iterable</Name>
           <Attributes />
         </Identifier>
         <MethodHeaders>
           <MethodHeader>
             <returnType>
               <ArrayType>
-                <DataType xsi:type="PrimitiveTypeNode" />
+                <PrimitiveTypeNode type="RW_INT" />
                 <MultiDimArrays>
                   <MultiDimArray dimensions="1" />
                 </MultiDimArrays>
@@ -177,25 +177,25 @@
               <IsVoid>false</IsVoid>
             </returnType>
             <Identifier>
-              <Identifier>getSec</Identifier>
+              <Name>getSec</Name>
               <Attributes />
             </Identifier>
             <Parameters>
               <Param>
-                <ArrayTypeNode>
-                  <DataType xsi:type="AbstractTypeNode">
+                <ArrayType>
+                  <AbstractTypeNode>
                     <Identifier>
-                      <Identifier>timeset</Identifier>
+                      <Name>timeset</Name>
                       <Attributes />
                     </Identifier>
-                  </DataType>
+                  </AbstractTypeNode>
                   <MultiDimArrays>
                     <MultiDimArray dimensions="3" />
                     <MultiDimArray dimensions="1" />
                   </MultiDimArrays>
-                </ArrayTypeNode>
+                </ArrayType>
                 <paramName>
-                  <Identifier>nowDays</Identifier>
+                  <Name>nowDays</Name>
                   <Attributes />
                 </paramName>
               </Param>
@@ -207,13 +207,13 @@
     </Namespace>
     <Namespace>
       <Identifier>
-        <Identifier>Hola</Identifier>
+        <Name>Hola</Name>
         <Attributes />
       </Identifier>
       <Interface>
         <encapsulation type="RW_PRIVATE" />
         <Identifier>
-          <Identifier>IGently</Identifier>
+          <Name>IGently</Name>
           <Attributes />
         </Identifier>
         <MethodHeaders>
@@ -223,17 +223,17 @@
               <IsVoid>true</IsVoid>
             </returnType>
             <Identifier>
-              <Identifier>saludar</Identifier>
+              <Name>saludar</Name>
               <Attributes />
             </Identifier>
           </MethodHeader>
           <MethodHeader>
             <returnType>
-              <PrimitiveType />
+              <PrimitiveType type="RW_INT" />
               <IsVoid>false</IsVoid>
             </returnType>
             <Identifier>
-              <Identifier>getSize</Identifier>
+              <Name>getSize</Name>
               <Attributes />
             </Identifier>
           </MethodHeader>
@@ -241,33 +241,33 @@
             <returnType>
               <AbstractType>
                 <Identifier>
-                  <Identifier>Adios</Identifier>
+                  <Name>Adios</Name>
                   <Attributes />
                 </Identifier>
               </AbstractType>
               <IsVoid>false</IsVoid>
             </returnType>
             <Identifier>
-              <Identifier>getIn</Identifier>
+              <Name>getIn</Name>
               <Attributes />
             </Identifier>
             <Parameters>
               <Param>
                 <AbstractTypeNode>
                   <Identifier>
-                    <Identifier>Language</Identifier>
+                    <Name>Language</Name>
                     <Attributes />
                   </Identifier>
                 </AbstractTypeNode>
                 <paramName>
-                  <Identifier>language</Identifier>
+                  <Name>language</Name>
                   <Attributes />
                 </paramName>
               </Param>
               <Param>
-                <PrimitiveTypeNode />
+                <PrimitiveTypeNode type="RW_STRING" />
                 <paramName>
-                  <Identifier>name</Identifier>
+                  <Name>name</Name>
                   <Attributes />
                 </paramName>
               </Param>
@@ -276,11 +276,11 @@
         </MethodHeaders>
         <Inheritanceses>
           <BaseItem>
-            <Identifier>Iterable</Identifier>
+            <Name>Iterable</Name>
             <Attributes />
           </BaseItem>
           <BaseItem>
-            <Identifier>IOtra</Identifier>
+            <Name>IOtra</Name>
             <Attributes />
           </BaseItem>
         </Inheritanceses>

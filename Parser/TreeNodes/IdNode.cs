@@ -3,29 +3,30 @@ using System.Xml.Serialization;
 
 namespace Compiler.TreeNodes
 {
+    [XmlType("IdNode")]
     public class IdNode
     {
         [XmlElement(typeof(string))]
-        public string Identifier;
+        public string Name;
 
         [XmlArray("Attributes"),
-        XmlArrayItem("Identifier")]
+        XmlArrayItem("Identifier", Type = typeof(IdNode))]
         public List<IdNode> attributes;
 
         private IdNode()
         {
-            Identifier = null;
+            Name = null;
             attributes = null;
         }
         public IdNode(string idValue)
         {
-            this.Identifier = idValue;
+            this.Name = idValue;
             this.attributes = new List<IdNode>();
         }
 
         public IdNode(string id, List<IdNode> attr)
         {
-            this.Identifier = id;
+            this.Name = id;
             this.attributes = attr;
         }
     }
