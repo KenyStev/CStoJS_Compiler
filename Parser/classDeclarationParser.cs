@@ -59,7 +59,7 @@ namespace Compiler
             printIfDebug("optional_class_member_declaration_list");
             if(pass(encapsulationOptions,optionalModifiersOptions,typesOptions,voidOption))
             {
-                class_member_declaration(); //TODO
+                class_member_declaration(ref currentClassType);
                 optional_class_member_declaration_list(ref currentClassType);
             }else{
                 //EPSILON
@@ -68,14 +68,13 @@ namespace Compiler
 
         /*class-member-declaration: 
 	        | encapsulation-modifier class-member-declaration-options */
-        private void class_member_declaration()
+        private void class_member_declaration(ref ClassTypeNode currentClassType)
         {
             printIfDebug("class_member_declaration");
-            if(pass(encapsulationOptions))
-                encapsulation_modifier();
+            var encapsulation = encapsulation_modifier();
             if(pass(optionalModifiersOptions,typesOptions,voidOption))
             {
-                class_member_declaration_options();
+                class_member_declaration_options(ref currentClassType,encapsulation);
             }else{
                 throwError(optionalModifiersOptions.ToString() + " or "+ typesOptions.ToString() +"or void expected");
             }
@@ -85,44 +84,52 @@ namespace Compiler
         ; SEMANTIC: validar que el constructor no tenga tipo de retorno
         class-member-declaration-options:
             | optional-modifier type-or-void identifier field-or-method-or-constructor */
-        private void class_member_declaration_options()
+        private void class_member_declaration_options(ref ClassTypeNode currentClassType, EncapsulationNode encapsulation)
         {
             printIfDebug("class_member_declaration_options");
-            if(pass(optionalModifiersOptions))
+            if(pass(optionalModifiersOptions)) //Field or Method
             {
-                Token oprionalModifierToken = token;
+                Token optionalModifierToken = token;
+                var methodModifier = new MethodModifierNode(optionalModifierToken.type);
                 consumeToken();
                 if(!pass(typesOptions,voidOption))
                     throwError("type-or-void expected");
-                type_or_void();
+                var type = type_or_void();
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
-                if(oprionalModifierToken.type==TokenType.RW_STATIC)
+                if(optionalModifierToken.type==TokenType.RW_STATIC) //Field
                 {
-                    field_or_method_declaration();
-                }else{
+                    field_or_method_declaration(ref currentClassType,type,encapsulation,methodModifier);
+                }else{ //Method
+                    var Identifier = new IdNode(token.lexeme);
                     consumeToken();
-                    method_declaration();
+                    var methodDeclared = method_declaration(Identifier,type);
+                    methodDeclared.setModifier(methodModifier);
+                    methodDeclared.setEncapsulation(encapsulation);
+                    currentClassType.addMethod(methodDeclared);
                 }
-            }else if(pass(typesOptions,voidOption))
+            }else if(pass(typesOptions,voidOption)) //Field, Method or constructor
             {
                 Token oldToken = token;
-                type_or_void();
+                var type = type_or_void();
                 
-                if(oldToken.type==TokenType.ID)
+                if(oldToken.type==TokenType.ID) //Field, Method or constructor
                 {
-                    if(pass(TokenType.ID))
+                    if(pass(TokenType.ID)) //Field or Method
                     {
-                        field_or_method_declaration();
-                    }else if(pass(TokenType.PUNT_PAREN_OPEN)){
+                        field_or_method_declaration(ref currentClassType, type, encapsulation,null);
+                    }else if(pass(TokenType.PUNT_PAREN_OPEN)) //Contructor
+                    { 
                         constructor_declaration();
                     }
-                }else{
+                }else //Field or Method
+                {
                     if(!pass(TokenType.ID))
                         throwError("identifier expected");
-                    field_or_method_declaration();
+                    field_or_method_declaration(ref currentClassType, type, encapsulation,null);
                 }
-            }else{
+            }else //Contructor
+            {
                 constructor_declaration();
             }
         }
@@ -141,30 +148,36 @@ namespace Compiler
             maybe_empty_block();
         }
 
-        private void field_or_method_declaration()
+        private void field_or_method_declaration(ref ClassTypeNode currentClassType,TypeNode type,EncapsulationNode encapsulation,MethodModifierNode modifier)
         {
             printIfDebug("field_or_method_declaration");
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var Identifier = new IdNode(token.lexeme);
             consumeToken();
             if(pass(TokenType.PUNT_PAREN_OPEN))
             {
-                method_declaration();
+                var newMethodDeclared = method_declaration(Identifier,type);
+                newMethodDeclared.setEncapsulation(encapsulation);
+                if(modifier!=null)
+                    newMethodDeclared.setModifier(modifier);
+                currentClassType.addMethod(newMethodDeclared);
             }else{
-                field_declaration();
+                field_declaration(); //TODO
             }
         }
 
-        private void method_declaration()
+        private MethodNode method_declaration(IdNode Identifier, TypeNode type)
         {
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            fixed_parameters();
+            var parameters = fixed_parameters();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
             maybe_empty_block();
+            return new MethodNode(new MethodHeaderNode(new ReturnTypeNode(type,type is VoidTypeNode),Identifier,parameters));
         }
 
         /*field-declaration: 
