@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Compiler.TreeNodes;
 using Compiler.TreeNodes.Types;
@@ -13,52 +14,56 @@ namespace Compiler
         {
             printIfDebug("interface_declaration");
             if(!pass(TokenType.RW_INTERFACE))
-                throwError("'interface' expected");
+                throwError("'interface' reserved word expected");
             consumeToken();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var interfaceID = new IdNode(token.lexeme);
             consumeToken();
-            inheritance_base();
-            interface_body();
+            var inheritanceses = inheritance_base();
+            var newInterfaceType = interface_body(interfaceID);
             optional_body_end();
-            return null;
+            return newInterfaceType;
         }
 
         /*interface-body:
 	        | '{' interface-method-declaration-list '}' */
-        private void interface_body()
+        private InterfaceTypeNode interface_body(IdNode name)
         {
             printIfDebug("interface_body");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
-            interface_method_declaration_list();
+            var methodDeclarationList = interface_method_declaration_list();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
+            return new InterfaceTypeNode(name,methodDeclarationList);
         }
 
         /*interface-method-declaration-list:
             | interface-method-header ';' interface-method-declaration-list
             | EPSILON */
-        private void interface_method_declaration_list()
+        private List<MethodNode> interface_method_declaration_list()
         {
             printIfDebug("interface_method_declaration_list");
             if(pass(typesOptions,voidOption))
             {
-                interface_method_header();
+                var methodHeader = interface_method_header();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                     throwError("; expected");
                 consumeToken();
-                interface_method_declaration_list();
+                var methodList = interface_method_declaration_list();
+                methodList.Insert(0,methodHeader);
+                return methodList;
             }else{
-                //EPSILON
+                return new List<MethodNode>();
             }
         }
 
         /*interface-method-header:
 	        | type-or-void identifier '(' fixed-parameters ')'  */
-        private void interface_method_header()
+        private MethodNode interface_method_header() //TODO: method header
         {
             printIfDebug("interface_method_header");
             if(!pass(typesOptions,voidOption))
@@ -75,6 +80,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
+            return null;
         }
 
         /*fixed-parameters:

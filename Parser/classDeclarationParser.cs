@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Compiler.TreeNodes;
 using Compiler.TreeNodes.Types;
 
@@ -341,15 +342,15 @@ namespace Compiler
         /*inheritance-base:
             | ':' identifiers-list
             | EPSILON */
-        private void inheritance_base()
+        private List<IdNode> inheritance_base()
         {
             printIfDebug("inheritance_base");
             if(pass(TokenType.PUNT_COLON))
             {
                 consumeToken();
-                identifiers_list();
+                return identifiers_list();
             }else{
-                //EPSILON
+                return new List<IdNode>();
             }
         }
     }

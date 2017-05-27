@@ -172,24 +172,28 @@ namespace Compiler
 
         /*identifiers-list:
 	        | qualified-identifier identifiers-list-p */
-        private void identifiers_list()
+        private List<IdNode> identifiers_list()
         {
-            qualified_identifier();
-            identifiers_list_p();
+            var idnode = qualified_identifier();
+            var lisIdNodes = identifiers_list_p();
+            lisIdNodes.Insert(0,idnode);
+            return lisIdNodes;
         }
 
         /*identifiers-list-p:
             | ',' qualified-identifier identifiers-list-p
             | EPSILON */
-        private void identifiers_list_p()
+        private List<IdNode> identifiers_list_p()
         {
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                qualified_identifier();
-                identifiers_list_p();
+                var idnode = qualified_identifier();
+                var listIdNode = identifiers_list_p();
+                listIdNode.Insert(0,idnode);
+                return listIdNode;
             }else{
-                //EPSILON
+                return new List<IdNode>();
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -28,7 +29,8 @@ namespace Main
                 ");}
             */
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
-            var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
+            // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
+            var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\interfaceTypes.txt");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
@@ -39,7 +41,6 @@ namespace Main
             }catch(SyntaxTokenExpectedException ex){
                 System.Console.Out.WriteLine(ex.Message);
             }
-            
 
             /*
             //TRY LEXER
