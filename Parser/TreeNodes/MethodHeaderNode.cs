@@ -1,17 +1,30 @@
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Compiler.TreeNodes
 {
     public class MethodHeaderNode
     {
-        private ReturnTypeNode returnType;
-        private IdNode name;
-        private List<ParameterNode> fixedParams;
+        [XmlElement(typeof(ReturnTypeNode))]
+        public ReturnTypeNode returnType;
 
+        [XmlElement(typeof(IdNode))]
+        public IdNode Identifier;
+
+        [XmlArray("Parameters"),
+        XmlArrayItem("Param")]
+        public List<ParameterNode> fixedParams;
+
+        private MethodHeaderNode()
+        {
+            returnType = null;
+            Identifier = null;
+            fixedParams = null;
+        }
         public MethodHeaderNode(ReturnTypeNode returnType, IdNode name, List<ParameterNode> fixedParams)
         {
             this.returnType = returnType;
-            this.name = name;
+            this.Identifier = name;
             this.fixedParams = fixedParams;
         }
     }

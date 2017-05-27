@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CompilationUnitNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UsingDirectives>
+    <Directive>
+      <Identifier>
+        <Identifier>Kenystev</Identifier>
+        <Attributes />
+      </Identifier>
+    </Directive>
+    <Directive>
+      <Identifier>
+        <Identifier>Kenystev</Identifier>
+        <Attributes>
+          <Identifier>
+            <Identifier>Collection</Identifier>
+            <Attributes />
+          </Identifier>
+        </Attributes>
+      </Identifier>
+    </Directive>
+  </UsingDirectives>
+  <defaultNamespace>
+    <Identifier>
+      <Identifier>default</Identifier>
+      <Attributes />
+    </Identifier>
+    <Enum>
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Identifier>miEnum</Identifier>
+        <Attributes />
+      </Identifier>
+      <Items>
+        <EnumItem>
+          <Name>
+            <Identifier>ONE</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>0</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Identifier>TWO</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>1</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Identifier>THREE</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>2</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Identifier>FOUR</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>3</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Identifier>FIVE</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>4</Value>
+          </LiteralIntNode>
+        </EnumItem>
+      </Items>
+    </Enum>
+    <Enum>
+      <encapsulation type="RW_PRIVATE" />
+      <Identifier>
+        <Identifier>otroMas</Identifier>
+        <Attributes />
+      </Identifier>
+      <Items>
+        <EnumItem>
+          <Name>
+            <Identifier>promise</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>0</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Identifier>nadaMas</Identifier>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>1</Value>
+          </LiteralIntNode>
+        </EnumItem>
+      </Items>
+    </Enum>
+  </defaultNamespace>
+  <Namespaceses>
+    <Namespace>
+      <Identifier>
+        <Identifier>Hola</Identifier>
+        <Attributes />
+      </Identifier>
+      <Enum>
+        <encapsulation type="RW_PUBLIC" />
+        <Identifier>
+          <Identifier>dentroDe</Identifier>
+          <Attributes />
+        </Identifier>
+        <Items>
+          <EnumItem>
+            <Name>
+              <Identifier>Hola</Identifier>
+              <Attributes />
+            </Name>
+            <LiteralIntNode>
+              <Value>0</Value>
+            </LiteralIntNode>
+          </EnumItem>
+          <EnumItem>
+            <Name>
+              <Identifier>adios</Identifier>
+              <Attributes />
+            </Name>
+            <LiteralIntNode>
+              <Value>1</Value>
+            </LiteralIntNode>
+          </EnumItem>
+        </Items>
+      </Enum>
+    </Namespace>
+    <Namespace>
+      <Identifier>
+        <Identifier>Kevin</Identifier>
+        <Attributes />
+      </Identifier>
+      <UsingDirectives>
+        <Directive>
+          <Identifier>
+            <Identifier>Hola</Identifier>
+            <Attributes />
+          </Identifier>
+        </Directive>
+      </UsingDirectives>
+    </Namespace>
+    <Namespace>
+      <Identifier>
+        <Identifier>Javier</Identifier>
+        <Attributes />
+      </Identifier>
+      <Interface>
+        <encapsulation type="RW_PUBLIC" />
+        <Identifier>
+          <Identifier>Iterable</Identifier>
+          <Attributes />
+        </Identifier>
+        <MethodHeaders>
+          <MethodHeader>
+            <returnType>
+              <ArrayType>
+                <DataType xsi:type="PrimitiveTypeNode" />
+                <MultiDimArrays>
+                  <MultiDimArray dimensions="1" />
+                </MultiDimArrays>
+              </ArrayType>
+              <IsVoid>false</IsVoid>
+            </returnType>
+            <Identifier>
+              <Identifier>getSec</Identifier>
+              <Attributes />
+            </Identifier>
+            <Parameters>
+              <Param>
+                <ArrayTypeNode>
+                  <DataType xsi:type="AbstractTypeNode">
+                    <Identifier>
+                      <Identifier>timeset</Identifier>
+                      <Attributes />
+                    </Identifier>
+                  </DataType>
+                  <MultiDimArrays>
+                    <MultiDimArray dimensions="3" />
+                    <MultiDimArray dimensions="1" />
+                  </MultiDimArrays>
+                </ArrayTypeNode>
+                <paramName>
+                  <Identifier>nowDays</Identifier>
+                  <Attributes />
+                </paramName>
+              </Param>
+            </Parameters>
+          </MethodHeader>
+        </MethodHeaders>
+        <Inheritanceses />
+      </Interface>
+    </Namespace>
+    <Namespace>
+      <Identifier>
+        <Identifier>Hola</Identifier>
+        <Attributes />
+      </Identifier>
+      <Interface>
+        <encapsulation type="RW_PRIVATE" />
+        <Identifier>
+          <Identifier>IGently</Identifier>
+          <Attributes />
+        </Identifier>
+        <MethodHeaders>
+          <MethodHeader>
+            <returnType>
+              <VoidType />
+              <IsVoid>true</IsVoid>
+            </returnType>
+            <Identifier>
+              <Identifier>saludar</Identifier>
+              <Attributes />
+            </Identifier>
+          </MethodHeader>
+          <MethodHeader>
+            <returnType>
+              <PrimitiveType />
+              <IsVoid>false</IsVoid>
+            </returnType>
+            <Identifier>
+              <Identifier>getSize</Identifier>
+              <Attributes />
+            </Identifier>
+          </MethodHeader>
+          <MethodHeader>
+            <returnType>
+              <AbstractType>
+                <Identifier>
+                  <Identifier>Adios</Identifier>
+                  <Attributes />
+                </Identifier>
+              </AbstractType>
+              <IsVoid>false</IsVoid>
+            </returnType>
+            <Identifier>
+              <Identifier>getIn</Identifier>
+              <Attributes />
+            </Identifier>
+            <Parameters>
+              <Param>
+                <AbstractTypeNode>
+                  <Identifier>
+                    <Identifier>Language</Identifier>
+                    <Attributes />
+                  </Identifier>
+                </AbstractTypeNode>
+                <paramName>
+                  <Identifier>language</Identifier>
+                  <Attributes />
+                </paramName>
+              </Param>
+              <Param>
+                <PrimitiveTypeNode />
+                <paramName>
+                  <Identifier>name</Identifier>
+                  <Attributes />
+                </paramName>
+              </Param>
+            </Parameters>
+          </MethodHeader>
+        </MethodHeaders>
+        <Inheritanceses>
+          <BaseItem>
+            <Identifier>Iterable</Identifier>
+            <Attributes />
+          </BaseItem>
+          <BaseItem>
+            <Identifier>IOtra</Identifier>
+            <Attributes />
+          </BaseItem>
+        </Inheritanceses>
+      </Interface>
+    </Namespace>
+  </Namespaceses>
+</CompilationUnitNode>

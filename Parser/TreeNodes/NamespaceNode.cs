@@ -1,19 +1,35 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Serialization;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes
 {
     public class NamespaceNode
     {
-        private IdNode name;
-        private List<UsingNode> usingDirectives;
-        private List<TypeNode> typesDeclarations;
+        [XmlElement(typeof(IdNode))]
+        public IdNode Identifier;
 
+        [XmlArray("UsingDirectives"),
+        XmlArrayItem("Directive")]
+        public List<UsingNode> usingDirectives;
+
+        [XmlElement(typeof(TypeNode)),
+        XmlElement(typeof(ClassTypeNode),ElementName = "Class"),
+        XmlElement(typeof(InterfaceTypeNode),ElementName = "Interface"),
+        XmlElement(typeof(EnumTypeNode),ElementName = "Enum")]
+        public List<TypeNode> typesDeclarations;
+
+        private NamespaceNode()
+        {
+            Identifier = null;
+            usingDirectives = null;
+            typesDeclarations = null;
+        }
         public NamespaceNode(IdNode name)
         {
-            this.name = name;
+            this.Identifier = name;
             this.typesDeclarations = new List<TypeNode>();
         }
 

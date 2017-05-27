@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Xml.Serialization;
 using Compiler;
+using Compiler.TreeNodes;
 
 namespace Main
 {
@@ -30,13 +32,21 @@ namespace Main
             */
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
-            var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\interfaceTypes.txt");
+            var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\enums_and_interface.txt");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
             var parser = new Parser(lexer);
             try{
                 var code = parser.parse();
+
+                // Insert code to set properties and fields of the object.  
+                XmlSerializer mySerializer = new XmlSerializer(typeof(CompilationUnitNode));  
+                // To write to a file, create a StreamWriter object.  
+                StreamWriter myWriter = new StreamWriter(File.OpenWrite(@"..\Parser.Tests\testFiles\generationTree\XMLs\enums_and_interface.xml"));
+                mySerializer.Serialize(myWriter, code);  
+                // myWriter.Close();
+                
                 System.Console.Out.WriteLine("Success!");
             }catch(SyntaxTokenExpectedException ex){
                 System.Console.Out.WriteLine(ex.Message);

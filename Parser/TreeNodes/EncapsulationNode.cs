@@ -1,12 +1,19 @@
+using System.Xml.Serialization;
+
 namespace Compiler.TreeNodes
 {
     public class EncapsulationNode
     {
-        private TokenType encapsulationType;
+        [XmlAttribute(AttributeName = "type")]
+        public TokenType type;
 
+        private EncapsulationNode()
+        {
+            this.type = TokenType.EOF;
+        }
         public EncapsulationNode(TokenType type)
         {
-            this.encapsulationType = type;
+            this.type = type;
         }
     }
 }

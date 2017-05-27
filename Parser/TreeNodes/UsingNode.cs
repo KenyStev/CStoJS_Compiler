@@ -1,12 +1,19 @@
+using System.Xml.Serialization;
+
 namespace Compiler.TreeNodes
 {
     public class UsingNode
     {
-        private IdNode idNode;
+        [XmlElement(typeof(IdNode))]
+        public IdNode Identifier;
 
+        private UsingNode()
+        {
+            Identifier = null;
+        }
         public UsingNode(IdNode val)
         {
-            this.idNode = val;
+            this.Identifier = val;
         }
     }
 }

@@ -2,8 +2,8 @@ namespace Compiler.TreeNodes.Expressions
 {
     public class BinaryOperatorNode
     {
-        private ExpressionNode leftOperand;
-        private ExpressionNode rightOperand;
+        public ExpressionNode leftOperand;
+        public ExpressionNode rightOperand;
         
     }
 }

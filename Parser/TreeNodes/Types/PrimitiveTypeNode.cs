@@ -1,12 +1,18 @@
+using System.Xml.Serialization;
+
 namespace Compiler.TreeNodes.Types
 {
-    internal class PrimitiveTypeNode : TypeNode
+    public class PrimitiveTypeNode : TypeNode
     {
-        private TokenType type;
+        private TokenType DataType;
 
+        private PrimitiveTypeNode()
+        {
+            this.DataType = TokenType.EOF;
+        }
         public PrimitiveTypeNode(TokenType type)
         {
-            this.type = type;
+            this.DataType = type;
         }
     }
 }

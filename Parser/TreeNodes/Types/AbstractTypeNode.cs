@@ -1,12 +1,19 @@
+using System.Xml.Serialization;
+
 namespace Compiler.TreeNodes.Types
 {
     public class AbstractTypeNode : TypeNode
     {
-        private IdNode typeName;
+        [XmlElement(typeof(IdNode))]
+        public IdNode Identifier;
 
+        private AbstractTypeNode()
+        {
+            Identifier = null;
+        }
         public AbstractTypeNode(IdNode typeName)
         {
-            this.typeName = typeName;
+            this.Identifier = typeName;
         }
     }
 }
