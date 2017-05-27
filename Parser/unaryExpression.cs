@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler
 {
@@ -269,35 +271,38 @@ namespace Compiler
 
         /*rank-specifier-list: 
 	        | rank-specifier optional-rank-specifier-list */
-        private void rank_specifier_list()
+        private List<MultidimensionArrayTypeNode> rank_specifier_list()
         {
             printIfDebug("rank_specifier_list");
-            rank_specifier();
-            optional_rank_specifier_list();
+            var array = rank_specifier();
+            var arrayList = optional_rank_specifier_list();
+            arrayList.Insert(0,array);
+            return arrayList;
         }
 
         /*rank-specifier:
 	        | optional-comma-list ']' */
-        private void rank_specifier()
+        private MultidimensionArrayTypeNode rank_specifier()
         {
             printIfDebug("rank_specifier");
-            optional_comma_list();
+            var dimensions = optional_comma_list();
             if(!pass(TokenType.PUNT_SQUARE_BRACKET_CLOSE))
                 throwError("] expected");
             consumeToken();
+            return new MultidimensionArrayTypeNode(dimensions);
         }
 
         /*optional-comma-list:
             | ',' optional-comma-list
             | EPSILON */
-        private void optional_comma_list()
+        private int optional_comma_list()
         {
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                optional_comma_list();
+                return 1 + optional_comma_list();
             }else{
-                //EPSILON
+                return 1;
             }
         }
 
@@ -318,15 +323,15 @@ namespace Compiler
         /*optional-rank-specifier-list:
             | '[' rank-specifier-list
             | EPSILON 	 */
-        private void optional_rank_specifier_list()
+        private List<MultidimensionArrayTypeNode> optional_rank_specifier_list()
         {
             printIfDebug("optional_rank_specifier_list");
             if(pass(TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
                 consumeToken();
-                rank_specifier_list();
+                return rank_specifier_list();
             }else{
-                //EPSILON
+                return new List<MultidimensionArrayTypeNode>(); 
             }
         }
     }

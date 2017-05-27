@@ -200,20 +200,30 @@ namespace Compiler
         /*type:
             | built-in-type optional-rank-specifier-list
             | qualified-identifier optional-rank-specifier-list */
-        private void types()
+        private TypeNode types()
         {
             printIfDebug("types");
             if(pass(typesOptions) && !pass(TokenType.ID))
             {
-                built_in_type();
-                optional_rank_specifier_list();
+                var primitiveType = built_in_type();
+                var newMultArrayTypeList = optional_rank_specifier_list();
+                if(newMultArrayTypeList.Count>0)
+                    return new ArrayTypeNode(primitiveType,newMultArrayTypeList);
+                else
+                    return primitiveType;
             }else if(pass(TokenType.ID))
             {
-                qualified_identifier();
-                optional_rank_specifier_list();
+                var typeName = qualified_identifier();
+                var abstractType = new AbstractTypeNode(typeName);
+                var newMultArrayTypeList = optional_rank_specifier_list();
+                if(newMultArrayTypeList.Count>0)
+                    return new ArrayTypeNode(abstractType,newMultArrayTypeList);
+                else
+                    return abstractType;
             }else{
                 throwError("type expected");
             }
+            return null;
         }
 
         /*built-in-type:
@@ -222,24 +232,28 @@ namespace Compiler
             | "string"
             | "bool"
             | "float" */
-        private void built_in_type()
+        private PrimitiveTypeNode built_in_type()
         {
             printIfDebug("built_in_type");
             if(!pass(typesOptions))
                 throwError("primary type expected");
+            var type = token.type;
             consumeToken();
+            return new PrimitiveTypeNode(type);
         }
 
         /*type-or-void:
             | type
             | "void" */
-        private void type_or_void()
+        private TypeNode type_or_void()
         {
             printIfDebug("type_or_void");
             if(pass(TokenType.RW_VOID))
+            {
                 consumeToken();
-            else
-                types();
+                return new VoidTypeNode();
+            }
+            return types();
         }
 
         /*type-or-var:
