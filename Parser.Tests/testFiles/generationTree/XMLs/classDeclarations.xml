@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CompilationUnitNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UsingDirectives>
+    <Directive>
+      <Identifier>
+        <Name>System</Name>
+        <Attributes />
+      </Identifier>
+    </Directive>
+    <Directive>
+      <Identifier>
+        <Name>System</Name>
+        <Attributes>
+          <Identifier>
+            <Name>Collections</Name>
+            <Attributes />
+          </Identifier>
+        </Attributes>
+      </Identifier>
+    </Directive>
+  </UsingDirectives>
+  <defaultNamespace>
+    <Identifier>
+      <Name>default</Name>
+      <Attributes />
+    </Identifier>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>Lexer</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses />
+    </Class>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PRIVATE" />
+      <Identifier>
+        <Name>Otra</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses />
+    </Class>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PROTECTED" />
+      <Identifier>
+        <Name>asaber</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses />
+    </Class>
+    <Class IsAbstract="true">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>figura</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses />
+    </Class>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>nuevaClase</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses />
+    </Class>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>heredadaDe</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses>
+        <BaseItem>
+          <Name>figura</Name>
+          <Attributes />
+        </BaseItem>
+      </Inheritanceses>
+    </Class>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>multipleheredadaDe</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses>
+        <BaseItem>
+          <Name>figura</Name>
+          <Attributes />
+        </BaseItem>
+        <BaseItem>
+          <Name>figura2</Name>
+          <Attributes />
+        </BaseItem>
+        <BaseItem>
+          <Name>figura3</Name>
+          <Attributes />
+        </BaseItem>
+      </Inheritanceses>
+    </Class>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>ImplementationClass</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses>
+        <BaseItem>
+          <Name>ISampleInterface</Name>
+          <Attributes />
+        </BaseItem>
+      </Inheritanceses>
+    </Class>
+  </defaultNamespace>
+  <Namespaceses>
+    <Namespace>
+      <Identifier>
+        <Name>Shell_Sort</Name>
+        <Attributes />
+      </Identifier>
+      <Class IsAbstract="false">
+        <encapsulation type="RW_PUBLIC" />
+        <Identifier>
+          <Name>SortShell</Name>
+          <Attributes />
+        </Identifier>
+        <Inheritanceses />
+      </Class>
+    </Namespace>
+  </Namespaceses>
+</CompilationUnitNode>

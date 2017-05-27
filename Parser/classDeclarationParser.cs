@@ -12,47 +12,55 @@ namespace Compiler
         private ClassTypeNode class_declaration() //TODO
         {
             printIfDebug("class_declaration");
+            var isAbstract = false;
             if(pass(TokenType.RW_ABSTRACT))
+            {
                 consumeToken();
+                isAbstract = true;
+            }
             if(!pass(TokenType.RW_CLASS))
                 throwError("group-declaration 'class' expected");
             consumeToken();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var Identifier = new IdNode(token.lexeme);
             consumeToken();
-            if(pass(TokenType.PUNT_COLON))
-                inheritance_base();
+            var inheritanceses = inheritance_base();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
-            class_body();
+            var newClassType = class_body(Identifier);
+            newClassType.setInheritance(inheritanceses);
+            newClassType.setAbstract(isAbstract);
             optional_body_end();
-            return null;
+            return newClassType;
         }
 
         /*class-body:
 	        | '{' optional-class-member-declaration-list '}' */
-        private void class_body()
+        private ClassTypeNode class_body(IdNode Identifier)
         {
             printIfDebug("class_body");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
-            optional_class_member_declaration_list();
+            var newClassType = new ClassTypeNode(Identifier);
+            optional_class_member_declaration_list(ref newClassType);
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
+            return newClassType;
         }
 
         /*optional-class-member-declaration-list:
             | class-member-declaration optional-class-member-declaration-list
             | EPSILON */
-        private void optional_class_member_declaration_list()
+        private void optional_class_member_declaration_list(ref ClassTypeNode currentClassType)
         {
             printIfDebug("optional_class_member_declaration_list");
             if(pass(encapsulationOptions,optionalModifiersOptions,typesOptions,voidOption))
             {
-                class_member_declaration();
-                optional_class_member_declaration_list();
+                class_member_declaration(); //TODO
+                optional_class_member_declaration_list(ref currentClassType);
             }else{
                 //EPSILON
             }

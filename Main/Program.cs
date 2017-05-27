@@ -30,9 +30,11 @@ namespace Main
                 }
                 ");}
             */
+            var dir = @"..\Parser.Tests\testFiles\generationTree\";
+            var TestingFile = @"classDeclarations";
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
-            var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\enums_and_interface.txt");
+            var inputString = new InputFile(dir+TestingFile+".txt");
             var tokenGenerators = Resources.getTokenGenerators();
 
             var lexer = new Lexer(inputString, tokenGenerators);
@@ -43,7 +45,7 @@ namespace Main
                 // Insert code to set properties and fields of the object.  
                 XmlSerializer mySerializer = new XmlSerializer(typeof(CompilationUnitNode));  
                 // To write to a file, create a StreamWriter object.  
-                StreamWriter myWriter = new StreamWriter(File.OpenWrite(@"..\Parser.Tests\testFiles\generationTree\XMLs\enums_and_interface.xml"));
+                StreamWriter myWriter = new StreamWriter(File.Create(dir+@"XMLs\"+TestingFile+".xml"));
                 mySerializer.Serialize(myWriter, code);  
                 // myWriter.Close();
                 

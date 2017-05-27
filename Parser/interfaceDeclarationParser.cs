@@ -64,7 +64,7 @@ namespace Compiler
 
         /*interface-method-header:
 	        | type-or-void identifier '(' fixed-parameters ')'  */
-        private MethodHeaderNode interface_method_header() //TODO: method header
+        private MethodHeaderNode interface_method_header()
         {
             printIfDebug("interface_method_header");
             if(!pass(typesOptions,voidOption))
