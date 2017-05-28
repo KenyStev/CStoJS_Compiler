@@ -89,7 +89,7 @@ namespace Compiler
             if (!pass(typesOptions, varOption))
                 throwError("type-or-var expected");
             type_or_var();
-            variable_declarator_list();
+            variable_declarator_list(null,null,false); //TODO: variable declaration statement
         }
     }
 }

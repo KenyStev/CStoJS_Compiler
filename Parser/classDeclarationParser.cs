@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Expressions;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler
@@ -163,7 +164,9 @@ namespace Compiler
                     newMethodDeclared.setModifier(modifier);
                 currentClassType.addMethod(newMethodDeclared);
             }else{
-                field_declaration(); //TODO
+                var isStatic = (modifier!=null)?modifier.type==TokenType.RW_STATIC:false;
+                var fieldDeclarationList = field_declaration(type,Identifier,encapsulation,isStatic); //TODO
+                currentClassType.addFields(fieldDeclarationList);
             }
         }
 
@@ -182,126 +185,136 @@ namespace Compiler
 
         /*field-declaration: 
 	        | variable-assigner variable-declarator-list-p ';' */
-        private void field_declaration()
+        private List<FieldNode> field_declaration(TypeNode type, IdNode Identifier,EncapsulationNode encapsulation,bool isStatic)
         {
             printIfDebug("field_declaration");
-            variable_assigner();
-            variable_declarator_list_p();
+            var assigner = variable_assigner();
+            var newField = new FieldNode(Identifier,type,isStatic,encapsulation,assigner);
+            var fields = variable_declarator_list_p(type,encapsulation,isStatic);
+            fields.Insert(0,newField);
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();
+            return fields;
         }
 
         /*variable-declarator-list-p:
             | ',' variable-declarator-list
             | EPSILON */
-        private void variable_declarator_list_p()
+        private List<FieldNode> variable_declarator_list_p(TypeNode type, EncapsulationNode encapsulation, bool isStatic)
         {
             printIfDebug("variable_declarator_list_p");
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                variable_declarator_list();
+                return variable_declarator_list(type,encapsulation,isStatic);
             }else{
-                //EPSILON
+                return new List<FieldNode>();
             }
         }
 
         /*variable-declarator-list:
 	        | identifier variable-assigner variable-declarator-list-p */
-        private void variable_declarator_list()
+        private List<FieldNode> variable_declarator_list(TypeNode type, EncapsulationNode encapsulation, bool isStatic)
         {
             printIfDebug("variable_declarator_list");
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var identifier = new IdNode(token.lexeme);
             consumeToken();
-            variable_assigner();
-            variable_declarator_list_p();
+            var assigner = variable_assigner();
+            var fields = variable_declarator_list_p(type,encapsulation,isStatic);
+            fields.Add(new FieldNode(identifier,type,isStatic,encapsulation,assigner));
+            return fields;
         }
 
         /*variable-assigner:
             | '=' variable-initializer
             | EPSILON */
-        private void variable_assigner()
+        private VariableInitializerNode variable_assigner()
         {
             printIfDebug("variable_assigner");
             if(pass(TokenType.OP_ASSIGN))
             {
                 consumeToken();
-                variable_initializer();
+                return variable_initializer();
             }else{
-                //EPSILON
+                return null;
             }
         }
 
         /*variable-initializer:
             | expression
             | array-initializer */
-        private void variable_initializer()
+        private VariableInitializerNode variable_initializer()
         {
             printIfDebug("variable_initializer");
             if(pass(expressionOptions()))
             {
-                expression();
+                return expression();
             }else if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
             {
-                array_initializer();
+                return array_initializer();
             }else{
                 throwError("expression or array initializer '{'");
             }
+            return null;
         }
 
         /*array-initializer: 
 	        | '{' optional-variable-initializer-list '}' */
-        private void array_initializer()
+        private ArrayInitializerNode array_initializer()
         {
             printIfDebug("array_initializer");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
-            optional_variable_initializer_list();
+            var arrayInitializers = optional_variable_initializer_list();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
+            return new ArrayInitializerNode(arrayInitializers);
         }
 
         /*optional-variable-initializer-list:
             | variable-initializer-list
             | EPSILON */
-        private void optional_variable_initializer_list()
+        private List<VariableInitializerNode> optional_variable_initializer_list()
         {
             printIfDebug("optional_variable_initializer_list");
             if(pass(new TokenType[]{TokenType.PUNT_CURLY_BRACKET_OPEN},expressionOptions()))
             {
-                variable_initializer_list();
+                return variable_initializer_list();
             }else{
-                //EPSILON
+                return new List<VariableInitializerNode>();
             }
         }
 
         /*variable-initializer-list:
 	        | variable-initializer variable-initializer-list-p */
-        private void variable_initializer_list()
+        private List<VariableInitializerNode> variable_initializer_list()
         {
             printIfDebug("variable_initializer_list");
             if(!pass(new TokenType[]{TokenType.PUNT_CURLY_BRACKET_OPEN},expressionOptions()))
                 throwError("expression or variable-initializer expected");
-            variable_initializer();
-            variable_initializer_list_p();
+            var varInitializer = variable_initializer();
+            var varInitializerList = variable_initializer_list_p();
+            varInitializerList.Insert(0,varInitializer);
+            return varInitializerList;
         }
 
         /*variable-initializer-list-p:
             | ',' variable-initializer-list
             | EPSILON */
-        private void variable_initializer_list_p()
+        private List<VariableInitializerNode> variable_initializer_list_p()
         {
             printIfDebug("variable_initializer_list_p");
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                variable_initializer_list();
+                return variable_initializer_list();
             }else{
-                //EPSILON
+                return new List<VariableInitializerNode>();
             }
         }
 

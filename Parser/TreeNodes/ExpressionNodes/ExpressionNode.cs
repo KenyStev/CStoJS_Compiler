@@ -1,6 +1,6 @@
 namespace Compiler.TreeNodes.Expressions
 {
-    public abstract class ExpressionNode
+    public abstract class ExpressionNode : VariableInitializerNode
     {
         
     }
