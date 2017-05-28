@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes.Statements;
 
 namespace Compiler
 {
@@ -16,7 +18,7 @@ namespace Compiler
             printIfDebug("embedded_statement");
             if(pass(maybeEmptyBlockOptions))
             {
-                maybe_empty_block();
+                maybe_empty_block(); //TODO: codeblock
             }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
             {
                 statement_expression();
@@ -41,22 +43,25 @@ namespace Compiler
         /*maybe-empty-block:
             | '{' optional-statement-list '}'
             | ';' */
-        private void maybe_empty_block()
+        private List<StatementNode> maybe_empty_block()
         {
             printIfDebug("maybe_empty_block");
+            if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN,TokenType.PUNT_END_STATEMENT_SEMICOLON))
+                throwError("'{' or ';' expected");
+            
             if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
             {
                 consumeToken();
-                optional_statement_list();
+                var statements = optional_statement_list();
                 if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                     throwError("'}' expected");
                 consumeToken();
+                return statements;
             }else if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
             {
                 consumeToken();
-            }else{
-                throwError("'{' or ';' expected");
             }
+            return null;
         }
 
         /*jump-statement:

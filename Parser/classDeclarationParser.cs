@@ -10,7 +10,7 @@ namespace Compiler
     {
         /*class-declaration: ;
 	        | class-modifier "class" identifier inheritance-base class-body optional-body-end */
-        private ClassTypeNode class_declaration() //TODO
+        private ClassTypeNode class_declaration()
         {
             printIfDebug("class_declaration");
             var isAbstract = false;
@@ -150,7 +150,7 @@ namespace Compiler
                 throwError("')' expected");
             consumeToken();
             var initializer = constructor_initializer();
-            maybe_empty_block();
+            maybe_empty_block(); //TODO: codeblock
             return new ConstructorNode(identifier,parameters,initializer);
         }
 
@@ -170,7 +170,7 @@ namespace Compiler
                 currentClassType.addMethod(newMethodDeclared);
             }else{
                 var isStatic = (modifier!=null)?modifier.type==TokenType.RW_STATIC:false;
-                var fieldDeclarationList = field_declaration(type,Identifier,encapsulation,isStatic); //TODO
+                var fieldDeclarationList = field_declaration(type,Identifier,encapsulation,isStatic);
                 currentClassType.addFields(fieldDeclarationList);
             }
         }
@@ -184,8 +184,8 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            maybe_empty_block();
-            return new MethodNode(new MethodHeaderNode(new ReturnTypeNode(type,type is VoidTypeNode),Identifier,parameters));
+            var statements = maybe_empty_block(); //TODO: codeblock
+            return new MethodNode(new MethodHeaderNode(new ReturnTypeNode(type,type is VoidTypeNode),Identifier,parameters),statements);
         }
 
         /*field-declaration: 

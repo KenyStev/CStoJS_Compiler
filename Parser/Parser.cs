@@ -259,13 +259,15 @@ namespace Compiler
         /*type-or-var:
             | type
             | "var" */
-        private void type_or_var()
+        private TypeNode type_or_var()
         {
             printIfDebug("type_or_var");
             if(pass(TokenType.RW_VAR))
+            {
                 consumeToken();
-            else
-                types();
+                return new VarTypeNode();
+            }
+            return types();
         }
     }
 }

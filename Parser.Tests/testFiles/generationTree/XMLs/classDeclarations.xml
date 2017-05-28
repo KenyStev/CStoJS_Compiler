@@ -31,6 +31,8 @@
         <Attributes />
       </Identifier>
       <Inheritanceses />
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="false">
@@ -40,6 +42,8 @@
         <Attributes />
       </Identifier>
       <Inheritanceses />
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="false">
@@ -49,6 +53,8 @@
         <Attributes />
       </Identifier>
       <Inheritanceses />
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="true">
@@ -58,6 +64,8 @@
         <Attributes />
       </Identifier>
       <Inheritanceses />
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="false">
@@ -67,6 +75,8 @@
         <Attributes />
       </Identifier>
       <Inheritanceses />
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="false">
@@ -81,6 +91,8 @@
           <Attributes />
         </BaseItem>
       </Inheritanceses>
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="false">
@@ -103,6 +115,8 @@
           <Attributes />
         </BaseItem>
       </Inheritanceses>
+      <Fields />
+      <Constructors />
       <Methods />
     </Class>
     <Class IsAbstract="false">
@@ -117,6 +131,72 @@
           <Attributes />
         </BaseItem>
       </Inheritanceses>
+      <Fields>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>date</Name>
+            <Attributes />
+          </identifier>
+          <AbstractTypeNode>
+            <Identifier>
+              <Name>DateTime</Name>
+              <Attributes />
+            </Identifier>
+          </AbstractTypeNode>
+          <encapsulation type="RW_PRIVATE" />
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>day</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_STRING" />
+          <encapsulation type="RW_PUBLIC" />
+        </Field>
+      </Fields>
+      <Constructors>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>ImplementationClass</Name>
+            <Attributes />
+          </identifier>
+          <Parameters />
+        </Contructor>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>ImplementationClass</Name>
+            <Attributes />
+          </identifier>
+          <Parameters>
+            <Param>
+              <PrimitiveTypeNode type="RW_INT" />
+              <paramName>
+                <Name>num</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+          </Parameters>
+          <initializer>
+            <Arguments>
+              <Argument>
+                <LiteralIntNode>
+                  <Value>11</Value>
+                </LiteralIntNode>
+              </Argument>
+            </Arguments>
+          </initializer>
+        </Contructor>
+        <Contructor>
+          <encapsulation type="RW_PRIVATE" />
+          <identifier>
+            <Name>ImplementationClass</Name>
+            <Attributes />
+          </identifier>
+          <Parameters />
+        </Contructor>
+      </Constructors>
       <Methods>
         <Method>
           <encapsulation type="RW_PUBLIC" />
@@ -190,6 +270,8 @@
           <Attributes />
         </Identifier>
         <Inheritanceses />
+        <Fields />
+        <Constructors />
         <Methods>
           <Method>
             <encapsulation type="RW_PUBLIC" />
@@ -218,6 +300,33 @@
                 </Param>
               </Parameters>
             </methodHeaderNode>
+            <LocalVariableDeclarationNode>
+              <LocalVariables>
+                <Variable IsStatic="false">
+                  <identifier>
+                    <Name>arr</Name>
+                    <Attributes />
+                  </identifier>
+                  <TypeNode xsi:type="ArrayType">
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <MultiDimArrays>
+                      <MultiDimArray dimensions="1" />
+                    </MultiDimArrays>
+                  </TypeNode>
+                </Variable>
+              </LocalVariables>
+            </LocalVariableDeclarationNode>
+            <LocalVariableDeclarationNode>
+              <LocalVariables>
+                <Variable IsStatic="false">
+                  <identifier>
+                    <Name>n</Name>
+                    <Attributes />
+                  </identifier>
+                  <PrimitiveTypeNode type="RW_INT" />
+                </Variable>
+              </LocalVariables>
+            </LocalVariableDeclarationNode>
           </Method>
           <Method>
             <encapsulation type="RW_PUBLIC" />
@@ -253,6 +362,38 @@
                 </Param>
               </Parameters>
             </methodHeaderNode>
+            <LocalVariableDeclarationNode>
+              <LocalVariables>
+                <Variable IsStatic="false">
+                  <identifier>
+                    <Name>temp</Name>
+                    <Attributes />
+                  </identifier>
+                  <PrimitiveTypeNode type="RW_INT" />
+                </Variable>
+                <Variable IsStatic="false">
+                  <identifier>
+                    <Name>inc</Name>
+                    <Attributes />
+                  </identifier>
+                  <PrimitiveTypeNode type="RW_INT" />
+                </Variable>
+                <Variable IsStatic="false">
+                  <identifier>
+                    <Name>j</Name>
+                    <Attributes />
+                  </identifier>
+                  <PrimitiveTypeNode type="RW_INT" />
+                </Variable>
+                <Variable IsStatic="false">
+                  <identifier>
+                    <Name>i</Name>
+                    <Attributes />
+                  </identifier>
+                  <PrimitiveTypeNode type="RW_INT" />
+                </Variable>
+              </LocalVariables>
+            </LocalVariableDeclarationNode>
           </Method>
           <Method>
             <encapsulation type="RW_PUBLIC" />
