@@ -12,7 +12,12 @@
         <Name>nuevaClase</Name>
         <Attributes />
       </Identifier>
-      <Inheritanceses />
+      <Inheritanceses>
+        <BaseItem>
+          <Name>viejaClase</Name>
+          <Attributes />
+        </BaseItem>
+      </Inheritanceses>
       <Fields>
         <Field IsStatic="false">
           <identifier>
@@ -576,7 +581,88 @@
           </ExpressionNode>
         </Field>
       </Fields>
-      <Constructors />
+      <Constructors>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters />
+          <initializer>
+            <Arguments>
+              <Argument>
+                <LiteralIntNode>
+                  <Value>11</Value>
+                </LiteralIntNode>
+              </Argument>
+            </Arguments>
+          </initializer>
+        </Contructor>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters>
+            <Param>
+              <ArrayType>
+                <PrimitiveTypeNode type="RW_FLOAT" />
+                <MultiDimArrays>
+                  <MultiDimArray dimensions="1" />
+                  <MultiDimArray dimensions="1" />
+                  <MultiDimArray dimensions="1" />
+                </MultiDimArrays>
+              </ArrayType>
+              <paramName>
+                <Name>vectors</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+            <Param>
+              <AbstractTypeNode>
+                <Identifier>
+                  <Name>Sapo</Name>
+                  <Attributes />
+                </Identifier>
+              </AbstractTypeNode>
+              <paramName>
+                <Name>ass</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+          </Parameters>
+        </Contructor>
+        <Contructor>
+          <encapsulation type="RW_PRIVATE" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters>
+            <Param>
+              <PrimitiveTypeNode type="RW_INT" />
+              <paramName>
+                <Name>hola</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+            <Param>
+              <AbstractTypeNode>
+                <Identifier>
+                  <Name>Persona</Name>
+                  <Attributes />
+                </Identifier>
+              </AbstractTypeNode>
+              <paramName>
+                <Name>persona</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+          </Parameters>
+        </Contructor>
+      </Constructors>
       <Methods />
     </Class>
   </defaultNamespace>

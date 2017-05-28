@@ -63,5 +63,10 @@ namespace Compiler.TreeNodes.Types
         {
             this.Fields.AddRange(fieldDeclarationList);
         }
+
+        public void addContructor(ConstructorNode contructoreDeclaration)
+        {
+            this.Constructors.Add(contructoreDeclaration);
+        }
     }
 }

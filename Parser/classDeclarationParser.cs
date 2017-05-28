@@ -121,7 +121,10 @@ namespace Compiler
                         field_or_method_declaration(ref currentClassType, type, encapsulation,null);
                     }else if(pass(TokenType.PUNT_PAREN_OPEN)) //Contructor
                     { 
-                        constructor_declaration();
+                        var Identifier = new IdNode(oldToken.lexeme);
+                        var contructoreDeclaration = constructor_declaration(Identifier);
+                        contructoreDeclaration.setEncapsulation(encapsulation);
+                        currentClassType.addContructor(contructoreDeclaration);
                     }
                 }else //Field or Method
                 {
@@ -129,24 +132,26 @@ namespace Compiler
                         throwError("identifier expected");
                     field_or_method_declaration(ref currentClassType, type, encapsulation,null);
                 }
-            }else //Contructor
-            {
-                constructor_declaration();
             }
+            // else //Contructor
+            // {
+            //     constructor_declaration();
+            // }
         }
 
-        private void constructor_declaration()
+        private ConstructorNode constructor_declaration(IdNode identifier)
         {
             printIfDebug("constructor_declaration");
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            fixed_parameters();
+            var parameters = fixed_parameters();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            constructor_initializer();
+            var initializer = constructor_initializer();
             maybe_empty_block();
+            return new ConstructorNode(identifier,parameters,initializer);
         }
 
         private void field_or_method_declaration(ref ClassTypeNode currentClassType,TypeNode type,EncapsulationNode encapsulation,MethodModifierNode modifier)
@@ -321,7 +326,7 @@ namespace Compiler
         /*constructor-initializer:
             | ':' "base" '(' argument-list ')'
             | EPSILON */
-        private void constructor_initializer()
+        private ConstructorInitializerNode constructor_initializer()
         {
             printIfDebug("constructor_initializer");
             if(pass(TokenType.PUNT_COLON))
@@ -333,43 +338,48 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_PAREN_OPEN))
                     throwError("'(' expected");
                 consumeToken();
-                argument_list();
+                var arguments = argument_list();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError("')' expected");
                 consumeToken();
+                return new ConstructorInitializerNode(arguments);
             }else{
-                //EPSILON
+                return null;
             }
         }
 
         /*argument-list:
             | expression argument-list-p
             | EPSILON */
-        private void argument_list()
+        private List<ArgumentNode> argument_list()
         {
             printIfDebug("argument_list");
             if(pass(expressionOptions()))
             {
-                expression();
-                argument_list_p();
+                var exp = expression();
+                var argumentList = argument_list_p();
+                argumentList.Insert(0,new ArgumentNode(exp));
+                return argumentList;
             }else{
-                //EPSILON
+                return new List<ArgumentNode>();
             }
         }
 
         /*argument-list-p:
             | ',' expression argument-list-p
             | EPSILON */
-        private void argument_list_p()
+        private List<ArgumentNode> argument_list_p()
         {
             printIfDebug("argument_list_p");
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                expression();
-                argument_list_p();
+                var exp = expression();
+                var argumentList = argument_list_p();
+                argumentList.Insert(0,new ArgumentNode(exp));
+                return argumentList;
             }else{
-                //EPSILON
+                return new List<ArgumentNode>();
             }
         }
 

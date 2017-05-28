@@ -1,4 +1,4 @@
-class nuevaClase
+class nuevaClase : viejaClase
 {
     int edad;
     private static float saldo = 600.54f;
@@ -74,4 +74,19 @@ class nuevaClase
     int arreglo = new int[2][]{ new int[5],new int[8]};
     int arreglo = { new int[5], new int[4], array };
     int value = new Persona(x,y,w).array[2];
+
+    nuevaClase() : base(val)
+    {
+
+    }
+
+    nuevaClase(float[][][] vectors, Sapo ass)
+    {
+
+    }
+
+    private nuevaClase(int hola,Persona persona)
+    {
+
+    }
 }
