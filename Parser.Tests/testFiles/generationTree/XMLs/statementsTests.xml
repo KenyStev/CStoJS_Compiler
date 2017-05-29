@@ -343,7 +343,14 @@
                         </statements>
                       </body>
                     </StatementNode>
-                    <StatementNode xsi:nil="true" />
+                    <StatementNode xsi:type="DoWhileStatementNode">
+                      <expression xsi:type="LiteralIntNode">
+                        <Value>11</Value>
+                      </expression>
+                      <body xsi:type="StatementBlockNode">
+                        <statements />
+                      </body>
+                    </StatementNode>
                     <StatementNode xsi:nil="true" />
                   </statements>
                 </StatementBlock>

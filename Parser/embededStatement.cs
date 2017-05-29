@@ -118,7 +118,7 @@ namespace Compiler
                 return while_statement();
             }else if(pass(TokenType.RW_DO))
             {
-                do_statement(); //TODO
+                return do_statement();
             }else if(pass(TokenType.RW_FOR))
             {
                 return for_statement();
@@ -150,26 +150,27 @@ namespace Compiler
 
         /*do-statement: 
 	        | "do" embedded-statement "while" '(' expression ')' ';' */
-        private void do_statement()
+        private DoWhileStatementNode do_statement()
         {
             printIfDebug("do_statement");
             if(!pass(TokenType.RW_DO))
                 throwError("'do' reserved word expected");
             consumeToken();
-            embedded_statement();
+            var body = embedded_statement();
             if(!pass(TokenType.RW_WHILE))
                 throwError("'while' reserved word expected");
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            expression();
+            var exp = expression();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();
+            return new DoWhileStatementNode(exp,body);
         }
 
         /*for-statement:

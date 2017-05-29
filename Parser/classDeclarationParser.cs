@@ -184,7 +184,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            var statements = maybe_empty_block(); //TODO: codeblock
+            var statements = maybe_empty_block();
             return new MethodNode(new MethodHeaderNode(new ReturnTypeNode(type,type is VoidTypeNode),Identifier,parameters),statements);
         }
 
