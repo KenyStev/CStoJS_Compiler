@@ -6,6 +6,9 @@ using System.Text;
 using System.Xml.Serialization;
 using Compiler;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
+using Compiler.TreeNodes.Statements;
+using Compiler.TreeNodes.Expressions;
 
 namespace Main
 {
@@ -31,7 +34,7 @@ namespace Main
                 ");}
             */
             var dir = @"..\Parser.Tests\testFiles\generationTree\";
-            var TestingFile = @"classDeclarations";
+            var TestingFile = @"localVariables";
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
             var inputString = new InputFile(dir+TestingFile+".txt");
@@ -43,7 +46,7 @@ namespace Main
                 var code = parser.parse();
 
                 // Insert code to set properties and fields of the object.  
-                XmlSerializer mySerializer = new XmlSerializer(typeof(CompilationUnitNode));  
+                XmlSerializer mySerializer = new XmlSerializer(typeof(CompilationUnitNode),types());
                 // To write to a file, create a StreamWriter object.  
                 StreamWriter myWriter = new StreamWriter(File.Create(dir+@"XMLs\"+TestingFile+".xml"));
                 mySerializer.Serialize(myWriter, code);  
@@ -65,6 +68,21 @@ namespace Main
             }
 
             System.Console.Out.WriteLine(token);*/
+        }
+
+        private static Type[] types()
+        {
+            return new Type[]{
+                typeof(ArrayInitializerNode),typeof(BinaryOperatorNode),typeof(ExpressionNode),
+                typeof(LiteralIntNode),typeof(VariableInitializerNode),typeof(AssignNode),
+                typeof(LocalVariableDeclarationNode),typeof(StatementNode),typeof(AbstractTypeNode),
+                typeof(ArrayTypeNode),typeof(ClassTypeNode),typeof(EnumTypeNode),typeof(InterfaceTypeNode),
+                typeof(MultidimensionArrayTypeNode),typeof(PrimitiveTypeNode),typeof(TypeNode),
+                typeof(VarTypeNode),typeof(VoidTypeNode),typeof(ArgumentNode),typeof(CompilationUnitNode),
+                typeof(ConstructorInitializerNode),typeof(ConstructorNode),typeof(EncapsulationNode),
+                typeof(EnumNode),typeof(FieldNode),typeof(IdNode),typeof(MethodHeaderNode),
+                typeof(MethodModifierNode),typeof(MethodNode),typeof(NamespaceNode),
+                typeof(ParameterNode),typeof(ReturnTypeNode),typeof(UsingNode)};
         }
     }
 }

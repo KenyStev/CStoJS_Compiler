@@ -150,8 +150,8 @@ namespace Compiler
                 throwError("')' expected");
             consumeToken();
             var initializer = constructor_initializer();
-            maybe_empty_block(); //TODO: codeblock
-            return new ConstructorNode(identifier,parameters,initializer);
+            var stmts = maybe_empty_block();
+            return new ConstructorNode(identifier,parameters,initializer,stmts);
         }
 
         private void field_or_method_declaration(ref ClassTypeNode currentClassType,TypeNode type,EncapsulationNode encapsulation,MethodModifierNode modifier)
@@ -229,7 +229,7 @@ namespace Compiler
             consumeToken();
             var assigner = variable_assigner();
             var fields = variable_declarator_list_p(type,encapsulation,isStatic);
-            fields.Add(new FieldNode(identifier,type,isStatic,encapsulation,assigner));
+            fields.Insert(0,new FieldNode(identifier,type,isStatic,encapsulation,assigner));
             return fields;
         }
 
