@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Compiler.TreeNodes
+namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 {
     [XmlType("IdNode")]
-    public class IdNode
+    public class IdNode : PrimaryExpressionNode
     {
         [XmlElement(typeof(string))]
         public string Name;

@@ -8,7 +8,6 @@ using Compiler.TreeNodes.Expressions.ShiftExpressions;
 using Compiler.TreeNodes.Expressions.AdditiveExpressions;
 using Compiler.TreeNodes.Expressions.MultipicativeExpressions;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
-using Compiler.TreeNodes.Expressions.PrimaryExpressions;
 
 namespace Compiler
 {

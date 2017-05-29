@@ -5,6 +5,8 @@ using Compiler.TreeNodes;
 using Compiler.TreeNodes.Expressions;
 using Compiler.TreeNodes.Statements;
 using Compiler.TreeNodes.Types;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
+using Compiler.TreeNodes.Expressions.UnaryExpressions.Literals;
 
 namespace Compiler
 {

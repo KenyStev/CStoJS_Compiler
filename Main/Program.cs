@@ -16,7 +16,9 @@ using Compiler.TreeNodes.Expressions.ShiftExpressions;
 using Compiler.TreeNodes.Expressions.AdditiveExpressions;
 using Compiler.TreeNodes.Expressions.MultipicativeExpressions;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
-using Compiler.TreeNodes.Expressions.PrimaryExpressions;
+using Compiler.TreeNodes.Expressions.UnaryExpressions.Literals;
+using Compiler.TreeNodes.Expressions.UnaryExpressions.ReferenceAccsess;
+using Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions;
 
 namespace Main
 {
@@ -102,7 +104,12 @@ namespace Main
                 typeof(DistinctExpressionNode),typeof(DivNode),typeof(MultNode),typeof(ModNode),
                 typeof(GreaterThanExpressionNode),typeof(GreaterOrEqualThanExpressionNode),typeof(LessThanExpressionNode),
                 typeof(LessOrEqualThanExpressionNode),typeof(ShiftLeftNode),typeof(ShiftRightNode),
-                typeof(IsTypeTestNode),typeof(AsTypeTestNode)};
+                typeof(IsTypeTestNode),typeof(AsTypeTestNode),typeof(LiteralBoolNode),typeof(LiteralCharNode),
+                typeof(LiteralFloatNode),typeof(LiteralStringNode),typeof(LiteralNode),typeof(UnaryNode),
+                typeof(CastingExpressionNode),typeof(GroupedExpressionNode),typeof(ThisReferenceAccsessNode),
+                typeof(BaseReferenceAccessNode),typeof(AccessorNode),typeof(PostAdditiveExpressionNode),
+                typeof(FunctionCallExpressionNode),typeof(ArrayAccessExpressionNode),typeof(InstanceExpressionNode),
+                typeof(ClassInstantioationNode),typeof(ArrayInstantiationNode),typeof(ReferenceAccsessNode)};
         }
     }
 }

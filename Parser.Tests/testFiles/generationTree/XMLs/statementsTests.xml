@@ -152,7 +152,11 @@
               <StatementNode xsi:type="IfStatementNode">
                 <statements xsi:type="StatementBlockNode">
                   <statements>
-                    <StatementNode xsi:type="IfStatementNode" />
+                    <StatementNode xsi:type="IfStatementNode">
+                      <expression xsi:type="AssignExpressionNode">
+                        <assignType>OP_ASSIGN_MULTIPLICATION</assignType>
+                      </expression>
+                    </StatementNode>
                     <StatementNode xsi:type="LocalVariableDeclarationNode">
                       <LocalVariables>
                         <Variable IsStatic="false">
