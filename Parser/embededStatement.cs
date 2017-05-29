@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes;
 using Compiler.TreeNodes.Expressions;
 using Compiler.TreeNodes.Statements;
 
@@ -34,7 +35,7 @@ namespace Compiler
             }else if(pass(selectionsOptionsStatements))
             {
                 return selection_statement();
-            }else if(pass(iteratorsOptionsStatements)) //TODO
+            }else if(pass(iteratorsOptionsStatements))
             {
                 return iteration_statement();
             }else if(pass(jumpsOptionsStatements)) //TODO
@@ -124,7 +125,7 @@ namespace Compiler
                 return for_statement();
             }else if(pass(TokenType.RW_FOREACH))
             {
-                foreach_statement(); //TODO
+                return foreach_statement();
             }
             return null;
         }
@@ -294,7 +295,7 @@ namespace Compiler
 
         /*foreach-statement:
 	        | "foreach" '(' type-or-var identifier "in" expression ')' embedded-statement */
-        private void foreach_statement()
+        private ForeachStatementNode foreach_statement()
         {
             printIfDebug("foreach_statement");
             if(!pass(TokenType.RW_FOREACH))
@@ -305,18 +306,20 @@ namespace Compiler
             consumeToken();
             if(!pass(typesOptions,new TokenType[]{TokenType.RW_VAR}))
                 throwError("type-or-var expected");
-            type_or_var();
+            var type = type_or_var();
             if(!pass(TokenType.ID))
                 throwError("identifier  expected");
+            var identifier = new IdNode(token.lexeme);
             consumeToken();
             if(!pass(TokenType.RW_IN))
                 throwError("'in' reserved word expected");
             consumeToken();
-            expression();
+            var exp = expression();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            embedded_statement();
+            var body = embedded_statement();
+            return new ForeachStatementNode(type, identifier, exp, body);
         }
 
         /*selection-statement:

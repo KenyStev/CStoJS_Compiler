@@ -351,7 +351,24 @@
                         <statements />
                       </body>
                     </StatementNode>
-                    <StatementNode xsi:nil="true" />
+                    <StatementNode xsi:type="ForeachStatementNode">
+                      <type xsi:type="VarTypeNode" />
+                      <identifier>
+                        <Name>type</Name>
+                        <Attributes />
+                      </identifier>
+                      <expression xsi:type="LiteralIntNode">
+                        <Value>11</Value>
+                      </expression>
+                      <body xsi:type="IfStatementNode">
+                        <expression xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </expression>
+                        <statements xsi:type="StatementBlockNode">
+                          <statements />
+                        </statements>
+                      </body>
+                    </StatementNode>
                   </statements>
                 </StatementBlock>
               </StatementNode>
@@ -850,7 +867,37 @@
                   </Variable>
                 </LocalVariables>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="ForeachStatementNode">
+                <type xsi:type="VarTypeNode" />
+                <identifier>
+                  <Name>type</Name>
+                  <Attributes />
+                </identifier>
+                <expression xsi:type="LiteralIntNode">
+                  <Value>11</Value>
+                </expression>
+                <body xsi:type="StatementBlockNode">
+                  <statements>
+                    <StatementNode xsi:type="IfStatementNode">
+                      <expression xsi:type="LiteralIntNode">
+                        <Value>11</Value>
+                      </expression>
+                      <statements xsi:type="StatementBlockNode">
+                        <statements>
+                          <StatementNode xsi:nil="true" />
+                        </statements>
+                      </statements>
+                      <elseBock>
+                        <stmts xsi:type="StatementBlockNode">
+                          <statements>
+                            <StatementNode xsi:nil="true" />
+                          </statements>
+                        </stmts>
+                      </elseBock>
+                    </StatementNode>
+                  </statements>
+                </body>
+              </StatementNode>
               <StatementNode xsi:nil="true" />
             </statements>
           </statemetBlock>
