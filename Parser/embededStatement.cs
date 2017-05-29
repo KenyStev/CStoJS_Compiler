@@ -482,29 +482,31 @@ namespace Compiler
 
         /*statement-expression:
 	        | unary-expression statement-expression-factorized */
-        private StatementExpressionNode statement_expression() //TODO
+        private StatementExpressionNode statement_expression()
         {
             printIfDebug("statement_expression");
-            unary_expression();
-            statement_expression_factorized();
-            return null;
+            var unary = unary_expression();
+            return new StatementExpressionNode(statement_expression_factorized(unary));
         }
 
         /*statement-expression-factorized:
 	        | assignment-operator expresion statement-expresion-p
             | statement-expresion-p */
-        private void statement_expression_factorized()
+        private ExpressionNode statement_expression_factorized(UnaryExpressionNode leftValue)
         {
             printIfDebug("statement_expression_factorized");
             if (pass(assignmentOperatorOptions))
             {
+                var assignmentOperator = token;
                 consumeToken();
-                expression();
-                statement_expression_p();
+                var exp = expression();
+                // return statement_expression_p(new AssignExpressionNode(leftValue,assignmentOperator.type,exp));
+                return new AssignExpressionNode(leftValue,assignmentOperator.type,exp);
             }
             else
             {
-                statement_expression_p();
+                // return statement_expression_p(leftValue);
+                return leftValue;
             }
         }
 
@@ -512,22 +514,23 @@ namespace Compiler
             | '(' argument-list ')'
             | increment-decrement
             | EPSILON */
-        private void statement_expression_p()
+        private ExpressionNode statement_expression_p(ExpressionNode leftValue)
         {
             printIfDebug("statement_expression_p");
             if(pass(TokenType.PUNT_PAREN_OPEN))
             {
                 consumeToken();
-                argument_list();
+                var arguments = argument_list();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
             }else if(pass(TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS))
             {
+                var operatorUnary = token;
                 consumeToken();
-            }else{
-                //EPSILON
+                
             }
+            return leftValue;
         }
 
         /*optional-unary-expression:

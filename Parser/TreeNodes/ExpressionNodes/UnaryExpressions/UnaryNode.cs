@@ -2,12 +2,12 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 {
     public class UnaryNode : UnaryExpressionNode
     {
-        public Token unaryOperator;
+        public TokenType unaryOperator;
         public UnaryExpressionNode unaryExpression;
 
         public UnaryNode(){}
 
-        public UnaryNode(Token unaryOperator, UnaryExpressionNode unaryExpression)
+        public UnaryNode(TokenType unaryOperator, UnaryExpressionNode unaryExpression)
         {
             this.unaryOperator = unaryOperator;
             this.unaryExpression = unaryExpression;

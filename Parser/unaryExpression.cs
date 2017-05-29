@@ -24,7 +24,7 @@ namespace Compiler
                 Token unaryOperator = token;
                 consumeToken();
                 var unaryExpression = unary_expression();
-                return new UnaryNode(unaryOperator,unaryExpression);
+                return new UnaryNode(unaryOperator.type,unaryExpression);
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
                 addLookAhead(lexer.GetNextToken());

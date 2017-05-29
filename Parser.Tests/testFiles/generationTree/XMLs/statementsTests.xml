@@ -135,6 +135,9 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralBoolNode">
+                      <Value>false</Value>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -146,15 +149,28 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_STRING" />
+                    <ExpressionNode xsi:type="LiteralStringNode">
+                      <Value>"adios"</Value>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
               <StatementNode xsi:type="IfStatementNode">
+                <expression xsi:type="LiteralBoolNode">
+                  <Value>true</Value>
+                </expression>
                 <statements xsi:type="StatementBlockNode">
                   <statements>
                     <StatementNode xsi:type="IfStatementNode">
                       <expression xsi:type="AssignExpressionNode">
+                        <unaryExpression xsi:type="IdNode">
+                          <Name>hola</Name>
+                          <Attributes />
+                        </unaryExpression>
                         <assignType>OP_ASSIGN_MULTIPLICATION</assignType>
+                        <assignExpression xsi:type="LiteralIntNode">
+                          <Value>9</Value>
+                        </assignExpression>
                       </expression>
                     </StatementNode>
                     <StatementNode xsi:type="LocalVariableDeclarationNode">
@@ -170,29 +186,257 @@
                     </StatementNode>
                     <StatementNode xsi:type="IfStatementNode">
                       <expression xsi:type="IsTypeTestNode">
+                        <leftExpression xsi:type="GroupedExpressionNode">
+                          <expression xsi:type="TernaryExpressionNode">
+                            <conditionalExpression xsi:type="IdNode">
+                              <Name>hola</Name>
+                              <Attributes />
+                            </conditionalExpression>
+                            <trueExpression xsi:type="GroupedExpressionNode">
+                              <expression xsi:type="SumExpressionNode">
+                                <leftOperand xsi:type="GroupedExpressionNode">
+                                  <expression xsi:type="SumExpressionNode">
+                                    <leftOperand xsi:type="SubExpressionNode">
+                                      <leftOperand xsi:type="GroupedExpressionNode">
+                                        <expression xsi:type="DivNode">
+                                          <leftOperand xsi:type="MultNode">
+                                            <leftOperand xsi:type="LiteralIntNode">
+                                              <Value>5</Value>
+                                            </leftOperand>
+                                            <rightOperand xsi:type="LiteralIntNode">
+                                              <Value>9</Value>
+                                            </rightOperand>
+                                          </leftOperand>
+                                          <rightOperand xsi:type="LiteralIntNode">
+                                            <Value>3</Value>
+                                          </rightOperand>
+                                        </expression>
+                                      </leftOperand>
+                                      <rightOperand xsi:type="LiteralIntNode">
+                                        <Value>7</Value>
+                                      </rightOperand>
+                                    </leftOperand>
+                                    <rightOperand xsi:type="DivNode">
+                                      <leftOperand xsi:type="GroupedExpressionNode">
+                                        <expression xsi:type="SumExpressionNode">
+                                          <leftOperand xsi:type="MultNode">
+                                            <leftOperand xsi:type="LiteralIntNode">
+                                              <Value>2</Value>
+                                            </leftOperand>
+                                            <rightOperand xsi:type="LiteralIntNode">
+                                              <Value>7</Value>
+                                            </rightOperand>
+                                          </leftOperand>
+                                          <rightOperand xsi:type="LiteralIntNode">
+                                            <Value>4</Value>
+                                          </rightOperand>
+                                        </expression>
+                                      </leftOperand>
+                                      <rightOperand xsi:type="GroupedExpressionNode">
+                                        <expression xsi:type="SubExpressionNode">
+                                          <leftOperand xsi:type="GroupedExpressionNode">
+                                            <expression xsi:type="ShiftRightNode">
+                                              <leftExpression xsi:type="LiteralIntNode">
+                                                <Value>128</Value>
+                                              </leftExpression>
+                                              <additiveExpression xsi:type="MultNode">
+                                                <leftOperand xsi:type="LiteralIntNode">
+                                                  <Value>5</Value>
+                                                </leftOperand>
+                                                <rightOperand xsi:type="LiteralIntNode">
+                                                  <Value>5</Value>
+                                                </rightOperand>
+                                              </additiveExpression>
+                                            </expression>
+                                          </leftOperand>
+                                          <rightOperand xsi:type="DivNode">
+                                            <leftOperand xsi:type="GroupedExpressionNode">
+                                              <expression xsi:type="ShiftLeftNode">
+                                                <leftExpression xsi:type="LiteralIntNode">
+                                                  <Value>1</Value>
+                                                </leftExpression>
+                                                <additiveExpression xsi:type="MultNode">
+                                                  <leftOperand xsi:type="LiteralIntNode">
+                                                    <Value>7</Value>
+                                                  </leftOperand>
+                                                  <rightOperand xsi:type="LiteralIntNode">
+                                                    <Value>46</Value>
+                                                  </rightOperand>
+                                                </additiveExpression>
+                                              </expression>
+                                            </leftOperand>
+                                            <rightOperand xsi:type="LiteralIntNode">
+                                              <Value>3</Value>
+                                            </rightOperand>
+                                          </rightOperand>
+                                        </expression>
+                                      </rightOperand>
+                                    </rightOperand>
+                                  </expression>
+                                </leftOperand>
+                                <rightOperand xsi:type="LiteralIntNode">
+                                  <Value>15</Value>
+                                </rightOperand>
+                              </expression>
+                            </trueExpression>
+                            <falseExpression xsi:type="GroupedExpressionNode">
+                              <expression xsi:type="TernaryExpressionNode">
+                                <conditionalExpression xsi:type="GroupedExpressionNode">
+                                  <expression xsi:type="EqualExpressionNode">
+                                    <leftOperand xsi:type="GroupedExpressionNode">
+                                      <expression xsi:type="AssignExpressionNode">
+                                        <unaryExpression xsi:type="IdNode">
+                                          <Name>mama</Name>
+                                          <Attributes />
+                                        </unaryExpression>
+                                        <assignType>OP_ASSIGN_SUM</assignType>
+                                        <assignExpression xsi:type="SumExpressionNode">
+                                          <leftOperand xsi:type="LiteralStringNode">
+                                            <Value>" como"</Value>
+                                          </leftOperand>
+                                          <rightOperand xsi:type="GroupedExpressionNode">
+                                            <expression xsi:type="MultNode">
+                                              <leftOperand xsi:type="LiteralIntNode">
+                                                <Value>9</Value>
+                                              </leftOperand>
+                                              <rightOperand xsi:type="LiteralIntNode">
+                                                <Value>5</Value>
+                                              </rightOperand>
+                                            </expression>
+                                          </rightOperand>
+                                        </assignExpression>
+                                      </expression>
+                                    </leftOperand>
+                                    <rightOperand xsi:type="LiteralStringNode">
+                                      <Value>"s"</Value>
+                                    </rightOperand>
+                                  </expression>
+                                </conditionalExpression>
+                                <trueExpression xsi:type="LiteralIntNode">
+                                  <Value>3</Value>
+                                </trueExpression>
+                                <falseExpression xsi:type="LiteralIntNode">
+                                  <Value>6</Value>
+                                </falseExpression>
+                              </expression>
+                            </falseExpression>
+                          </expression>
+                        </leftExpression>
                         <type xsi:type="PrimitiveTypeNode" type="RW_INT" />
                       </expression>
                       <statements xsi:type="StatementBlockNode">
                         <statements>
-                          <StatementNode xsi:nil="true" />
+                          <StatementNode xsi:type="StatementExpressionNode">
+                            <expressionNode xsi:type="AssignExpressionNode">
+                              <unaryExpression xsi:type="IdNode">
+                                <Name>value</Name>
+                                <Attributes />
+                              </unaryExpression>
+                              <assignType>OP_ASSIGN</assignType>
+                              <assignExpression xsi:type="LiteralIntNode">
+                                <Value>7</Value>
+                              </assignExpression>
+                            </expressionNode>
+                          </StatementNode>
                         </statements>
                       </statements>
                       <elseBock>
                         <statements xsi:type="StatementBlockNode">
                           <statements>
-                            <StatementNode xsi:nil="true" />
+                            <StatementNode xsi:type="StatementExpressionNode">
+                              <expressionNode xsi:type="AssignExpressionNode">
+                                <unaryExpression xsi:type="IdNode">
+                                  <Name>value</Name>
+                                  <Attributes />
+                                </unaryExpression>
+                                <assignType>OP_ASSIGN</assignType>
+                                <assignExpression xsi:type="LiteralIntNode">
+                                  <Value>9</Value>
+                                </assignExpression>
+                              </expressionNode>
+                            </StatementNode>
                             <StatementNode xsi:type="IfStatementNode">
-                              <expression xsi:type="GreaterThanExpressionNode" />
+                              <expression xsi:type="GreaterThanExpressionNode">
+                                <leftExpression xsi:type="AccessorNode">
+                                  <primary xsi:type="IdNode">
+                                    <Name>look_ahead</Name>
+                                    <Attributes />
+                                  </primary>
+                                  <identifier>
+                                    <Name>Count</Name>
+                                    <Attributes />
+                                  </identifier>
+                                </leftExpression>
+                                <shiftExpression xsi:type="LiteralIntNode">
+                                  <Value>0</Value>
+                                </shiftExpression>
+                              </expression>
                               <statements xsi:type="StatementBlockNode">
                                 <statements>
-                                  <StatementNode xsi:nil="true" />
-                                  <StatementNode xsi:nil="true" />
+                                  <StatementNode xsi:type="StatementExpressionNode">
+                                    <expressionNode xsi:type="AssignExpressionNode">
+                                      <unaryExpression xsi:type="IdNode">
+                                        <Name>token</Name>
+                                        <Attributes />
+                                      </unaryExpression>
+                                      <assignType>OP_ASSIGN</assignType>
+                                      <assignExpression xsi:type="ArrayAccessExpressionNode">
+                                        <identifier xsi:type="IdNode">
+                                          <Name>look_ahead</Name>
+                                          <Attributes />
+                                        </identifier>
+                                        <arrayAccessList>
+                                          <ArrayOfExpressionNode>
+                                            <ExpressionNode xsi:type="LiteralIntNode">
+                                              <Value>0</Value>
+                                            </ExpressionNode>
+                                          </ArrayOfExpressionNode>
+                                        </arrayAccessList>
+                                      </assignExpression>
+                                    </expressionNode>
+                                  </StatementNode>
+                                  <StatementNode xsi:type="StatementExpressionNode">
+                                    <expressionNode xsi:type="FunctionCallExpressionNode">
+                                      <identifier xsi:type="IdNode">
+                                        <Name>removeLookAhead</Name>
+                                        <Attributes />
+                                      </identifier>
+                                      <arguments>
+                                        <ArgumentNode>
+                                          <LiteralIntNode>
+                                            <Value>0</Value>
+                                          </LiteralIntNode>
+                                        </ArgumentNode>
+                                      </arguments>
+                                    </expressionNode>
+                                  </StatementNode>
                                 </statements>
                               </statements>
                               <elseBock>
                                 <statements xsi:type="StatementBlockNode">
                                   <statements>
-                                    <StatementNode xsi:nil="true" />
+                                    <StatementNode xsi:type="StatementExpressionNode">
+                                      <expressionNode xsi:type="AssignExpressionNode">
+                                        <unaryExpression xsi:type="IdNode">
+                                          <Name>token</Name>
+                                          <Attributes />
+                                        </unaryExpression>
+                                        <assignType>OP_ASSIGN</assignType>
+                                        <assignExpression xsi:type="FunctionCallExpressionNode">
+                                          <identifier xsi:type="AccessorNode">
+                                            <primary xsi:type="IdNode">
+                                              <Name>lexer</Name>
+                                              <Attributes />
+                                            </primary>
+                                            <identifier>
+                                              <Name>GetNextToken</Name>
+                                              <Attributes />
+                                            </identifier>
+                                          </identifier>
+                                          <arguments />
+                                        </assignExpression>
+                                      </expressionNode>
+                                    </StatementNode>
                                   </statements>
                                 </statements>
                               </elseBock>
@@ -202,12 +446,19 @@
                       </elseBock>
                     </StatementNode>
                     <StatementNode xsi:type="SwitchStatementNode">
+                      <expression xsi:type="IdNode">
+                        <Name>value</Name>
+                        <Attributes />
+                      </expression>
                       <switchBodyNode>
                         <switchSections>
                           <SwitchSectionNode>
                             <switchLabels>
                               <CaseNode>
                                 <caseType>RW_CASE</caseType>
+                                <expression xsi:type="LiteralIntNode">
+                                  <Value>9</Value>
+                                </expression>
                               </CaseNode>
                             </switchLabels>
                             <stmts>
@@ -221,6 +472,28 @@
                                           <Attributes />
                                         </identifier>
                                         <TypeNode xsi:type="VarTypeNode" />
+                                        <ExpressionNode xsi:type="ArrayInstantiationNode">
+                                          <type xsi:type="AbstractTypeNode">
+                                            <Identifier>
+                                              <Name>stmtTests</Name>
+                                              <Attributes />
+                                            </Identifier>
+                                          </type>
+                                          <arrayType>
+                                            <AbstractTypeNode>
+                                              <Identifier>
+                                                <Name>stmtTests</Name>
+                                                <Attributes />
+                                              </Identifier>
+                                            </AbstractTypeNode>
+                                            <MultiDimArrays>
+                                              <MultiDimArray dimensions="4" />
+                                            </MultiDimArrays>
+                                          </arrayType>
+                                          <initialization>
+                                            <ArrayInitializers />
+                                          </initialization>
+                                        </ExpressionNode>
                                       </Variable>
                                     </LocalVariables>
                                   </StatementNode>
@@ -235,6 +508,9 @@
                             <switchLabels>
                               <CaseNode>
                                 <caseType>RW_CASE</caseType>
+                                <expression xsi:type="LiteralIntNode">
+                                  <Value>8</Value>
+                                </expression>
                               </CaseNode>
                               <CaseNode>
                                 <caseType>RW_DEFAULT</caseType>
@@ -242,11 +518,34 @@
                             </switchLabels>
                             <stmts>
                               <StatementNode xsi:type="IfStatementNode">
+                                <expression xsi:type="IdNode">
+                                  <Name>jajaja</Name>
+                                  <Attributes />
+                                </expression>
                                 <statements xsi:type="IfStatementNode">
+                                  <expression xsi:type="IdNode">
+                                    <Name>xdxdxd</Name>
+                                    <Attributes />
+                                  </expression>
                                   <statements xsi:type="IfStatementNode">
+                                    <expression xsi:type="IdNode">
+                                      <Name>rufl</Name>
+                                      <Attributes />
+                                    </expression>
                                     <statements xsi:type="StatementBlockNode">
                                       <statements>
-                                        <StatementNode xsi:nil="true" />
+                                        <StatementNode xsi:type="StatementExpressionNode">
+                                          <expressionNode xsi:type="AssignExpressionNode">
+                                            <unaryExpression xsi:type="IdNode">
+                                              <Name>ass</Name>
+                                              <Attributes />
+                                            </unaryExpression>
+                                            <assignType>OP_ASSIGN</assignType>
+                                            <assignExpression xsi:type="LiteralStringNode">
+                                              <Value>@"que pasu prrro?"</Value>
+                                            </assignExpression>
+                                          </expressionNode>
+                                        </StatementNode>
                                       </statements>
                                     </statements>
                                   </statements>
@@ -287,12 +586,26 @@
           </methodHeaderNode>
           <statemetBlock>
             <statements>
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="FunctionCallExpressionNode">
+                  <identifier xsi:type="AccessorNode">
+                    <primary xsi:type="BaseReferenceAccessNode" />
+                    <identifier>
+                      <Name>iterationStmt</Name>
+                      <Attributes />
+                    </identifier>
+                  </identifier>
+                  <arguments />
+                </expressionNode>
+              </StatementNode>
               <StatementNode xsi:type="ForStatementNode" />
               <StatementNode xsi:type="ForStatementNode">
                 <StatementBlock xsi:type="StatementBlockNode">
                   <statements>
                     <StatementNode xsi:type="WhileStatementNode">
+                      <expression xsi:type="LiteralBoolNode">
+                        <Value>false</Value>
+                      </expression>
                       <body xsi:type="StatementBlockNode">
                         <statements>
                           <StatementNode xsi:type="LocalVariableDeclarationNode">
@@ -303,6 +616,9 @@
                                   <Attributes />
                                 </identifier>
                                 <TypeNode xsi:type="VarTypeNode" />
+                                <ExpressionNode xsi:type="LiteralStringNode">
+                                  <Value>"adios compita"</Value>
+                                </ExpressionNode>
                               </Variable>
                             </LocalVariables>
                           </StatementNode>
@@ -310,6 +626,9 @@
                       </body>
                     </StatementNode>
                     <StatementNode xsi:type="DoWhileStatementNode">
+                      <expression xsi:type="LiteralIntNode">
+                        <Value>0</Value>
+                      </expression>
                       <body xsi:type="StatementBlockNode">
                         <statements />
                       </body>
@@ -320,7 +639,37 @@
                         <Name>type</Name>
                         <Attributes />
                       </identifier>
+                      <expression xsi:type="IdNode">
+                        <Name>types</Name>
+                        <Attributes />
+                      </expression>
                       <body xsi:type="IfStatementNode">
+                        <expression xsi:type="FunctionCallExpressionNode">
+                          <identifier xsi:type="AccessorNode">
+                            <primary xsi:type="IdNode">
+                              <Name>type</Name>
+                              <Attributes />
+                            </primary>
+                            <identifier>
+                              <Name>Contains</Name>
+                              <Attributes />
+                            </identifier>
+                          </identifier>
+                          <arguments>
+                            <ArgumentNode>
+                              <ExpressionNode xsi:type="AccessorNode">
+                                <primary xsi:type="IdNode">
+                                  <Name>token</Name>
+                                  <Attributes />
+                                </primary>
+                                <identifier>
+                                  <Name>type</Name>
+                                  <Attributes />
+                                </identifier>
+                              </ExpressionNode>
+                            </ArgumentNode>
+                          </arguments>
+                        </expression>
                         <statements xsi:type="StatementBlockNode">
                           <statements />
                         </statements>
@@ -374,6 +723,28 @@
                         </Attributes>
                       </Identifier>
                     </AbstractTypeNode>
+                    <ExpressionNode xsi:type="ClassInstantioationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>namespace2</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>namespace3</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>MuClass</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <arguments />
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -408,6 +779,54 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>namespace2</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>namespace3</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>MuClass</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>namespace1</Name>
+                            <Attributes>
+                              <Identifier>
+                                <Name>namespace2</Name>
+                                <Attributes />
+                              </Identifier>
+                              <Identifier>
+                                <Name>namespace3</Name>
+                                <Attributes />
+                              </Identifier>
+                              <Identifier>
+                                <Name>MuClass</Name>
+                                <Attributes />
+                              </Identifier>
+                            </Attributes>
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays>
+                          <MultiDimArray dimensions="1" />
+                        </MultiDimArrays>
+                      </arrayType>
+                      <initialization>
+                        <ArrayInitializers />
+                      </initialization>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -443,6 +862,55 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>namespace2</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>namespace3</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>MuClass</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>namespace1</Name>
+                            <Attributes>
+                              <Identifier>
+                                <Name>namespace2</Name>
+                                <Attributes />
+                              </Identifier>
+                              <Identifier>
+                                <Name>namespace3</Name>
+                                <Attributes />
+                              </Identifier>
+                              <Identifier>
+                                <Name>MuClass</Name>
+                                <Attributes />
+                              </Identifier>
+                            </Attributes>
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays>
+                          <MultiDimArray dimensions="1" />
+                          <MultiDimArray dimensions="1" />
+                        </MultiDimArrays>
+                      </arrayType>
+                      <initialization>
+                        <ArrayInitializers />
+                      </initialization>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -477,6 +945,54 @@
                         <MultiDimArray dimensions="3" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>namespace2</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>namespace3</Name>
+                              <Attributes />
+                            </Identifier>
+                            <Identifier>
+                              <Name>MuClass</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>namespace1</Name>
+                            <Attributes>
+                              <Identifier>
+                                <Name>namespace2</Name>
+                                <Attributes />
+                              </Identifier>
+                              <Identifier>
+                                <Name>namespace3</Name>
+                                <Attributes />
+                              </Identifier>
+                              <Identifier>
+                                <Name>MuClass</Name>
+                                <Attributes />
+                              </Identifier>
+                            </Attributes>
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays>
+                          <MultiDimArray dimensions="3" />
+                        </MultiDimArrays>
+                      </arrayType>
+                      <initialization>
+                        <ArrayInitializers />
+                      </initialization>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -498,12 +1014,98 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="FunctionCallExpressionNode">
+                      <identifier xsi:type="IdNode">
+                        <Name>createPrenson</Name>
+                        <Attributes />
+                      </identifier>
+                      <arguments>
+                        <ArgumentNode>
+                          <ExpressionNode xsi:type="LiteralStringNode">
+                            <Value>"Carlos"</Value>
+                          </ExpressionNode>
+                        </ArgumentNode>
+                      </arguments>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="AccessorNode">
+                    <primary xsi:type="IdNode">
+                      <Name>varName2</Name>
+                      <Attributes />
+                    </primary>
+                    <identifier>
+                      <Name>edad</Name>
+                      <Attributes />
+                    </identifier>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="SubExpressionNode">
+                    <leftOperand xsi:type="IdNode">
+                      <Name>birthy_ear</Name>
+                      <Attributes />
+                    </leftOperand>
+                    <rightOperand xsi:type="IdNode">
+                      <Name>current_year</Name>
+                      <Attributes />
+                    </rightOperand>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="AccessorNode">
+                    <primary xsi:type="IdNode">
+                      <Name>varName2</Name>
+                      <Attributes />
+                    </primary>
+                    <identifier>
+                      <Name>sueldo</Name>
+                      <Attributes />
+                    </identifier>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN_MULTIPLICATION</assignType>
+                  <assignExpression xsi:type="LiteralFloatNode">
+                    <Value>0</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="FunctionCallExpressionNode">
+                  <identifier xsi:type="AccessorNode">
+                    <primary xsi:type="AccessorNode">
+                      <primary xsi:type="IdNode">
+                        <Name>varName2</Name>
+                        <Attributes />
+                      </primary>
+                      <identifier>
+                        <Name>carros</Name>
+                        <Attributes />
+                      </identifier>
+                    </primary>
+                    <identifier>
+                      <Name>add</Name>
+                      <Attributes />
+                    </identifier>
+                  </identifier>
+                  <arguments>
+                    <ArgumentNode>
+                      <ExpressionNode xsi:type="ClassInstantioationNode">
+                        <type xsi:type="AbstractTypeNode">
+                          <Identifier>
+                            <Name>Ferrarry</Name>
+                            <Attributes />
+                          </Identifier>
+                        </type>
+                        <arguments />
+                      </ExpressionNode>
+                    </ArgumentNode>
+                  </arguments>
+                </expressionNode>
+              </StatementNode>
               <StatementNode xsi:type="LocalVariableDeclarationNode">
                 <LocalVariables>
                   <Variable IsStatic="false">
@@ -517,6 +1119,30 @@
                         <Attributes />
                       </Identifier>
                     </AbstractTypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>Lol</Name>
+                          <Attributes />
+                        </Identifier>
+                      </type>
+                      <primaryExpBrackets>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>6</Value>
+                        </ExpressionNode>
+                      </primaryExpBrackets>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>Lol</Name>
+                            <Attributes />
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays>
+                          <MultiDimArray dimensions="1" />
+                        </MultiDimArrays>
+                      </arrayType>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -533,6 +1159,29 @@
                         <Attributes />
                       </Identifier>
                     </AbstractTypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>Lol</Name>
+                          <Attributes />
+                        </Identifier>
+                      </type>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>Lol</Name>
+                            <Attributes />
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays>
+                          <MultiDimArray dimensions="1" />
+                          <MultiDimArray dimensions="1" />
+                        </MultiDimArrays>
+                      </arrayType>
+                      <initialization>
+                        <ArrayInitializers />
+                      </initialization>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -549,18 +1198,295 @@
                         <Attributes />
                       </Identifier>
                     </AbstractTypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>Lol</Name>
+                          <Attributes />
+                        </Identifier>
+                      </type>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>Lol</Name>
+                            <Attributes />
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays>
+                          <MultiDimArray dimensions="4" />
+                        </MultiDimArrays>
+                      </arrayType>
+                      <initialization>
+                        <ArrayInitializers />
+                      </initialization>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="IdNode">
+                    <Name>hola</Name>
+                    <Attributes />
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"adios"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>hola</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>2</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"adios"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="FunctionCallExpressionNode">
+                  <identifier xsi:type="AccessorNode">
+                    <primary xsi:type="IdNode">
+                      <Name>Console</Name>
+                      <Attributes />
+                    </primary>
+                    <identifier>
+                      <Name>WriteLine</Name>
+                      <Attributes />
+                    </identifier>
+                  </identifier>
+                  <arguments>
+                    <ArgumentNode>
+                      <ExpressionNode xsi:type="LiteralStringNode">
+                        <Value>"Hello!"</Value>
+                      </ExpressionNode>
+                    </ArgumentNode>
+                  </arguments>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="AccessorNode">
+                        <primary xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>namespace1</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>namespace2</Name>
+                            <Attributes />
+                          </identifier>
+                        </primary>
+                        <identifier>
+                          <Name>namespace3</Name>
+                          <Attributes />
+                        </identifier>
+                      </primary>
+                      <identifier>
+                        <Name>MuClass</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>0</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"Ing."</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="AccessorNode">
+                        <primary xsi:type="IdNode">
+                          <Name>namespace1</Name>
+                          <Attributes />
+                        </primary>
+                        <identifier>
+                          <Name>namespace2</Name>
+                          <Attributes />
+                        </identifier>
+                      </primary>
+                      <identifier>
+                        <Name>MuClass</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>1</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"no"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="IdNode">
+                        <Name>namespace1</Name>
+                        <Attributes />
+                      </primary>
+                      <identifier>
+                        <Name>MuClass</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>2</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"nos"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="AccessorNode">
+                        <primary xsi:type="IdNode">
+                          <Name>namespace1</Name>
+                          <Attributes />
+                        </primary>
+                        <identifier>
+                          <Name>namespace2</Name>
+                          <Attributes />
+                        </identifier>
+                      </primary>
+                      <identifier>
+                        <Name>MuClass</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>3</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"viole"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="AccessorNode">
+                        <primary xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>namespace1</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>namespace2</Name>
+                            <Attributes />
+                          </identifier>
+                        </primary>
+                        <identifier>
+                          <Name>namespace3</Name>
+                          <Attributes />
+                        </identifier>
+                      </primary>
+                      <identifier>
+                        <Name>MuClass</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>4</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"plox"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="AccessorNode">
+                        <primary xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>namespace1</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>namespace2</Name>
+                            <Attributes />
+                          </identifier>
+                        </primary>
+                        <identifier>
+                          <Name>namespace3</Name>
+                          <Attributes />
+                        </identifier>
+                      </primary>
+                      <identifier>
+                        <Name>MuClass</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>5</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"plox X2"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
               <StatementNode xsi:type="LocalVariableDeclarationNode">
                 <LocalVariables>
                   <Variable IsStatic="false">
@@ -569,6 +1495,9 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>3</Value>
+                    </ExpressionNode>
                   </Variable>
                   <Variable IsStatic="false">
                     <identifier>
@@ -576,6 +1505,9 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>4</Value>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -592,18 +1524,295 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="PrimitiveTypeNode" type="RW_FLOAT" />
+                      <primaryExpBrackets>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>5</Value>
+                        </ExpressionNode>
+                      </primaryExpBrackets>
+                      <arrayType>
+                        <PrimitiveTypeNode type="RW_FLOAT" />
+                        <MultiDimArrays />
+                      </arrayType>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>rangos</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>0</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralFloatNode">
+                    <Value>0</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>rangos</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>1</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralFloatNode">
+                    <Value>0</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>rangos</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>2</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="CastingExpressionNode">
+                    <targetCastType xsi:type="PrimitiveTypeNode" type="RW_FLOAT" />
+                    <exp xsi:type="LiteralIntNode">
+                      <Value>9</Value>
+                    </exp>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>rangos</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>3</Value>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralFloatNode">
+                    <Value>0</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>rangos</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>FOUR</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="CastingExpressionNode">
+                    <targetCastType xsi:type="PrimitiveTypeNode" type="RW_FLOAT" />
+                    <exp xsi:type="LiteralIntNode">
+                      <Value>200</Value>
+                    </exp>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="AccessorNode">
+                    <primary xsi:type="ThisReferenceAccsessNode" />
+                    <identifier>
+                      <Name>myField</Name>
+                      <Attributes />
+                    </identifier>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="ClassInstantioationNode">
+                    <type xsi:type="AbstractTypeNode">
+                      <Identifier>
+                        <Name>Fielded</Name>
+                        <Attributes />
+                      </Identifier>
+                    </type>
+                    <arguments>
+                      <ArgumentNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>otroParam</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArgumentNode>
+                    </arguments>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="ThisReferenceAccsessNode" />
+                      <identifier>
+                        <Name>myField2</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>THREE</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="ClassInstantioationNode">
+                    <type xsi:type="AbstractTypeNode">
+                      <Identifier>
+                        <Name>Fielded</Name>
+                        <Attributes />
+                      </Identifier>
+                    </type>
+                    <arguments>
+                      <ArgumentNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>otroParam</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArgumentNode>
+                    </arguments>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="AccessorNode">
+                        <primary xsi:type="AccessorNode">
+                          <primary xsi:type="ThisReferenceAccsessNode" />
+                          <identifier>
+                            <Name>myField3</Name>
+                            <Attributes />
+                          </identifier>
+                        </primary>
+                        <identifier>
+                          <Name>id1</Name>
+                          <Attributes />
+                        </identifier>
+                      </primary>
+                      <identifier>
+                        <Name>id2</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>THREE</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="ClassInstantioationNode">
+                    <type xsi:type="AbstractTypeNode">
+                      <Identifier>
+                        <Name>Fielded</Name>
+                        <Attributes />
+                      </Identifier>
+                    </type>
+                    <arguments>
+                      <ArgumentNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>otroParam</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArgumentNode>
+                    </arguments>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="AccessorNode">
+                    <primary xsi:type="AccessorNode">
+                      <primary xsi:type="ThisReferenceAccsessNode" />
+                      <identifier>
+                        <Name>myField3</Name>
+                        <Attributes />
+                      </identifier>
+                    </primary>
+                    <identifier>
+                      <Name>id1</Name>
+                      <Attributes />
+                    </identifier>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="ClassInstantioationNode">
+                    <type xsi:type="AbstractTypeNode">
+                      <Identifier>
+                        <Name>ID1</Name>
+                        <Attributes />
+                      </Identifier>
+                    </type>
+                    <arguments>
+                      <ArgumentNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>otroParam</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArgumentNode>
+                      <ArgumentNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>otroParam2</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArgumentNode>
+                      <ArgumentNode>
+                        <ExpressionNode xsi:type="IdNode">
+                          <Name>otroParam3</Name>
+                          <Attributes />
+                        </ExpressionNode>
+                      </ArgumentNode>
+                    </arguments>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
               <StatementNode xsi:type="LocalVariableDeclarationNode">
                 <LocalVariables>
                   <Variable IsStatic="false">
@@ -617,6 +1826,42 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>MyBool</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <primaryExpBrackets>
+                        <ExpressionNode xsi:type="FunctionCallExpressionNode">
+                          <identifier xsi:type="IdNode">
+                            <Name>getSize</Name>
+                            <Attributes />
+                          </identifier>
+                          <arguments />
+                        </ExpressionNode>
+                      </primaryExpBrackets>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>namespace1</Name>
+                            <Attributes>
+                              <Identifier>
+                                <Name>MyBool</Name>
+                                <Attributes />
+                              </Identifier>
+                            </Attributes>
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays />
+                      </arrayType>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -633,6 +1878,45 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>MyBool</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <primaryExpBrackets>
+                        <ExpressionNode xsi:type="FunctionCallExpressionNode">
+                          <identifier xsi:type="AccessorNode">
+                            <primary xsi:type="ThisReferenceAccsessNode" />
+                            <identifier>
+                              <Name>getSize</Name>
+                              <Attributes />
+                            </identifier>
+                          </identifier>
+                          <arguments />
+                        </ExpressionNode>
+                      </primaryExpBrackets>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>namespace1</Name>
+                            <Attributes>
+                              <Identifier>
+                                <Name>MyBool</Name>
+                                <Attributes />
+                              </Identifier>
+                            </Attributes>
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays />
+                      </arrayType>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -649,15 +1933,292 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="AbstractTypeNode">
+                        <Identifier>
+                          <Name>namespace1</Name>
+                          <Attributes>
+                            <Identifier>
+                              <Name>MyBool</Name>
+                              <Attributes />
+                            </Identifier>
+                          </Attributes>
+                        </Identifier>
+                      </type>
+                      <primaryExpBrackets>
+                        <ExpressionNode xsi:type="TernaryExpressionNode">
+                          <conditionalExpression xsi:type="GroupedExpressionNode">
+                            <expression xsi:type="GreaterThanExpressionNode">
+                              <leftExpression xsi:type="AccessorNode">
+                                <primary xsi:type="IdNode">
+                                  <Name>Numbers</Name>
+                                  <Attributes />
+                                </primary>
+                                <identifier>
+                                  <Name>Count</Name>
+                                  <Attributes />
+                                </identifier>
+                              </leftExpression>
+                              <shiftExpression xsi:type="LiteralIntNode">
+                                <Value>3</Value>
+                              </shiftExpression>
+                            </expression>
+                          </conditionalExpression>
+                          <trueExpression xsi:type="LiteralIntNode">
+                            <Value>8</Value>
+                          </trueExpression>
+                          <falseExpression xsi:type="LiteralIntNode">
+                            <Value>3</Value>
+                          </falseExpression>
+                        </ExpressionNode>
+                      </primaryExpBrackets>
+                      <arrayType>
+                        <AbstractTypeNode>
+                          <Identifier>
+                            <Name>namespace1</Name>
+                            <Attributes>
+                              <Identifier>
+                                <Name>MyBool</Name>
+                                <Attributes />
+                              </Identifier>
+                            </Attributes>
+                          </Identifier>
+                        </AbstractTypeNode>
+                        <MultiDimArrays />
+                      </arrayType>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>nombres1</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="SubExpressionNode">
+                          <leftOperand xsi:type="FunctionCallExpressionNode">
+                            <identifier xsi:type="IdNode">
+                              <Name>getSize</Name>
+                              <Attributes />
+                            </identifier>
+                            <arguments />
+                          </leftOperand>
+                          <rightOperand xsi:type="LiteralIntNode">
+                            <Value>1</Value>
+                          </rightOperand>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"Imposible"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>nombres1</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="SubExpressionNode">
+                          <leftOperand xsi:type="FunctionCallExpressionNode">
+                            <identifier xsi:type="AccessorNode">
+                              <primary xsi:type="ThisReferenceAccsessNode" />
+                              <identifier>
+                                <Name>getSize</Name>
+                                <Attributes />
+                              </identifier>
+                            </identifier>
+                            <arguments />
+                          </leftOperand>
+                          <rightOperand xsi:type="LiteralIntNode">
+                            <Value>1</Value>
+                          </rightOperand>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"Thing"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>nombres1</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="TernaryExpressionNode">
+                          <conditionalExpression xsi:type="GroupedExpressionNode">
+                            <expression xsi:type="GreaterThanExpressionNode">
+                              <leftExpression xsi:type="AccessorNode">
+                                <primary xsi:type="IdNode">
+                                  <Name>Numbers</Name>
+                                  <Attributes />
+                                </primary>
+                                <identifier>
+                                  <Name>Count</Name>
+                                  <Attributes />
+                                </identifier>
+                              </leftExpression>
+                              <shiftExpression xsi:type="LiteralIntNode">
+                                <Value>3</Value>
+                              </shiftExpression>
+                            </expression>
+                          </conditionalExpression>
+                          <trueExpression xsi:type="LiteralIntNode">
+                            <Value>8</Value>
+                          </trueExpression>
+                          <falseExpression xsi:type="LiteralIntNode">
+                            <Value>3</Value>
+                          </falseExpression>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="LiteralStringNode">
+                    <Value>"Last"</Value>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="IdNode">
+                        <Name>namespace1</Name>
+                        <Attributes />
+                      </primary>
+                      <identifier>
+                        <Name>MyBool</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="AssignExpressionNode">
+                          <unaryExpression xsi:type="IdNode">
+                            <Name>size</Name>
+                            <Attributes />
+                          </unaryExpression>
+                          <assignType>OP_ASSIGN_MULTIPLICATION</assignType>
+                          <assignExpression xsi:type="LiteralIntNode">
+                            <Value>3</Value>
+                          </assignExpression>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="IdNode">
+                    <Name>value1</Name>
+                    <Attributes />
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="IdNode">
+                        <Name>namespace1</Name>
+                        <Attributes />
+                      </primary>
+                      <identifier>
+                        <Name>MyBool</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="AssignExpressionNode">
+                          <unaryExpression xsi:type="IdNode">
+                            <Name>size</Name>
+                            <Attributes />
+                          </unaryExpression>
+                          <assignType>OP_ASSIGN_SUM</assignType>
+                          <assignExpression xsi:type="LiteralIntNode">
+                            <Value>3</Value>
+                          </assignExpression>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="IdNode">
+                    <Name>value2</Name>
+                    <Attributes />
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="AccessorNode">
+                      <primary xsi:type="IdNode">
+                        <Name>namespace1</Name>
+                        <Attributes />
+                      </primary>
+                      <identifier>
+                        <Name>MyBool</Name>
+                        <Attributes />
+                      </identifier>
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="TernaryExpressionNode">
+                          <conditionalExpression xsi:type="GroupedExpressionNode">
+                            <expression xsi:type="GreaterThanExpressionNode">
+                              <leftExpression xsi:type="GroupedExpressionNode">
+                                <expression xsi:type="AssignExpressionNode">
+                                  <unaryExpression xsi:type="IdNode">
+                                    <Name>size</Name>
+                                    <Attributes />
+                                  </unaryExpression>
+                                  <assignType>OP_ASSIGN_SUBSTRACT</assignType>
+                                  <assignExpression xsi:type="LiteralIntNode">
+                                    <Value>3</Value>
+                                  </assignExpression>
+                                </expression>
+                              </leftExpression>
+                              <shiftExpression xsi:type="LiteralIntNode">
+                                <Value>0</Value>
+                              </shiftExpression>
+                            </expression>
+                          </conditionalExpression>
+                          <trueExpression xsi:type="IdNode">
+                            <Name>size</Name>
+                            <Attributes />
+                          </trueExpression>
+                          <falseExpression xsi:type="LiteralIntNode">
+                            <Value>0</Value>
+                          </falseExpression>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="IdNode">
+                    <Name>value3</Name>
+                    <Attributes />
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
               <StatementNode xsi:type="LocalVariableDeclarationNode">
                 <LocalVariables>
                   <Variable IsStatic="false">
@@ -666,6 +2227,9 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>5</Value>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -682,10 +2246,52 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
+                    <ExpressionNode xsi:type="ArrayInstantiationNode">
+                      <type xsi:type="PrimitiveTypeNode" type="RW_FLOAT" />
+                      <primaryExpBrackets>
+                        <ExpressionNode xsi:type="LiteralIntNode">
+                          <Value>8</Value>
+                        </ExpressionNode>
+                      </primaryExpBrackets>
+                      <arrayType>
+                        <PrimitiveTypeNode type="RW_FLOAT" />
+                        <MultiDimArrays />
+                      </arrayType>
+                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="StatementExpressionNode">
+                <expressionNode xsi:type="AssignExpressionNode">
+                  <unaryExpression xsi:type="ArrayAccessExpressionNode">
+                    <identifier xsi:type="IdNode">
+                      <Name>val</Name>
+                      <Attributes />
+                    </identifier>
+                    <arrayAccessList>
+                      <ArrayOfExpressionNode>
+                        <ExpressionNode xsi:type="AssignExpressionNode">
+                          <unaryExpression xsi:type="IdNode">
+                            <Name>size</Name>
+                            <Attributes />
+                          </unaryExpression>
+                          <assignType>OP_ASSIGN_MULTIPLICATION</assignType>
+                          <assignExpression xsi:type="LiteralIntNode">
+                            <Value>3</Value>
+                          </assignExpression>
+                        </ExpressionNode>
+                      </ArrayOfExpressionNode>
+                    </arrayAccessList>
+                  </unaryExpression>
+                  <assignType>OP_ASSIGN</assignType>
+                  <assignExpression xsi:type="CastingExpressionNode">
+                    <targetCastType xsi:type="PrimitiveTypeNode" type="RW_FLOAT" />
+                    <exp xsi:type="LiteralFloatNode">
+                      <Value>0</Value>
+                    </exp>
+                  </assignExpression>
+                </expressionNode>
+              </StatementNode>
             </statements>
           </statemetBlock>
         </Method>
@@ -735,18 +2341,126 @@
                     </TypeNode>
                     <ArrayInitializerNode>
                       <ArrayInitializers>
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
-                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_TERNARY</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>PUNT_COLON</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_NULL_COALESCING</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_OR</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_AND</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_BITWISE_OR</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_XOR</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>OP_BITWISE_AND</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>PUNT_PAREN_OPEN</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>RW_NEW</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>ID</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>TokenType</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>RW_THIS</Name>
+                            <Attributes />
+                          </identifier>
+                        </VariableInitializer>
                       </ArrayInitializers>
                     </ArrayInitializerNode>
                   </Variable>
@@ -758,9 +2472,39 @@
                   <Name>type</Name>
                   <Attributes />
                 </identifier>
+                <expression xsi:type="IdNode">
+                  <Name>types</Name>
+                  <Attributes />
+                </expression>
                 <body xsi:type="StatementBlockNode">
                   <statements>
                     <StatementNode xsi:type="IfStatementNode">
+                      <expression xsi:type="FunctionCallExpressionNode">
+                        <identifier xsi:type="AccessorNode">
+                          <primary xsi:type="IdNode">
+                            <Name>type</Name>
+                            <Attributes />
+                          </primary>
+                          <identifier>
+                            <Name>Contains</Name>
+                            <Attributes />
+                          </identifier>
+                        </identifier>
+                        <arguments>
+                          <ArgumentNode>
+                            <ExpressionNode xsi:type="AccessorNode">
+                              <primary xsi:type="IdNode">
+                                <Name>token</Name>
+                                <Attributes />
+                              </primary>
+                              <identifier>
+                                <Name>type</Name>
+                                <Attributes />
+                              </identifier>
+                            </ExpressionNode>
+                          </ArgumentNode>
+                        </arguments>
+                      </expression>
                       <statements xsi:type="StatementBlockNode">
                         <statements>
                           <StatementNode xsi:type="JumpStatementNode">
@@ -783,6 +2527,163 @@
               </StatementNode>
               <StatementNode xsi:type="JumpStatementNode">
                 <type>RW_RETURN</type>
+                <expression xsi:type="FunctionCallExpressionNode">
+                  <identifier xsi:type="AccessorNode">
+                    <primary xsi:type="FunctionCallExpressionNode">
+                      <identifier xsi:type="AccessorNode">
+                        <primary xsi:type="FunctionCallExpressionNode">
+                          <identifier xsi:type="AccessorNode">
+                            <primary xsi:type="FunctionCallExpressionNode">
+                              <identifier xsi:type="AccessorNode">
+                                <primary xsi:type="FunctionCallExpressionNode">
+                                  <identifier xsi:type="AccessorNode">
+                                    <primary xsi:type="FunctionCallExpressionNode">
+                                      <identifier xsi:type="AccessorNode">
+                                        <primary xsi:type="FunctionCallExpressionNode">
+                                          <identifier xsi:type="AccessorNode">
+                                            <primary xsi:type="FunctionCallExpressionNode">
+                                              <identifier xsi:type="AccessorNode">
+                                                <primary xsi:type="FunctionCallExpressionNode">
+                                                  <identifier xsi:type="AccessorNode">
+                                                    <primary xsi:type="FunctionCallExpressionNode">
+                                                      <identifier xsi:type="AccessorNode">
+                                                        <primary xsi:type="IdNode">
+                                                          <Name>nuevo</Name>
+                                                          <Attributes />
+                                                        </primary>
+                                                        <identifier>
+                                                          <Name>Concat</Name>
+                                                          <Attributes />
+                                                        </identifier>
+                                                      </identifier>
+                                                      <arguments>
+                                                        <ArgumentNode>
+                                                          <ExpressionNode xsi:type="IdNode">
+                                                            <Name>equalityOperatorOptions</Name>
+                                                            <Attributes />
+                                                          </ExpressionNode>
+                                                        </ArgumentNode>
+                                                      </arguments>
+                                                    </primary>
+                                                    <identifier>
+                                                      <Name>Concat</Name>
+                                                      <Attributes />
+                                                    </identifier>
+                                                  </identifier>
+                                                  <arguments>
+                                                    <ArgumentNode>
+                                                      <ExpressionNode xsi:type="IdNode">
+                                                        <Name>relationalOperatorOptions</Name>
+                                                        <Attributes />
+                                                      </ExpressionNode>
+                                                    </ArgumentNode>
+                                                  </arguments>
+                                                </primary>
+                                                <identifier>
+                                                  <Name>Concat</Name>
+                                                  <Attributes />
+                                                </identifier>
+                                              </identifier>
+                                              <arguments>
+                                                <ArgumentNode>
+                                                  <ExpressionNode xsi:type="IdNode">
+                                                    <Name>Is_AsOperatorOptions</Name>
+                                                    <Attributes />
+                                                  </ExpressionNode>
+                                                </ArgumentNode>
+                                              </arguments>
+                                            </primary>
+                                            <identifier>
+                                              <Name>Concat</Name>
+                                              <Attributes />
+                                            </identifier>
+                                          </identifier>
+                                          <arguments>
+                                            <ArgumentNode>
+                                              <ExpressionNode xsi:type="IdNode">
+                                                <Name>shiftOperatorOptions</Name>
+                                                <Attributes />
+                                              </ExpressionNode>
+                                            </ArgumentNode>
+                                          </arguments>
+                                        </primary>
+                                        <identifier>
+                                          <Name>Concat</Name>
+                                          <Attributes />
+                                        </identifier>
+                                      </identifier>
+                                      <arguments>
+                                        <ArgumentNode>
+                                          <ExpressionNode xsi:type="IdNode">
+                                            <Name>additiveOperatorOptions</Name>
+                                            <Attributes />
+                                          </ExpressionNode>
+                                        </ArgumentNode>
+                                      </arguments>
+                                    </primary>
+                                    <identifier>
+                                      <Name>Concat</Name>
+                                      <Attributes />
+                                    </identifier>
+                                  </identifier>
+                                  <arguments>
+                                    <ArgumentNode>
+                                      <ExpressionNode xsi:type="IdNode">
+                                        <Name>multiplicativeOperatorOptions</Name>
+                                        <Attributes />
+                                      </ExpressionNode>
+                                    </ArgumentNode>
+                                  </arguments>
+                                </primary>
+                                <identifier>
+                                  <Name>Concat</Name>
+                                  <Attributes />
+                                </identifier>
+                              </identifier>
+                              <arguments>
+                                <ArgumentNode>
+                                  <ExpressionNode xsi:type="IdNode">
+                                    <Name>assignmentOperatorOptions</Name>
+                                    <Attributes />
+                                  </ExpressionNode>
+                                </ArgumentNode>
+                              </arguments>
+                            </primary>
+                            <identifier>
+                              <Name>Concat</Name>
+                              <Attributes />
+                            </identifier>
+                          </identifier>
+                          <arguments>
+                            <ArgumentNode>
+                              <ExpressionNode xsi:type="IdNode">
+                                <Name>unaryOperatorOptions</Name>
+                                <Attributes />
+                              </ExpressionNode>
+                            </ArgumentNode>
+                          </arguments>
+                        </primary>
+                        <identifier>
+                          <Name>Concat</Name>
+                          <Attributes />
+                        </identifier>
+                      </identifier>
+                      <arguments>
+                        <ArgumentNode>
+                          <ExpressionNode xsi:type="IdNode">
+                            <Name>literalOptions</Name>
+                            <Attributes />
+                          </ExpressionNode>
+                        </ArgumentNode>
+                      </arguments>
+                    </primary>
+                    <identifier>
+                      <Name>ToArray</Name>
+                      <Attributes />
+                    </identifier>
+                  </identifier>
+                  <arguments />
+                </expression>
               </StatementNode>
             </statements>
           </statemetBlock>

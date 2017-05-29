@@ -109,7 +109,10 @@ namespace Main
                 typeof(CastingExpressionNode),typeof(GroupedExpressionNode),typeof(ThisReferenceAccsessNode),
                 typeof(BaseReferenceAccessNode),typeof(AccessorNode),typeof(PostAdditiveExpressionNode),
                 typeof(FunctionCallExpressionNode),typeof(ArrayAccessExpressionNode),typeof(InstanceExpressionNode),
-                typeof(ClassInstantioationNode),typeof(ArrayInstantiationNode),typeof(ReferenceAccsessNode)};
+                typeof(ClassInstantioationNode),typeof(ArrayInstantiationNode),typeof(ReferenceAccsessNode),
+                typeof(TernaryExpressionNode),typeof(BitwiseAndExpressionNode),typeof(BitwiseOrExpressionNode),
+                typeof(ConditionalAndExpressionNode),typeof(ConditionalOrExpressionNode),typeof(ExclusiveOrExpression),
+                typeof(NullCoalescingExpressionNode)};
         }
     }
 }
