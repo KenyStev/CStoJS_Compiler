@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes.Expressions;
 using Compiler.TreeNodes.Statements;
 
 namespace Compiler
@@ -16,27 +17,35 @@ namespace Compiler
         private EmbeddedStatementNode embedded_statement() //TODO
         {
             printIfDebug("embedded_statement");
+
+            if(!pass(embededOptions()))
+                throwError("{}, ;, statement, if, switch, for, foreach, while, do-while, continue or return expected");
+
             if(pass(maybeEmptyBlockOptions))
             {
-                maybe_empty_block();
+                return maybe_empty_block();
             }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
             {
-                statement_expression();
+                var stmt = statement_expression();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                     throwError("; expected");
                 consumeToken();
+                return stmt;
             }else if(pass(selectionsOptionsStatements))
             {
-                selection_statement();
-            }else if(pass(iteratorsOptionsStatements))
+                return selection_statement();
+            }else if(pass(iteratorsOptionsStatements)) //TODO
             {
+                // return 
                 iteration_statement();
-            }else if(pass(jumpsOptionsStatements))
+            }else if(pass(jumpsOptionsStatements)) //TODO
             {
+                EmbeddedStatementNode jumpStmt = null;
                 jump_statement();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                     throwError("; expected");
                 consumeToken();
+                return jumpStmt;
             }
             return null;
         }
@@ -286,23 +295,24 @@ namespace Compiler
         /*selection-statement:
             | if-statement
             | switch-statement */
-        private void selection_statement()
+        private SelectionStatementNode selection_statement()
         {
             printIfDebug("selection_statement");
+            if(!pass(TokenType.RW_IF,TokenType.RW_SWITCH))
+                throwError("'if' or 'switch' statement expected");
             if(pass(TokenType.RW_IF))
             {
-                if_statement();
+                return if_statement();
             }else if(pass(TokenType.RW_SWITCH))
             {
-                switch_statement();
-            }else{
-                throwError("'if' or 'switch' statement expected");
+                return switch_statement();
             }
+            return null;
         }
 
         /*if-statement:
 	        | "if" '(' expression ')' embedded-statement optional-else-part */
-        private void if_statement()
+        private IfStatementNode if_statement()
         {
             printIfDebug("if_statement");
             if(!pass(TokenType.RW_IF))
@@ -311,41 +321,42 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            expression();
+            var exp = expression();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            embedded_statement();
-            optional_else_part();
+            var stmts = embedded_statement();
+            var elseBock = optional_else_part();
+            return new IfStatementNode(exp,stmts,elseBock);
         }
 
         /*optional-else-part:
             | else-part
             | EPSILON */
-        private void optional_else_part()
+        private ElseStatementNode optional_else_part()
         {
             printIfDebug("optional_else_part");
             if(pass(TokenType.RW_ELSE))
             {
-                else_part();
-            }else{
-                //EPSILON
+                return else_part();
             }
+            return null;
         }
 
         /*else-part:
 	        | "else" embedded-statement	 */
-        private void else_part()
+        private ElseStatementNode else_part()
         {
             if(!pass(TokenType.RW_ELSE))
                 throwError("'else' reserved word expected");
             consumeToken();
-            embedded_statement();
+            var stmts = embedded_statement();
+            return new ElseStatementNode(stmts);
         }
 
         /*switch-statement:
 	        | "switch" '(' expression ')' '{' optional-switch-section-list '}' */
-        private void switch_statement()
+        private SwitchStatementNode switch_statement()
         {
             printIfDebug("switch_statement");
             if(!pass(TokenType.RW_SWITCH))
@@ -354,70 +365,77 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            expression();
+            var exp = expression();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
-            optional_switch_section_list();
+            var switchSections = optional_switch_section_list();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
+            return new SwitchStatementNode(exp,new SwitchBodyNode(switchSections));
         }
 
         /*optional-switch-section-list:
             | switch-label-list optional-statement-list optional-switch-section-list
             | EPSILON */
-        private void optional_switch_section_list()
+        private List<SwitchSectionNode> optional_switch_section_list()
         {
             printIfDebug("optional_switch_section_list");
             if(pass(switchLabelOptions))
             {
-                switch_label_list();
-                optional_statement_list();
-                optional_switch_section_list();
-            }else{
-                //EPSILON
+                var switchLabels = switch_label_list();
+                var stmts = optional_statement_list();
+                var switchSection = new SwitchSectionNode(switchLabels,stmts);
+                var swicthSections = optional_switch_section_list();
+                swicthSections.Insert(0,switchSection);
+                return swicthSections;
             }
+            return new List<SwitchSectionNode>();
         }
 
         /*switch-label-list:
 	        | switch-label switch-label-list-p */
-        private void switch_label_list()
+        private List<CaseNode> switch_label_list()
         {
             printIfDebug("switch_label_list");
             if(!pass(switchLabelOptions))
                 throwError("'case' or 'default' expected");
-            switch_label();
-            switch_label_list_p();
+            var caseLabel = switch_label();
+            var casesList = switch_label_list_p();
+            casesList.Insert(0,caseLabel);
+            return casesList;
         }
 
         /*switch-label-list-p:
             | switch-label-list
             | EPSILON */
-        private void switch_label_list_p()
+        private List<CaseNode> switch_label_list_p()
         {
             printIfDebug("switch_label_list_p");
             if(pass(switchLabelOptions))
             {
-                switch_label_list();
+                return switch_label_list();
             }else{
-                //EPSILON
+                return new List<CaseNode>();
             }
         }
 
         /*switch-label:
             | "case" expression ':'
             | "default" ':' */
-        private void switch_label()
+        private CaseNode switch_label()
         {
             printIfDebug("switch_label");
+            var caseType = token.type;
+            ExpressionNode exp = null;
             if(pass(TokenType.RW_CASE))
             {
                 consumeToken();
-                expression();
+                exp = expression();
             }else if(pass(TokenType.RW_DEFAULT))
             {
                 consumeToken();
@@ -427,15 +445,17 @@ namespace Compiler
             if(!pass(TokenType.PUNT_COLON))
                 throwError("':' expected");
             consumeToken();
+            return new CaseNode(caseType,exp);
         }
 
         /*statement-expression:
 	        | unary-expression statement-expression-factorized */
-        private void statement_expression()
+        private EmbeddedStatementNode statement_expression() //TODO
         {
             printIfDebug("statement_expression");
             unary_expression();
             statement_expression_factorized();
+            return null;
         }
 
         /*statement-expression-factorized:

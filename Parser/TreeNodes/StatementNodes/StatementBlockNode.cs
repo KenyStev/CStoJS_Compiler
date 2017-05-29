@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Compiler.TreeNodes.Statements
 {
-    public class StatementBlockNode
+    public class StatementBlockNode : EmbeddedStatementNode
     {
         public List<StatementNode> statements;
 

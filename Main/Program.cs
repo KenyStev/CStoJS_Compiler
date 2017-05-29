@@ -34,7 +34,7 @@ namespace Main
                 ");}
             */
             var dir = @"..\Parser.Tests\testFiles\generationTree\";
-            var TestingFile = @"localVariables";
+            var TestingFile = @"statementsTests";
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
             var inputString = new InputFile(dir+TestingFile+".txt");
@@ -83,7 +83,9 @@ namespace Main
                 typeof(EnumNode),typeof(FieldNode),typeof(IdNode),typeof(MethodHeaderNode),
                 typeof(MethodModifierNode),typeof(MethodNode),typeof(NamespaceNode),
                 typeof(ParameterNode),typeof(ReturnTypeNode),typeof(UsingNode),typeof(StatementBlockNode),
-                typeof(EmbeddedStatementNode)};
+                typeof(EmbeddedStatementNode),typeof(ElseStatementNode),typeof(IfStatementNode),
+                typeof(SelectionStatementNode),typeof(SwitchStatementNode),typeof(SwitchBodyNode),
+                typeof(SwitchSectionNode),typeof(CaseNode)};
         }
     }
 }
