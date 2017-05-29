@@ -85,7 +85,8 @@ namespace Main
                 typeof(ParameterNode),typeof(ReturnTypeNode),typeof(UsingNode),typeof(StatementBlockNode),
                 typeof(EmbeddedStatementNode),typeof(ElseStatementNode),typeof(IfStatementNode),
                 typeof(SelectionStatementNode),typeof(SwitchStatementNode),typeof(SwitchBodyNode),
-                typeof(SwitchSectionNode),typeof(CaseNode)};
+                typeof(SwitchSectionNode),typeof(CaseNode),typeof(ForStatementNode),typeof(ForInitializerNode),
+                };
         }
     }
 }

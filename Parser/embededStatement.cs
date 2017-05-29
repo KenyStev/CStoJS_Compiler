@@ -36,8 +36,7 @@ namespace Compiler
                 return selection_statement();
             }else if(pass(iteratorsOptionsStatements)) //TODO
             {
-                // return 
-                iteration_statement();
+                return iteration_statement();
             }else if(pass(jumpsOptionsStatements)) //TODO
             {
                 EmbeddedStatementNode jumpStmt = null;
@@ -92,14 +91,14 @@ namespace Compiler
         /*optional-expression: 
             | expression
             | EPSILON */
-        private void optional_expression()
+        private ExpressionNode optional_expression()
         {
             printIfDebug("optional_expression");
             if(pass(expressionOptions()))
             {
-                expression();
+                return expression();
             }else{
-                //EPSILON
+                return null;
             }
         }
 
@@ -108,24 +107,26 @@ namespace Compiler
             | do-statement
             | for-statement
             | foreach-statement */
-        private void iteration_statement()
+        private IterationStatementNode iteration_statement()
         {
             printIfDebug("iteration_statement");
+            if(!pass(iteratorsOptionsStatements))
+                throwError("while, do-while, for or foreach conditional statement expected");
+            
             if(pass(TokenType.RW_WHILE))
             {
-                while_statement();
+                while_statement(); //TODO
             }else if(pass(TokenType.RW_DO))
             {
-                do_statement();
+                do_statement(); //TODO
             }else if(pass(TokenType.RW_FOR))
             {
-                for_statement();
+                return for_statement();
             }else if(pass(TokenType.RW_FOREACH))
             {
-                foreach_statement();
-            }else{
-                throwError("while, do-while, for or foreach conditional statement expected");
+                foreach_statement(); //TODO
             }
+            return null;
         }
 
         /*while-statement:
@@ -172,7 +173,7 @@ namespace Compiler
 
         /*for-statement:
 	        | "for" '(' optional-for-initializer ';' optional-expression ';' optional-statement-expression-list ')' embedded-statement */
-        private void for_statement()
+        private ForStatementNode for_statement()
         {
             printIfDebug("for_statement");
             if(!pass(TokenType.RW_FOR))
@@ -182,86 +183,111 @@ namespace Compiler
                 throwError("'(' expected");
             consumeToken();
             //initializer
-            optional_for_initializer();
+            var forInitializer = optional_for_initializer();
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("';' expected");
             consumeToken();
             //expresion
-            optional_expression();
+            var exp = optional_expression();
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("';' expected");
             consumeToken();
             //statementlist
-            optional_statement_expression_list();
+            var postIncrementStmts = optional_statement_expression_list();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            embedded_statement();
+            var stmts = embedded_statement();
+            return new ForStatementNode(forInitializer,exp,postIncrementStmts,stmts);
         }
 
         /*optional-for-initializer:
             | local-variable-declaration
             | statement-expression-list
             | EPSILON */
-        private void optional_for_initializer()
+        private ForInitializerNode optional_for_initializer()
         {
             printIfDebug("optional_for_initializer");
-            addLookAhead(lexer.GetNextToken());
-            int look_ahead_index = look_ahead.Count()-1;
-            addLookAhead(lexer.GetNextToken());
-            int look_ahead_index2 = look_ahead.Count() - 1;
-            if (pass(varOption,typesOptions) &&
-                (look_ahead[look_ahead_index].type == TokenType.ID
-                || look_ahead[look_ahead_index].type == TokenType.PUNT_SQUARE_BRACKET_OPEN
-                || look_ahead[look_ahead_index].type == TokenType.PUNT_ACCESOR
-                || look_ahead[look_ahead_index].type == TokenType.OP_LESS_THAN) 
-                && !literalOptions.Contains(look_ahead[look_ahead_index2].type))
+
+            while (pass(typesOptions,varOption))
             {
-                local_variable_declaration();
-            }else if (pass(unaryExpressionOptions.Concat(unaryOperatorOptions).Concat(literalOptions).ToArray()))
-            {
-                statement_expression_list();
+                addLookAhead(lexer.GetNextToken());
+                if (look_ahead[look_ahead.Count() - 1].type == TokenType.PUNT_ACCESOR)
+                {
+                    addLookAhead(lexer.GetNextToken());
+                }
+                else
+                    break;
             }
-            else
+            int index;
+            int index2 = 0;
+            Token placeholder = token;
+            if (pass(typesOptions,varOption))
             {
-                //EPSILON
+                index = look_ahead.Count() - 1;
+                placeholder = look_ahead[index];
+                addLookAhead(lexer.GetNextToken());
+                index2 = look_ahead.Count() - 1;
+            }
+            if (
+                (pass(typesOptions,varOption) &&
+                (placeholder.type == TokenType.ID
+                || placeholder.type == TokenType.OP_LESS_THAN
+                ||
+                (placeholder.type == TokenType.PUNT_SQUARE_BRACKET_OPEN
+                && (look_ahead[index2].type == TokenType.PUNT_SQUARE_BRACKET_CLOSE
+                || look_ahead[index2].type == TokenType.PUNT_COMMA))))
+                )
+            {
+                var localVariables = local_variable_declaration();
+                return new ForInitializerNode(localVariables);
+            }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
+            {
+                var stmtsExpList = statement_expression_list();
+                var initialization = new ForInitializerNode();
+                initialization.setStatements(stmtsExpList);
+                return initialization;
+            }else{
+                return null;
             }
         }
 
         /*optional-statement-expression-list:
             | statement-expression-list
             | EPSILON */
-        private void optional_statement_expression_list()
+        private List<StatementExpressionNode> optional_statement_expression_list()
         {
             printIfDebug("optional_statement_expression_list");
             if(pass(unaryOperatorOptions,unaryExpressionOptions,literalOptions))
             {
-                statement_expression_list();
+                return statement_expression_list();
             }else{
-                //EPSILON
+                return null;
             }
         }
 
         /*statement-expression-list:
 	        | statement-expression statement-expression-list-p */
-        private void statement_expression_list()
+        private List<StatementExpressionNode> statement_expression_list()
         {
             printIfDebug("statement_expression_list");
-            statement_expression();
-            statement_expression_list_p();
+            var stmtExp = statement_expression();
+            var stmtsExp = statement_expression_list_p();
+            stmtsExp.Insert(0,stmtExp);
+            return stmtsExp;
         }
 
         /*statement-expression-list-p:
             | ',' statement-expression statement-expression-list-p
             | EPSILON */
-        private void statement_expression_list_p()
+        private List<StatementExpressionNode> statement_expression_list_p()
         {
             printIfDebug("statement_expression_list_p");
             if(pass(TokenType.PUNT_COMMA))
             {
-                statement_expression_list_p();
+                return statement_expression_list_p();
             }else{
-                //EPSILON
+                return new List<StatementExpressionNode>();
             }
         }
 
@@ -450,7 +476,7 @@ namespace Compiler
 
         /*statement-expression:
 	        | unary-expression statement-expression-factorized */
-        private EmbeddedStatementNode statement_expression() //TODO
+        private StatementExpressionNode statement_expression() //TODO
         {
             printIfDebug("statement_expression");
             unary_expression();

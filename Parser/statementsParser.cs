@@ -42,7 +42,7 @@ namespace Compiler
             printIfDebug("statement");
 
             while (pass(typesOptions,selectionsOptionsStatements,maybeEmptyBlockOptions,jumpsOptionsStatements,
-            iteratorsOptionsStatements,new TokenType[]{TokenType.RW_VAR}))
+            iteratorsOptionsStatements,varOption))
             {
                 addLookAhead(lexer.GetNextToken());
                 if (look_ahead[look_ahead.Count() - 1].type == TokenType.PUNT_ACCESOR)
@@ -55,7 +55,7 @@ namespace Compiler
             int index;
             int index2 = 0;
             Token placeholder = token;
-            if (pass(typesOptions,new TokenType[]{TokenType.RW_VAR}))
+            if (pass(typesOptions,varOption))
             {
                 index = look_ahead.Count() - 1;
                 placeholder = look_ahead[index];
@@ -63,7 +63,7 @@ namespace Compiler
                 index2 = look_ahead.Count() - 1;
             }
             if (
-                (pass(typesOptions,new TokenType[]{TokenType.RW_VAR}) &&
+                (pass(typesOptions,varOption) &&
                 (placeholder.type == TokenType.ID
                 || placeholder.type == TokenType.OP_LESS_THAN
                 ||

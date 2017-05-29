@@ -156,15 +156,15 @@
                 </LocalVariables>
               </StatementNode>
               <StatementNode xsi:type="IfStatementNode">
-                <exp xsi:type="LiteralIntNode">
+                <expression xsi:type="LiteralIntNode">
                   <Value>11</Value>
-                </exp>
-                <stmts xsi:type="StatementBlockNode">
+                </expression>
+                <statements xsi:type="StatementBlockNode">
                   <statements>
                     <StatementNode xsi:type="IfStatementNode">
-                      <exp xsi:type="LiteralIntNode">
+                      <expression xsi:type="LiteralIntNode">
                         <Value>11</Value>
-                      </exp>
+                      </expression>
                     </StatementNode>
                     <StatementNode xsi:type="LocalVariableDeclarationNode">
                       <LocalVariables>
@@ -178,28 +178,28 @@
                       </LocalVariables>
                     </StatementNode>
                     <StatementNode xsi:type="IfStatementNode">
-                      <exp xsi:type="LiteralIntNode">
+                      <expression xsi:type="LiteralIntNode">
                         <Value>11</Value>
-                      </exp>
-                      <stmts xsi:type="StatementBlockNode">
+                      </expression>
+                      <statements xsi:type="StatementBlockNode">
                         <statements>
                           <StatementNode xsi:nil="true" />
                         </statements>
-                      </stmts>
+                      </statements>
                       <elseBock>
                         <stmts xsi:type="StatementBlockNode">
                           <statements>
                             <StatementNode xsi:nil="true" />
                             <StatementNode xsi:type="IfStatementNode">
-                              <exp xsi:type="LiteralIntNode">
+                              <expression xsi:type="LiteralIntNode">
                                 <Value>11</Value>
-                              </exp>
-                              <stmts xsi:type="StatementBlockNode">
+                              </expression>
+                              <statements xsi:type="StatementBlockNode">
                                 <statements>
                                   <StatementNode xsi:nil="true" />
                                   <StatementNode xsi:nil="true" />
                                 </statements>
-                              </stmts>
+                              </statements>
                               <elseBock>
                                 <stmts xsi:type="StatementBlockNode">
                                   <statements>
@@ -263,24 +263,24 @@
                             </switchLabels>
                             <stmts>
                               <StatementNode xsi:type="IfStatementNode">
-                                <exp xsi:type="LiteralIntNode">
+                                <expression xsi:type="LiteralIntNode">
                                   <Value>11</Value>
-                                </exp>
-                                <stmts xsi:type="IfStatementNode">
-                                  <exp xsi:type="LiteralIntNode">
+                                </expression>
+                                <statements xsi:type="IfStatementNode">
+                                  <expression xsi:type="LiteralIntNode">
                                     <Value>11</Value>
-                                  </exp>
-                                  <stmts xsi:type="IfStatementNode">
-                                    <exp xsi:type="LiteralIntNode">
+                                  </expression>
+                                  <statements xsi:type="IfStatementNode">
+                                    <expression xsi:type="LiteralIntNode">
                                       <Value>11</Value>
-                                    </exp>
-                                    <stmts xsi:type="StatementBlockNode">
+                                    </expression>
+                                    <statements xsi:type="StatementBlockNode">
                                       <statements>
                                         <StatementNode xsi:nil="true" />
                                       </statements>
-                                    </stmts>
-                                  </stmts>
-                                </stmts>
+                                    </statements>
+                                  </statements>
+                                </statements>
                               </StatementNode>
                               <StatementNode xsi:nil="true" />
                             </stmts>
@@ -289,7 +289,7 @@
                       </switchBodyNode>
                     </StatementNode>
                   </statements>
-                </stmts>
+                </statements>
                 <elseBock>
                   <stmts xsi:type="StatementBlockNode">
                     <statements />
@@ -316,8 +316,16 @@
           <statemetBlock>
             <statements>
               <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="ForStatementNode" />
+              <StatementNode xsi:type="ForStatementNode">
+                <StatementBlock xsi:type="StatementBlockNode">
+                  <statements>
+                    <StatementNode xsi:nil="true" />
+                    <StatementNode xsi:nil="true" />
+                    <StatementNode xsi:nil="true" />
+                  </statements>
+                </StatementBlock>
+              </StatementNode>
             </statements>
           </statemetBlock>
         </Method>
