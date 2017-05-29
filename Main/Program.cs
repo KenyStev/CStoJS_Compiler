@@ -9,6 +9,14 @@ using Compiler.TreeNodes;
 using Compiler.TreeNodes.Types;
 using Compiler.TreeNodes.Statements;
 using Compiler.TreeNodes.Expressions;
+using Compiler.TreeNodes.Expressions.EqualityExpressions;
+using Compiler.TreeNodes.Expressions.RelationalExpressions;
+using Compiler.TreeNodes.Expressions.TypeTestingExpressions;
+using Compiler.TreeNodes.Expressions.ShiftExpressions;
+using Compiler.TreeNodes.Expressions.AdditiveExpressions;
+using Compiler.TreeNodes.Expressions.MultipicativeExpressions;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
+using Compiler.TreeNodes.Expressions.PrimaryExpressions;
 
 namespace Main
 {
@@ -74,7 +82,7 @@ namespace Main
         {
             return new Type[]{
                 typeof(ArrayInitializerNode),typeof(BinaryOperatorNode),typeof(ExpressionNode),
-                typeof(LiteralIntNode),typeof(VariableInitializerNode),typeof(AssignNode),
+                typeof(LiteralIntNode),typeof(VariableInitializerNode),typeof(AssignExpressionNode),
                 typeof(LocalVariableDeclarationNode),typeof(StatementNode),typeof(AbstractTypeNode),
                 typeof(ArrayTypeNode),typeof(ClassTypeNode),typeof(EnumTypeNode),typeof(InterfaceTypeNode),
                 typeof(MultidimensionArrayTypeNode),typeof(PrimitiveTypeNode),typeof(TypeNode),
@@ -87,7 +95,14 @@ namespace Main
                 typeof(SelectionStatementNode),typeof(SwitchStatementNode),typeof(SwitchBodyNode),
                 typeof(SwitchSectionNode),typeof(CaseNode),typeof(ForStatementNode),typeof(ForInitializerNode),
                 typeof(WhileStatementNode),typeof(DoWhileStatementNode),typeof(ForeachStatementNode),
-                typeof(JumpStatementNode)};
+                typeof(JumpStatementNode),typeof(EqualityExpressionNode),typeof(RelationalExpressionNode),
+                typeof(TypeTestingExpressionNode),typeof(ShiftExpressionNode),typeof(AdditiveExpressionNode),
+                typeof(MultipicativeExpressionNode),typeof(UnaryExpressionNode),typeof(PrimaryExpressionNode),
+                typeof(SumExpressionNode),typeof(SubExpressionNode),typeof(EqualExpressionNode),
+                typeof(DistinctExpressionNode),typeof(DivNode),typeof(MultNode),typeof(ModNode),
+                typeof(GreaterThanExpressionNode),typeof(GreaterOrEqualThanExpressionNode),typeof(LessThanExpressionNode),
+                typeof(LessOrEqualThanExpressionNode),typeof(ShiftLeftNode),typeof(ShiftRightNode),
+                typeof(IsTypeTestNode),typeof(AsTypeTestNode)};
         }
     }
 }

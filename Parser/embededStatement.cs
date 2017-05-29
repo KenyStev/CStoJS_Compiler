@@ -15,7 +15,7 @@ namespace Compiler
             | selection-statement
             | iteration-statement
             | jump-statement ';' */
-        private EmbeddedStatementNode embedded_statement() //TODO
+        private EmbeddedStatementNode embedded_statement()
         {
             printIfDebug("embedded_statement");
 

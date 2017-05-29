@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler
@@ -11,7 +12,7 @@ namespace Compiler
             | expression-unary-operator unary-expression
             | '(' type ')' primary-expression
             | primary-expression */
-        private void unary_expression()
+        private UnaryExpressionNode unary_expression()
         {
             printIfDebug("unary_expression");
             if(pass(unaryOperatorOptions))
@@ -57,6 +58,7 @@ namespace Compiler
             }else{
                 throwError("unary-operator, casting or primary-expression expected");
             }
+            return null;
         }
 
         /*primary-expression:

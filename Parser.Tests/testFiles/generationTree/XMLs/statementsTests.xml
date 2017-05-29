@@ -135,9 +135,6 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_BOOL" />
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -149,23 +146,13 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_STRING" />
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
               <StatementNode xsi:type="IfStatementNode">
-                <expression xsi:type="LiteralIntNode">
-                  <Value>11</Value>
-                </expression>
                 <statements xsi:type="StatementBlockNode">
                   <statements>
-                    <StatementNode xsi:type="IfStatementNode">
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
-                      </expression>
-                    </StatementNode>
+                    <StatementNode xsi:type="IfStatementNode" />
                     <StatementNode xsi:type="LocalVariableDeclarationNode">
                       <LocalVariables>
                         <Variable IsStatic="false">
@@ -178,8 +165,8 @@
                       </LocalVariables>
                     </StatementNode>
                     <StatementNode xsi:type="IfStatementNode">
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
+                      <expression xsi:type="IsTypeTestNode">
+                        <type xsi:type="PrimitiveTypeNode" type="RW_INT" />
                       </expression>
                       <statements xsi:type="StatementBlockNode">
                         <statements>
@@ -187,13 +174,11 @@
                         </statements>
                       </statements>
                       <elseBock>
-                        <stmts xsi:type="StatementBlockNode">
+                        <statements xsi:type="StatementBlockNode">
                           <statements>
                             <StatementNode xsi:nil="true" />
                             <StatementNode xsi:type="IfStatementNode">
-                              <expression xsi:type="LiteralIntNode">
-                                <Value>11</Value>
-                              </expression>
+                              <expression xsi:type="GreaterThanExpressionNode" />
                               <statements xsi:type="StatementBlockNode">
                                 <statements>
                                   <StatementNode xsi:nil="true" />
@@ -201,30 +186,24 @@
                                 </statements>
                               </statements>
                               <elseBock>
-                                <stmts xsi:type="StatementBlockNode">
+                                <statements xsi:type="StatementBlockNode">
                                   <statements>
                                     <StatementNode xsi:nil="true" />
                                   </statements>
-                                </stmts>
+                                </statements>
                               </elseBock>
                             </StatementNode>
                           </statements>
-                        </stmts>
+                        </statements>
                       </elseBock>
                     </StatementNode>
                     <StatementNode xsi:type="SwitchStatementNode">
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
-                      </expression>
                       <switchBodyNode>
                         <switchSections>
                           <SwitchSectionNode>
                             <switchLabels>
                               <CaseNode>
                                 <caseType>RW_CASE</caseType>
-                                <expression xsi:type="LiteralIntNode">
-                                  <Value>11</Value>
-                                </expression>
                               </CaseNode>
                             </switchLabels>
                             <stmts>
@@ -238,9 +217,6 @@
                                           <Attributes />
                                         </identifier>
                                         <TypeNode xsi:type="VarTypeNode" />
-                                        <ExpressionNode xsi:type="LiteralIntNode">
-                                          <Value>11</Value>
-                                        </ExpressionNode>
                                       </Variable>
                                     </LocalVariables>
                                   </StatementNode>
@@ -255,9 +231,6 @@
                             <switchLabels>
                               <CaseNode>
                                 <caseType>RW_CASE</caseType>
-                                <expression xsi:type="LiteralIntNode">
-                                  <Value>11</Value>
-                                </expression>
                               </CaseNode>
                               <CaseNode>
                                 <caseType>RW_DEFAULT</caseType>
@@ -265,17 +238,8 @@
                             </switchLabels>
                             <stmts>
                               <StatementNode xsi:type="IfStatementNode">
-                                <expression xsi:type="LiteralIntNode">
-                                  <Value>11</Value>
-                                </expression>
                                 <statements xsi:type="IfStatementNode">
-                                  <expression xsi:type="LiteralIntNode">
-                                    <Value>11</Value>
-                                  </expression>
                                   <statements xsi:type="IfStatementNode">
-                                    <expression xsi:type="LiteralIntNode">
-                                      <Value>11</Value>
-                                    </expression>
                                     <statements xsi:type="StatementBlockNode">
                                       <statements>
                                         <StatementNode xsi:nil="true" />
@@ -295,9 +259,9 @@
                   </statements>
                 </statements>
                 <elseBock>
-                  <stmts xsi:type="StatementBlockNode">
+                  <statements xsi:type="StatementBlockNode">
                     <statements />
-                  </stmts>
+                  </statements>
                 </elseBock>
               </StatementNode>
             </statements>
@@ -325,9 +289,6 @@
                 <StatementBlock xsi:type="StatementBlockNode">
                   <statements>
                     <StatementNode xsi:type="WhileStatementNode">
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
-                      </expression>
                       <body xsi:type="StatementBlockNode">
                         <statements>
                           <StatementNode xsi:type="LocalVariableDeclarationNode">
@@ -338,9 +299,6 @@
                                   <Attributes />
                                 </identifier>
                                 <TypeNode xsi:type="VarTypeNode" />
-                                <ExpressionNode xsi:type="LiteralIntNode">
-                                  <Value>11</Value>
-                                </ExpressionNode>
                               </Variable>
                             </LocalVariables>
                           </StatementNode>
@@ -348,9 +306,6 @@
                       </body>
                     </StatementNode>
                     <StatementNode xsi:type="DoWhileStatementNode">
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
-                      </expression>
                       <body xsi:type="StatementBlockNode">
                         <statements />
                       </body>
@@ -361,13 +316,7 @@
                         <Name>type</Name>
                         <Attributes />
                       </identifier>
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
-                      </expression>
                       <body xsi:type="IfStatementNode">
-                        <expression xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </expression>
                         <statements xsi:type="StatementBlockNode">
                           <statements />
                         </statements>
@@ -421,9 +370,6 @@
                         </Attributes>
                       </Identifier>
                     </AbstractTypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -458,9 +404,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -496,9 +439,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -533,9 +473,6 @@
                         <MultiDimArray dimensions="3" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -557,9 +494,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -579,9 +513,6 @@
                         <Attributes />
                       </Identifier>
                     </AbstractTypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -598,9 +529,6 @@
                         <Attributes />
                       </Identifier>
                     </AbstractTypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -617,9 +545,6 @@
                         <Attributes />
                       </Identifier>
                     </AbstractTypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -640,9 +565,6 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_INT" />
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                   <Variable IsStatic="false">
                     <identifier>
@@ -650,9 +572,6 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_INT" />
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -669,9 +588,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -697,9 +613,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -716,9 +629,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -735,9 +645,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -755,9 +662,6 @@
                       <Attributes />
                     </identifier>
                     <PrimitiveTypeNode type="RW_INT" />
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -774,9 +678,6 @@
                         <MultiDimArray dimensions="1" />
                       </MultiDimArrays>
                     </TypeNode>
-                    <ExpressionNode xsi:type="LiteralIntNode">
-                      <Value>11</Value>
-                    </ExpressionNode>
                   </Variable>
                 </LocalVariables>
               </StatementNode>
@@ -830,42 +731,18 @@
                     </TypeNode>
                     <ArrayInitializerNode>
                       <ArrayInitializers>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
-                        <VariableInitializer xsi:type="LiteralIntNode">
-                          <Value>11</Value>
-                        </VariableInitializer>
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
+                        <VariableInitializer xsi:nil="true" />
                       </ArrayInitializers>
                     </ArrayInitializerNode>
                   </Variable>
@@ -877,15 +754,9 @@
                   <Name>type</Name>
                   <Attributes />
                 </identifier>
-                <expression xsi:type="LiteralIntNode">
-                  <Value>11</Value>
-                </expression>
                 <body xsi:type="StatementBlockNode">
                   <statements>
                     <StatementNode xsi:type="IfStatementNode">
-                      <expression xsi:type="LiteralIntNode">
-                        <Value>11</Value>
-                      </expression>
                       <statements xsi:type="StatementBlockNode">
                         <statements>
                           <StatementNode xsi:type="JumpStatementNode">
@@ -894,13 +765,13 @@
                         </statements>
                       </statements>
                       <elseBock>
-                        <stmts xsi:type="StatementBlockNode">
+                        <statements xsi:type="StatementBlockNode">
                           <statements>
                             <StatementNode xsi:type="JumpStatementNode">
                               <type>RW_CONTINUE</type>
                             </StatementNode>
                           </statements>
-                        </stmts>
+                        </statements>
                       </elseBock>
                     </StatementNode>
                   </statements>
@@ -908,9 +779,6 @@
               </StatementNode>
               <StatementNode xsi:type="JumpStatementNode">
                 <type>RW_RETURN</type>
-                <expression xsi:type="LiteralIntNode">
-                  <Value>11</Value>
-                </expression>
               </StatementNode>
             </statements>
           </statemetBlock>
