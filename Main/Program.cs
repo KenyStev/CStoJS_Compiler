@@ -82,7 +82,8 @@ namespace Main
                 typeof(ConstructorInitializerNode),typeof(ConstructorNode),typeof(EncapsulationNode),
                 typeof(EnumNode),typeof(FieldNode),typeof(IdNode),typeof(MethodHeaderNode),
                 typeof(MethodModifierNode),typeof(MethodNode),typeof(NamespaceNode),
-                typeof(ParameterNode),typeof(ReturnTypeNode),typeof(UsingNode)};
+                typeof(ParameterNode),typeof(ReturnTypeNode),typeof(UsingNode),typeof(StatementBlockNode),
+                typeof(EmbeddedStatementNode)};
         }
     }
 }

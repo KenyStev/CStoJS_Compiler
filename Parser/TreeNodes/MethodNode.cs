@@ -16,23 +16,22 @@ namespace Compiler.TreeNodes
         [XmlElement(typeof(MethodHeaderNode))]
         public MethodHeaderNode methodHeaderNode;
 
-        [XmlElement(typeof(StatementNode)),
-        XmlElement(typeof(LocalVariableDeclarationNode))]
-        public List<StatementNode> statemets;
+        [XmlElement(typeof(StatementBlockNode))]
+        public StatementBlockNode statemetBlock;
         
         private MethodNode()
         {
             encapsulation = null;
             methodHeaderNode = null;
-            statemets = null;
+            statemetBlock = null;
             Modifier = null;
         }
 
-        public MethodNode(MethodHeaderNode methodHeaderNode,List<StatementNode> statemets)
+        public MethodNode(MethodHeaderNode methodHeaderNode,StatementBlockNode statemetBlock)
         {
             this.methodHeaderNode = methodHeaderNode;
             this.encapsulation = new EncapsulationNode(TokenType.RW_PUBLIC);
-            this.statemets = statemets;
+            this.statemetBlock = statemetBlock;
             this.Modifier = null;
         }
 

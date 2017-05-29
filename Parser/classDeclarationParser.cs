@@ -150,8 +150,8 @@ namespace Compiler
                 throwError("')' expected");
             consumeToken();
             var initializer = constructor_initializer();
-            var stmts = maybe_empty_block();
-            return new ConstructorNode(identifier,parameters,initializer,stmts);
+            var stmtsBlock = maybe_empty_block();
+            return new ConstructorNode(identifier,parameters,initializer,stmtsBlock);
         }
 
         private void field_or_method_declaration(ref ClassTypeNode currentClassType,TypeNode type,EncapsulationNode encapsulation,MethodModifierNode modifier)

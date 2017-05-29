@@ -79,7 +79,7 @@ namespace Compiler
                 return localVariable;
             }else if(pass(embededOptions()))
             {
-                embedded_statement();
+                return embedded_statement();
             }else{
                 throwError("statement expected");
             }

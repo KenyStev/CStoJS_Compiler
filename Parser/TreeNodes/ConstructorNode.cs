@@ -20,23 +20,23 @@ namespace Compiler.TreeNodes
         [XmlElement(typeof(ConstructorInitializerNode))]
         public ConstructorInitializerNode initializer;
         
-        [XmlElement(typeof(StatementNode)),
-        XmlElement(typeof(LocalVariableDeclarationNode))]
-        public List<StatementNode> statements;
+        [XmlElement(typeof(StatementBlockNode))]
+        public StatementBlockNode statementBlock;
 
         private ConstructorNode()
         {
             this.identifier = null;
             this.parameters = null;
             this.initializer = null;
+            this.statementBlock = null;
             this.encapsulation = null;
         }
-        public ConstructorNode(IdNode identifier, List<ParameterNode> parameters, ConstructorInitializerNode initializer, List<StatementNode> statements)
+        public ConstructorNode(IdNode identifier, List<ParameterNode> parameters, ConstructorInitializerNode initializer, StatementBlockNode statementBlock)
         {
             this.identifier = identifier;
             this.parameters = parameters;
             this.initializer = initializer;
-            this.statements = statements;
+            this.statementBlock = statementBlock;
             this.encapsulation = null;
         }
 

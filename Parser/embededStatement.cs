@@ -13,12 +13,12 @@ namespace Compiler
             | selection-statement
             | iteration-statement
             | jump-statement ';' */
-        private void embedded_statement()
+        private EmbeddedStatementNode embedded_statement() //TODO
         {
             printIfDebug("embedded_statement");
             if(pass(maybeEmptyBlockOptions))
             {
-                maybe_empty_block(); //TODO: codeblock
+                maybe_empty_block();
             }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
             {
                 statement_expression();
@@ -38,12 +38,13 @@ namespace Compiler
                     throwError("; expected");
                 consumeToken();
             }
+            return null;
         }
 
         /*maybe-empty-block:
             | '{' optional-statement-list '}'
             | ';' */
-        private List<StatementNode> maybe_empty_block()
+        private StatementBlockNode maybe_empty_block()
         {
             printIfDebug("maybe_empty_block");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN,TokenType.PUNT_END_STATEMENT_SEMICOLON))
@@ -56,7 +57,7 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                     throwError("'}' expected");
                 consumeToken();
-                return statements;
+                return new StatementBlockNode(statements);
             }else if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
             {
                 consumeToken();
