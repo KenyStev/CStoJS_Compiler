@@ -320,7 +320,29 @@
               <StatementNode xsi:type="ForStatementNode">
                 <StatementBlock xsi:type="StatementBlockNode">
                   <statements>
-                    <StatementNode xsi:nil="true" />
+                    <StatementNode xsi:type="WhileStatementNode">
+                      <expression xsi:type="LiteralIntNode">
+                        <Value>11</Value>
+                      </expression>
+                      <body xsi:type="StatementBlockNode">
+                        <statements>
+                          <StatementNode xsi:type="LocalVariableDeclarationNode">
+                            <LocalVariables>
+                              <Variable IsStatic="false">
+                                <identifier>
+                                  <Name>ultimatum</Name>
+                                  <Attributes />
+                                </identifier>
+                                <TypeNode xsi:type="VarTypeNode" />
+                                <ExpressionNode xsi:type="LiteralIntNode">
+                                  <Value>11</Value>
+                                </ExpressionNode>
+                              </Variable>
+                            </LocalVariables>
+                          </StatementNode>
+                        </statements>
+                      </body>
+                    </StatementNode>
                     <StatementNode xsi:nil="true" />
                     <StatementNode xsi:nil="true" />
                   </statements>

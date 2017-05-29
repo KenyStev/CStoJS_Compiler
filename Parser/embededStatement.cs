@@ -115,7 +115,7 @@ namespace Compiler
             
             if(pass(TokenType.RW_WHILE))
             {
-                while_statement(); //TODO
+                return while_statement();
             }else if(pass(TokenType.RW_DO))
             {
                 do_statement(); //TODO
@@ -131,7 +131,7 @@ namespace Compiler
 
         /*while-statement:
 	        | "while" '(' expression ')' embedded-statement */
-        private void while_statement()
+        private WhileStatementNode while_statement()
         {
             printIfDebug("while_statement");
             if(!pass(TokenType.RW_WHILE))
@@ -140,11 +140,12 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
             consumeToken();
-            expression();
+            var exp = expression();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            embedded_statement();
+            var body = embedded_statement();
+            return new WhileStatementNode(exp,body);
         }
 
         /*do-statement: 
@@ -244,8 +245,7 @@ namespace Compiler
             }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
             {
                 var stmtsExpList = statement_expression_list();
-                var initialization = new ForInitializerNode();
-                initialization.setStatements(stmtsExpList);
+                var initialization = new ForInitializerNode(stmtsExpList);
                 return initialization;
             }else{
                 return null;

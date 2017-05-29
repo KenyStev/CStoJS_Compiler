@@ -6,7 +6,7 @@ namespace Compiler.TreeNodes.Statements
     public class ForInitializerNode
     {
         public LocalVariableDeclarationNode localVariables;
-        private List<StatementExpressionNode> statementExpresions;
+        public List<StatementExpressionNode> statementExpresions;
 
         public ForInitializerNode(){
             this.localVariables = null;
@@ -18,8 +18,9 @@ namespace Compiler.TreeNodes.Statements
             this.statementExpresions = null;
         }
 
-        public void setStatements(List<StatementExpressionNode> stmtsExpList)
+        public ForInitializerNode(List<StatementExpressionNode> stmtsExpList)
         {
+            this.localVariables = null;
             this.statementExpresions = stmtsExpList;
         }
     }
