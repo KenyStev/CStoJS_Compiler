@@ -38,10 +38,9 @@ namespace Compiler
             }else if(pass(iteratorsOptionsStatements))
             {
                 return iteration_statement();
-            }else if(pass(jumpsOptionsStatements)) //TODO
+            }else if(pass(jumpsOptionsStatements))
             {
-                EmbeddedStatementNode jumpStmt = null;
-                jump_statement();
+                var jumpStmt = jump_statement();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                     throwError("; expected");
                 consumeToken();
@@ -78,15 +77,17 @@ namespace Compiler
             | "break"
             | "continue"
             | "return" optional-expression */
-        private void jump_statement()
+        private JumpStatementNode jump_statement()
         {
             printIfDebug("jump_statement");
             if(!pass(jumpsOptionsStatements))
                 throwError("break, continue or return expected");
             Token old = token;
             consumeToken();
+            ExpressionNode exp=null;
             if(old.type==TokenType.RW_RETURN)
-                optional_expression();
+                exp = optional_expression();
+            return new JumpStatementNode(old.type,exp);
         }
 
         /*optional-expression: 

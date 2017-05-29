@@ -2,12 +2,12 @@ namespace Compiler.TreeNodes.Statements
 {
     public class ElseStatementNode
     {
-        public EmbeddedStatementNode stmts;
+        public EmbeddedStatementNode statements;
 
         private ElseStatementNode(){}
         public ElseStatementNode(EmbeddedStatementNode stmts)
         {
-            this.stmts = stmts;
+            this.statements = stmts;
         }
     }
 }

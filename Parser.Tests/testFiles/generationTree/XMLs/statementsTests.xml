@@ -246,7 +246,9 @@
                                   </StatementNode>
                                 </statements>
                               </StatementNode>
-                              <StatementNode xsi:nil="true" />
+                              <StatementNode xsi:type="JumpStatementNode">
+                                <type>RW_BREAK</type>
+                              </StatementNode>
                             </stmts>
                           </SwitchSectionNode>
                           <SwitchSectionNode>
@@ -282,7 +284,9 @@
                                   </statements>
                                 </statements>
                               </StatementNode>
-                              <StatementNode xsi:nil="true" />
+                              <StatementNode xsi:type="JumpStatementNode">
+                                <type>RW_BREAK</type>
+                              </StatementNode>
                             </stmts>
                           </SwitchSectionNode>
                         </switchSections>
@@ -884,13 +888,17 @@
                       </expression>
                       <statements xsi:type="StatementBlockNode">
                         <statements>
-                          <StatementNode xsi:nil="true" />
+                          <StatementNode xsi:type="JumpStatementNode">
+                            <type>RW_BREAK</type>
+                          </StatementNode>
                         </statements>
                       </statements>
                       <elseBock>
                         <stmts xsi:type="StatementBlockNode">
                           <statements>
-                            <StatementNode xsi:nil="true" />
+                            <StatementNode xsi:type="JumpStatementNode">
+                              <type>RW_CONTINUE</type>
+                            </StatementNode>
                           </statements>
                         </stmts>
                       </elseBock>
@@ -898,7 +906,12 @@
                   </statements>
                 </body>
               </StatementNode>
-              <StatementNode xsi:nil="true" />
+              <StatementNode xsi:type="JumpStatementNode">
+                <type>RW_RETURN</type>
+                <expression xsi:type="LiteralIntNode">
+                  <Value>11</Value>
+                </expression>
+              </StatementNode>
             </statements>
           </statemetBlock>
         </Method>
