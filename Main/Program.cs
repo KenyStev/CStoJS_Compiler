@@ -44,7 +44,7 @@ namespace Main
                 ");}
             */
             var dir = @"..\Parser.Tests\testFiles\generationTree\";
-            var TestingFile = @"statementsTests";
+            var TestingFile = @"compiiisseada";
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
             // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
             var inputString = new InputFile(dir+TestingFile+".txt");
