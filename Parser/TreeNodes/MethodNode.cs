@@ -19,7 +19,8 @@ namespace Compiler.TreeNodes
 
         [XmlElement(typeof(StatementBlockNode))]
         public StatementBlockNode statemetBlock;
-        
+        public Token token;
+
         private MethodNode()
         {
             encapsulation = null;
@@ -28,12 +29,13 @@ namespace Compiler.TreeNodes
             Modifier = null;
         }
 
-        public MethodNode(MethodHeaderNode methodHeaderNode,StatementBlockNode statemetBlock)
+        public MethodNode(MethodHeaderNode methodHeaderNode,StatementBlockNode statemetBlock,Token token)
         {
             this.methodHeaderNode = methodHeaderNode;
-            this.encapsulation = new EncapsulationNode(TokenType.RW_PUBLIC);
+            this.encapsulation = new EncapsulationNode(TokenType.RW_PUBLIC,token);
             this.statemetBlock = statemetBlock;
             this.Modifier = null;
+            this.token = token;
         }
 
         public void setEncapsulation(EncapsulationNode encapsulation)

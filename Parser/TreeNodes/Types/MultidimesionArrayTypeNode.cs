@@ -6,11 +6,13 @@ namespace Compiler.TreeNodes.Types
     {
         [XmlAttribute(AttributeName = "dimensions")]
         public int dimensions;
+        public Token token;
 
         private MultidimensionArrayTypeNode(){}
-        public MultidimensionArrayTypeNode(int dimensions)
+        public MultidimensionArrayTypeNode(int dimensions,Token token)
         {
             this.dimensions = dimensions;
+            this.token = token;
         }
     }
 }

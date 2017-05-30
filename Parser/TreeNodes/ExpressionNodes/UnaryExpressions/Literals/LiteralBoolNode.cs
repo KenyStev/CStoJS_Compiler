@@ -7,7 +7,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
         public bool Value;
 
         private LiteralBoolNode(){}
-        public LiteralBoolNode(string IntValue)
+        public LiteralBoolNode(string IntValue,Token token) : base(token)
         {
             bool.TryParse(IntValue,out this.Value);
         }

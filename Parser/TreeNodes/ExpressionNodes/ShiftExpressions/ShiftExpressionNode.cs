@@ -2,14 +2,10 @@ namespace Compiler.TreeNodes.Expressions.ShiftExpressions
 {
     public class ShiftExpressionNode : BinaryOperatorNode
     {
-        public ExpressionNode leftExpression;
-        public ExpressionNode additiveExpression;
-
         public ShiftExpressionNode(){}
-        public ShiftExpressionNode(ExpressionNode leftExpression, ExpressionNode additiveExpression)
+        public ShiftExpressionNode(ExpressionNode leftExpression, 
+        ExpressionNode additiveExpression,Token token) : base(leftExpression,additiveExpression,token)
         {
-            this.leftExpression = leftExpression;
-            this.additiveExpression = additiveExpression;
         }
     }
 }

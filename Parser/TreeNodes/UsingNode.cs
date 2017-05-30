@@ -7,14 +7,13 @@ namespace Compiler.TreeNodes
     {
         [XmlElement(typeof(IdNode))]
         public IdNode Identifier;
+        public Token token;
 
-        private UsingNode()
-        {
-            Identifier = null;
-        }
-        public UsingNode(IdNode val)
+        private UsingNode(){}
+        public UsingNode(IdNode val,Token usingToken)
         {
             this.Identifier = val;
+            this.token = usingToken;
         }
     }
 }

@@ -14,16 +14,14 @@ namespace Compiler.TreeNodes
 
         [XmlElement(typeof(IdNode))]
         public IdNode paramName;
+        public Token token;
 
-        private ParameterNode()
-        {
-            this.DataType = null;
-            paramName = null;
-        }
-        public ParameterNode(TypeNode type, IdNode paramName)
+        private ParameterNode(){}
+        public ParameterNode(TypeNode type, IdNode paramName,Token token)
         {
             this.DataType = type;
             this.paramName = paramName;
+            this.token = token;
         }
     }
 }

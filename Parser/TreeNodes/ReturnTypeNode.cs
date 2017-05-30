@@ -14,16 +14,14 @@ namespace Compiler.TreeNodes
 
         [XmlElement(typeof(bool))]
         public bool IsVoid;
+        public Token token;
 
-        private ReturnTypeNode()
-        {
-            DataType = null;
-            IsVoid = false;
-        }
-        public ReturnTypeNode(TypeNode typeNode, bool isVoid)
+        private ReturnTypeNode(){}
+        public ReturnTypeNode(TypeNode typeNode, bool isVoid,Token token)
         {
             this.DataType = typeNode;
             this.IsVoid = isVoid;
+            this.token = token;
         }
     }
 }

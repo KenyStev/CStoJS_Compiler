@@ -7,7 +7,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
         public char Value;
 
         private LiteralCharNode(){}
-        public LiteralCharNode(string IntValue)
+        public LiteralCharNode(string IntValue,Token token) : base(token)
         {
             char.TryParse(IntValue,out this.Value);
         }

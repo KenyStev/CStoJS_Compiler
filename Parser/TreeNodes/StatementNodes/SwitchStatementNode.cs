@@ -8,7 +8,7 @@ namespace Compiler.TreeNodes.Statements
         public SwitchBodyNode switchBodyNode;
 
         private SwitchStatementNode(){}
-        public SwitchStatementNode(ExpressionNode exp, SwitchBodyNode switchBodyNode)
+        public SwitchStatementNode(ExpressionNode exp, SwitchBodyNode switchBodyNode,Token token) : base(token)
         {
             this.expression = exp;
             this.switchBodyNode = switchBodyNode;

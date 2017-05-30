@@ -13,16 +13,14 @@ namespace Compiler.TreeNodes
         [XmlElement(typeof(ExpressionNode)),
         XmlElement(typeof(LiteralIntNode))]
         public ExpressionNode value;
+        public Token token;
 
-        private EnumNode()
-        {
-            Name = null;
-            value = null;
-        }
-        public EnumNode(IdNode name, ExpressionNode value)
+        private EnumNode(){}
+        public EnumNode(IdNode name, ExpressionNode value,Token token)
         {
             this.Name = name;
             this.value = value;
+            this.token = token;
         }
     }
 }

@@ -8,13 +8,11 @@ namespace Compiler.TreeNodes.Types
         [XmlElement(typeof(IdNode))]
         public IdNode Identifier;
 
-        private AbstractTypeNode()
-        {
-            Identifier = null;
-        }
-        public AbstractTypeNode(IdNode typeName)
+        private AbstractTypeNode(){}
+        public AbstractTypeNode(IdNode typeName,Token token)
         {
             this.Identifier = typeName;
+            this.token = token;
         }
     }
 }

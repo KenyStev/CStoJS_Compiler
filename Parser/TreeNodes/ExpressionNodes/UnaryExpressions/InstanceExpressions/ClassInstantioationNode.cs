@@ -10,7 +10,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
 
         public ClassInstantioationNode(){}
 
-        public ClassInstantioationNode(TypeNode type, List<ArgumentNode> arguments)
+        public ClassInstantioationNode(TypeNode type, List<ArgumentNode> arguments,Token token) : base(token)
         {
             this.type = type;
             this.arguments = arguments;

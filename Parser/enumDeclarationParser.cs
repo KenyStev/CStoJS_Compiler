@@ -22,7 +22,7 @@ namespace Compiler
             consumeToken();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var idNode = new IdNode(token.lexeme);
+            var idNode = new IdNode(token.lexeme,token);
             consumeToken();
             var enumDef = enum_body(idNode);
             optional_body_end();
@@ -41,7 +41,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
-            return new EnumTypeNode(idnode,enumerableList);
+            return new EnumTypeNode(idnode,enumerableList,idnode.token);
         }
 
         /*optional-assignable-identifiers-list:
@@ -52,7 +52,7 @@ namespace Compiler
             printIfDebug("optional_assignable_identifiers_list");
             if(pass(TokenType.ID))
             {
-                var idListed = new IdNode(token.lexeme);
+                var idListed = new IdNode(token.lexeme,token);
                 consumeToken();
                 return assignment_options(idListed,counter);
             }else{
@@ -67,20 +67,21 @@ namespace Compiler
         private List<EnumNode> assignment_options(IdNode currentId,int counter)
         {
             printIfDebug("assignment_options");
+            var enumToken = token;
             if(pass(TokenType.PUNT_COMMA))
             {
-                var newEntryEnum = new EnumNode(currentId,new LiteralIntNode(counter));
+                var newEntryEnum = new EnumNode(currentId,new LiteralIntNode(counter,enumToken),currentId.token);
                 return optional_assignable_identifiers_list_p(newEntryEnum,counter+1);
             }else if(pass(TokenType.OP_ASSIGN))
             {
                 consumeToken();
                 var exp = expression();
-                var assignExpr = new EnumNode(currentId,exp);
+                var assignExpr = new EnumNode(currentId,exp,currentId.token);
                 // var nextVal = new SumNode(exp,new LiteralIntNode(1)); //TODO: evaluate and send as parameter
                 return optional_assignable_identifiers_list_p(assignExpr,counter+1);
             }else{
                 var newListEnumerables = new List<EnumNode>();
-                var newEntryEnum = new EnumNode(currentId,new LiteralIntNode(counter));
+                var newEntryEnum = new EnumNode(currentId,new LiteralIntNode(counter,enumToken),currentId.token);
                 newListEnumerables.Add(newEntryEnum);
                 return newListEnumerables;
             }

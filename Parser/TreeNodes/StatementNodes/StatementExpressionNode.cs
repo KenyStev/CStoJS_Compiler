@@ -7,7 +7,7 @@ namespace Compiler.TreeNodes.Statements
         public ExpressionNode expressionNode;
 
         public StatementExpressionNode(){}
-        public StatementExpressionNode(ExpressionNode expressionNode)
+        public StatementExpressionNode(ExpressionNode expressionNode,Token token) : base(token)
         {
             this.expressionNode = expressionNode;
         }

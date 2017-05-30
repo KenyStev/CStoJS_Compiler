@@ -9,7 +9,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public CastingExpressionNode(){}
 
-        public CastingExpressionNode(TypeNode targetCastType, PrimaryExpressionNode exp)
+        public CastingExpressionNode(TypeNode targetCastType, PrimaryExpressionNode exp,Token token) : base(token)
         {
             this.targetCastType = targetCastType;
             this.exp = exp;

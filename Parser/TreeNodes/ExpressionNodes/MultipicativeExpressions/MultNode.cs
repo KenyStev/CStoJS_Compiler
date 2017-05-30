@@ -6,7 +6,8 @@ namespace Compiler.TreeNodes.Expressions.MultipicativeExpressions
     {
 
         MultNode(){}
-        public MultNode(ExpressionNode leftExpression, UnaryExpressionNode unaryExpression) : base(leftExpression,unaryExpression)
+        public MultNode(ExpressionNode leftExpression, 
+        UnaryExpressionNode unaryExpression,Token token) : base(leftExpression,unaryExpression,token)
         {
             
         }

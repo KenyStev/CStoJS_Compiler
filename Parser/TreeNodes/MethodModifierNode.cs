@@ -4,16 +4,12 @@ namespace Compiler.TreeNodes
 {
     public class MethodModifierNode
     {
-        [XmlAttribute(AttributeName = "type")]
-        public TokenType type;
+        public Token token;
 
-        private MethodModifierNode()
+        private MethodModifierNode(){}
+        public MethodModifierNode(Token optionalModifierToken)
         {
-            type = TokenType.EOF;
-        }
-        public MethodModifierNode(TokenType type)
-        {
-            this.type = type;
+            this.token = optionalModifierToken;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
         public float Value;
 
         private LiteralFloatNode(){}
-        public LiteralFloatNode(string IntValue)
+        public LiteralFloatNode(string IntValue,Token token) : base(token)
         {
             float.TryParse(IntValue,out this.Value);
         }

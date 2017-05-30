@@ -7,6 +7,7 @@ namespace Compiler
         public int row;
         public string lexeme;
         
+        public Token(){}
         public Token(TokenType type, string lexeme, int row, int column)
         {
             this.type = type;

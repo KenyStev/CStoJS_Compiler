@@ -8,7 +8,7 @@ namespace Compiler.TreeNodes.Statements
         public EmbeddedStatementNode body;
 
         private DoWhileStatementNode(){}
-        public DoWhileStatementNode(ExpressionNode exp, EmbeddedStatementNode body)
+        public DoWhileStatementNode(ExpressionNode exp, EmbeddedStatementNode body,Token token) : base(token)
         {
             this.expression = exp;
             this.body = body;

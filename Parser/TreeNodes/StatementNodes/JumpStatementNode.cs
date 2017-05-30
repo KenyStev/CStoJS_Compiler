@@ -8,7 +8,7 @@ namespace Compiler.TreeNodes.Statements
         public ExpressionNode expression;
 
         private JumpStatementNode(){}
-        public JumpStatementNode(TokenType type, ExpressionNode exp)
+        public JumpStatementNode(TokenType type, ExpressionNode exp,Token token) : base(token)
         {
             this.type = type;
             this.expression = exp;

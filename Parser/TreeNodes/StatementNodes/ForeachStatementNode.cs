@@ -12,7 +12,8 @@ namespace Compiler.TreeNodes.Statements
         public EmbeddedStatementNode body;
 
         private ForeachStatementNode(){}
-        public ForeachStatementNode(TypeNode type, IdNode identifier, ExpressionNode exp, EmbeddedStatementNode body)
+        public ForeachStatementNode(TypeNode type, IdNode identifier, ExpressionNode exp, 
+        EmbeddedStatementNode body,Token token) : base(token)
         {
             this.type = type;
             this.identifier = identifier;

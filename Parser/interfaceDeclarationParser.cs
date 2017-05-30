@@ -19,7 +19,7 @@ namespace Compiler
             consumeToken();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var interfaceID = new IdNode(token.lexeme);
+            var interfaceID = new IdNode(token.lexeme,token);
             consumeToken();
             var inheritanceses = inheritance_base();
             var newInterfaceType = interface_body(interfaceID);
@@ -40,7 +40,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
-            return new InterfaceTypeNode(name,methodDeclarationList);
+            return new InterfaceTypeNode(name,methodDeclarationList,name.token);
         }
 
         /*interface-method-declaration-list:
@@ -71,13 +71,14 @@ namespace Compiler
             if(!pass(typesOptions,voidOption))
                 throwError("type-or-void expected");
             var typeNode = type_or_void();
-            var returnType = new ReturnTypeNode(typeNode,typeNode is VoidTypeNode);
+            var returnType = new ReturnTypeNode(typeNode,typeNode is VoidTypeNode,typeNode.token);
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var name = new IdNode(token.lexeme);
+            var name = new IdNode(token.lexeme,token);
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
+            var methodHeaderToken = token;
             consumeToken();
             List<ParameterNode> fixedParams = null;
             if(pass(typesOptions))
@@ -85,7 +86,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
-            return new MethodHeaderNode(returnType,name,fixedParams);
+            return new MethodHeaderNode(returnType,name,fixedParams,methodHeaderToken);
         }
 
         /*fixed-parameters:
@@ -133,9 +134,9 @@ namespace Compiler
             var type = types();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var paramName = new IdNode(token.lexeme);
+            var paramName = new IdNode(token.lexeme,token);
             consumeToken();
-            return new ParameterNode(type,paramName);
+            return new ParameterNode(type,paramName,type.token);
         }
     }
 }

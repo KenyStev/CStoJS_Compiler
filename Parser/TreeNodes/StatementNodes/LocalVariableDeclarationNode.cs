@@ -9,12 +9,9 @@ namespace Compiler.TreeNodes.Statements
         XmlArrayItem("Variable")]
         public List<FieldNode> localVariables;
 
-        private LocalVariableDeclarationNode()
-        {
-            localVariables = null;
-        }
+        private LocalVariableDeclarationNode(){}
 
-        public LocalVariableDeclarationNode(List<FieldNode> localVariables)
+        public LocalVariableDeclarationNode(List<FieldNode> localVariables,Token token) : base(token)
         {
             this.localVariables = localVariables;
         }

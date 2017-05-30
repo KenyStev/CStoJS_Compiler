@@ -7,21 +7,21 @@ namespace Compiler.TreeNodes.Statements
     {
         public LocalVariableDeclarationNode localVariables;
         public List<StatementExpressionNode> statementExpresions;
+        public Token token;
 
-        public ForInitializerNode(){
-            this.localVariables = null;
-            this.statementExpresions = null;
-        }
-        public ForInitializerNode(LocalVariableDeclarationNode localVariables)
+        public ForInitializerNode(){}
+        public ForInitializerNode(LocalVariableDeclarationNode localVariables,Token token)
         {
             this.localVariables = localVariables;
             this.statementExpresions = null;
+            this.token = token;
         }
 
-        public ForInitializerNode(List<StatementExpressionNode> stmtsExpList)
+        public ForInitializerNode(List<StatementExpressionNode> stmtsExpList,Token token)
         {
             this.localVariables = null;
             this.statementExpresions = stmtsExpList;
+            this.token = token;
         }
     }
 }

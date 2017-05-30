@@ -9,11 +9,8 @@ namespace Compiler.TreeNodes.Expressions
         XmlArrayItem("VariableInitializer")]
         public List<VariableInitializerNode> arrayInitializers;
 
-        private ArrayInitializerNode()
-        {
-            arrayInitializers = null;
-        }
-        public ArrayInitializerNode(List<VariableInitializerNode> arrayInitializers)
+        private ArrayInitializerNode(){}
+        public ArrayInitializerNode(List<VariableInitializerNode> arrayInitializers,Token token) : base(token)
         {
             this.arrayInitializers = arrayInitializers;
         }

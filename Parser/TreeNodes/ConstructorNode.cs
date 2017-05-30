@@ -23,22 +23,18 @@ namespace Compiler.TreeNodes
         
         [XmlElement(typeof(StatementBlockNode))]
         public StatementBlockNode statementBlock;
+        public Token token;
 
-        private ConstructorNode()
-        {
-            this.identifier = null;
-            this.parameters = null;
-            this.initializer = null;
-            this.statementBlock = null;
-            this.encapsulation = null;
-        }
-        public ConstructorNode(IdNode identifier, List<ParameterNode> parameters, ConstructorInitializerNode initializer, StatementBlockNode statementBlock)
+        private ConstructorNode(){}
+        public ConstructorNode(IdNode identifier, List<ParameterNode> parameters, 
+        ConstructorInitializerNode initializer, StatementBlockNode statementBlock,Token token)
         {
             this.identifier = identifier;
             this.parameters = parameters;
             this.initializer = initializer;
             this.statementBlock = statementBlock;
             this.encapsulation = null;
+            this.token = token;
         }
 
         public void setEncapsulation(EncapsulationNode encapsulation)

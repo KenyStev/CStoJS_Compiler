@@ -6,7 +6,8 @@ namespace Compiler.TreeNodes.Expressions
         public ExpressionNode equalityExpression;
 
          BitwiseAndExpressionNode(){}
-        public BitwiseAndExpressionNode(ExpressionNode leftExpression, ExpressionNode equalityExpression)
+        public BitwiseAndExpressionNode(ExpressionNode leftExpression, ExpressionNode equalityExpression,
+        Token token) : base(token)
         {
             this.leftExpression = leftExpression;
             this.equalityExpression = equalityExpression;

@@ -5,7 +5,8 @@ namespace Compiler.TreeNodes.Expressions.MultipicativeExpressions
     public class MultipicativeExpressionNode : BinaryOperatorNode
     {
         public MultipicativeExpressionNode(){}
-        public MultipicativeExpressionNode(ExpressionNode leftExpression, UnaryExpressionNode unaryExpression) : base(leftExpression,unaryExpression)
+        public MultipicativeExpressionNode(ExpressionNode leftExpression, 
+        UnaryExpressionNode unaryExpression,Token token) : base(leftExpression,unaryExpression,token)
         {
         }
     }

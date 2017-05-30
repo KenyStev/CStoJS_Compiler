@@ -7,7 +7,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
         public string Value;
 
         private LiteralStringNode(){}
-        public LiteralStringNode(string IntValue)
+        public LiteralStringNode(string IntValue,Token token) : base(token)
         {
             Value = IntValue;
         }

@@ -112,7 +112,7 @@ namespace Main
                 typeof(ClassInstantioationNode),typeof(ArrayInstantiationNode),typeof(ReferenceAccsessNode),
                 typeof(TernaryExpressionNode),typeof(BitwiseAndExpressionNode),typeof(BitwiseOrExpressionNode),
                 typeof(ConditionalAndExpressionNode),typeof(ConditionalOrExpressionNode),typeof(ExclusiveOrExpression),
-                typeof(NullCoalescingExpressionNode)};
+                typeof(NullCoalescingExpressionNode),typeof(Token)};
         }
     }
 }

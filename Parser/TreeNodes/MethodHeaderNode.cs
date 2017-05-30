@@ -16,18 +16,15 @@ namespace Compiler.TreeNodes
         [XmlArray("Parameters"),
         XmlArrayItem("Param")]
         public List<ParameterNode> fixedParams;
+        public Token token;
 
-        private MethodHeaderNode()
-        {
-            returnType = null;
-            Identifier = null;
-            fixedParams = null;
-        }
-        public MethodHeaderNode(ReturnTypeNode returnType, IdNode name, List<ParameterNode> fixedParams)
+        private MethodHeaderNode(){}
+        public MethodHeaderNode(ReturnTypeNode returnType, IdNode name, List<ParameterNode> fixedParams,Token token)
         {
             this.returnType = returnType;
             this.Identifier = name;
             this.fixedParams = fixedParams;
+            this.token = token;
         }
     }
 }

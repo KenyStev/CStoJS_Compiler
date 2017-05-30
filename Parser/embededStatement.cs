@@ -61,12 +61,13 @@ namespace Compiler
             
             if(pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
             {
+                var blockToken = token;
                 consumeToken();
                 var statements = optional_statement_list();
                 if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                     throwError("'}' expected");
                 consumeToken();
-                return new StatementBlockNode(statements);
+                return new StatementBlockNode(statements,blockToken);
             }else if(pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
             {
                 consumeToken();
@@ -88,7 +89,7 @@ namespace Compiler
             ExpressionNode exp=null;
             if(old.type==TokenType.RW_RETURN)
                 exp = optional_expression();
-            return new JumpStatementNode(old.type,exp);
+            return new JumpStatementNode(old.type,exp,old);
         }
 
         /*optional-expression: 
@@ -139,6 +140,7 @@ namespace Compiler
             printIfDebug("while_statement");
             if(!pass(TokenType.RW_WHILE))
                 throwError("'while' reserved word expected");
+            var whileToken = token;
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
@@ -148,7 +150,7 @@ namespace Compiler
                 throwError("')' expected");
             consumeToken();
             var body = embedded_statement();
-            return new WhileStatementNode(exp,body);
+            return new WhileStatementNode(exp,body,whileToken);
         }
 
         /*do-statement: 
@@ -158,6 +160,7 @@ namespace Compiler
             printIfDebug("do_statement");
             if(!pass(TokenType.RW_DO))
                 throwError("'do' reserved word expected");
+            var doToken = token;
             consumeToken();
             var body = embedded_statement();
             if(!pass(TokenType.RW_WHILE))
@@ -173,7 +176,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();
-            return new DoWhileStatementNode(exp,body);
+            return new DoWhileStatementNode(exp,body,doToken);
         }
 
         /*for-statement:
@@ -183,6 +186,7 @@ namespace Compiler
             printIfDebug("for_statement");
             if(!pass(TokenType.RW_FOR))
                 throwError("'for' reserved word expected");
+            var forToken = token;
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
@@ -203,7 +207,7 @@ namespace Compiler
                 throwError("')' expected");
             consumeToken();
             var stmts = embedded_statement();
-            return new ForStatementNode(forInitializer,exp,postIncrementStmts,stmts);
+            return new ForStatementNode(forInitializer,exp,postIncrementStmts,stmts,forToken);
         }
 
         /*optional-for-initializer:
@@ -213,7 +217,7 @@ namespace Compiler
         private ForInitializerNode optional_for_initializer()
         {
             printIfDebug("optional_for_initializer");
-
+            var forInitialation = token;
             while (pass(typesOptions,varOption))
             {
                 addLookAhead(lexer.GetNextToken());
@@ -245,11 +249,11 @@ namespace Compiler
                 )
             {
                 var localVariables = local_variable_declaration();
-                return new ForInitializerNode(localVariables);
+                return new ForInitializerNode(localVariables,forInitialation);
             }else if(pass(unaryExpressionOptions,unaryOperatorOptions,literalOptions))
             {
                 var stmtsExpList = statement_expression_list();
-                var initialization = new ForInitializerNode(stmtsExpList);
+                var initialization = new ForInitializerNode(stmtsExpList,forInitialation);
                 return initialization;
             }else{
                 return null;
@@ -302,6 +306,7 @@ namespace Compiler
             printIfDebug("foreach_statement");
             if(!pass(TokenType.RW_FOREACH))
                 throwError("'foreach' reserved word expected");
+            var foreachToken = token;
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
@@ -311,7 +316,7 @@ namespace Compiler
             var type = type_or_var();
             if(!pass(TokenType.ID))
                 throwError("identifier  expected");
-            var identifier = new IdNode(token.lexeme);
+            var identifier = new IdNode(token.lexeme,token);
             consumeToken();
             if(!pass(TokenType.RW_IN))
                 throwError("'in' reserved word expected");
@@ -321,7 +326,7 @@ namespace Compiler
                 throwError("')' expected");
             consumeToken();
             var body = embedded_statement();
-            return new ForeachStatementNode(type, identifier, exp, body);
+            return new ForeachStatementNode(type, identifier, exp, body,foreachToken);
         }
 
         /*selection-statement:
@@ -349,6 +354,7 @@ namespace Compiler
             printIfDebug("if_statement");
             if(!pass(TokenType.RW_IF))
                 throwError("'if' reserved word expected");
+            var ifToken = token;
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
@@ -359,7 +365,7 @@ namespace Compiler
             consumeToken();
             var stmts = embedded_statement();
             var elseBock = optional_else_part();
-            return new IfStatementNode(exp,stmts,elseBock);
+            return new IfStatementNode(exp,stmts,elseBock,ifToken);
         }
 
         /*optional-else-part:
@@ -381,9 +387,10 @@ namespace Compiler
         {
             if(!pass(TokenType.RW_ELSE))
                 throwError("'else' reserved word expected");
+            var elseToken = token;
             consumeToken();
             var stmts = embedded_statement();
-            return new ElseStatementNode(stmts);
+            return new ElseStatementNode(stmts,elseToken);
         }
 
         /*switch-statement:
@@ -393,6 +400,7 @@ namespace Compiler
             printIfDebug("switch_statement");
             if(!pass(TokenType.RW_SWITCH))
                 throwError("'switch' reserved word expected");
+            var switchToken = token;
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
@@ -404,11 +412,12 @@ namespace Compiler
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
+            var switchSectionsToken = token;
             var switchSections = optional_switch_section_list();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
-            return new SwitchStatementNode(exp,new SwitchBodyNode(switchSections));
+            return new SwitchStatementNode(exp,new SwitchBodyNode(switchSections,switchSectionsToken),switchToken);
         }
 
         /*optional-switch-section-list:
@@ -419,9 +428,10 @@ namespace Compiler
             printIfDebug("optional_switch_section_list");
             if(pass(switchLabelOptions))
             {
+                var switchLabelToken = token;
                 var switchLabels = switch_label_list();
                 var stmts = optional_statement_list();
-                var switchSection = new SwitchSectionNode(switchLabels,stmts);
+                var switchSection = new SwitchSectionNode(switchLabels,stmts,switchLabelToken);
                 var swicthSections = optional_switch_section_list();
                 swicthSections.Insert(0,switchSection);
                 return swicthSections;
@@ -463,6 +473,7 @@ namespace Compiler
         {
             printIfDebug("switch_label");
             var caseType = token.type;
+            var caseToken = token;
             ExpressionNode exp = null;
             if(pass(TokenType.RW_CASE))
             {
@@ -477,7 +488,7 @@ namespace Compiler
             if(!pass(TokenType.PUNT_COLON))
                 throwError("':' expected");
             consumeToken();
-            return new CaseNode(caseType,exp);
+            return new CaseNode(caseType,exp,caseToken);
         }
 
         /*statement-expression:
@@ -485,8 +496,9 @@ namespace Compiler
         private StatementExpressionNode statement_expression()
         {
             printIfDebug("statement_expression");
+            var stmtToken = token;
             var unary = unary_expression();
-            return new StatementExpressionNode(statement_expression_factorized(unary));
+            return new StatementExpressionNode(statement_expression_factorized(unary),stmtToken);
         }
 
         /*statement-expression-factorized:
@@ -501,7 +513,7 @@ namespace Compiler
                 consumeToken();
                 var exp = expression();
                 // return statement_expression_p(new AssignExpressionNode(leftValue,assignmentOperator.type,exp));
-                return new AssignExpressionNode(leftValue,assignmentOperator.type,exp);
+                return new AssignExpressionNode(leftValue,assignmentOperator.type,exp,assignmentOperator);
             }
             else
             {

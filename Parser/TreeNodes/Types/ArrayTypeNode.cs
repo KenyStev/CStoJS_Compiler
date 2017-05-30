@@ -15,15 +15,12 @@ namespace Compiler.TreeNodes.Types
         XmlArrayItem("MultiDimArray")]
         public List<MultidimensionArrayTypeNode> multidimsArrays;
 
-        private ArrayTypeNode()
-        {
-            this.DataType = null;
-            multidimsArrays = null;
-        }
-        public ArrayTypeNode(TypeNode type, List<MultidimensionArrayTypeNode> multidimsArrays)
+        private ArrayTypeNode(){}
+        public ArrayTypeNode(TypeNode type, List<MultidimensionArrayTypeNode> multidimsArrays,Token token)
         {
             this.DataType = type;
             this.multidimsArrays = multidimsArrays;
+            this.token = token;
         }
     }
 }

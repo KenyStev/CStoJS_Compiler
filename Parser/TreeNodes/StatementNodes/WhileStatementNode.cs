@@ -8,7 +8,7 @@ namespace Compiler.TreeNodes.Statements
         public EmbeddedStatementNode body;
 
         private WhileStatementNode(){}
-        public WhileStatementNode(ExpressionNode exp, EmbeddedStatementNode body)
+        public WhileStatementNode(ExpressionNode exp, EmbeddedStatementNode body,Token token) : base(token)
         {
             this.expression = exp;
             this.body = body;

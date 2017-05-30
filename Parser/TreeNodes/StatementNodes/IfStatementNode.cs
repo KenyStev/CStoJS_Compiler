@@ -9,7 +9,8 @@ namespace Compiler.TreeNodes.Statements
         public ElseStatementNode elseBock;
 
         private IfStatementNode(){} 
-        public IfStatementNode(ExpressionNode exp, EmbeddedStatementNode stmts, ElseStatementNode elseBock)
+        public IfStatementNode(ExpressionNode exp, EmbeddedStatementNode stmts, 
+        ElseStatementNode elseBock,Token token) : base(token)
         {
             this.expression = exp;
             this.statements = stmts;

@@ -6,7 +6,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public GroupedExpressionNode(){}
 
-        public GroupedExpressionNode(ExpressionNode exp)
+        public GroupedExpressionNode(ExpressionNode exp,Token token) : base(token)
         {
             this.expression = exp;
         }

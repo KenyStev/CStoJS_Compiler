@@ -8,10 +8,11 @@ namespace Compiler.TreeNodes.Expressions.TypeTestingExpressions
         public TypeNode type;
 
         public TypeTestingExpressionNode(){}
-        public TypeTestingExpressionNode(ExpressionNode leftExpression, TypeNode type)
+        public TypeTestingExpressionNode(ExpressionNode leftExpression, TypeNode type,Token token)
         {
             this.leftExpression = leftExpression;
             this.type = type;
+            this.token = token;
         }
     }
 }

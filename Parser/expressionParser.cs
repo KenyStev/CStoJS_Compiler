@@ -40,13 +40,14 @@ namespace Compiler
             printIfDebug("conditional_expression_p");
             if(pass(TokenType.OP_TERNARY))
             {
+                var ternaryToken = token;
                 consumeToken();
                 var trueExpression = expression();
                 if(!pass(TokenType.PUNT_COLON))
                     throwError(": expected");
                 consumeToken();
                 var falseExpression = expression();
-                return new TernaryExpressionNode(conditionalExpression,trueExpression,falseExpression);
+                return new TernaryExpressionNode(conditionalExpression,trueExpression,falseExpression,ternaryToken);
             }else{
                 return conditionalExpression;
             }
@@ -69,9 +70,10 @@ namespace Compiler
             printIfDebug("null_coalescing_expression_p");
             if(pass(TokenType.OP_NULL_COALESCING))
             {
+                var nullCoToken = token;
                 consumeToken();
                 var rightExpression = null_coalescing_expression();
-                return new NullCoalescingExpressionNode(nullableExpression,rightExpression);
+                return new NullCoalescingExpressionNode(nullableExpression,rightExpression,nullCoToken);
             }else{
                 return nullableExpression;
             }
@@ -94,9 +96,10 @@ namespace Compiler
             printIfDebug("conditional_or_expression_p");
             if(pass(TokenType.OP_OR))
             {
+                var orToken = token;
                 consumeToken();
                 var AndExpression = conditional_and_expression();
-                return conditional_or_expression_p(new ConditionalOrExpressionNode(OrExpression,AndExpression));
+                return conditional_or_expression_p(new ConditionalOrExpressionNode(OrExpression,AndExpression,orToken));
             }else{
                 return OrExpression;
             }
@@ -119,9 +122,10 @@ namespace Compiler
             printIfDebug("conditional_and_expression_p");
             if(pass(TokenType.OP_AND))
             {
+                var andToken = token;
                 consumeToken();
                 var bitsOt = inclusive_or_expression();
-                return conditional_and_expression_p(new ConditionalAndExpressionNode(leftExpression,bitsOt));
+                return conditional_and_expression_p(new ConditionalAndExpressionNode(leftExpression,bitsOt,andToken));
             }else{
                 return leftExpression;
             }
@@ -144,9 +148,10 @@ namespace Compiler
             printIfDebug("inclusive_or_expression_p");
             if(pass(TokenType.OP_BITWISE_OR))
             {
+                var orToken = token;
                 consumeToken();
                 var exclusiveOrExpression = exclusive_or_expression();
-                return inclusive_or_expression_p(new BitwiseOrExpressionNode(leftExpression,exclusiveOrExpression));
+                return inclusive_or_expression_p(new BitwiseOrExpressionNode(leftExpression,exclusiveOrExpression,orToken));
             }else{
                 return leftExpression;
             }
@@ -169,9 +174,10 @@ namespace Compiler
             printIfDebug("exclusive_or_expression_p");
             if(pass(TokenType.OP_XOR))
             {
+                var xorToken = token;
                 consumeToken();
                 var bitsAnd = and_expression();
-                return exclusive_or_expression_p(new ExclusiveOrExpression(leftExpression,bitsAnd));
+                return exclusive_or_expression_p(new ExclusiveOrExpression(leftExpression,bitsAnd,xorToken));
             }else{
                 return leftExpression;
             }
@@ -194,9 +200,10 @@ namespace Compiler
             printIfDebug("and_expression_p");
             if(pass(TokenType.OP_BITWISE_AND))
             {
+                var andToken = token;
                 consumeToken();
                 var equalityExpression = equality_expression();
-                return and_expression_p(new BitwiseAndExpressionNode(leftExpression,equalityExpression));
+                return and_expression_p(new BitwiseAndExpressionNode(leftExpression,equalityExpression,andToken));
             }else{
                 return leftExpression;
             }
@@ -224,9 +231,9 @@ namespace Compiler
                 var relationalExpression = relational_expression();
                 ExpressionNode resultExpression = null;
                 if(equalityOperation.type==TokenType.OP_EQUAL)
-                    resultExpression = new EqualExpressionNode(leftExpression,relationalExpression);
+                    resultExpression = new EqualExpressionNode(leftExpression,relationalExpression,equalityOperation);
                 else
-                    resultExpression = new DistinctExpressionNode(leftExpression,relationalExpression);
+                    resultExpression = new DistinctExpressionNode(leftExpression,relationalExpression,equalityOperation);
 
                 return equality_expression_p(resultExpression);
             }else{
@@ -257,13 +264,13 @@ namespace Compiler
                 var shiftExpression = shift_expression();
                 ExpressionNode resultExpression = null;
                 if(relationalOperator.type == TokenType.OP_LESS_THAN)
-                    resultExpression = new LessThanExpressionNode(leftExpression,shiftExpression);
+                    resultExpression = new LessThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
                 else if(relationalOperator.type == TokenType.OP_MORE_THAN)
-                    resultExpression = new GreaterThanExpressionNode(leftExpression,shiftExpression);
+                    resultExpression = new GreaterThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
                 else if(relationalOperator.type == TokenType.OP_LESS_AND_EQUAL_THAN)
-                    resultExpression = new LessOrEqualThanExpressionNode(leftExpression,shiftExpression);
+                    resultExpression = new LessOrEqualThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
                 else
-                    resultExpression = new GreaterOrEqualThanExpressionNode(leftExpression,shiftExpression);
+                    resultExpression = new GreaterOrEqualThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
                 return relational_expression_p(resultExpression);
             }else if(pass(Is_AsOperatorOptions))
             {
@@ -274,9 +281,9 @@ namespace Compiler
                 var type = types();
                 TypeTestingExpressionNode resultExpression = null;
                 if(typeTestOperator.type==TokenType.OP_IS)
-                    resultExpression = new IsTypeTestNode(leftExpression,type);
+                    resultExpression = new IsTypeTestNode(leftExpression,type,typeTestOperator);
                 else
-                    resultExpression = new AsTypeTestNode(leftExpression,type);
+                    resultExpression = new AsTypeTestNode(leftExpression,type,typeTestOperator);
                 return relational_expression_p(resultExpression);
             }else{
                 return leftExpression;
@@ -305,9 +312,9 @@ namespace Compiler
                 var additiveExpression = additive_expression();
                 ExpressionNode resultExpression = null;
                 if(shiftOperator.type==TokenType.OP_SHIFT_LEFT)
-                    resultExpression = new ShiftLeftNode(leftExpression,additiveExpression);
+                    resultExpression = new ShiftLeftNode(leftExpression,additiveExpression,shiftOperator);
                 else
-                    resultExpression = new ShiftRightNode(leftExpression,additiveExpression);
+                    resultExpression = new ShiftRightNode(leftExpression,additiveExpression,shiftOperator);
                 return shift_expression_p(resultExpression);
             }else{
                 return leftExpression;
@@ -336,9 +343,9 @@ namespace Compiler
                 var multExpression = multiplicative_expression();
                 ExpressionNode resultExpression = null;
                 if(additiveOperatior.type==TokenType.OP_SUM)
-                    resultExpression = new SumExpressionNode(leftExpression,multExpression);
+                    resultExpression = new SumExpressionNode(leftExpression,multExpression,additiveOperatior);
                 else
-                    resultExpression = new SubExpressionNode(leftExpression,multExpression);
+                    resultExpression = new SubExpressionNode(leftExpression,multExpression,additiveOperatior);
 
                 return additive_expression_p(resultExpression);
             }else{
@@ -364,9 +371,10 @@ namespace Compiler
             if(pass(assignmentOperatorOptions))
             {
                 TokenType assignType = token.type;
+                var assignToken = token;
                 consumeToken();
                 var assignExpression = expression();
-                return multiplicative_expression_p(new AssignExpressionNode(unaryExpression,assignType,assignExpression));
+                return multiplicative_expression_p(new AssignExpressionNode(unaryExpression,assignType,assignExpression,assignToken));
             }else{
                 return multiplicative_expression_p(unaryExpression);
             }
@@ -385,11 +393,11 @@ namespace Compiler
                 var unaryExpression = unary_expression();
                 ExpressionNode resultExpression = null;
                 if(multiplicativeOperator.type==TokenType.OP_MULTIPLICATION)
-                    resultExpression = new MultNode(leftExpression,unaryExpression);
+                    resultExpression = new MultNode(leftExpression,unaryExpression,multiplicativeOperator);
                 else if(multiplicativeOperator.type==TokenType.OP_DIVISION)
-                    resultExpression = new DivNode(leftExpression,unaryExpression);
+                    resultExpression = new DivNode(leftExpression,unaryExpression,multiplicativeOperator);
                 else
-                    resultExpression = new ModNode(leftExpression,unaryExpression);
+                    resultExpression = new ModNode(leftExpression,unaryExpression,multiplicativeOperator);
                 return multiplicative_expression_p(resultExpression);
             }
             return leftExpression;

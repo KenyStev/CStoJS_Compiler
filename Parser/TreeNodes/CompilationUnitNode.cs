@@ -19,16 +19,11 @@ namespace Compiler.TreeNodes
         XmlArrayItem("Namespace")]
         public List<NamespaceNode> namespaceDeclared;
 
-        private CompilationUnitNode()
-        {
-            this.usingDirectives = null;
-            this.defaultNamespace = new NamespaceNode(new IdNode("default"));
-            this.namespaceDeclared = new List<NamespaceNode>();
-        }
+        private CompilationUnitNode(){}
         public CompilationUnitNode(List<UsingNode> usingList)
         {
             this.usingDirectives = usingList;
-            this.defaultNamespace = new NamespaceNode(new IdNode("default"));
+            this.defaultNamespace = new NamespaceNode(new IdNode("default",null),null);
             this.namespaceDeclared = new List<NamespaceNode>();
         }
 

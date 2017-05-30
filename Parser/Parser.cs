@@ -145,9 +145,10 @@ namespace Compiler
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
             var id = token.lexeme;
+            var idToken = token;
             consumeToken();
             var attr = identifier_attribute();
-            return new IdNode(id,attr);
+            return new IdNode(id,attr,idToken);
         }
 
         /*identifier-attribute:
@@ -162,9 +163,10 @@ namespace Compiler
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
                 var idValue = token.lexeme;
+                var idToken = token;
                 consumeToken();
                 var listIdNod = identifier_attribute();
-                listIdNod.Insert(0,new IdNode(idValue));
+                listIdNod.Insert(0,new IdNode(idValue,idToken));
                 return listIdNod;
             }else{
                 return new List<IdNode>();
@@ -206,19 +208,21 @@ namespace Compiler
             printIfDebug("types");
             if(pass(typesOptions) && !pass(TokenType.ID))
             {
+                var typeToken = token;
                 var primitiveType = built_in_type();
                 var newMultArrayTypeList = optional_rank_specifier_list();
                 if(newMultArrayTypeList.Count>0)
-                    return new ArrayTypeNode(primitiveType,newMultArrayTypeList);
+                    return new ArrayTypeNode(primitiveType,newMultArrayTypeList,typeToken);
                 else
                     return primitiveType;
             }else if(pass(TokenType.ID))
             {
+                var typeToken = token;
                 var typeName = qualified_identifier();
-                var abstractType = new AbstractTypeNode(typeName);
+                var abstractType = new AbstractTypeNode(typeName,typeToken);
                 var newMultArrayTypeList = optional_rank_specifier_list();
                 if(newMultArrayTypeList.Count>0)
-                    return new ArrayTypeNode(abstractType,newMultArrayTypeList);
+                    return new ArrayTypeNode(abstractType,newMultArrayTypeList,typeToken);
                 else
                     return abstractType;
             }else{
@@ -238,7 +242,7 @@ namespace Compiler
             printIfDebug("built_in_type");
             if(!pass(typesOptions))
                 throwError("primary type expected");
-            var type = token.type;
+            var type = token;
             consumeToken();
             return new PrimitiveTypeNode(type);
         }
@@ -251,8 +255,9 @@ namespace Compiler
             printIfDebug("type_or_void");
             if(pass(TokenType.RW_VOID))
             {
+                var voidToken = token;
                 consumeToken();
-                return new VoidTypeNode();
+                return new VoidTypeNode(voidToken);
             }
             return types();
         }
@@ -265,8 +270,9 @@ namespace Compiler
             printIfDebug("type_or_var");
             if(pass(TokenType.RW_VAR))
             {
+                var varToken = token;
                 consumeToken();
-                return new VarTypeNode();
+                return new VarTypeNode(varToken);
             }
             return types();
         }

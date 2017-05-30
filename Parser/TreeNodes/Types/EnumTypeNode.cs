@@ -13,15 +13,12 @@ namespace Compiler.TreeNodes.Types
         [XmlArray("Items"),
         XmlArrayItem("EnumItem")]
         public List<EnumNode> EnumItems;
-        private EnumTypeNode()
-        {
-            EnumItems = null;
-            Identifier = null;
-        }
-        public EnumTypeNode(IdNode idnode, List<EnumNode> enumerableList)
+        private EnumTypeNode(){}
+        public EnumTypeNode(IdNode idnode, List<EnumNode> enumerableList,Token token)
         {
             this.Identifier = idnode;
             this.EnumItems = enumerableList;
+            this.token = token;
         }
     }
 }

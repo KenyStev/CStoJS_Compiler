@@ -13,21 +13,19 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
         XmlArrayItem("Identifier", Type = typeof(IdNode))]
         public List<IdNode> attributes;
 
-        private IdNode()
-        {
-            Name = null;
-            attributes = null;
-        }
-        public IdNode(string idValue)
+        private IdNode(){}
+        public IdNode(string idValue,Token token)
         {
             this.Name = idValue;
             this.attributes = new List<IdNode>();
+            this.token = token;
         }
 
-        public IdNode(string id, List<IdNode> attr)
+        public IdNode(string id, List<IdNode> attr,Token token)
         {
             this.Name = id;
             this.attributes = attr;
+            this.token = token;
         }
     }
 }

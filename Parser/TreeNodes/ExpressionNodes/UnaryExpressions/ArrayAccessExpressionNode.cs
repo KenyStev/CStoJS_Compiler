@@ -9,7 +9,8 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public ArrayAccessExpressionNode(){}
 
-        public ArrayAccessExpressionNode(PrimaryExpressionNode identifier, List<List<ExpressionNode>> arrayAccessList)
+        public ArrayAccessExpressionNode(PrimaryExpressionNode identifier, 
+        List<List<ExpressionNode>> arrayAccessList,Token token) : base(token)
         {
             this.identifier = identifier;
             this.arrayAccessList = arrayAccessList;

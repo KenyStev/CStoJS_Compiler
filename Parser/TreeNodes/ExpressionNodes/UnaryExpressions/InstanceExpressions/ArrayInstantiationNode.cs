@@ -12,7 +12,8 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
 
         public ArrayInstantiationNode(){}
 
-        public ArrayInstantiationNode(TypeNode type, List<ExpressionNode> primaryExpBrackets, ArrayTypeNode arrayType, ArrayInitializerNode initialization)
+        public ArrayInstantiationNode(TypeNode type, List<ExpressionNode> primaryExpBrackets, 
+        ArrayTypeNode arrayType, ArrayInitializerNode initialization,Token token) : base(token)
         {
             this.type = type;
             this.primaryExpBrackets = primaryExpBrackets;
@@ -20,7 +21,8 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
             this.initialization = initialization;
         }
 
-        public ArrayInstantiationNode(TypeNode type, ArrayTypeNode arrayType, ArrayInitializerNode arrayInitializer)
+        public ArrayInstantiationNode(TypeNode type, ArrayTypeNode arrayType, 
+        ArrayInitializerNode arrayInitializer,Token token) : base(token)
         {
             this.type = type;
             this.arrayType = arrayType;

@@ -15,12 +15,12 @@ namespace Compiler
             printIfDebug("encapsulation_modifier");
             if(pass(encapsulationOptions))
             {
-                var encapMod = new EncapsulationNode(token.type);
+                var encapMod = new EncapsulationNode(token.type,token);
                 consumeToken();
                 return encapMod;
             }else
             {
-                return new EncapsulationNode(TokenType.RW_PUBLIC);
+                return new EncapsulationNode(TokenType.RW_PUBLIC,token);
             }
         }
     }

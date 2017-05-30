@@ -95,7 +95,7 @@ namespace Compiler
                 throwError("type-or-var expected");
             var type = type_or_var();
             var localVariableList = variable_declarator_list(type,null,false);
-            return new LocalVariableDeclarationNode(localVariableList);
+            return new LocalVariableDeclarationNode(localVariableList,type.token);
         }
     }
 }

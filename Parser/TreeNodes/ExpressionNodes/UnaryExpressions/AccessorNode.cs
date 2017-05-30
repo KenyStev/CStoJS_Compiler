@@ -7,7 +7,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public AccessorNode(){}
 
-        public AccessorNode(PrimaryExpressionNode primary, IdNode identifier)
+        public AccessorNode(PrimaryExpressionNode primary, IdNode identifier,Token token) : base(token)
         {
             this.primary = primary;
             this.identifier = identifier;

@@ -29,20 +29,16 @@ namespace Compiler.TreeNodes.Types
         XmlArrayItem("Method")]
         public List<MethodNode> Methods;
 
-        private ClassTypeNode()
-        {
-            Identifier = null;
-            inheritanceses = null;
-            IsAbstract = false;
-        }
+        private ClassTypeNode(){}
 
-        public ClassTypeNode(IdNode identifier)
+        public ClassTypeNode(IdNode identifier,Token token)
         {
             this.Identifier = identifier;
             inheritanceses = null;
             Fields = new List<FieldNode>();
             Constructors = new List<ConstructorNode>();
             Methods = new List<MethodNode>();
+            this.token = token;
         }
 
         public void setInheritance(List<IdNode> inheritanceses)

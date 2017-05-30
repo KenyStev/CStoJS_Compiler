@@ -6,7 +6,7 @@ namespace Compiler.TreeNodes.Expressions
         public ExpressionNode bitsAnd;
 
         private ExclusiveOrExpression(){}
-        public ExclusiveOrExpression(ExpressionNode leftExpression, ExpressionNode bitsAnd)
+        public ExclusiveOrExpression(ExpressionNode leftExpression, ExpressionNode bitsAnd,Token token) : base(token)
         {
             this.leftExpression = leftExpression;
             this.bitsAnd = bitsAnd;

@@ -9,7 +9,8 @@ namespace Compiler.TreeNodes.Expressions
         public ExpressionNode assignExpression;
 
         public AssignExpressionNode(){}
-        public AssignExpressionNode(ExpressionNode unaryExpression, TokenType assignType, ExpressionNode assignExpression)
+        public AssignExpressionNode(ExpressionNode unaryExpression, TokenType assignType, 
+        ExpressionNode assignExpression,Token token) : base(token)
         {
             this.unaryExpression = unaryExpression;
             this.assignType = assignType;

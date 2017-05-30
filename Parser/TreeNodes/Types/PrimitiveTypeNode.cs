@@ -4,16 +4,10 @@ namespace Compiler.TreeNodes.Types
 {
     public class PrimitiveTypeNode : TypeNode
     {
-        [XmlAttribute(AttributeName = "type")]
-        public TokenType DataType;
-
-        private PrimitiveTypeNode()
+        private PrimitiveTypeNode(){}
+        public PrimitiveTypeNode(Token type)
         {
-            this.DataType = TokenType.EOF;
-        }
-        public PrimitiveTypeNode(TokenType type)
-        {
-            this.DataType = type;
+            this.token = type;
         }
     }
 }

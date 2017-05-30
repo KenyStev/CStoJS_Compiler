@@ -21,17 +21,14 @@ namespace Compiler.TreeNodes
         XmlElement(typeof(InterfaceTypeNode),ElementName = "Interface"),
         XmlElement(typeof(EnumTypeNode),ElementName = "Enum")]
         public List<TypeNode> typesDeclarations;
+        public Token token;
 
-        private NamespaceNode()
-        {
-            Identifier = null;
-            usingDirectives = null;
-            typesDeclarations = null;
-        }
-        public NamespaceNode(IdNode name)
+        private NamespaceNode(){}
+        public NamespaceNode(IdNode name,Token namespaceToken)
         {
             this.Identifier = name;
             this.typesDeclarations = new List<TypeNode>();
+            this.token = namespaceToken;
         }
 
         public void setUsings(List<UsingNode> namespaceDirectives)

@@ -3,7 +3,8 @@ namespace Compiler.TreeNodes.Expressions.AdditiveExpressions
     public class SumExpressionNode : AdditiveExpressionNode
     {
         SumExpressionNode(){}
-        public SumExpressionNode(ExpressionNode leftExpression, ExpressionNode multExpression) : base(leftExpression,multExpression)
+        public SumExpressionNode(ExpressionNode leftExpression, 
+        ExpressionNode multExpression,Token token) : base(leftExpression,multExpression,token)
         {
         }
     }

@@ -8,14 +8,13 @@ namespace Compiler.TreeNodes
         [XmlArray("Arguments"),
         XmlArrayItem("Argument")]
         public List<ArgumentNode> arguments;
+        public Token token;
 
-        private ConstructorInitializerNode()
-        {
-            arguments = null;
-        }
-        public ConstructorInitializerNode(List<ArgumentNode> arguments)
+        private ConstructorInitializerNode(){}
+        public ConstructorInitializerNode(List<ArgumentNode> arguments,Token token)
         {
             this.arguments = arguments;
+            this.token = token;
         }
     }
 }

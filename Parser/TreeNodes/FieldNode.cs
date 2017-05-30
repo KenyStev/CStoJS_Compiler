@@ -25,23 +25,19 @@ namespace Compiler.TreeNodes
         XmlElement(typeof(ArrayInitializerNode)),
         XmlElement(typeof(ExpressionNode))]
         public VariableInitializerNode assigner;
+        public Token token;
 
-        private FieldNode()
-        {
-            this.identifier = null;
-            this.type = null;
-            this.isStatic = false;
-            this.encapsulation = null;
-            this.assigner = null;
-        }
+        private FieldNode(){}
 
-        public FieldNode(IdNode identifier, TypeNode type, bool isStatic, EncapsulationNode encapsulation, VariableInitializerNode assigner)
+        public FieldNode(IdNode identifier, TypeNode type, bool isStatic, EncapsulationNode encapsulation, 
+        VariableInitializerNode assigner,Token token)
         {
             this.identifier = identifier;
             this.type = type;
             this.isStatic = isStatic;
             this.encapsulation = encapsulation;
             this.assigner = assigner;
+            this.token = token;
         }
     }
 }

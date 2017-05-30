@@ -14,13 +14,14 @@ namespace Compiler
             printIfDebug("using_directive");
             if(!pass(TokenType.RW_USING))
                 throwError("'using' expected");
+            var usingToken = token;
             consumeToken();
             var idValue = qualified_identifier();
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();
             var usingList = optional_using_directive();
-            usingList.Insert(0,new UsingNode(idValue));
+            usingList.Insert(0,new UsingNode(idValue,usingToken));
             return usingList;
         }
 
@@ -63,12 +64,13 @@ namespace Compiler
             printIfDebug("namespace_declaration");
             if(!pass(TokenType.RW_NAMESPACE))
                 throwError("'namespace' expected");
+            var namespaceToken = token;
             consumeToken();
             var idNamespace = qualified_identifier();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
 
-            var namespaceDeclaration = new NamespaceNode(idNamespace);
+            var namespaceDeclaration = new NamespaceNode(idNamespace,namespaceToken);
             namespace_body(ref compilation, ref namespaceDeclaration);
             return namespaceDeclaration;
         }

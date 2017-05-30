@@ -6,10 +6,12 @@ namespace Compiler.TreeNodes.Expressions
         public ExpressionNode rightOperand;
 
         public BinaryOperatorNode(){} 
-        public BinaryOperatorNode(ExpressionNode leftExpression, ExpressionNode relationalExpression)
+        public BinaryOperatorNode(ExpressionNode leftExpression, ExpressionNode relationalExpression,
+        Token token) : base(token)
         {
             this.leftOperand = leftExpression;
             this.rightOperand = relationalExpression;
+            this.token = token;
         }
     }
 }

@@ -9,7 +9,8 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public FunctionCallExpressionNode(){}
 
-        public FunctionCallExpressionNode(PrimaryExpressionNode identifier, List<ArgumentNode> arguments)
+        public FunctionCallExpressionNode(PrimaryExpressionNode identifier, 
+        List<ArgumentNode> arguments,Token token) : base(token)
         {
             this.identifier = identifier;
             this.arguments = arguments;

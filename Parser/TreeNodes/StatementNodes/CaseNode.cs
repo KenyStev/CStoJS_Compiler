@@ -6,12 +6,14 @@ namespace Compiler.TreeNodes.Statements
     {
         public TokenType caseType;
         public ExpressionNode expression;
+        public Token token;
 
         private CaseNode(){}
-        public CaseNode(TokenType caseType, ExpressionNode exp)
+        public CaseNode(TokenType caseType, ExpressionNode exp,Token token)
         {
             this.caseType = caseType;
             this.expression = exp;
+            this.token = token;
         }
     }
 }

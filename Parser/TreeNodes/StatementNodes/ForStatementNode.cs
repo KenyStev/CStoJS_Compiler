@@ -11,7 +11,8 @@ namespace Compiler.TreeNodes.Statements
         public EmbeddedStatementNode StatementBlock;
 
         private ForStatementNode(){}
-        public ForStatementNode(ForInitializerNode forInitializer, ExpressionNode exp, List<StatementExpressionNode> postIncrementStmts, EmbeddedStatementNode stmts)
+        public ForStatementNode(ForInitializerNode forInitializer, ExpressionNode exp, 
+        List<StatementExpressionNode> postIncrementStmts, EmbeddedStatementNode stmts,Token token) : base(token)
         {
             this.Initializer = forInitializer;
             this.expression = exp;

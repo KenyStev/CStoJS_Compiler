@@ -7,7 +7,8 @@ namespace Compiler.TreeNodes.Expressions
         public ExpressionNode falseExpression;
 
         private TernaryExpressionNode(){}
-        public TernaryExpressionNode(ExpressionNode conditionalExpression, ExpressionNode trueExpression, ExpressionNode falseExpression)
+        public TernaryExpressionNode(ExpressionNode conditionalExpression, ExpressionNode trueExpression, 
+        ExpressionNode falseExpression,Token token) : base(token)
         {
             this.conditionalExpression = conditionalExpression;
             this.trueExpression = trueExpression;

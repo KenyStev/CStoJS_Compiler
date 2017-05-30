@@ -9,15 +9,14 @@ namespace Compiler.TreeNodes
         [XmlElement(typeof(ExpressionNode)),
         XmlElement(typeof(LiteralIntNode))]
         public ExpressionNode expression;
+        public Token token;
 
-        private ArgumentNode()
-        {
-            expression = null;
-        }
+        private ArgumentNode(){}
 
-        public ArgumentNode(ExpressionNode exp)
+        public ArgumentNode(ExpressionNode exp,Token token)
         {
             this.expression = exp;
+            this.token = token;
         }
     }
 }

@@ -22,15 +22,16 @@ namespace Compiler
             }
             if(!pass(TokenType.RW_CLASS))
                 throwError("group-declaration 'class' expected");
+            var classTypeToken = token;
             consumeToken();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var Identifier = new IdNode(token.lexeme);
+            var Identifier = new IdNode(token.lexeme,token);
             consumeToken();
             var inheritanceses = inheritance_base();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
-            var newClassType = class_body(Identifier);
+            var newClassType = class_body(Identifier,classTypeToken);
             newClassType.setInheritance(inheritanceses);
             newClassType.setAbstract(isAbstract);
             optional_body_end();
@@ -39,13 +40,13 @@ namespace Compiler
 
         /*class-body:
 	        | '{' optional-class-member-declaration-list '}' */
-        private ClassTypeNode class_body(IdNode Identifier)
+        private ClassTypeNode class_body(IdNode Identifier,Token classTypeToken)
         {
             printIfDebug("class_body");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
-            var newClassType = new ClassTypeNode(Identifier);
+            var newClassType = new ClassTypeNode(Identifier,classTypeToken);
             optional_class_member_declaration_list(ref newClassType);
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
@@ -92,7 +93,7 @@ namespace Compiler
             if(pass(optionalModifiersOptions)) //Field or Method
             {
                 Token optionalModifierToken = token;
-                var methodModifier = new MethodModifierNode(optionalModifierToken.type);
+                var methodModifier = new MethodModifierNode(optionalModifierToken);
                 consumeToken();
                 if(!pass(typesOptions,voidOption))
                     throwError("type-or-void expected");
@@ -103,9 +104,10 @@ namespace Compiler
                 {
                     field_or_method_declaration(ref currentClassType,type,encapsulation,methodModifier);
                 }else{ //Method
-                    var Identifier = new IdNode(token.lexeme);
+                    var Identifier = new IdNode(token.lexeme,token);
+                    var identifierMethodToken = token;
                     consumeToken();
-                    var methodDeclared = method_declaration(Identifier,type);
+                    var methodDeclared = method_declaration(Identifier,type,identifierMethodToken);
                     methodDeclared.setModifier(methodModifier);
                     methodDeclared.setEncapsulation(encapsulation);
                     currentClassType.addMethod(methodDeclared);
@@ -122,7 +124,7 @@ namespace Compiler
                         field_or_method_declaration(ref currentClassType, type, encapsulation,null);
                     }else if(pass(TokenType.PUNT_PAREN_OPEN)) //Contructor
                     { 
-                        var Identifier = new IdNode(oldToken.lexeme);
+                        var Identifier = new IdNode(oldToken.lexeme,token);
                         var contructoreDeclaration = constructor_declaration(Identifier);
                         contructoreDeclaration.setEncapsulation(encapsulation);
                         currentClassType.addContructor(contructoreDeclaration);
@@ -145,6 +147,7 @@ namespace Compiler
             printIfDebug("constructor_declaration");
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
+            var constructorToken = token;
             consumeToken();
             var parameters = fixed_parameters();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
@@ -152,7 +155,7 @@ namespace Compiler
             consumeToken();
             var initializer = constructor_initializer();
             var stmtsBlock = maybe_empty_block();
-            return new ConstructorNode(identifier,parameters,initializer,stmtsBlock);
+            return new ConstructorNode(identifier,parameters,initializer,stmtsBlock,constructorToken);
         }
 
         private void field_or_method_declaration(ref ClassTypeNode currentClassType,TypeNode type,EncapsulationNode encapsulation,MethodModifierNode modifier)
@@ -160,33 +163,36 @@ namespace Compiler
             printIfDebug("field_or_method_declaration");
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var Identifier = new IdNode(token.lexeme);
+            var Identifier = new IdNode(token.lexeme,token);
+            var identifierMethodOrFielToken = token;
             consumeToken();
             if(pass(TokenType.PUNT_PAREN_OPEN))
             {
-                var newMethodDeclared = method_declaration(Identifier,type);
+                var newMethodDeclared = method_declaration(Identifier,type,identifierMethodOrFielToken);
                 newMethodDeclared.setEncapsulation(encapsulation);
                 if(modifier!=null)
                     newMethodDeclared.setModifier(modifier);
                 currentClassType.addMethod(newMethodDeclared);
             }else{
-                var isStatic = (modifier!=null)?modifier.type==TokenType.RW_STATIC:false;
+                var isStatic = (modifier!=null)?modifier.token.type==TokenType.RW_STATIC:false;
                 var fieldDeclarationList = field_declaration(type,Identifier,encapsulation,isStatic);
                 currentClassType.addFields(fieldDeclarationList);
             }
         }
 
-        private MethodNode method_declaration(IdNode Identifier, TypeNode type)
+        private MethodNode method_declaration(IdNode Identifier, TypeNode type,Token identifierMethodOrFielToken)
         {
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
+            var methodHeaderToken = token;
             consumeToken();
             var parameters = fixed_parameters();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
             var statements = maybe_empty_block();
-            return new MethodNode(new MethodHeaderNode(new ReturnTypeNode(type,type is VoidTypeNode),Identifier,parameters),statements);
+            return new MethodNode(new MethodHeaderNode(new ReturnTypeNode(type,type is VoidTypeNode,type.token),
+                                                        Identifier,parameters,methodHeaderToken),statements,identifierMethodOrFielToken);
         }
 
         /*field-declaration: 
@@ -195,7 +201,7 @@ namespace Compiler
         {
             printIfDebug("field_declaration");
             var assigner = variable_assigner();
-            var newField = new FieldNode(Identifier,type,isStatic,encapsulation,assigner);
+            var newField = new FieldNode(Identifier,type,isStatic,encapsulation,assigner,Identifier.token);
             var fields = variable_declarator_list_p(type,encapsulation,isStatic);
             fields.Insert(0,newField);
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
@@ -226,11 +232,11 @@ namespace Compiler
             printIfDebug("variable_declarator_list");
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
-            var identifier = new IdNode(token.lexeme);
+            var identifier = new IdNode(token.lexeme,token);
             consumeToken();
             var assigner = variable_assigner();
             var fields = variable_declarator_list_p(type,encapsulation,isStatic);
-            fields.Insert(0,new FieldNode(identifier,type,isStatic,encapsulation,assigner));
+            fields.Insert(0,new FieldNode(identifier,type,isStatic,encapsulation,assigner,identifier.token));
             return fields;
         }
 
@@ -274,12 +280,13 @@ namespace Compiler
             printIfDebug("array_initializer");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
+            var arrayInitializerToken = token;
             consumeToken();
             var arrayInitializers = optional_variable_initializer_list();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
-            return new ArrayInitializerNode(arrayInitializers);
+            return new ArrayInitializerNode(arrayInitializers,arrayInitializerToken);
         }
 
         /*optional-variable-initializer-list:
@@ -338,12 +345,13 @@ namespace Compiler
                 consumeToken();
                 if(!pass(TokenType.PUNT_PAREN_OPEN))
                     throwError("'(' expected");
+                var argumentsToken = token;
                 consumeToken();
                 var arguments = argument_list();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError("')' expected");
                 consumeToken();
-                return new ConstructorInitializerNode(arguments);
+                return new ConstructorInitializerNode(arguments,argumentsToken);
             }else{
                 return null;
             }
@@ -357,9 +365,10 @@ namespace Compiler
             printIfDebug("argument_list");
             if(pass(expressionOptions()))
             {
+                var expToken = token;
                 var exp = expression();
                 var argumentList = argument_list_p();
-                argumentList.Insert(0,new ArgumentNode(exp));
+                argumentList.Insert(0,new ArgumentNode(exp,expToken));
                 return argumentList;
             }else{
                 return new List<ArgumentNode>();
@@ -374,10 +383,11 @@ namespace Compiler
             printIfDebug("argument_list_p");
             if(pass(TokenType.PUNT_COMMA))
             {
+                var expToken = token;
                 consumeToken();
                 var exp = expression();
                 var argumentList = argument_list_p();
-                argumentList.Insert(0,new ArgumentNode(exp));
+                argumentList.Insert(0,new ArgumentNode(exp,expToken));
                 return argumentList;
             }else{
                 return new List<ArgumentNode>();

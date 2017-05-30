@@ -18,16 +18,12 @@ namespace Compiler.TreeNodes.Types
         XmlArrayItem("BaseItem")]
         public List<IdNode> inheritanceses;
 
-        private InterfaceTypeNode()
-        {
-            Identifier = null;
-            methodDeclarationList = null;
-            inheritanceses = null;
-        }
-        public InterfaceTypeNode(IdNode name, List<MethodHeaderNode> methodDeclarationList)
+        private InterfaceTypeNode(){}
+        public InterfaceTypeNode(IdNode name, List<MethodHeaderNode> methodDeclarationList,Token token)
         {
             this.Identifier = name;
             this.methodDeclarationList = methodDeclarationList;
+            this.token = token;
         }
 
         public void setInheritance(List<IdNode> inheritanceses)

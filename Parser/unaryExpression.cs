@@ -24,7 +24,7 @@ namespace Compiler
                 Token unaryOperator = token;
                 consumeToken();
                 var unaryExpression = unary_expression();
-                return new UnaryNode(unaryOperator.type,unaryExpression);
+                return new UnaryNode(unaryOperator.type,unaryExpression,unaryOperator);
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
                 addLookAhead(lexer.GetNextToken());
@@ -53,7 +53,7 @@ namespace Compiler
                         throwError("')' expected");
                     consumeToken();
                     var exp = primary_expression();
-                    return new CastingExpressionNode(targetCastType,exp);
+                    return new CastingExpressionNode(targetCastType,exp,targetCastType.token);
                 }
                 else
                 {
@@ -89,19 +89,19 @@ namespace Compiler
                 consumeToken();
                 PrimaryExpressionNode literal = null;
                 if(literalToken.type==TokenType.LIT_INT)
-                    literal = new LiteralIntNode(literalToken.lexeme);
+                    literal = new LiteralIntNode(literalToken.lexeme,literalToken);
                 else if(literalToken.type==TokenType.LIT_FLOAT)
-                    literal = new LiteralFloatNode(literalToken.lexeme);
+                    literal = new LiteralFloatNode(literalToken.lexeme,literalToken);
                 else if(literalToken.type==TokenType.LIT_BOOL)
-                    literal = new LiteralBoolNode(literalToken.lexeme);
+                    literal = new LiteralBoolNode(literalToken.lexeme,literalToken);
                 else if(literalToken.type==TokenType.LIT_CHAR)
-                    literal = new LiteralCharNode(literalToken.lexeme);
+                    literal = new LiteralCharNode(literalToken.lexeme,literalToken);
                 else if(literalToken.type==TokenType.LIT_STRING)
-                    literal = new LiteralStringNode(literalToken.lexeme);
+                    literal = new LiteralStringNode(literalToken.lexeme,literalToken);
                 return primary_expression_p(literal);
             }else if(pass(TokenType.ID))
             {
-                var identifier = new IdNode(token.lexeme);
+                var identifier = new IdNode(token.lexeme,token);
                 consumeToken();
                 return primary_expression_p(identifier);
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
@@ -111,7 +111,7 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
-                return primary_expression_p(new GroupedExpressionNode(exp));
+                return primary_expression_p(new GroupedExpressionNode(exp,exp.token));
             }else if(pass(TokenType.RW_THIS))
             {
                 consumeToken();
@@ -139,9 +139,9 @@ namespace Compiler
                 consumeToken();
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
-                var identifier = new IdNode(token.lexeme);
+                var identifier = new IdNode(token.lexeme,token);
                 consumeToken();
-                return primary_expression_p(new AccessorNode(primary,identifier));
+                return primary_expression_p(new AccessorNode(primary,identifier,identifier.token));
             }else if(pass(TokenType.PUNT_PAREN_OPEN,TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
                 var accessOrCall = optional_funct_or_array_call(primary);
@@ -150,7 +150,7 @@ namespace Compiler
             {
                 var operatorToken = token;
                 consumeToken();
-                return primary_expression_p(new PostAdditiveExpressionNode(primary,operatorToken.type));
+                return primary_expression_p(new PostAdditiveExpressionNode(primary,operatorToken.type,operatorToken));
             }else{
                 return primary;
             }
@@ -163,6 +163,7 @@ namespace Compiler
         private PrimaryExpressionNode optional_funct_or_array_call(PrimaryExpressionNode identifier)
         {
             printIfDebug("optional_funct_or_array_call");
+            var accessOrCallToken = token;
             if(pass(TokenType.PUNT_PAREN_OPEN))
             {
                 consumeToken();
@@ -170,11 +171,11 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
-                return new FunctionCallExpressionNode(identifier,arguments);
+                return new FunctionCallExpressionNode(identifier,arguments,accessOrCallToken);
             }else if(pass(TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
                 var arrayAccessList = optional_array_access_list();
-                return new ArrayAccessExpressionNode(identifier,arrayAccessList);
+                return new ArrayAccessExpressionNode(identifier,arrayAccessList,accessOrCallToken);
             }else{
                 return identifier;
             }
@@ -235,27 +236,29 @@ namespace Compiler
             if(!pass(typesOptions))
                 throwError("type expected");
             TypeNode type = null;
+            var identifierToken = token;
             if(pass(TokenType.ID))
             {
                 var identifier = qualified_identifier();
-                type = new AbstractTypeNode(identifier);
+                type = new AbstractTypeNode(identifier,identifierToken);
             }else{
-                type = new PrimitiveTypeNode(token.type);
+                type = new PrimitiveTypeNode(token);
                 consumeToken();
             }
-            return instance_expression_factorized(type);
+            return instance_expression_factorized(type,identifierToken);
         }
 
         /*instance-expression-factorized:
             | '[' instance-expression-factorized-p 
             | '(' argument-list ')' */
-        private InstanceExpressionNode instance_expression_factorized(TypeNode type)
+        private InstanceExpressionNode instance_expression_factorized(TypeNode type,Token identifierToken)
         {
             printIfDebug("instance_expression_factorized");
             if (pass(TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
+                var instanceToken = token;
                 consumeToken();
-                return instance_expression_factorized_p(type);
+                return instance_expression_factorized_p(type,identifierToken,instanceToken);
             }else if (pass(TokenType.PUNT_PAREN_OPEN))
             {
                 consumeToken();
@@ -264,7 +267,7 @@ namespace Compiler
                 if (!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError("')' expected");
                 consumeToken();
-                return new ClassInstantioationNode(type,arguments);
+                return new ClassInstantioationNode(type,arguments,identifierToken);
             }
             else
             {
@@ -276,7 +279,7 @@ namespace Compiler
         /*instance-expression-factorized-p:
             | expression-list ']' optional-rank-specifier-list optional-array-initializer
             | rank-specifier-list optional-array-initializer */
-        private ArrayInstantiationNode instance_expression_factorized_p(TypeNode type)
+        private ArrayInstantiationNode instance_expression_factorized_p(TypeNode type,Token identifierToken,Token instanceToken)
         {
             printIfDebug("instance_expression_factorized_p");
             if(pass(expressionOptions()))
@@ -286,16 +289,17 @@ namespace Compiler
                     throwError("']' expected");
                 consumeToken();
 
+                var initializationToken = token;
                 var rankList = optional_rank_specifier_list();
-                var arrayType = new ArrayTypeNode(type,rankList);
+                var arrayType = new ArrayTypeNode(type,rankList,identifierToken);
                 var initialization = optional_array_initializer();
-                return new ArrayInstantiationNode(type,primaryExpBrackets,arrayType,initialization);
+                return new ArrayInstantiationNode(type,primaryExpBrackets,arrayType,initialization,instanceToken);
             }else if (pass(TokenType.PUNT_COMMA,TokenType.PUNT_SQUARE_BRACKET_CLOSE))
             {
                 var rankList = rank_specifier_list();
                 var arrayInitializer = array_initializer();
-                var arrayType = new ArrayTypeNode(type,rankList);
-                return new ArrayInstantiationNode(type,arrayType,arrayInitializer);
+                var arrayType = new ArrayTypeNode(type,rankList,identifierToken);
+                return new ArrayInstantiationNode(type,arrayType,arrayInitializer,instanceToken);
             }
             else
             {
@@ -320,11 +324,12 @@ namespace Compiler
         private MultidimensionArrayTypeNode rank_specifier()
         {
             printIfDebug("rank_specifier");
+            var rankToken = token;
             var dimensions = optional_comma_list();
             if(!pass(TokenType.PUNT_SQUARE_BRACKET_CLOSE))
                 throwError("] expected");
             consumeToken();
-            return new MultidimensionArrayTypeNode(dimensions);
+            return new MultidimensionArrayTypeNode(dimensions,rankToken);
         }
 
         /*optional-comma-list:
