@@ -27,23 +27,23 @@ namespace Compiler
                 return new UnaryNode(unaryOperator.type,unaryExpression,unaryOperator);
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
-                if(look_ahead.Count==0)addLookAhead(lexer.GetNextToken());
-                int first = 0;//look_ahead.Count() - 1;
-                Token placehold = look_ahead[look_ahead.Count() - 1];
+                //if(look_ahead.Count==0)addLookAhead(lexer.GetNextToken());
+                int counter = 0;
+                Token placehold = getNextLookAhead(counter);//look_ahead[look_ahead.Count() - 1];
+                int first = look_ahead.IndexOf(placehold);//look_ahead.Count() - 1;
                 bool accept = false;
-                int counter = 1;
                 while (typesOptions.Contains(placehold.type) || placehold.type == TokenType.PUNT_ACCESOR
                     || placehold.type == TokenType.PUNT_SQUARE_BRACKET_OPEN || placehold.type == TokenType.PUNT_SQUARE_BRACKET_CLOSE
                     || placehold.type == TokenType.OP_LESS_THAN || placehold.type == TokenType.OP_MORE_THAN
                     || placehold.type == TokenType.PUNT_COMMA)
                 {
-                    if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
-                    placehold = look_ahead[look_ahead.Count() - 1];
-                    accept = true;
+                    //if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
                     counter++;
+                    placehold = getNextLookAhead(counter); //look_ahead[look_ahead.Count() - 1];
+                    accept = true;
                 }
-                if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
-                Token after_close = look_ahead[look_ahead.Count() - 1];
+                //if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
+                Token after_close = getNextLookAhead(++counter);//look_ahead[look_ahead.Count() - 1];
                 if (typesOptions.Contains(look_ahead[first].type) && accept && 
                     (placehold.type == TokenType.PUNT_PAREN_CLOSE)
                     && after_close.type != TokenType.OP_PLUS_PLUS

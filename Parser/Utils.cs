@@ -163,5 +163,17 @@ namespace Compiler
         {
             look_ahead.Add(token);
         }
+
+        public Token getNextLookAhead(int count)
+        {
+            if (look_ahead.Count==0)
+            {
+                addLookAhead(lexer.GetNextToken());
+                count = 0;
+            }else if(count >= look_ahead.Count){
+                addLookAhead(lexer.GetNextToken());
+            }
+            return look_ahead[count];
+        }
     }
 }
