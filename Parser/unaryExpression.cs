@@ -27,22 +27,29 @@ namespace Compiler
                 return new UnaryNode(unaryOperator.type,unaryExpression,unaryOperator);
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
-                addLookAhead(lexer.GetNextToken());
-                int first = look_ahead.Count() - 1;
+                if(look_ahead.Count==0)addLookAhead(lexer.GetNextToken());
+                int first = 0;//look_ahead.Count() - 1;
                 Token placehold = look_ahead[look_ahead.Count() - 1];
                 bool accept = false;
+                int counter = 1;
                 while (typesOptions.Contains(placehold.type) || placehold.type == TokenType.PUNT_ACCESOR
                     || placehold.type == TokenType.PUNT_SQUARE_BRACKET_OPEN || placehold.type == TokenType.PUNT_SQUARE_BRACKET_CLOSE
                     || placehold.type == TokenType.OP_LESS_THAN || placehold.type == TokenType.OP_MORE_THAN
                     || placehold.type == TokenType.PUNT_COMMA)
                 {
-                    addLookAhead(lexer.GetNextToken());
+                    if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
                     placehold = look_ahead[look_ahead.Count() - 1];
                     accept = true;
+                    counter++;
                 }
-                
+                if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
+                Token after_close = look_ahead[look_ahead.Count() - 1];
                 if (typesOptions.Contains(look_ahead[first].type) && accept && 
-                    (placehold.type == TokenType.PUNT_PAREN_CLOSE))
+                    (placehold.type == TokenType.PUNT_PAREN_CLOSE)
+                    && after_close.type != TokenType.OP_PLUS_PLUS
+                    && after_close.type != TokenType.OP_MINUS_MINUS
+                    && after_close.type != TokenType.PUNT_ACCESOR
+                    )
                 {
                     consumeToken();
                     if (!pass(typesOptions))
@@ -83,6 +90,14 @@ namespace Compiler
                 if(((ArrayAccessExpressionNode)inline_p.primary).identifier == null)
                 {
                     ((ArrayAccessExpressionNode)inline_p.primary).identifier = inline.primary as IdNode;
+                    inline.primary = inline_p.primary;
+                    inline.nextExpression = null;
+                }
+            }else if (inline_p.primary is PostAdditiveExpressionNode)
+            {
+                if(((PostAdditiveExpressionNode)inline_p.primary).primary == null)
+                {
+                    ((PostAdditiveExpressionNode)inline_p.primary).primary = inline.primary as PrimaryExpressionNode;
                     inline.primary = inline_p.primary;
                     inline.nextExpression = null;
                 }
@@ -209,8 +224,17 @@ namespace Compiler
                 consumeToken();
                 var postOp = new PostAdditiveExpressionNode(operatorToken.type,operatorToken);
                 var inline_p = new InlineExpressionNode(postOp,operatorToken);
-                primary_expression_p(ref inline_p);
-                inline.nextExpression = inline_p;
+                if(inline_p.primary is PostAdditiveExpressionNode)
+                {
+                    is_function_or_array(ref inline, ref inline_p);
+                    primary_expression_p(ref inline);
+                }else{
+                    primary_expression_p(ref inline_p);
+                    inline.nextExpression = inline_p;
+                }
+                
+                
+                // inline.nextExpression = inline_p;
             }else{
                 // return null;
             }
