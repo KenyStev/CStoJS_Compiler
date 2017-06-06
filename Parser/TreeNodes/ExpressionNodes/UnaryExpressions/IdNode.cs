@@ -8,7 +8,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
     {
         [XmlElement(typeof(string))]
         public string Name;
-
+        
         [XmlArray("Attributes"),
         XmlArrayItem("Identifier", Type = typeof(IdNode))]
         public List<IdNode> attributes;

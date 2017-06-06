@@ -7,9 +7,9 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public PostAdditiveExpressionNode(){}
 
-        public PostAdditiveExpressionNode(PrimaryExpressionNode primary, TokenType type,Token token) : base(token)
+        public PostAdditiveExpressionNode(TokenType type,Token token) : base(token)
         {
-            this.primary = primary;
+            this.primary = null;
             this.type = type;
         }
     }

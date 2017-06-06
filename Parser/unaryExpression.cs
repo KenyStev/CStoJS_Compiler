@@ -68,6 +68,27 @@ namespace Compiler
             return null;
         }
 
+        private void is_function_or_array(ref InlineExpressionNode inline, ref InlineExpressionNode inline_p)
+        {
+            if (inline_p.primary is FunctionCallExpressionNode)
+            {
+                if(((FunctionCallExpressionNode)inline_p.primary).identifier == null)
+                {
+                    ((FunctionCallExpressionNode)inline_p.primary).identifier = inline.primary as IdNode;
+                    inline.primary = inline_p.primary;
+                    inline.nextExpression = null;
+                }
+            }else if (inline_p.primary is ArrayAccessExpressionNode)
+            {
+                if(((ArrayAccessExpressionNode)inline_p.primary).identifier == null)
+                {
+                    ((ArrayAccessExpressionNode)inline_p.primary).identifier = inline.primary as IdNode;
+                    inline.primary = inline_p.primary;
+                    inline.nextExpression = null;
+                }
+            }
+        }
+
         /*primary-expression:
             | "new" instance-expression primary-expression-p
             | literal primary-expression-p
@@ -75,14 +96,17 @@ namespace Compiler
             | '(' expression ')' primary-expression-p
             | "this" primary-expression-p
             | "base" primary-expression-p */
-        private PrimaryExpressionNode primary_expression()
+        private InlineExpressionNode primary_expression()
         {
             printIfDebug("primary_expression");
             if(pass(TokenType.RW_NEW))
             {
+                var NewToken = token;
                 consumeToken();
                 var instance = instance_expression();
-                return primary_expression_p(instance);
+                var inline = new InlineExpressionNode(instance,NewToken);
+                primary_expression_p(ref inline);
+                return inline;
             }else if(pass(literalOptions))
             {
                 var literalToken = token;
@@ -98,28 +122,44 @@ namespace Compiler
                     literal = new LiteralCharNode(literalToken.lexeme,literalToken);
                 else if(literalToken.type==TokenType.LIT_STRING)
                     literal = new LiteralStringNode(literalToken.lexeme,literalToken);
-                return primary_expression_p(literal);
+                var inline = new InlineExpressionNode(literal,literalToken);
+                primary_expression_p(ref inline);
+                return inline;
             }else if(pass(TokenType.ID))
             {
                 var identifier = new IdNode(token.lexeme,token);
                 consumeToken();
-                return primary_expression_p(identifier);
+                var inline = new InlineExpressionNode(identifier,identifier.token);
+                primary_expression_p(ref inline);
+                return inline;
             }else if(pass(TokenType.PUNT_PAREN_OPEN))
             {
+                var parentizedToken = token;
                 consumeToken();
                 var exp = expression();
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
-                return primary_expression_p(new GroupedExpressionNode(exp,exp.token));
+                var groupedExp = new GroupedExpressionNode(exp,exp.token);
+                var inline = new InlineExpressionNode(groupedExp,parentizedToken);
+                primary_expression_p(ref inline);
+                return inline;
             }else if(pass(TokenType.RW_THIS))
             {
+                var thisToken = token;
                 consumeToken();
-                return primary_expression_p(new ThisReferenceAccsessNode());
+                var thisExp = new ThisReferenceAccsessNode(thisToken);
+                var inline = new InlineExpressionNode(thisExp,thisToken);
+                primary_expression_p(ref inline);
+                return inline;
             }else if(pass(TokenType.RW_BASE))
             {
+                var baseToken = token;
                 consumeToken();
-                return primary_expression_p(new BaseReferenceAccessNode());
+                var baseExp = new BaseReferenceAccessNode(baseToken);
+                var inline = new InlineExpressionNode(baseExp,baseToken);
+                primary_expression_p(ref inline);
+                return inline;
             }else{
                 throwError("new, literal, identifier, '(' or \"this\" expected");
             }
@@ -131,7 +171,7 @@ namespace Compiler
             | optional-funct-or-array-call primary-expression-p
             | increment-decrement primary-expression-p 
             | EPSILON  */
-        private PrimaryExpressionNode primary_expression_p(PrimaryExpressionNode primary)
+        private void primary_expression_p(ref InlineExpressionNode inline)
         {
             printIfDebug("primary_expression_p");
             if(pass(TokenType.PUNT_ACCESOR))
@@ -141,18 +181,38 @@ namespace Compiler
                     throwError("identifier expected");
                 var identifier = new IdNode(token.lexeme,token);
                 consumeToken();
-                return primary_expression_p(new AccessorNode(primary,identifier,identifier.token));
+                // var nextExpression = new AccessorNode(identifier,identifier.token);
+                var inline_p = new InlineExpressionNode(identifier,identifier.token);
+                if(inline_p.primary is FunctionCallExpressionNode || inline_p.primary is ArrayAccessExpressionNode)
+                {
+                    is_function_or_array(ref inline, ref inline_p);
+                    primary_expression_p(ref inline);
+                }else{
+                    primary_expression_p(ref inline_p);
+                    inline.nextExpression = inline_p;
+                }
             }else if(pass(TokenType.PUNT_PAREN_OPEN,TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
-                var accessOrCall = optional_funct_or_array_call(primary);
-                return primary_expression_p(accessOrCall);
+                var accessOrCall = optional_funct_or_array_call();
+                var inline_p = new InlineExpressionNode(accessOrCall,accessOrCall.token);
+                if(accessOrCall is FunctionCallExpressionNode || accessOrCall is ArrayAccessExpressionNode)
+                {
+                    is_function_or_array(ref inline, ref inline_p);
+                    primary_expression_p(ref inline);
+                }else{
+                    primary_expression_p(ref inline_p);
+                    inline.nextExpression = inline_p;
+                }
             }else if(pass(TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS))
             {
                 var operatorToken = token;
                 consumeToken();
-                return primary_expression_p(new PostAdditiveExpressionNode(primary,operatorToken.type,operatorToken));
+                var postOp = new PostAdditiveExpressionNode(operatorToken.type,operatorToken);
+                var inline_p = new InlineExpressionNode(postOp,operatorToken);
+                primary_expression_p(ref inline_p);
+                inline.nextExpression = inline_p;
             }else{
-                return primary;
+                // return null;
             }
         }
 
@@ -160,7 +220,7 @@ namespace Compiler
             | '(' argument-list ')'
             | optional-array-access-list
             | EPSILON */
-        private PrimaryExpressionNode optional_funct_or_array_call(PrimaryExpressionNode identifier)
+        private PrimaryExpressionNode optional_funct_or_array_call()
         {
             printIfDebug("optional_funct_or_array_call");
             var accessOrCallToken = token;
@@ -171,13 +231,13 @@ namespace Compiler
                 if(!pass(TokenType.PUNT_PAREN_CLOSE))
                     throwError(") expected");
                 consumeToken();
-                return new FunctionCallExpressionNode(identifier,arguments,accessOrCallToken);
+                return new FunctionCallExpressionNode(arguments,accessOrCallToken);
             }else if(pass(TokenType.PUNT_SQUARE_BRACKET_OPEN))
             {
                 var arrayAccessList = optional_array_access_list();
-                return new ArrayAccessExpressionNode(identifier,arrayAccessList,accessOrCallToken);
+                return new ArrayAccessExpressionNode(arrayAccessList,accessOrCallToken);
             }else{
-                return identifier;
+                return null;
             }
         }
 
