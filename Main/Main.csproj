@@ -2,6 +2,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Lexer\Lexer.csproj" />
     <ProjectReference Include="..\Parser\Parser.csproj" />
+    <ProjectReference Include="..\Semantic\Semantic.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />

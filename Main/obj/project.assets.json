@@ -2320,6 +2320,20 @@
         "runtime": {
           "bin/placeholder/netcoreapp1.1/Parser.dll": {}
         }
+      },
+      "Semantic/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v1.1",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.1",
+          "Parser": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/netcoreapp1.1/Semantic.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/netcoreapp1.1/Semantic.dll": {}
+        }
       }
     }
   },
@@ -7202,6 +7216,11 @@
       "type": "project",
       "path": "../Parser/Parser.csproj",
       "msbuildProject": "../Parser/Parser.csproj"
+    },
+    "Semantic/1.0.0": {
+      "type": "project",
+      "path": "../Semantic/Semantic.csproj",
+      "msbuildProject": "../Semantic/Semantic.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -7209,6 +7228,7 @@
       "Lexer >= 1.0.0",
       "Microsoft.NETCore.App >= 1.1.1",
       "Parser >= 1.0.0",
+      "Semantic >= 1.0.0",
       "System.Xml.XmlSerializer >= 4.3.0"
     ]
   },
@@ -7218,25 +7238,28 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\Main.csproj",
+      "projectUniqueName": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\Main.csproj",
       "projectName": "Main",
-      "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\Main.csproj",
-      "outputPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\obj\\",
+      "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\Main.csproj",
+      "outputPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Main.dll": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\bin\\placeholder\\netcoreapp1.1\\Main.dll"
+        "lib/netcoreapp1.1/Main.dll": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Main\\bin\\placeholder\\netcoreapp1.1\\Main.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj": {
-              "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj"
+            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj": {
+              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj"
             },
-            "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj": {
-              "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj"
+            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj": {
+              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj"
+            },
+            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj": {
+              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj"
             }
           }
         }

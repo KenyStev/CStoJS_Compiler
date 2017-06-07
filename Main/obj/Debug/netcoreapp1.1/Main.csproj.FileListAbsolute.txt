@@ -10,3 +10,5 @@ C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\obj\Debug\netcorea
 C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.pdb
 C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Parser.dll
 C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Parser.pdb
+c:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Semantic.dll
+c:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Semantic.pdb

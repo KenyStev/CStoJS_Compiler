@@ -26,58 +26,73 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            /*{var inputString = new InputFile(@"..\Lexer.Tests\TokenTypeTests.cs");
-                var inputString = new InputFile(@"..\Parser\unaryExpression.cs");
-                var inputString = new InputString(@"
-                class MyClass
-                {
-                    MyClass(Nombre val)
-                    {
-
-                    }
-
-                    public me()
-                    {
-
-                    }
-                }
-                ");}
-            */
-            var dir = @"..\Parser.Tests\testFiles\generationTree\";
-            var TestingFile = @"compiiisseada";
-            // var inputString = new InputFile(@"..\Parser.Tests\testFiles\compiiiss1.txt");
-            // var inputString = new InputFile(@"..\Parser.Tests\testFiles\generationTree\using_namespace_enum.txt");
-            var inputString = new InputFile(dir+TestingFile+".txt");
-            var tokenGenerators = Resources.getTokenGenerators();
-
-            var lexer = new Lexer(inputString, tokenGenerators);
-            var parser = new Parser(lexer);
-            try{
-                var code = parser.parse();
-
-                // Insert code to set properties and fields of the object.  
-                XmlSerializer mySerializer = new XmlSerializer(typeof(CompilationUnitNode),types());
-                // To write to a file, create a StreamWriter object.  
-                StreamWriter myWriter = new StreamWriter(File.Create(dir+@"XMLs\"+TestingFile+".xml"));
-                mySerializer.Serialize(myWriter, code);  
-                // myWriter.Close();
-                
-                System.Console.Out.WriteLine("Success!");
-            }catch(SyntaxTokenExpectedException ex){
-                System.Console.Out.WriteLine(ex.Message);
-            }
-
-            /*
-            //TRY LEXER
-            Token token = lexer.GetNextToken();
-
-            while (token.type != TokenType.EOF)
+            string[] argumentos = { @"C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Semantic.Tests\testFiles\"};
+            string path = "./";
+            if (argumentos.Length > 0)
             {
-                System.Console.Out.WriteLine(token);
-                token = lexer.GetNextToken();
+                path = argumentos[0];
+            }
+            path = Path.GetDirectoryName(path);
+            List<string> paths = new List<string>();
+            if (Directory.Exists(path))
+            {
+                ProcessDirectory(ref paths, path);
             }
 
-            System.Console.Out.WriteLine(token);*/
+            try{
+                var semantic = new Semantic(paths);
+                var trees = semantic.evaluate();
+                System.Console.Out.WriteLine("Success!");
+            }catch(Exception ex){
+                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            }
+
+            // var dir = @"..\Parser.Tests\testFiles\generationTree\";
+            // var TestingFile = @"compiiisseada";
+            // var inputString = new InputFile(dir+TestingFile+".txt");
+            // var tokenGenerators = Resources.getTokenGenerators();
+
+            // var lexer = new Lexer(inputString, tokenGenerators);
+            // var parser = new Parser(lexer);
+            // try{
+            //     var code = parser.parse();
+            //     serializeCode(code,dir+@"XMLs\"+TestingFile+".xml");
+                
+            //     System.Console.Out.WriteLine("Success!");
+            // }catch(SyntaxTokenExpectedException ex){
+            //     System.Console.Out.WriteLine(ex.Message);
+            // }
+        }
+
+        public static void ProcessDirectory(ref List<string> paths, string targetDirectory)
+        {
+            string[] fileEntries = Directory.GetFiles(targetDirectory);
+            foreach (string fileName in fileEntries)
+            {
+                if (isCsFile(fileName))
+                    paths.Add(Path.GetFullPath(fileName));
+            }
+            string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+            foreach (string subdirectory in subdirectoryEntries)
+                ProcessDirectory(ref paths, subdirectory);
+        }
+        public static bool isCsFile(string path)
+        {
+            if(Path.GetExtension(path) == ".cs")
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static void serializeCode(CompilationUnitNode code,string path)
+        {
+            // Insert code to set properties and fields of the object.  
+            XmlSerializer mySerializer = new XmlSerializer(typeof(CompilationUnitNode),types());
+            // To write to a file, create a StreamWriter object.  
+            StreamWriter myWriter = new StreamWriter(File.Create(path));
+            mySerializer.Serialize(myWriter, code);  
+            // myWriter.Close();
         }
 
         private static Type[] types()

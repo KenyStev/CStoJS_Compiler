@@ -10,6 +10,7 @@
         "dependencies": {
           "Lexer": "1.0.0",
           "Parser": "1.0.0",
+          "Semantic": "1.0.0",
           "System.Xml.XmlSerializer": "4.3.0"
         },
         "runtime": {
@@ -42,6 +43,14 @@
         "runtime": {
           "Parser.dll": {}
         }
+      },
+      "semantic/1.0.0": {
+        "dependencies": {
+          "Parser": "1.0.0"
+        },
+        "runtime": {
+          "Semantic.dll": {}
+        }
       }
     }
   },
@@ -71,6 +80,11 @@
       "sha512": ""
     },
     "parser/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "semantic/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
