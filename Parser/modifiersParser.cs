@@ -20,7 +20,7 @@ namespace Compiler
                 return encapMod;
             }else
             {
-                return new EncapsulationNode(TokenType.RW_PUBLIC,token);
+                return new EncapsulationNode(TokenType.RW_PRIVATE,token);
             }
         }
     }

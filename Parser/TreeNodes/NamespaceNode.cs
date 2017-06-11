@@ -22,6 +22,7 @@ namespace Compiler.TreeNodes
         XmlElement(typeof(EnumTypeNode),ElementName = "Enum")]
         public List<TypeNode> typesDeclarations;
         public Token token;
+        public NamespaceNode parentNamespace;
 
         private NamespaceNode(){}
         public NamespaceNode(IdNode name,Token namespaceToken)
@@ -41,7 +42,7 @@ namespace Compiler.TreeNodes
             this.typesDeclarations = this.typesDeclarations.Union(listTypeDeclared).ToList();
         }
 
-        public void setFatherNamePrefix(IdNode identifier)
+        public void setParentNamePrefix(IdNode identifier)
         {
             this.Identifier = getFullNamespaceName(identifier, this.Identifier);
         }
@@ -59,6 +60,21 @@ namespace Compiler.TreeNodes
                 nsName += "."+a.Name;
             }
             return new IdNode(nsName,id.token);
+        }
+
+        public void addParentUsings(List<UsingNode> usingDirectives)
+        {
+            if(usingDirectives!=null)
+            {
+                if(this.usingDirectives==null)
+                    this.usingDirectives = new List<UsingNode>();
+                this.usingDirectives.AddRange(usingDirectives);
+            }
+        }
+
+        public void setParentNamespace(NamespaceNode currentNamespace)
+        {
+            this.parentNamespace = currentNamespace;
         }
     }
 }

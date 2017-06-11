@@ -9,8 +9,10 @@ namespace Compiler.TreeNodes.Types
         [XmlElement(typeof(EncapsulationNode))]
         public EncapsulationNode encapsulation;
         public Token token;
-
-        private void setEncapsulationMode(){}
+        public TypeNode()
+        {
+            encapsulation = null;
+        }
         public void setEncapsulationMode(EncapsulationNode encapMod)
         {
             this.encapsulation = encapMod;

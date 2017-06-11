@@ -148,7 +148,12 @@ namespace Compiler
             var idToken = token;
             consumeToken();
             var attr = identifier_attribute();
-            return new IdNode(id,attr,idToken);
+            string fullIdName = id;
+            foreach(var a in attr)
+            {
+                fullIdName += "." + a.Name;
+            }
+            return new IdNode(fullIdName,attr,idToken);
         }
 
         /*identifier-attribute:

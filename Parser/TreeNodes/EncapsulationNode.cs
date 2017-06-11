@@ -8,10 +8,7 @@ namespace Compiler.TreeNodes
         public TokenType type;
         public Token token;
 
-        private EncapsulationNode()
-        {
-            this.type = TokenType.EOF;
-        }
+        private EncapsulationNode(){}
         public EncapsulationNode(TokenType type,Token token)
         {
             this.type = type;

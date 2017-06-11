@@ -32,7 +32,7 @@ namespace Compiler.TreeNodes
         public MethodNode(MethodHeaderNode methodHeaderNode,StatementBlockNode statemetBlock,Token token)
         {
             this.methodHeaderNode = methodHeaderNode;
-            this.encapsulation = new EncapsulationNode(TokenType.RW_PUBLIC,token);
+            this.encapsulation = new EncapsulationNode(TokenType.RW_PRIVATE,token);
             this.statemetBlock = statemetBlock;
             this.Modifier = null;
             this.token = token;

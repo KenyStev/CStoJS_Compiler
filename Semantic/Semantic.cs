@@ -35,6 +35,23 @@ namespace Compiler
                 throw new SemanticException(currentFile + ": "+ex.Message);
             }
             this.api = new API(trees);
+            setUsingsParentForAllNamespaces();
+        }
+
+        private void setUsingsParentForAllNamespaces()
+        {
+            foreach (var tree in trees)
+            {
+                foreach (var ns in tree.Value.namespaceDeclared)
+                {
+                    if(ns.parentNamespace == null)
+                    {
+                        ns.addParentUsings(tree.Value.usingDirectives);
+                    }else{
+                        ns.addParentUsings(ns.parentNamespace.usingDirectives);
+                    }
+                }
+            }
         }
 
         public Dictionary<string,CompilationUnitNode> evaluate()
@@ -46,6 +63,9 @@ namespace Compiler
             }
             printNamespaceTable();
             printTypesTable();
+            
+            
+
             // string currentFile = "";
             // try{
             //     foreach(var csFile in paths)
@@ -69,19 +89,23 @@ namespace Compiler
         private void printTypesTable()
         {
             Debug.print("Table of Types");
+            Debug.print("--------------------------------------");
             foreach (var entry in Singleton.typesTable)
             {
                 Debug.print(entry.Key + " | " + entry.Value.GetType());
             }
+            Debug.print("--------------------------------------");
         }
 
         private void printNamespaceTable()
         {
             Debug.print("Table of Namespaces");
+            Debug.print("--------------------------------------");
             foreach (var ns in Singleton.namespacesTable)
             {
                 Debug.print(ns.Key + " | " + ns.Value.GetType());
             }
+            Debug.print("--------------------------------------");
         }
     }
 }
