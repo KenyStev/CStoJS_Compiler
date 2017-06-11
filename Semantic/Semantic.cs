@@ -35,7 +35,6 @@ namespace Compiler
                 throw new SemanticException(currentFile + ": "+ex.Message);
             }
             this.api = new API(trees);
-            setUsingsParentForAllNamespaces();
         }
 
         private void setUsingsParentForAllNamespaces()
@@ -63,8 +62,8 @@ namespace Compiler
             }
             printNamespaceTable();
             printTypesTable();
-            
-            
+            evaluateDuplicatedUsingInSameNamespace();
+            setUsingsParentForAllNamespaces();
 
             // string currentFile = "";
             // try{
@@ -84,6 +83,34 @@ namespace Compiler
             //     throw new SemanticException(currentFile + ": "+ex.Message);
             // }
             return trees;
+        }
+
+        private void evaluateDuplicatedUsingInSameNamespace()
+        {
+            foreach (var tree in trees)
+            {
+                evaluateUsings(tree.Value.origin,tree.Value.defaultNamespace,tree.Value.usingDirectives);
+                foreach (var ns in tree.Value.namespaceDeclared)
+                {
+                    evaluateUsings(tree.Value.origin,ns,ns.usingDirectives);
+                }
+            }
+        }
+
+        private void evaluateUsings(string origin, NamespaceNode ns, List<UsingNode> usingDirectives)
+        {
+            if(usingDirectives!=null)
+            {
+                Dictionary<string,UsingNode> usingNames = new Dictionary<string,UsingNode>();
+                foreach (var ud in usingDirectives)
+                {
+                    if(usingNames.ContainsKey(ud.Identifier.Name))
+                        Utils.ThrowError("The using directive for '"+
+                        ud.Identifier.Name+"' appeared previously in this namespace ("+origin+")["+
+                        ns.Identifier.Name+"]: "+usingNames[ud.Identifier.Name].token.getLine());
+                    usingNames[ud.Identifier.Name] = ud;
+                }
+            }
         }
 
         private void printTypesTable()

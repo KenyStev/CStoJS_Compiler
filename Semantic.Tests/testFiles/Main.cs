@@ -27,9 +27,17 @@ namespace N1{
 
 	}
 	namespace N2{
+        using System;
+        using System.Buffers;
 		public class myClase2{
 
-		}	
+		}
+
+        namespace N3
+        {
+            using System.CodeDom;
+            using System.Collections;
+        }
 		
 	}
 }
