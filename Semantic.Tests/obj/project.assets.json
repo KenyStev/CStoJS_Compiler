@@ -8621,22 +8621,22 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\Semantic.Tests.csproj",
+      "projectUniqueName": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\Semantic.Tests.csproj",
       "projectName": "Semantic.Tests",
-      "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\Semantic.Tests.csproj",
-      "outputPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\obj\\",
+      "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\Semantic.Tests.csproj",
+      "outputPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Semantic.Tests.dll": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\bin\\placeholder\\netcoreapp1.1\\Semantic.Tests.dll"
+        "lib/netcoreapp1.1/Semantic.Tests.dll": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic.Tests\\bin\\placeholder\\netcoreapp1.1\\Semantic.Tests.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj": {
-              "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj"
+            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj": {
+              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj"
             }
           }
         }

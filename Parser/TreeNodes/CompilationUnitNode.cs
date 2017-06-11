@@ -18,6 +18,7 @@ namespace Compiler.TreeNodes
         [XmlArray("Namespaceses"),
         XmlArrayItem("Namespace")]
         public List<NamespaceNode> namespaceDeclared;
+        public string origin;
 
         private CompilationUnitNode(){}
         public CompilationUnitNode(List<UsingNode> usingList)
@@ -25,6 +26,11 @@ namespace Compiler.TreeNodes
             this.usingDirectives = usingList;
             this.defaultNamespace = new NamespaceNode(new IdNode("default",null),null);
             this.namespaceDeclared = new List<NamespaceNode>();
+        }
+
+        public void setOriginFile(string csFile)
+        {
+            this.origin = csFile;
         }
 
         public void addNamespace(NamespaceNode namespaceDeclared)

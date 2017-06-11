@@ -40,5 +40,25 @@ namespace Compiler.TreeNodes
         {
             this.typesDeclarations = this.typesDeclarations.Union(listTypeDeclared).ToList();
         }
+
+        public void setFatherNamePrefix(IdNode identifier)
+        {
+            this.Identifier = getFullNamespaceName(identifier, this.Identifier);
+        }
+
+        private IdNode getFullNamespaceName(IdNode father, IdNode id)
+        {
+            string fatherName = father.Name;
+            foreach(var a in father.attributes)
+            {
+                fatherName += "."+a.Name;
+            }
+            string nsName = fatherName + "." + id.Name;
+            foreach(var a in id.attributes)
+            {
+                nsName += "."+a.Name;
+            }
+            return new IdNode(nsName,id.token);
+        }
     }
 }

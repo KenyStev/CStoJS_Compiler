@@ -48,6 +48,10 @@ namespace Compiler
             if(pass(TokenType.RW_NAMESPACE))
             {
                 var namespaceDeclared = namespace_declaration(ref compilation);
+                if(currentNamespace.Identifier.Name != "default")
+                {
+                    namespaceDeclared.setFatherNamePrefix(currentNamespace.Identifier);
+                }
                 compilation.addNamespace(namespaceDeclared);
                 optional_namespace_or_type_member_declaration(ref compilation, ref currentNamespace);
             }else{
