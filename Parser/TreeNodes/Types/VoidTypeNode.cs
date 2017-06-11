@@ -1,3 +1,6 @@
+using System;
+using Compiler.SemanticAPI;
+
 namespace Compiler.TreeNodes.Types
 {
     public class VoidTypeNode : TypeNode
@@ -6,6 +9,11 @@ namespace Compiler.TreeNodes.Types
         public VoidTypeNode(Token token)
         {
             this.token = token;
+        }
+
+        public override void Evaluate(API api)//TODO
+        {
+            throw new NotImplementedException();
         }
     }
 }

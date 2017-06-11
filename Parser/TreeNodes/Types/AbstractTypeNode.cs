@@ -1,4 +1,6 @@
+using System;
 using System.Xml.Serialization;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler.TreeNodes.Types
@@ -13,6 +15,11 @@ namespace Compiler.TreeNodes.Types
         {
             this.Identifier = typeName;
             this.token = token;
+        }
+
+        public override void Evaluate(API api) //TODO
+        {
+            throw new NotImplementedException();
         }
     }
 }

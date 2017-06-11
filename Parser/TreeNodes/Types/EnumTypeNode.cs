@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Compiler.TreeNodes.Statements;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
+using Compiler.SemanticAPI;
+using System;
 
 namespace Compiler.TreeNodes.Types
 {
@@ -19,6 +21,11 @@ namespace Compiler.TreeNodes.Types
             this.Identifier = idnode;
             this.EnumItems = enumerableList;
             this.token = token;
+        }
+
+        public override void Evaluate(API api)//TODO
+        {
+            throw new NotImplementedException();
         }
     }
 }

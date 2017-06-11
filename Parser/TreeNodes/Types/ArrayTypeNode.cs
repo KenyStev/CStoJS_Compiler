@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Compiler.SemanticAPI;
 
 namespace Compiler.TreeNodes.Types
 {
@@ -21,6 +23,11 @@ namespace Compiler.TreeNodes.Types
             this.DataType = type;
             this.multidimsArrays = multidimsArrays;
             this.token = token;
+        }
+
+        public override void Evaluate(API api)//TODO
+        {
+            throw new NotImplementedException();
         }
     }
 }

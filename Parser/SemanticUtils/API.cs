@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Compiler.TreeNodes;
 using Compiler.TreeNodes.Types;
 
-namespace Compiler
+namespace Compiler.SemanticAPI
 {
     public class API
     {

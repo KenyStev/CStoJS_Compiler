@@ -50,8 +50,8 @@ namespace Compiler
                 var namespaceDeclared = namespace_declaration(ref compilation);
                 if(currentNamespace.Identifier.Name != "default")
                 {
-                    namespaceDeclared.setParentNamePrefix(currentNamespace.Identifier);
-                    namespaceDeclared.setParentNamespace(currentNamespace);
+                    // namespaceDeclared.setParentNamePrefix(currentNamespace.Identifier);
+                    namespaceDeclared.setParentNamespace(ref currentNamespace);
                     // namespaceDeclared.addFatherUsings(currentNamespace.usingDirectives);
                 }
                 // else{

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Serialization;
 using Compiler.TreeNodes.Types;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
+using Compiler.SemanticAPI;
 
 namespace Compiler.TreeNodes
 {
@@ -72,9 +73,21 @@ namespace Compiler.TreeNodes
             }
         }
 
-        public void setParentNamespace(NamespaceNode currentNamespace)
+        public void setParentNamespace(ref NamespaceNode currentNamespace)
         {
             this.parentNamespace = currentNamespace;
+        }
+
+        public void Evaluate(API api)
+        {
+            foreach (var typeDef in typesDeclarations)
+            {
+                try{
+                    typeDef.Evaluate(api);
+                }catch(NotImplementedException ex){
+                    Console.WriteLine("TODO: ["+typeDef.GetType()+"]("+ex.Message+")");
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Compiler;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes;
 
 namespace Compiler
@@ -35,6 +36,21 @@ namespace Compiler
                 throw new SemanticException(currentFile + ": "+ex.Message);
             }
             this.api = new API(trees);
+            setParentPrefixNamespace();
+        }
+
+        private void setParentPrefixNamespace()
+        {
+            foreach (var tree in trees)
+            {
+                foreach (var ns in tree.Value.namespaceDeclared)
+                {
+                    if(ns.parentNamespace != null)
+                    {
+                        ns.setParentNamePrefix(ns.parentNamespace.Identifier);
+                    }
+                }
+            }
         }
 
         private void setUsingsParentForAllNamespaces()
@@ -64,6 +80,7 @@ namespace Compiler
             printTypesTable();
             evaluateDuplicatedUsingInSameNamespace();
             setUsingsParentForAllNamespaces();
+            evaluateNamespaces();
 
             // string currentFile = "";
             // try{
@@ -83,6 +100,18 @@ namespace Compiler
             //     throw new SemanticException(currentFile + ": "+ex.Message);
             // }
             return trees;
+        }
+
+        private void evaluateNamespaces()
+        {
+            foreach (var tree in trees)
+            {
+                tree.Value.defaultNamespace.Evaluate(api);
+                foreach (var ns in tree.Value.namespaceDeclared)
+                {
+                    ns.Evaluate(api);
+                }
+            }
         }
 
         private void evaluateDuplicatedUsingInSameNamespace()

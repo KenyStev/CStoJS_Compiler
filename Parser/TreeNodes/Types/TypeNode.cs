@@ -1,10 +1,11 @@
 using System;
 using System.Xml.Serialization;
+using Compiler.SemanticAPI;
 
 namespace Compiler.TreeNodes.Types
 {
     [XmlType("TypeNode")]
-    public class TypeNode
+    public abstract class TypeNode
     {
         [XmlElement(typeof(EncapsulationNode))]
         public EncapsulationNode encapsulation;
@@ -17,5 +18,7 @@ namespace Compiler.TreeNodes.Types
         {
             this.encapsulation = encapMod;
         }
+
+        public abstract void Evaluate(API api);
     }
 }

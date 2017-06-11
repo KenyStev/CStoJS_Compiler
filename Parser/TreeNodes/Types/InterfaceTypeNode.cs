@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler.TreeNodes.Types
@@ -29,6 +30,11 @@ namespace Compiler.TreeNodes.Types
         public void setInheritance(List<IdNode> inheritanceses)
         {
             this.inheritanceses = inheritanceses;
+        }
+
+        public override void Evaluate(API api)//TODO
+        {
+            throw new NotImplementedException();
         }
     }
 }
