@@ -8,7 +8,7 @@ namespace Compiler.TreeNodes
     public class EnumNode
     {
         [XmlElement(typeof(IdNode))]
-        public IdNode Name;
+        public IdNode Identifier;
 
         [XmlElement(typeof(ExpressionNode)),
         XmlElement(typeof(LiteralIntNode))]
@@ -18,7 +18,7 @@ namespace Compiler.TreeNodes
         private EnumNode(){}
         public EnumNode(IdNode name, ExpressionNode value,Token token)
         {
-            this.Name = name;
+            this.Identifier = name;
             this.value = value;
             this.token = token;
         }

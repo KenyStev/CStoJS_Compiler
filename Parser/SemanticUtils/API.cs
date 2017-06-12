@@ -68,7 +68,7 @@ namespace Compiler.SemanticAPI
             }
         }
 
-        private string getDeclarationPathForType(TypeNode typeNode)
+        public string getDeclarationPathForType(TypeNode typeNode)
         {
             string path = "";
             string filePath = "";

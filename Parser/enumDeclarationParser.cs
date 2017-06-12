@@ -75,7 +75,13 @@ namespace Compiler
             }else if(pass(TokenType.OP_ASSIGN))
             {
                 consumeToken();
-                var exp = expression();
+                ExpressionNode exp = expression();
+                if(exp is InlineExpressionNode)
+                {
+                    exp = ((InlineExpressionNode)exp).primary;
+                    if(exp is LiteralIntNode)
+                        counter = ((LiteralIntNode)exp).Value;
+                }
                 var assignExpr = new EnumNode(currentId,exp,currentId.token);
                 // var nextVal = new SumNode(exp,new LiteralIntNode(1)); //TODO: evaluate and send as parameter
                 return optional_assignable_identifiers_list_p(assignExpr,counter+1);
