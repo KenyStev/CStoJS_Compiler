@@ -32,7 +32,7 @@ namespace Compiler.TreeNodes.Types
             this.inheritanceses = inheritanceses;
         }
 
-        public override void Evaluate(API api)//TODO
+        public override void Evaluate(API api)
         {
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             if(!Utils.isValidEncapsulation(this.encapsulation,TokenType.RW_PUBLIC))
@@ -67,6 +67,7 @@ namespace Compiler.TreeNodes.Types
                     methodDe.Identifier.Name+"' with the same parameter types ["+myNs.Identifier.Name+"]("
                     +thisDeclarationPath+")");
                 this.methods[methodName] = methodDe;
+                api.checkFixedParameters(methodDe,myNs);
             }
         }
 
@@ -98,7 +99,8 @@ namespace Compiler.TreeNodes.Types
 
         public override string ToString()
         {
-            return Identifier.Name;
+            // return Identifier.Name;
+            return "InterfaceType";
         }
 
         public override bool Equals(object obj)

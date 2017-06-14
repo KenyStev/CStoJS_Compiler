@@ -42,7 +42,8 @@ namespace Compiler.TreeNodes.Types
 
         public override string ToString()
         {
-            return Identifier.Name;
+            // return Identifier.Name;
+            return "EnumType";
         }
 
         public override bool Equals(object obj)

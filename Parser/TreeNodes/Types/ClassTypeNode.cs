@@ -71,7 +71,8 @@ namespace Compiler.TreeNodes.Types
 
         public override string ToString()
         {
-            return Identifier.Name;
+            // return Identifier.Name;
+            return "ClassType";
         }
 
         public override bool Equals(object obj)

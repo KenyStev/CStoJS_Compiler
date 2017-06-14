@@ -66,7 +66,7 @@ namespace Compiler
                 {
                     return primary_expression();
                 }
-            }else if(pass(unaryExpressionOptions,literalOptions))
+            }else if(pass(unaryExpressionOptions,literalOptions,typesOptions))
             {
                 return primary_expression();
             }else{
@@ -111,7 +111,8 @@ namespace Compiler
             | '(' expression ')' primary-expression-p
             | "this" primary-expression-p
             | "base" primary-expression-p
-            | "null" */
+            | "null" 
+            | type primary-expression-p*/
         private InlineExpressionNode primary_expression()
         {
             printIfDebug("primary_expression");
@@ -183,6 +184,12 @@ namespace Compiler
                 var nullExp = new NullExpressionNode(nullToken);
                 var inline = new InlineExpressionNode(nullExp,nullToken);
                 // primary_expression_p(ref inline);
+                return inline;
+            }else if(pass(typesOptions))
+            {
+                var type = types();
+                var inline = new InlineExpressionNode(type.Identifier,type.token);
+                primary_expression_p(ref inline);
                 return inline;
             }else{
                 throwError("new, literal, identifier, '(' or \"this\" expected");
@@ -336,8 +343,8 @@ namespace Compiler
                 // identifier = getFullIdentifierName(identifier);
                 type = new AbstractTypeNode(identifier,identifierToken);
             }else{
-                type = types();
-                consumeToken();
+                type = built_in_type();
+                // consumeToken();
             }
             return instance_expression_factorized(type,identifierToken);
         }
@@ -385,6 +392,7 @@ namespace Compiler
 
                 var initializationToken = token;
                 var rankList = optional_rank_specifier_list();
+                rankList.Insert(0,new MultidimensionArrayTypeNode(primaryExpBrackets.Count,primaryExpBrackets[0].token));
                 var arrayType = new ArrayTypeNode(type,rankList,identifierToken);
                 var initialization = optional_array_initializer();
                 return new ArrayInstantiationNode(type,primaryExpBrackets,arrayType,initialization,instanceToken);

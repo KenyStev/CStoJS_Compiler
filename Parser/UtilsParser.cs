@@ -96,7 +96,7 @@ namespace Compiler
         TokenType[] namespaceOption = {TokenType.RW_NAMESPACE};
 
         TokenType[] nuevo = { TokenType.RW_NEW , TokenType.ID,
-            TokenType.PUNT_PAREN_OPEN, TokenType.RW_THIS,TokenType.RW_BASE
+            TokenType.PUNT_PAREN_OPEN, TokenType.RW_THIS,TokenType.RW_BASE,TokenType.RW_NULL
         };
                                                 
         private TokenType [] expressionOptions()
@@ -106,15 +106,15 @@ namespace Compiler
                 TokenType.OP_AND, TokenType.OP_BITWISE_OR,
                 TokenType.OP_XOR, TokenType.OP_BITWISE_AND,
                 TokenType.PUNT_PAREN_OPEN, TokenType.RW_NEW,
-                TokenType.ID, TokenType.RW_THIS};
+                TokenType.ID, TokenType.RW_THIS,TokenType.RW_NULL};
 
             return nuevo.Concat(equalityOperatorOptions).Concat(relationalOperatorOptions).
                 Concat(Is_AsOperatorOptions).Concat(shiftOperatorOptions).Concat(additiveOperatorOptions).
                 Concat(multiplicativeOperatorOptions).Concat(assignmentOperatorOptions).Concat(unaryOperatorOptions)
-                .Concat(literalOptions).ToArray();
+                .Concat(literalOptions).Concat(typesOptions).ToArray();
         }
 
-        private TokenType[] embededOptions() //TOFIX delete: unaryOperatorOptions, literalOptions, unaryExpressionOptions
+        private TokenType[] embededOptions()
         {
             return maybeEmptyBlockOptions.Concat(selectionsOptionsStatements).Concat(iteratorsOptionsStatements)
             .Concat(jumpsOptionsStatements).Concat(unaryOperatorOptions)

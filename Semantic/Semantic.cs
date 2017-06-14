@@ -105,13 +105,19 @@ namespace Compiler
 
         private void evaluateNamespaces()
         {
-            foreach (var tree in trees)
-            {
-                tree.Value.defaultNamespace.Evaluate(api);
-                foreach (var ns in tree.Value.namespaceDeclared)
+            string currentFile = "";
+            try{
+                foreach (var tree in trees)
                 {
-                    ns.Evaluate(api);
+                    currentFile = tree.Value.origin;
+                    tree.Value.defaultNamespace.Evaluate(api);
+                    foreach (var ns in tree.Value.namespaceDeclared)
+                    {
+                        ns.Evaluate(api);
+                    }
                 }
+            }catch(SemanticException ex){
+                throw new SemanticException(currentFile + ": "+ex.Message);
             }
         }
 
@@ -149,7 +155,7 @@ namespace Compiler
             Debug.print("--------------------------------------");
             foreach (var entry in Singleton.typesTable)
             {
-                Debug.print(entry.Key + " | " + entry.Value.GetType());
+                Debug.print(entry.Key + " | " + entry.Value.ToString());
             }
             Debug.print("--------------------------------------");
         }
@@ -160,7 +166,7 @@ namespace Compiler
             Debug.print("--------------------------------------");
             foreach (var ns in Singleton.namespacesTable)
             {
-                Debug.print(ns.Key + " | " + ns.Value.GetType());
+                Debug.print(ns.Key + " | " + ns.Value.ToString());
             }
             Debug.print("--------------------------------------");
         }

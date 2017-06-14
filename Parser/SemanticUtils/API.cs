@@ -68,6 +68,23 @@ namespace Compiler.SemanticAPI
             }
         }
 
+        public void checkFixedParameters(MethodHeaderNode methodDe, NamespaceNode myNs)
+        {
+            TypeNode returnType = getTypeForIdentifier(methodDe.returnType.DataType.ToString(),myNs.usingDirectivesList(),myNs);
+            if(returnType==null)
+                Utils.ThrowError("The type name '"+methodDe.returnType.DataType.token.lexeme
+                +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
+                +methodDe.returnType.token.getLine()+")");
+            foreach (var fixedParam in methodDe.fixedParams)
+            {
+                TypeNode fixedType = getTypeForIdentifier(fixedParam.DataType.ToString(),myNs.usingDirectivesList(),myNs);
+                if(fixedType==null)
+                    Utils.ThrowError("The type name '"+fixedParam.DataType.token.lexeme
+                    +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
+                    +fixedParam.DataType.token.getLine()+")");
+            }
+        }
+
         public void hasCycleInheritance(string name, Dictionary<string, TypeNode> parents)
         {
             if(parents==null)return;
