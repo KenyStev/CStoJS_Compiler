@@ -75,13 +75,14 @@ namespace Compiler.SemanticAPI
                 Utils.ThrowError("The type name '"+methodDe.returnType.DataType.token.lexeme
                 +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
                 +methodDe.returnType.token.getLine()+")");
+            if(methodDe.fixedParams==null)return;
             foreach (var fixedParam in methodDe.fixedParams)
             {
                 TypeNode fixedType = getTypeForIdentifier(fixedParam.DataType.ToString(),myNs.usingDirectivesList(),myNs);
                 if(fixedType==null)
                     Utils.ThrowError("The type name '"+fixedParam.DataType.token.lexeme
                     +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
-                    +fixedParam.DataType.token.getLine()+")");
+                    +fixedParam.token.getLine()+")");
             }
         }
 

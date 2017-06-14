@@ -16,14 +16,19 @@ namespace Compiler
         {
             this.paths = paths;
             this.trees = new Dictionary<string,CompilationUnitNode>();
+            var lexer = new Lexer(new InputString(Utils.txtIncludes),Resources.getTokenGenerators());
+            var parser = new Parser(lexer);
+            // trees.Add(parser.parse());
+            trees["IncludesDefault"] = parser.parse();
+
 
             string currentFile = "";
             try{
                 foreach(var csFile in paths)
                 {
                     currentFile = csFile;
-                    var lexer = new Lexer(new InputFile(csFile),Resources.getTokenGenerators());
-                    var parser = new Parser(lexer);
+                    lexer = new Lexer(new InputFile(csFile),Resources.getTokenGenerators());
+                    parser = new Parser(lexer);
                     // trees.Add(parser.parse());
                     trees[csFile] = parser.parse();
                     trees[csFile].setOriginFile(csFile);
