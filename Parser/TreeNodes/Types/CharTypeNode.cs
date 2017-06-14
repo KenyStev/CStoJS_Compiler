@@ -18,5 +18,10 @@ namespace Compiler.TreeNodes.Types
         {
             return "CharType";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is CharTypeNode;
+        }
     }
 }

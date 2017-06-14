@@ -18,5 +18,10 @@ namespace Compiler.TreeNodes.Types
         {
             return "FloatType";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is FloatTypeNode;
+        }
     }
 }

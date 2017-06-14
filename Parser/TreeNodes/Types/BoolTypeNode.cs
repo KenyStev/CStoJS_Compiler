@@ -18,5 +18,10 @@ namespace Compiler.TreeNodes.Types
         {
             return "BoolType";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BoolTypeNode;
+        }
     }
 }

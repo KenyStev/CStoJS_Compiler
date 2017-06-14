@@ -39,5 +39,23 @@ namespace Compiler.TreeNodes.Types
             }
             return DataType.ToString()+string.Join(".",arrayBrackets);
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is ArrayTypeNode)
+            {
+                var o = obj as ArrayTypeNode;
+                if(DataType.Equals(o.DataType))
+                {
+                    for(int i=0; i<multidimsArrays.Count; i++)
+                    {
+                        if(!multidimsArrays[i].Equals(o.multidimsArrays[i]))
+                            return false;
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

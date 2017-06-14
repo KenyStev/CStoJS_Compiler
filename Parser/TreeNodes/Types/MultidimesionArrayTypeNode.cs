@@ -24,5 +24,15 @@ namespace Compiler.TreeNodes.Types
             }
             return rank + "]";
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is MultidimensionArrayTypeNode)
+            {
+                var o =  obj as MultidimensionArrayTypeNode;
+                return dimensions == o.dimensions;
+            }
+            return false;
+        }
     }
 }

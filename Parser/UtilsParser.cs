@@ -86,7 +86,7 @@ namespace Compiler
 
         TokenType[] unaryExpressionOptions = {
             TokenType.PUNT_PAREN_OPEN,TokenType.RW_NEW, TokenType.ID,
-            TokenType.RW_THIS,TokenType.RW_BASE
+            TokenType.RW_THIS,TokenType.RW_BASE,TokenType.RW_NULL
         };
 
         TokenType[] voidOption = {TokenType.RW_VOID};

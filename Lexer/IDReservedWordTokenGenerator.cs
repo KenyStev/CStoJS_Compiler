@@ -58,6 +58,7 @@ namespace Compiler
             //Literals
             reservedWordsDict["true"] = TokenType.LIT_BOOL;
             reservedWordsDict["false"] = TokenType.LIT_BOOL;
+            reservedWordsDict["null"] = TokenType.RW_NULL;
 
             //Operators
             reservedWordsDict["sizeof"] = TokenType.OP_SIZEOF;

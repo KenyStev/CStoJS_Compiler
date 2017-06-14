@@ -110,7 +110,8 @@ namespace Compiler
             | identifier primary-expression-p
             | '(' expression ')' primary-expression-p
             | "this" primary-expression-p
-            | "base" primary-expression-p */
+            | "base" primary-expression-p
+            | "null" */
         private InlineExpressionNode primary_expression()
         {
             printIfDebug("primary_expression");
@@ -174,6 +175,14 @@ namespace Compiler
                 var baseExp = new BaseReferenceAccessNode(baseToken);
                 var inline = new InlineExpressionNode(baseExp,baseToken);
                 primary_expression_p(ref inline);
+                return inline;
+            }else if(pass(TokenType.RW_NULL))
+            {
+                var nullToken = token;
+                consumeToken();
+                var nullExp = new NullExpressionNode(nullToken);
+                var inline = new InlineExpressionNode(nullExp,nullToken);
+                // primary_expression_p(ref inline);
                 return inline;
             }else{
                 throwError("new, literal, identifier, '(' or \"this\" expected");
@@ -324,6 +333,7 @@ namespace Compiler
             if(pass(TokenType.ID))
             {
                 var identifier = qualified_identifier();
+                // identifier = getFullIdentifierName(identifier);
                 type = new AbstractTypeNode(identifier,identifierToken);
             }else{
                 type = types();

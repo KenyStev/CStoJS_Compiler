@@ -3,10 +3,10 @@ using Compiler.SemanticAPI;
 
 namespace Compiler.TreeNodes.Types
 {
-    public class VoidTypeNode : TypeNode
+    public class NullTypeNode : TypeNode
     {
-        VoidTypeNode(){}
-        public VoidTypeNode(Token token)
+        NullTypeNode(){}
+        public NullTypeNode(Token token)
         {
             this.token = token;
         }
@@ -18,12 +18,12 @@ namespace Compiler.TreeNodes.Types
 
         public override string ToString()
         {
-            return "VoidType";
+            return "NullType";
         }
 
         public override bool Equals(object obj)
         {
-            return obj is VoidTypeNode;
+            return obj is NullTypeNode;
         }
     }
 }

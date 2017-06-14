@@ -73,5 +73,15 @@ namespace Compiler.TreeNodes.Types
         {
             return Identifier.Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is ClassTypeNode)
+            {
+                var o = obj as ClassTypeNode;
+                return Identifier.Name == o.Identifier.Name;
+            }
+            return false;
+        }
     }
 }

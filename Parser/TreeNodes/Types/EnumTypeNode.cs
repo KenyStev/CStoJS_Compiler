@@ -44,5 +44,15 @@ namespace Compiler.TreeNodes.Types
         {
             return Identifier.Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is EnumTypeNode)
+            {
+                var o = obj as EnumTypeNode;
+                return Identifier.Name == o.Identifier.Name;
+            }
+            return false;
+        }
     }
 }

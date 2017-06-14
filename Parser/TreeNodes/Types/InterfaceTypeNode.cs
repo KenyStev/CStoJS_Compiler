@@ -100,5 +100,15 @@ namespace Compiler.TreeNodes.Types
         {
             return Identifier.Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is InterfaceTypeNode)
+            {
+                var o = obj as InterfaceTypeNode;
+                return Identifier.Name == o.Identifier.Name;
+            }
+            return false;
+        }
     }
 }

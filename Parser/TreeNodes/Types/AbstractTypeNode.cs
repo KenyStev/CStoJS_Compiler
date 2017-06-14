@@ -23,5 +23,15 @@ namespace Compiler.TreeNodes.Types
         {
             return Identifier.Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            if(obj is AbstractTypeNode)
+            {
+                var o = obj as AbstractTypeNode;
+                return o.Identifier.attributes[o.Identifier.attributes.Count-1].Name == Identifier.Name;
+            }
+            return false;
+        }
     }
 }

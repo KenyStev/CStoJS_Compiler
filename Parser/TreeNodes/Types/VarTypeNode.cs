@@ -20,5 +20,10 @@ namespace Compiler.TreeNodes.Types
         {
             return "VarType";
         }
+
+        public override bool Equals(object obj)
+        {
+            return obj is VarTypeNode;
+        }
     }
 }
