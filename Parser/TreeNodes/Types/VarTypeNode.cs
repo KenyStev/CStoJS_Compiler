@@ -15,5 +15,10 @@ namespace Compiler.TreeNodes.Types
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            return "VarType";
+        }
     }
 }

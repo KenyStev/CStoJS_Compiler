@@ -8,9 +8,6 @@ namespace Compiler.TreeNodes.Types
 {
     public class ClassTypeNode : TypeNode
     {
-        [XmlElement(typeof(IdNode))]
-        public IdNode Identifier;
-
         [XmlArray("Inheritanceses"),
         XmlArrayItem("BaseItem")]
         public List<IdNode> inheritanceses;
@@ -34,7 +31,7 @@ namespace Compiler.TreeNodes.Types
 
         public ClassTypeNode(IdNode identifier,Token token)
         {
-            this.Identifier = identifier;
+            base.Identifier = identifier;
             inheritanceses = null;
             Fields = new List<FieldNode>();
             Constructors = new List<ConstructorNode>();
@@ -70,6 +67,11 @@ namespace Compiler.TreeNodes.Types
         public override void Evaluate(API api)//TODO
         {
             throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            return Identifier.Name;
         }
     }
 }

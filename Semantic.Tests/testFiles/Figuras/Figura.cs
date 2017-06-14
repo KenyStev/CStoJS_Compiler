@@ -7,7 +7,7 @@ namespace Figuras{
 
 	enum DIASDELASEMANA{
 		LUNES = 5,
-		MARTES = -5,
+		MARTES = 5,
 		MIERCOLES,
 		JUEVES,
 		VIERNES,
@@ -18,9 +18,9 @@ namespace Figuras{
 
 public enum DIASDELASEMANA2{
 		LUNES = 5,
-		MARTES = -5,
+		MARTES = 5,
 		MIERCOLES,
-		JUEVES = -52,
+		JUEVES = 52,
 		VIERNES,
 		SABADO=10,
 		DOMINGO

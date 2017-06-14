@@ -43,9 +43,16 @@ namespace Main
                 var semantic = new Semantic(paths);
                 var trees = semantic.evaluate();
                 System.Console.Out.WriteLine("Success!");
-            }catch(Exception ex){
+            }catch(LexicalException ex){
+                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            }catch(SyntaxTokenExpectedException ex){
+                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            }catch(SemanticException ex){
                 System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
             }
+            // catch(Exception ex){
+            //     System.Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+            // }
 
             // var dir = @"..\Parser.Tests\testFiles\generationTree\";
             // var TestingFile = @"compiiisseada";

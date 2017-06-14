@@ -183,6 +183,7 @@ namespace Compiler
         private List<IdNode> identifiers_list()
         {
             var idnode = qualified_identifier();
+            idnode = getFullIdentifierName(idnode);
             var lisIdNodes = identifiers_list_p();
             lisIdNodes.Insert(0,idnode);
             return lisIdNodes;
@@ -197,6 +198,7 @@ namespace Compiler
             {
                 consumeToken();
                 var idnode = qualified_identifier();
+                idnode = getFullIdentifierName(idnode);
                 var listIdNode = identifiers_list_p();
                 listIdNode.Insert(0,idnode);
                 return listIdNode;
@@ -249,7 +251,16 @@ namespace Compiler
                 throwError("primary type expected");
             var type = token;
             consumeToken();
-            return new PrimitiveTypeNode(type);
+            
+            switch (type.type)
+            {
+                case TokenType.RW_BOOL: return new BoolTypeNode(type);
+                case TokenType.RW_INT: return new IntTypeNode(type);
+                case TokenType.RW_CHAR: return new CharTypeNode(type);
+                case TokenType.RW_FLOAT: return new FloatTypeNode(type);
+                case TokenType.RW_STRING: return new StringTypeNode(type);
+                default: return null;
+            }
         }
 
         /*type-or-void:

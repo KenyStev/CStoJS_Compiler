@@ -12,7 +12,7 @@ namespace Compiler
 
         public static bool isValidEncapsulation(EncapsulationNode encapsulation, TokenType encapsulationType)
         {
-            if(encapsulation == null)
+            if(encapsulation == null || encapsulation.token == null)
                 return true;
             return encapsulation.type == encapsulationType;
         }

@@ -4,17 +4,12 @@ using Compiler.SemanticAPI;
 
 namespace Compiler.TreeNodes.Types
 {
-    public class PrimitiveTypeNode : TypeNode
+    public abstract class PrimitiveTypeNode : TypeNode
     {
-        private PrimitiveTypeNode(){}
+        public PrimitiveTypeNode(){}
         public PrimitiveTypeNode(Token type)
         {
             this.token = type;
-        }
-
-        public override void Evaluate(API api)//TODO
-        {
-            throw new NotImplementedException();
         }
     }
 }

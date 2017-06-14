@@ -29,5 +29,15 @@ namespace Compiler.TreeNodes.Types
         {
             throw new NotImplementedException();
         }
+
+        public override string ToString()
+        {
+            List<string> arrayBrackets = new List<string>();
+            foreach (var rank in multidimsArrays)
+            {
+                arrayBrackets.Add(rank.ToString());
+            }
+            return DataType.ToString()+string.Join(".",arrayBrackets);
+        }
     }
 }

@@ -1,13 +1,14 @@
 using System;
 using System.Xml.Serialization;
 using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler.TreeNodes.Types
 {
     [XmlType("TypeNode")]
     public abstract class TypeNode
     {
-        [XmlElement(typeof(EncapsulationNode))]
+        public IdNode Identifier;
         public EncapsulationNode encapsulation;
         public Token token;
         public TypeNode()

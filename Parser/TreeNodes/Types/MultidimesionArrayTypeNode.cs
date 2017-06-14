@@ -14,5 +14,15 @@ namespace Compiler.TreeNodes.Types
             this.dimensions = dimensions;
             this.token = token;
         }
+
+        public override string ToString()
+        {
+            string rank = "[";
+            for (int i = 1; i < dimensions; i++)
+            {
+                rank += ",";
+            }
+            return rank + "]";
+        }
     }
 }

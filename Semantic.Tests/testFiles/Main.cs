@@ -24,7 +24,11 @@ namespace N1{
 	}
 
 	public interface outsideInterface{
-
+		void go();
+	}
+	public interface IName : outsideInterface
+	{
+		void go();
 	}
 	namespace N2{
         using System;

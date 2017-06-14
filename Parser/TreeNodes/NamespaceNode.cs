@@ -63,6 +63,20 @@ namespace Compiler.TreeNodes
             return new IdNode(nsName,id.token);
         }
 
+        public List<string> usingDirectivesList()
+        {
+            List<string> usings = new List<string>();
+            if(usingDirectives!=null)
+            {
+                foreach (var usingDirective in usingDirectives)
+                {
+                    if(!usings.Contains(usingDirective.Identifier.Name))
+                        usings.Add(usingDirective.Identifier.Name);
+                }
+            }
+            return usings;
+        }
+
         public void addParentUsings(List<UsingNode> usingDirectives)
         {
             if(usingDirectives!=null)
@@ -85,7 +99,7 @@ namespace Compiler.TreeNodes
                 try{
                     typeDef.Evaluate(api);
                 }catch(NotImplementedException ex){
-                    Console.WriteLine("TODO: ["+typeDef.GetType()+"]("+ex.Message+")");
+                    Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+")");
                 }
             }
         }

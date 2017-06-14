@@ -176,5 +176,15 @@ namespace Compiler
             }
             return look_ahead[count];
         }
+
+        private IdNode getFullIdentifierName(IdNode id)
+        {
+            string idName = id.Name;
+            foreach(var a in id.attributes)
+            {
+                idName += "."+a.Name;
+            }
+            return new IdNode(idName,id.token);
+        }
     }
 }

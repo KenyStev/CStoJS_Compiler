@@ -522,53 +522,53 @@ namespace Compiler
             }
         }
 
-        /*statement-expression-p:
-            | '(' argument-list ')'
-            | increment-decrement
-            | EPSILON */
-        private ExpressionNode statement_expression_p(ExpressionNode leftValue)
-        {
-            printIfDebug("statement_expression_p");
-            if(pass(TokenType.PUNT_PAREN_OPEN))
-            {
-                consumeToken();
-                var arguments = argument_list();
-                if(!pass(TokenType.PUNT_PAREN_CLOSE))
-                    throwError(") expected");
-                consumeToken();
-            }else if(pass(TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS))
-            {
-                var operatorUnary = token;
-                consumeToken();
+        // /*statement-expression-p:
+        //     | '(' argument-list ')'
+        //     | increment-decrement
+        //     | EPSILON */
+        // private ExpressionNode statement_expression_p(ExpressionNode leftValue)
+        // {
+        //     printIfDebug("statement_expression_p");
+        //     if(pass(TokenType.PUNT_PAREN_OPEN))
+        //     {
+        //         consumeToken();
+        //         var arguments = argument_list();
+        //         if(!pass(TokenType.PUNT_PAREN_CLOSE))
+        //             throwError(") expected");
+        //         consumeToken();
+        //     }else if(pass(TokenType.OP_PLUS_PLUS,TokenType.OP_MINUS_MINUS))
+        //     {
+        //         var operatorUnary = token;
+        //         consumeToken();
                 
-            }
-            return leftValue;
-        }
+        //     }
+        //     return leftValue;
+        // }
 
-        /*optional-unary-expression:
-            | expression-unary-operator unary-expression
-            | '(' type ')'
-            | EPSILON */
-        private void optional_unary_expression()
-        {
-            printIfDebug("optional_unary_expression");
-            if(pass(TokenType.PUNT_PAREN_OPEN))
-            {
-                consumeToken();
-                if(!pass(typesOptions))
-                    throwError("type expected");
-                types();
-                if(!pass(TokenType.PUNT_PAREN_CLOSE))
-                    throwError(") expected");
-                consumeToken();
-            }else if(pass(unaryOperatorOptions))
-            {
-                if(!pass(unaryOperatorOptions))
-                    throwError("unary operator expected");
-                unary_expression();
-            }else{
-                //EPSILON
-            }
-        }
+        // /*optional-unary-expression:
+        //     | expression-unary-operator unary-expression
+        //     | '(' type ')'
+        //     | EPSILON */
+        // private void optional_unary_expression()
+        // {
+        //     printIfDebug("optional_unary_expression");
+        //     if(pass(TokenType.PUNT_PAREN_OPEN))
+        //     {
+        //         consumeToken();
+        //         if(!pass(typesOptions))
+        //             throwError("type expected");
+        //         types();
+        //         if(!pass(TokenType.PUNT_PAREN_CLOSE))
+        //             throwError(") expected");
+        //         consumeToken();
+        //     }else if(pass(unaryOperatorOptions))
+        //     {
+        //         if(!pass(unaryOperatorOptions))
+        //             throwError("unary operator expected");
+        //         unary_expression();
+        //     }else{
+        //         //EPSILON
+        //     }
+        // }
     }
 }

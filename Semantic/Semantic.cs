@@ -57,6 +57,7 @@ namespace Compiler
         {
             foreach (var tree in trees)
             {
+                tree.Value.defaultNamespace.addParentUsings(tree.Value.usingDirectives);
                 foreach (var ns in tree.Value.namespaceDeclared)
                 {
                     if(ns.parentNamespace == null)

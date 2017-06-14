@@ -9,10 +9,7 @@ using Compiler.TreeNodes.Expressions.UnaryExpressions.Literals;
 namespace Compiler.TreeNodes.Types
 {
     public class EnumTypeNode : TypeNode
-    {
-        [XmlElement(typeof(IdNode))]
-        public IdNode Identifier;
-        
+    {   
         [XmlArray("Items"),
         XmlArrayItem("EnumItem")]
         public List<EnumNode> EnumItems;
@@ -24,11 +21,11 @@ namespace Compiler.TreeNodes.Types
             this.token = token;
         }
 
-        public override void Evaluate(API api)//TODO
+        public override void Evaluate(API api)
         {
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             if(!Utils.isValidEncapsulation(this.encapsulation,TokenType.RW_PUBLIC))
-                Utils.ThrowError("Elements defined in a namespace cannot be explicitly declared as private or protected; Enum: "
+                Utils.ThrowError("Elements defined in a namespace cannot be declared as private or protected; Enum: "
                 +this.Identifier.Name+" ("+thisDeclarationPath+") ");
             Dictionary<string,EnumNode> enums = new Dictionary<string,EnumNode>();
             foreach (var item in this.EnumItems)
@@ -41,6 +38,11 @@ namespace Compiler.TreeNodes.Types
                     Utils.ThrowError("The value for ("+thisDeclarationPath+")["+ this.Identifier.Name+"."
                     +item.Identifier.Name +"]"+item.token.getLine()+" Enum Assignment should be constant-Literal-Int");
             }
+        }
+
+        public override string ToString()
+        {
+            return Identifier.Name;
         }
     }
 }

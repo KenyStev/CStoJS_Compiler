@@ -326,7 +326,7 @@ namespace Compiler
                 var identifier = qualified_identifier();
                 type = new AbstractTypeNode(identifier,identifierToken);
             }else{
-                type = new PrimitiveTypeNode(token);
+                type = types();
                 consumeToken();
             }
             return instance_expression_factorized(type,identifierToken);

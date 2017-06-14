@@ -68,6 +68,82 @@ namespace Compiler.SemanticAPI
             }
         }
 
+        public void hasCycleInheritance(string name, Dictionary<string, TypeNode> parents)
+        {
+            if(parents==null)return;
+            foreach (var parent in parents)
+            {
+                hasCycleInheritance(name,parent);
+            }
+        }
+
+        public void hasCycleInheritance(string name, KeyValuePair<string, TypeNode> parent)
+        {
+            if(parent.Value is InterfaceTypeNode)
+            {
+                if(name == parent.Value.Identifier.Name)
+                    Utils.ThrowError("Inherited interface '"+parent.Value.Identifier.Name+"' causes a cycle in the interface hierarchy of '"+ name +"'");
+                hasCycleInheritance(name,((InterfaceTypeNode)parent.Value).parents);
+            }else if(parent.Value is ClassTypeNode)
+            {
+                if(name == parent.Value.Identifier.Name)
+                    Utils.ThrowError("Inherited class '"+parent.Value.Identifier.Name+"' causes a cycle in the class hierarchy of '"+ name +"'");
+                // hasCycleInheritance(name,((ClassTypeNode)parent.Value).parents);//TODO
+            }
+        }
+
+        public string buildMethodName(MethodHeaderNode methodDe)
+        {
+            var nameDefinition = methodDe.Identifier.Name + "(";
+            List<string> typesParams = new List<string>();
+            if(methodDe.fixedParams != null)
+            {
+                foreach (var parameter in methodDe.fixedParams)
+                {
+                    typesParams.Add(parameter.DataType.ToString());
+                }
+            }
+            return nameDefinition + string.Join(",",typesParams) + ")";
+        }
+
+        public TypeNode getTypeForIdentifier(string name, List<string> usingDirectivesList,NamespaceNode myNs)
+        {
+            if(myNs.Identifier.Name!="default")usingDirectivesList.Insert(0,myNs.Identifier.Name);
+            foreach (var usd in usingDirectivesList)
+            {
+                if(Singleton.typesTable.ContainsKey(usd+"."+name))
+                    return Singleton.typesTable[usd+"."+name];
+            }
+            if(Singleton.typesTable.ContainsKey(name))
+                return Singleton.typesTable[name];
+            return null;
+        }
+
+        public NamespaceNode getNamespaceForType(TypeNode typeNode)
+        {
+            foreach (var tree in trees)
+            {
+                foreach (var entry in tree.Value.defaultNamespace.typesDeclarations)
+                {
+                    if(entry == typeNode)
+                    {
+                        return tree.Value.defaultNamespace;
+                    }
+                }
+                foreach (var ns in tree.Value.namespaceDeclared)
+                {
+                    foreach (var entry in ns.typesDeclarations)
+                    {
+                        if(entry == typeNode)
+                        {
+                            return ns;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
         public string getDeclarationPathForType(TypeNode typeNode)
         {
             string path = "";
