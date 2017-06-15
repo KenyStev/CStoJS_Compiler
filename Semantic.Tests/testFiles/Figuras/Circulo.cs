@@ -1,7 +1,7 @@
 using N1;
 
 namespace Figuras{
-	public class Circulo : Figura{
+	public class Circulo : insideFiguras.Otra{
 		public int field1;
 		public string field2;
 		public static float field3;
@@ -13,6 +13,15 @@ namespace Figuras{
 	namespace insideFiguras{
 		public interface Types{
 			
+		}
+
+		public class Otra
+		{
+
+		}
+		public class Otra2
+		{
+
 		}
 	}
 }

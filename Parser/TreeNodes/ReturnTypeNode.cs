@@ -23,5 +23,15 @@ namespace Compiler.TreeNodes
             this.IsVoid = isVoid;
             this.token = token;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is ReturnTypeNode)
+            {
+                var o = obj as ReturnTypeNode;
+                return DataType.Equals(o.DataType);
+            }
+            return false;
+        }
     }
 }

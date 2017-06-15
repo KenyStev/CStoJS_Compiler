@@ -99,8 +99,8 @@ namespace Compiler.TreeNodes.Types
 
         public override string ToString()
         {
-            // return Identifier.Name;
-            return "InterfaceType";
+            return Identifier.Name;
+            // return "InterfaceType";
         }
 
         public override bool Equals(object obj)

@@ -27,5 +27,10 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             this.attributes = attr;
             this.token = token;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

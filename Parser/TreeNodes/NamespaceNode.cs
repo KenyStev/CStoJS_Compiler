@@ -51,15 +51,17 @@ namespace Compiler.TreeNodes
         private IdNode getFullNamespaceName(IdNode father, IdNode id)
         {
             string fatherName = father.Name;
-            foreach(var a in father.attributes)
-            {
-                fatherName += "."+a.Name;
-            }
+            if(father.attributes!=null)
+                foreach(var a in father.attributes)
+                {
+                    fatherName += "."+a.Name;
+                }
             string nsName = fatherName + "." + id.Name;
-            foreach(var a in id.attributes)
-            {
-                nsName += "."+a.Name;
-            }
+            if(id.attributes!=null)
+                foreach(var a in id.attributes)
+                {
+                    nsName += "."+a.Name;
+                }
             return new IdNode(nsName,id.token);
         }
 

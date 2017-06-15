@@ -153,7 +153,7 @@ namespace Compiler
             {
                 fullIdName += "." + a.Name;
             }
-            return new IdNode(fullIdName,attr,idToken);
+            return new IdNode(fullIdName,null,idToken);
         }
 
         /*identifier-attribute:
@@ -183,7 +183,7 @@ namespace Compiler
         private List<IdNode> identifiers_list()
         {
             var idnode = qualified_identifier();
-            idnode = getFullIdentifierName(idnode);
+            // idnode = getFullIdentifierName(idnode);
             var lisIdNodes = identifiers_list_p();
             lisIdNodes.Insert(0,idnode);
             return lisIdNodes;
@@ -198,7 +198,7 @@ namespace Compiler
             {
                 consumeToken();
                 var idnode = qualified_identifier();
-                idnode = getFullIdentifierName(idnode);
+                // idnode = getFullIdentifierName(idnode);
                 var listIdNode = identifiers_list_p();
                 listIdNode.Insert(0,idnode);
                 return listIdNode;

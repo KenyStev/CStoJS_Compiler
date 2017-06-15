@@ -14,5 +14,15 @@ namespace Compiler.TreeNodes
             this.type = type;
             this.token = token;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is EncapsulationNode)
+            {
+                var o = obj as EncapsulationNode;
+                return o.type == type;
+            }
+            return false;
+        }
     }
 }

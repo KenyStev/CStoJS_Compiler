@@ -17,6 +17,7 @@ namespace Compiler
             var usingToken = token;
             consumeToken();
             var idValue = qualified_identifier();
+            // idValue = getFullIdentifierName(idValue);
             if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                 throwError("; expected");
             consumeToken();

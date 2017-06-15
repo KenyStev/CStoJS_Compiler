@@ -17,6 +17,13 @@ namespace Compiler
             return encapsulation.type == encapsulationType;
         }
 
+        public static bool isValidEncapsulationForClass(EncapsulationNode encapsulation, TokenType encapsulationType)
+        {
+            if(encapsulation == null)
+                return true;
+            return encapsulation.type == encapsulationType;
+        }
+
         public static string txtIncludes = @"
             namespace System {
                 namespace IO{

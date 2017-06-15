@@ -20,6 +20,7 @@ namespace Compiler
             var parser = new Parser(lexer);
             // trees.Add(parser.parse());
             trees["IncludesDefault"] = parser.parse();
+            trees["IncludesDefault"].setOriginFile("IncludesDefault");
 
 
             string currentFile = "";
@@ -70,6 +71,7 @@ namespace Compiler
                         ns.addParentUsings(tree.Value.usingDirectives);
                     }else{
                         ns.addParentUsings(ns.parentNamespace.usingDirectives);
+                        ns.usingDirectives.Add(new UsingNode(ns.parentNamespace.Identifier,ns.parentNamespace.Identifier.token));
                     }
                 }
             }
@@ -115,10 +117,13 @@ namespace Compiler
                 foreach (var tree in trees)
                 {
                     currentFile = tree.Value.origin;
-                    tree.Value.defaultNamespace.Evaluate(api);
-                    foreach (var ns in tree.Value.namespaceDeclared)
+                    if(currentFile!="IncludesDefault")
                     {
-                        ns.Evaluate(api);
+                        tree.Value.defaultNamespace.Evaluate(api);
+                        foreach (var ns in tree.Value.namespaceDeclared)
+                        {
+                            ns.Evaluate(api);
+                        }
                     }
                 }
             }catch(SemanticException ex){

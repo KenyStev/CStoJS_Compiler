@@ -180,10 +180,11 @@ namespace Compiler
         private IdNode getFullIdentifierName(IdNode id)
         {
             string idName = id.Name;
-            foreach(var a in id.attributes)
-            {
-                idName += "."+a.Name;
-            }
+            if(id.attributes!=null)
+                foreach(var a in id.attributes)
+                {
+                    idName += "."+a.Name;
+                }
             return new IdNode(idName,id.token);
         }
     }
