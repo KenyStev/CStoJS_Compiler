@@ -1,3 +1,7 @@
+using System;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
+
 namespace Compiler.TreeNodes.Expressions
 {
     public class NullCoalescingExpressionNode : ExpressionNode
@@ -11,6 +15,11 @@ namespace Compiler.TreeNodes.Expressions
         {
             this.nullableExpression = nullableExpression;
             this.rightExpression = rightExpression;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

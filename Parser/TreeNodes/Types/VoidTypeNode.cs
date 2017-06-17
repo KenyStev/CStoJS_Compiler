@@ -25,5 +25,10 @@ namespace Compiler.TreeNodes.Types
         {
             return obj is VoidTypeNode;
         }
+
+        public override string getComparativeType()
+        {
+            return Utils.Void;
+        }
     }
 }

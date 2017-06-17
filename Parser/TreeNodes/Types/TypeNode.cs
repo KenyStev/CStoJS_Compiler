@@ -21,5 +21,6 @@ namespace Compiler.TreeNodes.Types
         }
 
         public abstract void Evaluate(API api);
+        public abstract string getComparativeType();
     }
 }

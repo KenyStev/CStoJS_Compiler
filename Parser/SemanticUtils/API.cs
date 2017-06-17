@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI.ContextUtils;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Statements;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.SemanticAPI
@@ -9,9 +11,57 @@ namespace Compiler.SemanticAPI
     {
         private Dictionary<string, CompilationUnitNode> trees;
 
+        public Context buildContextForClass(TypeNode typeNode)
+        {
+            var path = getDeclarationPathForType(typeNode);
+
+            var newContext = new Context( typeNode.Identifier.Name, ContextType.CLASS,
+                                getFieldsForClass(typeNode as ClassTypeNode,path),
+                                getConstructorsForClass(typeNode as ClassTypeNode,path),
+                                getMethodsForType(typeNode,path)
+                                );
+            if(newContext.name!="Object")
+            {
+                var c = typeNode as ClassTypeNode;
+                Context parentContext=null;
+                foreach (var parent in c.parents)
+                {
+                    if(parent.Value is ClassTypeNode)
+                    {
+                        parentContext = buildContextForClass(parent.Value);
+                        break;
+                    }
+                }
+                newContext.parentContext = parentContext;
+            }
+
+            return newContext;
+        }
+
+        public ContextManager contextManager;
+
+        public List<string> assignmentRules;
+
         public API(Dictionary<string, CompilationUnitNode> trees)
         {
             this.trees = trees;
+            setAssigmentRules();
+        }
+
+        public void setAssigmentRules()
+        {
+            assignmentRules = new List<string>();
+            assignmentRules.Add(Utils.Bool + "," + Utils.Bool);
+            assignmentRules.Add(Utils.String + "," + Utils.String);
+            assignmentRules.Add(Utils.Float + "," + Utils.Int);
+            assignmentRules.Add(Utils.Float + "," + Utils.Float);
+            assignmentRules.Add(Utils.Float + "," + Utils.Char);
+            assignmentRules.Add(Utils.Char + "," + Utils.Char);
+            assignmentRules.Add(Utils.Int + "," + Utils.Char);
+            assignmentRules.Add(Utils.Int + "," + Utils.Int);
+            assignmentRules.Add(Utils.Class + "," + Utils.Null);
+            assignmentRules.Add(Utils.String + "," + Utils.Null);
+            assignmentRules.Add(Utils.Enum + "," + Utils.Enum);
         }
 
         public void setNamespaces(KeyValuePair<string, CompilationUnitNode> tree)
@@ -68,6 +118,44 @@ namespace Compiler.SemanticAPI
             }
         }
 
+        public void initContext()
+        {
+            contextManager = new ContextManager(this);
+        }
+
+        public Dictionary<string, FieldNode> getFieldsForClass(ClassTypeNode classType, string path)
+        {
+            Dictionary<string, FieldNode> my_fields = new Dictionary<string, FieldNode>();
+            foreach (var f in classType.Fields)
+            {
+                if(my_fields.ContainsKey(f.identifier.Name))
+                    Utils.ThrowError(path+": The type '"+classType.Identifier.Name
+                    +"' already contains a definition for '"+f.identifier.Name+"'");
+                my_fields[f.identifier.Name] = f;
+            }
+            return my_fields;
+        }
+
+        public Dictionary<string, ConstructorNode> getConstructorsForClass(ClassTypeNode classType, string path)
+        {
+            Dictionary<string, ConstructorNode> ctrs = new Dictionary<string, ConstructorNode>();
+            foreach (var ct in classType.Constructors)
+            {
+                string ctrName = ct.identifier.Name + buildFixedParams(ct.parameters);
+                if(ctrs.ContainsKey(ctrName))
+                    Utils.ThrowError(getDeclarationPathForType(classType)+": Type '"+classType.Identifier.Name
+                    +"' already defines a member called '.ctor' with the same parameter types '"+ctrName+"'");
+                ctrs[ctrName] = ct;
+            }
+            if(ctrs.Count==0)
+            {
+                var token = new Token(TokenType.RW_PUBLIC,"public",0,0);
+                ctrs[classType.Identifier.Name+"()"] = new ConstructorNode(classType.Identifier, null,null
+                ,new StatementBlockNode(),token);
+            }
+            return ctrs;
+        }
+
         public Dictionary<string, MethodNode> getMethodsForType(TypeNode typeNode,string path)
         {
             var methodlist = new Dictionary<string,MethodNode>();
@@ -100,7 +188,7 @@ namespace Compiler.SemanticAPI
             return methodlist;
         }
 
-        public void checkFixedParameters(MethodHeaderNode methodDe, NamespaceNode myNs)
+        public void checkFixedParametersForMethod(MethodHeaderNode methodDe, NamespaceNode myNs)
         {
             TypeNode type = methodDe.returnType.DataType;
             if(methodDe.returnType.DataType is ArrayTypeNode)
@@ -114,9 +202,14 @@ namespace Compiler.SemanticAPI
                 +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
                 +methodDe.returnType.DataType.token.getLine()+")");
             if(methodDe.fixedParams==null)return;
-            foreach (var fixedParam in methodDe.fixedParams)
+            checkFixedParameters(methodDe.fixedParams,myNs);
+        }
+
+        public void checkFixedParameters(List<ParameterNode> parameters, NamespaceNode myNs)
+        {
+            foreach (var fixedParam in parameters)
             {
-                type = fixedParam.DataType;
+                var type = fixedParam.DataType;
                 if(fixedParam.DataType is ArrayTypeNode)
                 {
                     var t = fixedParam.DataType as ArrayTypeNode;
@@ -204,16 +297,21 @@ namespace Compiler.SemanticAPI
 
         public string buildMethodName(MethodHeaderNode methodDe)
         {
-            var nameDefinition = methodDe.Identifier.Name + "(";
+            var nameDefinition = methodDe.Identifier.Name;
+            return nameDefinition + buildFixedParams(methodDe.fixedParams);
+        }
+
+        private string buildFixedParams(List<ParameterNode> fixedParams)
+        {
             List<string> typesParams = new List<string>();
-            if(methodDe.fixedParams != null)
+            if(fixedParams != null)
             {
-                foreach (var parameter in methodDe.fixedParams)
+                foreach (var parameter in fixedParams)
                 {
                     typesParams.Add(parameter.DataType.ToString());
                 }
             }
-            return nameDefinition + string.Join(",",typesParams) + ")";
+            return "(" + string.Join(",",typesParams) + ")";
         }
 
         public TypeNode getTypeForIdentifier(string name, List<string> usingDirectivesList,NamespaceNode myNs)

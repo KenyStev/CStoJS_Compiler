@@ -2,7 +2,7 @@ using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.TypeTestingExpressions
 {
-    public class TypeTestingExpressionNode : ExpressionNode
+    public abstract class TypeTestingExpressionNode : ExpressionNode
     {
         public ExpressionNode leftExpression;
         public TypeNode type;

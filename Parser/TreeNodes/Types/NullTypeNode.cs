@@ -25,5 +25,10 @@ namespace Compiler.TreeNodes.Types
         {
             return obj is NullTypeNode;
         }
+
+        public override string getComparativeType()
+        {
+            return Utils.Null;
+        }
     }
 }

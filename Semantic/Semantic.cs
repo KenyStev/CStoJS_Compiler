@@ -112,6 +112,7 @@ namespace Compiler
 
         private void evaluateNamespaces()
         {
+            api.initContext();
             string currentFile = "";
             try{
                 foreach (var tree in trees)

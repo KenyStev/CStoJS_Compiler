@@ -1,6 +1,6 @@
 namespace Compiler.TreeNodes.Expressions.AdditiveExpressions
 {
-    public class AdditiveExpressionNode : BinaryOperatorNode
+    public abstract class AdditiveExpressionNode : BinaryOperatorNode
     {
         public AdditiveExpressionNode(){}
         public AdditiveExpressionNode(ExpressionNode leftExpression, 

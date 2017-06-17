@@ -1,3 +1,7 @@
+using System;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
+
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 {
     public class InlineExpressionNode : UnaryExpressionNode
@@ -12,6 +16,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             this.primary = primary;
             this.nextExpression = null;
             this.token = token;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

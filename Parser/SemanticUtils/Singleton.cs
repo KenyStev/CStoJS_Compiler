@@ -22,5 +22,10 @@ namespace Compiler
         {
             typesTable[name] = newType;
         }
+
+        public static TypeNode getTypeNode(string nameType)
+        {
+            return typesTable[nameType];
+        }
     }
 }

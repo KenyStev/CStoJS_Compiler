@@ -23,6 +23,7 @@ namespace Compiler.TreeNodes.Types
             this.DataType = type;
             this.multidimsArrays = multidimsArrays;
             this.token = token;
+            this.Identifier = type.Identifier;
         }
 
         public override void Evaluate(API api)//TODO
@@ -56,6 +57,11 @@ namespace Compiler.TreeNodes.Types
                 }
             }
             return false;
+        }
+
+        public override string getComparativeType()
+        {
+            return Utils.Array;
         }
     }
 }

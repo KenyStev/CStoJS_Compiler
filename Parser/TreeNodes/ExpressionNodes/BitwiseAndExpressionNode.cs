@@ -1,16 +1,11 @@
 namespace Compiler.TreeNodes.Expressions
 {
-    public class BitwiseAndExpressionNode : ExpressionNode
+    public class BitwiseAndExpressionNode : BinaryOperatorNode
     {
-        public ExpressionNode leftExpression;
-        public ExpressionNode equalityExpression;
-
-         BitwiseAndExpressionNode(){}
+        BitwiseAndExpressionNode(){}
         public BitwiseAndExpressionNode(ExpressionNode leftExpression, ExpressionNode equalityExpression,
-        Token token) : base(token)
+        Token token) : base(leftExpression,equalityExpression,token)
         {
-            this.leftExpression = leftExpression;
-            this.equalityExpression = equalityExpression;
         }
     }
 }

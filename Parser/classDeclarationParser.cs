@@ -175,6 +175,9 @@ namespace Compiler
                 currentClassType.addMethod(newMethodDeclared);
             }else{
                 var isStatic = (modifier!=null)?modifier.token.type==TokenType.RW_STATIC:false;
+                if(modifier!=null && !isStatic)
+                    Utils.ThrowError("The modifier '"+modifier.token.lexeme
+                    +"' is not valid on fields. Try using a property instead.");
                 var fieldDeclarationList = field_declaration(type,Identifier,encapsulation,isStatic);
                 currentClassType.addFields(fieldDeclarationList);
             }

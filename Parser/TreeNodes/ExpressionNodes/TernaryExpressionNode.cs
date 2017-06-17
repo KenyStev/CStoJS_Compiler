@@ -1,3 +1,7 @@
+using System;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
+
 namespace Compiler.TreeNodes.Expressions
 {
     public class TernaryExpressionNode : ExpressionNode
@@ -13,6 +17,11 @@ namespace Compiler.TreeNodes.Expressions
             this.conditionalExpression = conditionalExpression;
             this.trueExpression = trueExpression;
             this.falseExpression = falseExpression;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

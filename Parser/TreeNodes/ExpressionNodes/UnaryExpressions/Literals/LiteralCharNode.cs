@@ -1,4 +1,7 @@
+using System;
 using System.Xml.Serialization;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
 {
@@ -10,6 +13,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
         public LiteralCharNode(string IntValue,Token token) : base(token)
         {
             char.TryParse(IntValue,out this.Value);
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

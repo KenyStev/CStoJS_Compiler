@@ -1,10 +1,26 @@
 using System;
+using Compiler.SemanticAPI.ContextUtils;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler
 {
     public class Utils
     {
+        public const string Bool = "BoolType";
+        public const string Char = "CharType";
+        public const string Float = "FloatType";
+        public const string Int = "IntType";
+
+        public const string String = "StringType";
+        public const string Class = "ClassType";
+        public const string Interface = "InterfaceType";
+        public const string Enum = "EnumType";
+        public const string Null = "NullType";
+        public static string Void = "VoidType";
+        public static string Array = "ArrayType";
+        public static string Var = "VarType";
+        public static string[] primitives = {Bool, Char, Float,Int};
         public static void ThrowError(string message)
         {
             throw new SemanticException(message);
@@ -80,5 +96,10 @@ namespace Compiler
                 public override string ToString(){}
             }
             ";
+
+        public static string getNameForType(TypeNode type)
+        {
+            return (type is ArrayTypeNode)?((ArrayTypeNode)type).DataType.ToString():type.ToString();
+        }
     }
 }

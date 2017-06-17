@@ -1,3 +1,7 @@
+using System;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
+
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 {
     public class PostAdditiveExpressionNode : PrimaryExpressionNode
@@ -11,6 +15,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
         {
             this.primary = null;
             this.type = type;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

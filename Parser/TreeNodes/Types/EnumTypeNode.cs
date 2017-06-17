@@ -43,7 +43,11 @@ namespace Compiler.TreeNodes.Types
         public override string ToString()
         {
             return Identifier.Name;
-            // return "EnumType";
+        }
+
+        public string getDefinitionType()
+        {
+            return "EnumType";
         }
 
         public override bool Equals(object obj)
@@ -54,6 +58,11 @@ namespace Compiler.TreeNodes.Types
                 return Identifier.Name == o.Identifier.Name;
             }
             return false;
+        }
+
+        public override string getComparativeType()
+        {
+            return Utils.Enum;
         }
     }
 }

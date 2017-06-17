@@ -23,5 +23,10 @@ namespace Compiler.TreeNodes.Types
         {
             return obj is FloatTypeNode;
         }
+
+        public override string getComparativeType()
+        {
+            return Utils.Float;
+        }
     }
 }

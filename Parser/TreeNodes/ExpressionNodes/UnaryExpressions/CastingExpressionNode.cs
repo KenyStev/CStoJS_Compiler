@@ -1,3 +1,5 @@
+using System;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
@@ -13,6 +15,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
         {
             this.targetCastType = targetCastType;
             this.expresion = exp;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

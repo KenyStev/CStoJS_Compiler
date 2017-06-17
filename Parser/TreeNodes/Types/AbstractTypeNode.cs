@@ -24,6 +24,11 @@ namespace Compiler.TreeNodes.Types
             return Identifier.Name;
         }
 
+        public string getDefinitionType()
+        {
+            return "AbstractType";
+        }
+
         public override bool Equals(object obj)
         {
             if(obj is AbstractTypeNode)
@@ -32,6 +37,11 @@ namespace Compiler.TreeNodes.Types
                 return o.Identifier.attributes[o.Identifier.attributes.Count-1].Name == Identifier.Name;
             }
             return false;
+        }
+
+        public override string getComparativeType()
+        {
+            throw new NotImplementedException();
         }
     }
 }

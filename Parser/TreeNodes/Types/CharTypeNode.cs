@@ -23,5 +23,10 @@ namespace Compiler.TreeNodes.Types
         {
             return obj is CharTypeNode;
         }
+
+        public override string getComparativeType()
+        {
+            return Utils.Char;
+        }
     }
 }

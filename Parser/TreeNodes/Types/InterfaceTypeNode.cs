@@ -67,7 +67,7 @@ namespace Compiler.TreeNodes.Types
                     methodDe.Identifier.Name+"' with the same parameter types ["+myNs.Identifier.Name+"]("
                     +thisDeclarationPath+")");
                 this.methods[methodName] = methodDe;
-                api.checkFixedParameters(methodDe,myNs);
+                api.checkFixedParametersForMethod(methodDe,myNs);
             }
         }
 
@@ -100,7 +100,11 @@ namespace Compiler.TreeNodes.Types
         public override string ToString()
         {
             return Identifier.Name;
-            // return "InterfaceType";
+        }
+
+        public string getDefinitionType()
+        {
+            return "InterfaceType";
         }
 
         public override bool Equals(object obj)
@@ -111,6 +115,11 @@ namespace Compiler.TreeNodes.Types
                 return Identifier.Name == o.Identifier.Name;
             }
             return false;
+        }
+
+        public override string getComparativeType()
+        {
+            return Utils.Interface;
         }
     }
 }

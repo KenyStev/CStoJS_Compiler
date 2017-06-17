@@ -1,6 +1,6 @@
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 {
-    public class UnaryExpressionNode : ExpressionNode
+    public abstract class UnaryExpressionNode : ExpressionNode
     {
 
         public UnaryExpressionNode(){}

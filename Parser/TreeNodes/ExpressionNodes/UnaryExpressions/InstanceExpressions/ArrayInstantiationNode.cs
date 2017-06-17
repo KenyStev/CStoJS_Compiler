@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
@@ -27,6 +29,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
             this.type = type;
             this.arrayType = arrayType;
             this.initialization = arrayInitializer;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

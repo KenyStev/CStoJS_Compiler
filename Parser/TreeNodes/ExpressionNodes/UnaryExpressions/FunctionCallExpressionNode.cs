@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 {
@@ -13,6 +16,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
         {
             this.identifier = null;
             this.arguments = arguments;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

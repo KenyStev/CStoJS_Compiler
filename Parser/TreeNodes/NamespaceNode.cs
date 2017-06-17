@@ -99,9 +99,10 @@ namespace Compiler.TreeNodes
             foreach (var typeDef in typesDeclarations)
             {
                 try{
+                    api.contextManager.backContextToObject();
                     typeDef.Evaluate(api);
                 }catch(NotImplementedException ex){
-                    Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+")");
+                    Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+") -> "+ex.StackTrace);
                 }
             }
         }

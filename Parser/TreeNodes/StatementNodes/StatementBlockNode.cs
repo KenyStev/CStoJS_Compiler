@@ -6,7 +6,7 @@ namespace Compiler.TreeNodes.Statements
     {
         public List<StatementNode> statements;
 
-        private StatementBlockNode(){}
+        public StatementBlockNode(){}
         public StatementBlockNode(List<StatementNode> statements,Token token) : base(token)
         {
             this.statements = statements;

@@ -1,15 +1,11 @@
 namespace Compiler.TreeNodes.Expressions
 {
-    public class ExclusiveOrExpression : ExpressionNode
+    public class ExclusiveOrExpression : BinaryOperatorNode
     {
-        public ExpressionNode leftExpression;
-        public ExpressionNode bitsAnd;
-
         private ExclusiveOrExpression(){}
-        public ExclusiveOrExpression(ExpressionNode leftExpression, ExpressionNode bitsAnd,Token token) : base(token)
+        public ExclusiveOrExpression(ExpressionNode leftExpression, ExpressionNode bitsAnd,Token token) : 
+        base(leftExpression,bitsAnd,token)
         {
-            this.leftExpression = leftExpression;
-            this.bitsAnd = bitsAnd;
         }
     }
 }

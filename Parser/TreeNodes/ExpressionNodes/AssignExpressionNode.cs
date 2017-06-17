@@ -1,4 +1,7 @@
+using System;
 using System.Xml.Serialization;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions
 {
@@ -15,6 +18,11 @@ namespace Compiler.TreeNodes.Expressions
             this.unaryExpression = unaryExpression;
             this.assignType = assignType;
             this.assignExpression = assignExpression;
+        }
+
+        public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -76,7 +76,75 @@ namespace Compiler.TreeNodes.Types
             checkInheritance(api,myNs);
             verifyCycleInheritance(api,myNs);
             checkParents(api,myNs);
+            api.contextManager.pushContext(api.buildContextForClass(this));
+            checkFields(api,myNs);
+            checkConstructors(api,myNs);
             checkMethods(api,myNs);
+            api.contextManager.backContextToObject();
+        }
+
+        private void checkFields(API api, NamespaceNode myNs)
+        {
+            var path = api.getDeclarationPathForType(this);
+            Dictionary<string,FieldNode> my_fields = api.getFieldsForClass(this,path+" "+Identifier.token.getLine());
+            foreach (var field in my_fields)
+            {
+                var f = field.Value;
+                if(f.type is VoidTypeNode)
+                    Utils.ThrowError("Field cannot have void type ["+myNs.Identifier.Name+"] "+f.type.token.getLine());
+                var typeName =  Utils.getNameForType(f.type);
+                var typeNode = api.getTypeForIdentifier(typeName,myNs.usingDirectivesList(),myNs);
+                if(typeNode==null)
+                    Utils.ThrowError("The type or namespace name '"+ typeName 
+                    +"' could not be found (are you missing a using directive or an assembly reference?) ["
+                    +myNs.Identifier.Name+"]: "+f.type.token.getLine());
+                if(typeNode is InterfaceTypeNode || typeNode is VoidTypeNode)
+                    Utils.ThrowError("The type '" + typeNode.ToString()+ "' is not valid for field " 
+                    + field.Value.identifier.Name.ToString() + " in class " + Identifier.Name.ToString() 
+                    + ". "+ f.type.token.getLine());
+                if(typeNode is ClassTypeNode && Utils.isValidEncapsulationForClass(((ClassTypeNode)typeNode).encapsulation,TokenType.RW_PRIVATE))
+                    Utils.ThrowError("The type '" + typeName + "' can't be reached due to encapsulation level. "+ f.type.token.getLine());
+            }
+            checkFieldsAssignment(api,my_fields,myNs);
+        }
+
+        private void checkFieldsAssignment(API api, Dictionary<string, FieldNode> my_fields, NamespaceNode myNs)
+        {
+            checkStaticFields(api,my_fields,myNs);
+            checkNonStaticFields(api,my_fields,myNs);
+        }
+
+        private void checkStaticFields(API api, Dictionary<string, FieldNode> my_fields, NamespaceNode myNs)
+        {
+            foreach (var field in my_fields)
+            {
+                if(field.Value.isStatic && field.Value.assigner!=null)
+                {
+                    var assigner = field.Value.assigner;
+                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,this,true); //TODO
+                }
+            }
+        }
+
+        private void checkNonStaticFields(API api, Dictionary<string, FieldNode> my_fields, NamespaceNode myNs)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void checkConstructors(API api, NamespaceNode myNs)
+        {
+            var path = api.getDeclarationPathForType(this);
+            var my_constructors = api.getConstructorsForClass(this,path+" "+Identifier.token.getLine());
+            foreach (var ct in my_constructors)
+            {
+                api.checkFixedParameters(ct.Value.parameters,myNs);
+            }
+            checkConstructorsBody(api,my_constructors,myNs);
+        }
+
+        private void checkConstructorsBody(API api, Dictionary<string, ConstructorNode> my_constructors, NamespaceNode myNs)
+        {
+            throw new NotImplementedException();//TODO
         }
 
         private void checkMethods(API api, NamespaceNode myNs)
@@ -112,8 +180,14 @@ namespace Compiler.TreeNodes.Types
                         Utils.ThrowError("Modifier 'override' can't be aplied to the method "+childMethodName+" "+method.Value.token.getLine());
                     method.Value.evaluated=true;
                 }
-                api.checkFixedParameters(method.Value.methodHeaderNode,myNs);
+                api.checkFixedParametersForMethod(method.Value.methodHeaderNode,myNs);
             }
+            checkMethodsBody(api, my_methods,myNs);
+        }
+
+        private void checkMethodsBody(API api, Dictionary<string, MethodNode> my_methods, NamespaceNode myNs)
+        {
+            throw new NotImplementedException();//TODO
         }
 
         private void checkParents(API api, NamespaceNode myNs)
@@ -210,7 +284,11 @@ namespace Compiler.TreeNodes.Types
         public override string ToString()
         {
             return Identifier.Name;
-            // return "ClassType";
+        }
+
+        public string getDefinitionType()
+        {
+            return "ClassType";
         }
 
         public override bool Equals(object obj)
@@ -221,6 +299,17 @@ namespace Compiler.TreeNodes.Types
                 return Identifier.Name == o.Identifier.Name;
             }
             return false;
+        }
+
+        public override string getComparativeType()
+        {
+            string[] primitives = { Utils.Bool, Utils.Char, Utils.Float, Utils.String, Utils.Int, Utils.Void, Utils.Var };
+            foreach (string s in primitives)
+            {
+                if (Identifier.token.lexeme == s)
+                    return s;
+            }
+            return Utils.Class;
         }
     }
 }

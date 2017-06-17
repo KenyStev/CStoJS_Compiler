@@ -1,16 +1,11 @@
 namespace Compiler.TreeNodes.Expressions
 {
-    public class ConditionalAndExpressionNode : ExpressionNode
+    public class ConditionalAndExpressionNode : BinaryOperatorNode
     {
-        public ExpressionNode leftExpression;
-        public ExpressionNode bitsOt;
-
         private ConditionalAndExpressionNode(){}
         public ConditionalAndExpressionNode(ExpressionNode leftExpression, ExpressionNode bitsOt,
-        Token token) : base(token)
+        Token token) : base(leftExpression,bitsOt,token)
         {
-            this.leftExpression = leftExpression;
-            this.bitsOt = bitsOt;
         }
     }
 }

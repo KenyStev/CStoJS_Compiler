@@ -8,7 +8,7 @@ namespace Figuras
         {
             public override int connect(int numero)
             {
-                // throw new NotImplementedException();
+                // throw new NotImplementedException();x    
                 return 0;
             }
 

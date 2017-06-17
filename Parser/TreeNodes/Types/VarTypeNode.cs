@@ -25,5 +25,10 @@ namespace Compiler.TreeNodes.Types
         {
             return obj is VarTypeNode;
         }
+
+        public override string getComparativeType()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
