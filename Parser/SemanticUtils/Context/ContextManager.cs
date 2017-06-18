@@ -7,9 +7,12 @@ namespace Compiler.SemanticAPI.ContextUtils
     public class ContextManager
     {
         public Context currentContext;
+        private API api;
+
         public ContextManager(API api)
         {
-            currentContext = api.buildContextForClass(Singleton.getTypeNode("Object"));
+            this.api = api;
+            currentContext = api.buildContextForTypeDeclaration(Singleton.getTypeNode("Object"));
         }
 
         public void pushContext(Context newCurrent)
@@ -26,9 +29,14 @@ namespace Compiler.SemanticAPI.ContextUtils
         public void backContextToObject()
         {
             var temp = currentContext;
-            while(temp.name != "Object")
+            while(temp.contextName != "Object")
                 temp = temp.parentContext;
             currentContext = temp;
+        }
+
+        public FieldNode findVariable(string name)
+        {
+            return currentContext.findVariable(name,null);
         }
     }
 }

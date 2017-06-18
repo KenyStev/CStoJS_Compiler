@@ -10,37 +10,10 @@ namespace Compiler.SemanticAPI
     public class API
     {
         private Dictionary<string, CompilationUnitNode> trees;
-
-        public Context buildContextForClass(TypeNode typeNode)
-        {
-            var path = getDeclarationPathForType(typeNode);
-
-            var newContext = new Context( typeNode.Identifier.Name, ContextType.CLASS,
-                                getFieldsForClass(typeNode as ClassTypeNode,path),
-                                getConstructorsForClass(typeNode as ClassTypeNode,path),
-                                getMethodsForType(typeNode,path)
-                                );
-            if(newContext.name!="Object")
-            {
-                var c = typeNode as ClassTypeNode;
-                Context parentContext=null;
-                foreach (var parent in c.parents)
-                {
-                    if(parent.Value is ClassTypeNode)
-                    {
-                        parentContext = buildContextForClass(parent.Value);
-                        break;
-                    }
-                }
-                newContext.parentContext = parentContext;
-            }
-
-            return newContext;
-        }
-
         public ContextManager contextManager;
 
         public List<string> assignmentRules;
+        public NamespaceNode currentNamespace;
 
         public API(Dictionary<string, CompilationUnitNode> trees)
         {
@@ -118,9 +91,84 @@ namespace Compiler.SemanticAPI
             }
         }
 
+        public void setCurrentNamespace(NamespaceNode namespaceNode)
+        {
+            this.currentNamespace = namespaceNode;
+        }
+
         public void initContext()
         {
             contextManager = new ContextManager(this);
+        }
+
+        public Context buildContextForTypeDeclaration(TypeNode typeNode)
+        {
+            var path = getDeclarationPathForType(typeNode);
+            Context newContext = null;
+            if(typeNode is ClassTypeNode)
+            {
+                newContext = new Context( typeNode.Identifier.Name, ContextType.CLASS,
+                                    getFieldsForClass(typeNode as ClassTypeNode,path),
+                                    getConstructorsForClass(typeNode as ClassTypeNode,path),
+                                    getMethodsForType(typeNode,path)
+                                    );
+                if(newContext.contextName!="Object")
+                {
+                    var c = typeNode as ClassTypeNode;
+                    Context parentContext=null;
+                    foreach (var parent in c.parents)
+                    {
+                        if(parent.Value is ClassTypeNode)
+                        {
+                            parentContext = buildContextForTypeDeclaration(parent.Value);
+                            break;
+                        }
+                    }
+                    newContext.parentContext = parentContext;
+                }
+            }else if(typeNode is InterfaceTypeNode)
+            {
+                newContext = new Context( typeNode.Identifier.Name, ContextType.INTERFACE,null,null,
+                                    getMethodsForType(typeNode,path)
+                                    );
+                if(newContext.contextName!="Object")
+                {
+                    var c = typeNode as InterfaceTypeNode;
+                    if(c.parents!=null && c.parents.Count>0)
+                    {
+                        string key = c.parents.GetEnumerator().Current.Key;
+                        Context parentContextFirst=buildContextForTypeDeclaration(c.parents.GetEnumerator().Current.Value);
+                        Context parentContext = parentContextFirst;
+                        foreach(var parent in c.parents)
+                        {
+                            if(parent.Key!=key)
+                            {
+                                parentContext.parentContext = buildContextForTypeDeclaration(parent.Value);
+                                parentContext = parentContext.parentContext;
+                            }
+                        }
+                        newContext.parentContext = parentContextFirst;
+                    }
+                }
+            }else if(typeNode is EnumTypeNode){
+                newContext = new Context( typeNode.Identifier.Name, ContextType.ENUM,
+                                    getFieldsForEnum(typeNode as EnumTypeNode,path),
+                                    null,null);
+            }
+
+            newContext.api = this;
+            return newContext;
+        }
+
+        private Dictionary<string, FieldNode> getFieldsForEnum(EnumTypeNode enumType, string path)
+        {
+            Dictionary<string, FieldNode> fields = new Dictionary<string, FieldNode>();
+            foreach (var enumeration in enumType.EnumItems)
+            {
+                fields[enumeration.Identifier.Name] = new FieldNode(enumeration.Identifier,enumType,true
+                                ,new EncapsulationNode(TokenType.RW_PUBLIC,null),enumeration.value,enumeration.token);
+            }
+            return fields;
         }
 
         public Dictionary<string, FieldNode> getFieldsForClass(ClassTypeNode classType, string path)
@@ -188,7 +236,7 @@ namespace Compiler.SemanticAPI
             return methodlist;
         }
 
-        public void checkFixedParametersForMethod(MethodHeaderNode methodDe, NamespaceNode myNs)
+        public void checkFixedParametersForMethod(MethodHeaderNode methodDe, NamespaceNode currentNamespace)
         {
             TypeNode type = methodDe.returnType.DataType;
             if(methodDe.returnType.DataType is ArrayTypeNode)
@@ -196,17 +244,18 @@ namespace Compiler.SemanticAPI
                 var t = methodDe.returnType.DataType as ArrayTypeNode;
                 type = t.DataType;
             }
-            TypeNode returnType = getTypeForIdentifier(type.ToString(),myNs.usingDirectivesList(),myNs);
+            TypeNode returnType = getTypeForIdentifier(type.ToString());
             if(returnType==null)
                 Utils.ThrowError("The type name '"+methodDe.returnType.DataType.token.lexeme
-                +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
+                +"' could not be found (are you missing a using directive or an assembly reference?) ["+currentNamespace.Identifier.Name+"]("
                 +methodDe.returnType.DataType.token.getLine()+")");
             if(methodDe.fixedParams==null)return;
-            checkFixedParameters(methodDe.fixedParams,myNs);
+            checkFixedParameters(methodDe.fixedParams,currentNamespace);
         }
 
-        public void checkFixedParameters(List<ParameterNode> parameters, NamespaceNode myNs)
+        public void checkFixedParameters(List<ParameterNode> parameters, NamespaceNode currentNamespace)
         {
+            if(parameters!=null)
             foreach (var fixedParam in parameters)
             {
                 var type = fixedParam.DataType;
@@ -215,10 +264,10 @@ namespace Compiler.SemanticAPI
                     var t = fixedParam.DataType as ArrayTypeNode;
                     type = t.DataType;
                 }
-                TypeNode fixedType = getTypeForIdentifier(type.ToString(),myNs.usingDirectivesList(),myNs);
+                TypeNode fixedType = getTypeForIdentifier(type.ToString());
                 if(fixedType==null)
                     Utils.ThrowError("The type name '"+fixedParam.DataType.token.lexeme
-                    +"' could not be found (are you missing a using directive or an assembly reference?) ["+myNs.Identifier.Name+"]("
+                    +"' could not be found (are you missing a using directive or an assembly reference?) ["+currentNamespace.Identifier.Name+"]("
                     +fixedParam.DataType.token.getLine()+")");
             }
         }
@@ -234,7 +283,7 @@ namespace Compiler.SemanticAPI
             return false;
         }
 
-        public void checkParentMethodOnMe(MethodNode my_method, MethodNode parent_method,TypeNode child, TypeNode parent,NamespaceNode myNs)
+        public void checkParentMethodOnMe(MethodNode my_method, MethodNode parent_method,TypeNode child, TypeNode parent,NamespaceNode currentNamespace)
         {
             if(parent is InterfaceTypeNode)
             {
@@ -242,7 +291,7 @@ namespace Compiler.SemanticAPI
                 {
                     if(!validateModifier(my_method.Modifier,TokenType.RW_VIRTUAL,TokenType.RW_ABSTRACT))
                         Utils.ThrowError("Modifier: "+my_method.Modifier.token.lexeme+" can't be applied to method: "
-                        +buildMethodName(my_method.methodHeaderNode)+" ["+myNs.Identifier.Name+"] "+my_method.Modifier.token.getLine());
+                        +buildMethodName(my_method.methodHeaderNode)+" ["+currentNamespace.Identifier.Name+"] "+my_method.Modifier.token.getLine());
                 }
             }else if(parent is ClassTypeNode)
             {
@@ -250,24 +299,24 @@ namespace Compiler.SemanticAPI
                 var parentMethodName = parent.Identifier.Name+"."+buildMethodName(parent_method.methodHeaderNode);
                 if(!validateModifier(my_method.Modifier,TokenType.RW_OVERRIDE))
                     Utils.ThrowError("'"+childMethodName+"' hides inherited member '"+parentMethodName+"'. To make the current member override that "+
-                    "implementation, add the override keyword. ["+myNs.Identifier.Name+"] "+my_method.token.getLine());
+                    "implementation, add the override keyword. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
                 if(my_method.statemetBlock==null)
                     Utils.ThrowError("'"+childMethodName+"' must declare a body because it is not marked abstract ["
-                    +myNs.Identifier.Name+"] "+my_method.token.getLine());
+                    +currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
                 if(!validateModifier(parent_method.Modifier,TokenType.RW_VIRTUAL,TokenType.RW_ABSTRACT))
                     Utils.ThrowError("'"+childMethodName+"': cannot override inherited member '"+
-                    parentMethodName+"' because it is not marked virtual, abstract. ["+myNs.Identifier.Name+"] "+my_method.token.getLine());
+                    parentMethodName+"' because it is not marked virtual, abstract. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
                 if(parent_method.encapsulation.type==TokenType.RW_PRIVATE)
-                    Utils.ThrowError("'"+childMethodName+"': no suitable method found to override. ["+myNs.Identifier.Name+"] "+ my_method.token.getLine());
+                    Utils.ThrowError("'"+childMethodName+"': no suitable method found to override. ["+currentNamespace.Identifier.Name+"] "+ my_method.token.getLine());
                 if(!my_method.encapsulation.Equals(parent_method.encapsulation))
                     Utils.ThrowError("'"+childMethodName+"': cannot change access modifiers when overriding '"
-                    +parent_method.encapsulation.token.lexeme+"' inherited member '"+parentMethodName+"' ["+myNs.Identifier.Name+"] "+my_method.token.getLine());
+                    +parent_method.encapsulation.token.lexeme+"' inherited member '"+parentMethodName+"' ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
             }
 
             if(!my_method.methodHeaderNode.returnType.Equals(parent_method.methodHeaderNode.returnType))
                 Utils.ThrowError("Method: "+buildMethodName(my_method.methodHeaderNode)
                 +" hide method "+parent.ToString()+"."+buildMethodName(parent_method.methodHeaderNode)
-                +". Not the same return type. ["+myNs.Identifier.Name+"] "+my_method.token.getLine());
+                +". Not the same return type. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
             my_method.evaluated = true;
         }
 
@@ -314,9 +363,10 @@ namespace Compiler.SemanticAPI
             return "(" + string.Join(",",typesParams) + ")";
         }
 
-        public TypeNode getTypeForIdentifier(string name, List<string> usingDirectivesList,NamespaceNode myNs)
+        public TypeNode getTypeForIdentifier(string name)
         {
-            if(myNs.Identifier.Name!="default")usingDirectivesList.Insert(0,myNs.Identifier.Name);
+            var usingDirectivesList = currentNamespace.usingDirectivesList();
+            if(currentNamespace.Identifier.Name!="default")usingDirectivesList.Insert(0,currentNamespace.Identifier.Name);
             foreach (var usd in usingDirectivesList)
             {
                 if(Singleton.typesTable.ContainsKey(usd+"."+name))

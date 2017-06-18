@@ -96,6 +96,7 @@ namespace Compiler.TreeNodes
 
         public void Evaluate(API api)
         {
+            api.setCurrentNamespace(this);
             foreach (var typeDef in typesDeclarations)
             {
                 try{
@@ -105,6 +106,7 @@ namespace Compiler.TreeNodes
                     Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+") -> "+ex.StackTrace);
                 }
             }
+            api.setCurrentNamespace(null);
         }
     }
 }

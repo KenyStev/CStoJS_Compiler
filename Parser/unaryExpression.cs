@@ -35,7 +35,7 @@ namespace Compiler
                 while (typesOptions.Contains(placehold.type) || placehold.type == TokenType.PUNT_ACCESOR
                     || placehold.type == TokenType.PUNT_SQUARE_BRACKET_OPEN || placehold.type == TokenType.PUNT_SQUARE_BRACKET_CLOSE
                     || placehold.type == TokenType.OP_LESS_THAN || placehold.type == TokenType.OP_MORE_THAN
-                    || placehold.type == TokenType.PUNT_COMMA)
+                    || placehold.type == TokenType.PUNT_COMMA || placehold.type == TokenType.PUNT_PAREN_OPEN)
                 {
                     //if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
                     counter++;
@@ -43,7 +43,7 @@ namespace Compiler
                     accept = true;
                 }
                 //if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
-                Token after_close = getNextLookAhead(++counter);//look_ahead[look_ahead.Count() - 1];
+                Token after_close = getNextLookAhead(counter+1);//look_ahead[look_ahead.Count() - 1];
                 if (typesOptions.Contains(look_ahead[first].type) && accept && 
                     (placehold.type == TokenType.PUNT_PAREN_CLOSE)
                     && after_close.type != TokenType.OP_PLUS_PLUS

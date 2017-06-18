@@ -42,6 +42,7 @@ namespace Figuras{
 			int[] jaja = n7[x[0,0]];
 			int jaja1 = n6[0,n5[0,0]];
 			Console.WriteLine(""+5);
+			// this.holaNombre = "hola";
 		}
 
 		void meth(){}
@@ -84,7 +85,7 @@ namespace Figuras{
 
 		public class Otra
 		{
-
+			private string holaNombre;
 		}
 		public class Otra2
 		{

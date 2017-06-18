@@ -11,6 +11,7 @@ namespace Compiler.SemanticAPI.ContextUtils
         CONSTRUCTOR,
         ATTRIBUTE,
         BASE,
-        ITERATIVE
+        ITERATIVE,
+        ENUM
     }
 }

@@ -1,8 +1,12 @@
 using Figuras;
+using N1.N2;
 
 namespace N1{
 
 	public class myClase{
+		static int inaccesibleNode = myClase2.inaccessible;
+		static DIASDELASEMANA otroDia = DIASDELASEMANA.DOMINGO;
+		static myClase NullableAssign = null;
 		static int otronumero2;
 		static int otronumero = numero;
 		static int numero = 9;
@@ -54,7 +58,7 @@ namespace N1{
         using System;
         using System.Buffers;
 		public class myClase2{
-
+			public static int inaccessible = 3;
 		}
 
         namespace N3

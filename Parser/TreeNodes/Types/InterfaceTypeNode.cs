@@ -76,10 +76,9 @@ namespace Compiler.TreeNodes.Types
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             if(inheritanceses!=null)
             {
-                var usingDirectivesList = myNs.usingDirectivesList();
                 foreach (var parent in inheritanceses)
                 {
-                    TypeNode parentTypeNode = api.getTypeForIdentifier(parent.Name,usingDirectivesList,myNs);
+                    TypeNode parentTypeNode = api.getTypeForIdentifier(parent.Name);
                     if(parentTypeNode==null)
                         Utils.ThrowError("The type or namespace name '"+ parent.Name 
                         +"' could not be found (are you missing a using directive or an assembly reference?) ["

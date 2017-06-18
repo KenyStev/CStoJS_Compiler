@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Compiler.SemanticAPI;
+using Compiler.SemanticAPI.ContextUtils;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
@@ -38,7 +39,29 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            throw new NotImplementedException();
+            TypeNode t = null;
+            if(type==null)
+            {
+                FieldNode f = api.contextManager.findVariable(Name);
+                if(f!=null && f.isStatic == isStatic)
+                {
+                    t = f.type;
+                }else{
+                    t = api.getTypeForIdentifier(Name);
+                    if(t!=null)
+                        isStatic=true;
+                }
+            }else{
+                Context staticContext = api.buildContextForTypeDeclaration(type);
+                FieldNode f = staticContext.findVariable(Name,new EncapsulationNode(TokenType.RW_PRIVATE,null));
+                if(f!=null && f.isStatic == isStatic)
+                    t = f.type;
+            }
+
+            if(t == null)
+                Utils.ThrowError("Variable '" + Name + "' could not be found in the current context. "+ token.getLine());
+
+            return t;
         }
     }
 }
