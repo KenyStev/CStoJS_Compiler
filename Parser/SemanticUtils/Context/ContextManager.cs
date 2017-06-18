@@ -38,5 +38,28 @@ namespace Compiler.SemanticAPI.ContextUtils
         {
             return currentContext.findVariable(name,null);
         }
+
+        public void popContext()
+        {
+            currentContext = currentContext.parentContext;
+        }
+
+        public FieldNode findVariableInCurrentContext(string variableName)
+        {
+            return currentContext.findVariableJustHere(variableName);
+        }
+
+        public string getCurrentClassContextName()
+        {
+            Context temp = currentContext;
+            while(temp.type!=ContextType.CLASS)
+                temp = temp.parentContext;
+            return temp.contextName;
+        }
+
+        public void addVariable(FieldNode variable)
+        {
+            currentContext.addVariable(variable);
+        }
     }
 }

@@ -89,7 +89,12 @@ namespace Compiler
             ExpressionNode exp=null;
             if(old.type==TokenType.RW_RETURN)
                 exp = optional_expression();
-            return new JumpStatementNode(old.type,exp,old);
+            switch(old.type)
+            {
+                case TokenType.RW_BREAK: return new BreakStatementNode(old);
+                case TokenType.RW_CONTINUE: return new ContinueStatementNode(old);
+                default: return new ReturnStatementNode(exp,old);
+            }
         }
 
         /*optional-expression: 

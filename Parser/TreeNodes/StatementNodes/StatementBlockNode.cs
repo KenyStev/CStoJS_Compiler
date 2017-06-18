@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI;
 
 namespace Compiler.TreeNodes.Statements
 {
@@ -10,6 +12,15 @@ namespace Compiler.TreeNodes.Statements
         public StatementBlockNode(List<StatementNode> statements,Token token) : base(token)
         {
             this.statements = statements;
+        }
+
+        public override void Evaluate(API api)
+        {
+            if(statements!=null)
+            foreach (var stmt in statements)
+            {
+                stmt.Evaluate(api);
+            }
         }
     }
 }

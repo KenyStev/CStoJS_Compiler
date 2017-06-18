@@ -96,6 +96,9 @@ namespace Compiler
                 public override string ToString(){}
             }
             ";
+        public static EncapsulationNode privateLevel = new EncapsulationNode(TokenType.RW_PRIVATE,null);
+        public static EncapsulationNode protectedLevel = new EncapsulationNode(TokenType.RW_PROTECTED,null);
+        public static EncapsulationNode publicLevel = new EncapsulationNode(TokenType.RW_PUBLIC,null);
 
         public static string getNameForType(TypeNode type)
         {

@@ -32,19 +32,43 @@ namespace Compiler.SemanticAPI.ContextUtils
             this.methods = dictionary3;
         }
 
-        public FieldNode findVariable(string variableName,EncapsulationNode notToBeEncapsulation)
+        public FieldNode findVariable(string variableName,params EncapsulationNode[] notToBeEncapsulation)
         {
             if(variables.ContainsKey(variableName))
             {
                 var variable =  variables[variableName];
                 if(notToBeEncapsulation==null) return variable;
-                else if(notToBeEncapsulation.Equals(variable.encapsulation))
-                    Utils.ThrowError(""+contextName+"."+variable.identifier.Name+"' is inaccessible due to its protection level ["+api.currentNamespace.Identifier.Name+"]");
+                else
+                {
+                    foreach (var enc in notToBeEncapsulation)
+                    {
+                        if(enc.Equals(variable.encapsulation))
+                            Utils.ThrowError(""+contextName+"."+variable.identifier.Name
+                            +"' is inaccessible due to its protection level ["
+                            +api.currentNamespace.Identifier.Name+"]");
+                    }
+                }
                 return variable;
             }
             else if (parentContext.contextName!="Object")
-                return parentContext.findVariable(variableName,new EncapsulationNode(TokenType.RW_PRIVATE,null));
+                return parentContext.findVariable(variableName,Utils.privateLevel);
             return null;
+        }
+
+        public void addVariable(FieldNode variable)
+        {
+            if(variables.ContainsKey(variable.identifier.Name))
+                Utils.ThrowError("A local variable or function named '"+variable.identifier.Name
+                    +"' is already defined in this scope ["+api.currentNamespace.Identifier.Name+"]");
+            variables[variable.identifier.Name] = variable;
+        }
+
+        public FieldNode findVariableJustHere(string variableName)
+        {
+            FieldNode f = null;
+            if(variables.ContainsKey(variableName))
+                f = variables[variableName];
+            return f;
         }
 
         public override string ToString()

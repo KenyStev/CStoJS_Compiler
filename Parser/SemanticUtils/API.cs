@@ -37,6 +37,20 @@ namespace Compiler.SemanticAPI
             assignmentRules.Add(Utils.Enum + "," + Utils.Enum);
         }
 
+        public Dictionary<string, FieldNode> getFieldsForContext(List<FieldNode> localVariables)
+        {
+            Dictionary<string, FieldNode> fields = new Dictionary<string, FieldNode>();
+            foreach (var field in localVariables)
+            {
+                if(fields.ContainsKey(field.identifier.Name) 
+                || contextManager.findVariableInCurrentContext(field.identifier.Name)!=null)
+                    Utils.ThrowError("A local variable or function named '"+field.identifier.Name
+                    +"' is already defined in this scope ["+currentNamespace.Identifier.Name+"]");
+                fields[field.identifier.Name] = field;
+            }
+            return fields;
+        }
+
         public void setNamespaces(KeyValuePair<string, CompilationUnitNode> tree)
         {
             foreach(var ns in tree.Value.namespaceDeclared)
@@ -158,6 +172,26 @@ namespace Compiler.SemanticAPI
 
             newContext.api = this;
             return newContext;
+        }
+
+        public Context buildContextForConstructor(KeyValuePair<string, ConstructorNode> ctror)
+        {
+            Context newContext = new Context(ctror.Key,ContextType.CONSTRUCTOR
+                                ,getFixedParameters(ctror.Value.parameters),null,null);
+            return newContext;
+        }
+
+        private Dictionary<string, FieldNode> getFixedParameters(List<ParameterNode> parameters)
+        {
+            Dictionary<string, FieldNode> variables = new Dictionary<string, FieldNode>();
+            if(parameters!=null)
+            foreach (var variable in parameters)
+            {
+                if(variables.ContainsKey(variable.paramName.Name))
+                    Utils.ThrowError("The parameter name '"+variable.paramName.Name+"' is a duplicate ["+currentNamespace.Identifier.Name+"] "+variable.token.getLine());
+                variables[variable.paramName.Name] = new FieldNode(variable.paramName,variable.DataType,false,null,null,variable.token);
+            }
+            return variables;
         }
 
         private Dictionary<string, FieldNode> getFieldsForEnum(EnumTypeNode enumType, string path)

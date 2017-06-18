@@ -1,3 +1,5 @@
+using Compiler.SemanticAPI;
+
 namespace Compiler.TreeNodes.Statements
 {
     public abstract class StatementNode
@@ -8,5 +10,7 @@ namespace Compiler.TreeNodes.Statements
         {
             this.token = token;
         }
+
+        public abstract void Evaluate(API api);
     }
 }

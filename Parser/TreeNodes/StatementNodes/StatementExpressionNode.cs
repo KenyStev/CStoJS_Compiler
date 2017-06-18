@@ -1,3 +1,5 @@
+using System;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Expressions;
 
 namespace Compiler.TreeNodes.Statements
@@ -10,6 +12,11 @@ namespace Compiler.TreeNodes.Statements
         public StatementExpressionNode(ExpressionNode expressionNode,Token token) : base(token)
         {
             this.expressionNode = expressionNode;
+        }
+
+        public override void Evaluate(API api)
+        {
+            throw new NotImplementedException();
         }
     }
 }

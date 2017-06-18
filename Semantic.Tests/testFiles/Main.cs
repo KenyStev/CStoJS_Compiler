@@ -3,7 +3,7 @@ using N1.N2;
 
 namespace N1{
 
-	public class myClase{
+	public class myClase : myClase2{
 		static int inaccesibleNode = myClase2.inaccessible;
 		static DIASDELASEMANA otroDia = DIASDELASEMANA.DOMINGO;
 		static myClase NullableAssign = null;
@@ -34,6 +34,7 @@ namespace N1{
 		public void metodo(){
 			// (count)++;
 			// ((parent)child).print();
+			base.basePrueba = 5;
 		}
 
 		public void getType(int index, bool maybe){
@@ -57,8 +58,10 @@ namespace N1{
 	namespace N2{
         using System;
         using System.Buffers;
-		public class myClase2{
+		public class myClase2: myClaseAlone{
 			public static int inaccessible = 3;
+			protected int protectedField = 3;
+			public int publicField = 3;
 		}
 
         namespace N3
@@ -70,5 +73,5 @@ namespace N1{
 	}
 }
 public class myClaseAlone{
-
+	protected int basePrueba;
 }

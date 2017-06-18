@@ -39,6 +39,8 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
+            if(Name=="numero")
+                Console.WriteLine();
             TypeNode t = null;
             if(type==null)
             {
@@ -46,6 +48,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                 if(f!=null && f.isStatic == isStatic)
                 {
                     t = f.type;
+                    isStatic = false;
                 }else{
                     t = api.getTypeForIdentifier(Name);
                     if(t!=null)
@@ -53,7 +56,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                 }
             }else{
                 Context staticContext = api.buildContextForTypeDeclaration(type);
-                FieldNode f = staticContext.findVariable(Name,new EncapsulationNode(TokenType.RW_PRIVATE,null));
+                FieldNode f = staticContext.findVariable(Name,Utils.privateLevel,Utils.protectedLevel);
                 if(f!=null && f.isStatic == isStatic)
                     t = f.type;
             }

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Expressions;
 
 namespace Compiler.TreeNodes.Statements
@@ -18,6 +20,11 @@ namespace Compiler.TreeNodes.Statements
             this.expression = exp;
             this.postIncrementStmts = postIncrementStmts;
             this.StatementBlock = stmts;
+        }
+
+        public override void Evaluate(API api)
+        {
+            throw new NotImplementedException();
         }
     }
 }

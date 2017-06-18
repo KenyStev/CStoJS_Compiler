@@ -1,3 +1,5 @@
+using System;
+using Compiler.SemanticAPI;
 using Compiler.TreeNodes.Expressions;
 
 namespace Compiler.TreeNodes.Statements
@@ -15,6 +17,11 @@ namespace Compiler.TreeNodes.Statements
             this.expression = exp;
             this.statements = stmts;
             this.elseBock = elseBock;
+        }
+
+        public override void Evaluate(API api)
+        {
+            throw new NotImplementedException();
         }
     }
 }

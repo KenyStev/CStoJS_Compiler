@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Compiler.SemanticAPI;
+using Compiler.SemanticAPI.ContextUtils;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler.TreeNodes.Types
@@ -120,7 +121,7 @@ namespace Compiler.TreeNodes.Types
                 if(field.Value.assigner!=null)
                 {
                     var assigner = field.Value.assigner;
-                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,field.Value.isStatic);
+                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);
                 }
             }
         }
@@ -132,13 +133,28 @@ namespace Compiler.TreeNodes.Types
             foreach (var ct in my_constructors)
             {
                 api.checkFixedParameters(ct.Value.parameters,myNs);
+                if(ct.Value.statementBlock==null)
+                    Utils.ThrowError("Constructor has no body. "+ct.Value.identifier.token.getLine());
             }
             checkConstructorsBody(api,my_constructors,myNs);
         }
 
         private void checkConstructorsBody(API api, Dictionary<string, ConstructorNode> my_constructors, NamespaceNode myNs)
         {
-            throw new NotImplementedException();//TODO
+            foreach (var ctror in my_constructors)
+            {
+                api.contextManager.pushContext(api.buildContextForConstructor(ctror));
+                ctror.Value.statementBlock.Evaluate(api);
+                // List<TypeNode> returns = api.contextManager.getReturns();//TODO
+                /*foreach (var r in returns)
+                {
+                    if(r.getComparativeType() != Utils.Void)
+                        Utils.ThrowError("Since '"+Identifier.Name+"."+ctror.Key
+                        +"' returns void, a return keyword must not be followed by an object expression ["
+                        +api.currentNamespace.Identifier.Name+"]");
+                }*/
+                api.contextManager.popContext();
+            }
         }
 
         private void checkMethods(API api, NamespaceNode myNs)

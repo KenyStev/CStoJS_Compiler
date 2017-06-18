@@ -5,7 +5,7 @@ namespace Compiler.TreeNodes.Types
 {
     public class NullTypeNode : TypeNode
     {
-        NullTypeNode(){}
+        public NullTypeNode(){}
         public NullTypeNode(Token token)
         {
             this.token = token;

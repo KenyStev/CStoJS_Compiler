@@ -1,6 +1,8 @@
 using Compiler.TreeNodes.Expressions;
 using Compiler.TreeNodes.Types;
 using Compiler.TreeNodes.Expressions.UnaryExpressions;
+using Compiler.SemanticAPI;
+using System;
 
 namespace Compiler.TreeNodes.Statements
 {
@@ -19,6 +21,11 @@ namespace Compiler.TreeNodes.Statements
             this.identifier = identifier;
             this.expression = exp;
             this.body = body;
+        }
+
+        public override void Evaluate(API api)
+        {
+            throw new NotImplementedException();
         }
     }
 }
