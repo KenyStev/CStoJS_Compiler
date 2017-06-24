@@ -61,5 +61,11 @@ namespace Compiler.SemanticAPI.ContextUtils
         {
             currentContext.addVariable(variable);
         }
+
+        public bool existBaseConstructor(List<string> argsTypes)
+        {
+            string args = "("+string.Join(",",argsTypes)+")";
+            return currentContext.parentContext.existConstructor(currentContext.parentContext.contextName+args);
+        }
     }
 }

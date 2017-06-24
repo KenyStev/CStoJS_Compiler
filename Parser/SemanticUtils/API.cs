@@ -51,6 +51,13 @@ namespace Compiler.SemanticAPI
             return fields;
         }
 
+        public bool checkRelationBetween(TypeNode leftType, TypeNode target)
+        {
+            bool found = ((ClassTypeNode)leftType).checkRelationWith(this,target);
+            bool found2 = ((ClassTypeNode)target).checkRelationWith(this,leftType);
+            return found||found2;
+        }
+
         public void setNamespaces(KeyValuePair<string, CompilationUnitNode> tree)
         {
             foreach(var ns in tree.Value.namespaceDeclared)

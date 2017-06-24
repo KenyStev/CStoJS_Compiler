@@ -84,6 +84,24 @@ namespace Compiler.TreeNodes.Types
             api.contextManager.backContextToObject();
         }
 
+        public bool checkRelationWith(API api, TypeNode target)
+        {
+            if(target.Identifier.Equals(Identifier) && api.getNamespaceForType(target).Equals(api.getNamespaceForType(this)))
+                return true;
+            if(parents!=null)
+            foreach (var item in parents)
+            {
+                if(item.Value is ClassTypeNode)
+                {
+                    if(target.Identifier.Equals(item.Value.Identifier) && api.getNamespaceForType(target).Equals(api.getNamespaceForType(item.Value)))
+                        return true;
+                    bool found = ((ClassTypeNode)item.Value).checkRelationWith(api,target);
+                    if(found)return true;
+                }
+            }
+            return false;
+        }
+
         private void checkFields(API api, NamespaceNode myNs)
         {
             var path = api.getDeclarationPathForType(this);
@@ -106,10 +124,10 @@ namespace Compiler.TreeNodes.Types
                 if(typeNode is ClassTypeNode && Utils.isValidEncapsulationForClass(((ClassTypeNode)typeNode).encapsulation,TokenType.RW_PRIVATE))
                     Utils.ThrowError("The type '" + typeName + "' can't be reached due to encapsulation level. "+ f.type.token.getLine());
                 
-                if (f.type is ArrayTypeNode)
-                    ((ArrayTypeNode)f.type).DataType = typeNode;
-                else
-                    f.type = typeNode;
+                // if (f.type is ArrayTypeNode)
+                //     ((ArrayTypeNode)f.type).DataType = typeNode;
+                // else
+                //     f.type = typeNode;
             }
             checkFieldsAssignment(api,my_fields,myNs);
         }
@@ -121,7 +139,7 @@ namespace Compiler.TreeNodes.Types
                 if(field.Value.assigner!=null)
                 {
                     var assigner = field.Value.assigner;
-                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);
+                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);//TODO
                 }
             }
         }
@@ -145,6 +163,18 @@ namespace Compiler.TreeNodes.Types
             {
                 api.contextManager.pushContext(api.buildContextForConstructor(ctror));
                 ctror.Value.statementBlock.Evaluate(api);
+
+                List<string> argsTypes = new List<string>();
+                if(ctror.Value.initializer!=null)
+                    foreach (var arg in ctror.Value.initializer.arguments)
+                    {
+                        var Typearg = arg.expression.EvaluateType(api,null,true);
+                        argsTypes.Add(Typearg.ToString());
+                    }
+                if(!api.contextManager.existBaseConstructor(argsTypes))
+                    Utils.ThrowError("'"+Identifier.Name+"' does not contain a constructor that takes "+argsTypes.Count
+                    +" arguments ["+api.currentNamespace.Identifier.Name+"]");
+
                 // List<TypeNode> returns = api.contextManager.getReturns();//TODO
                 /*foreach (var r in returns)
                 {

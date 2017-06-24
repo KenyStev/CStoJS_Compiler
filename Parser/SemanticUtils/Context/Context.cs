@@ -55,6 +55,13 @@ namespace Compiler.SemanticAPI.ContextUtils
             return null;
         }
 
+        public bool existConstructor(string constructorSign)
+        {
+            if(constructors!=null && constructors.ContainsKey(constructorSign))
+                return true;
+            return false;
+        }
+
         public void addVariable(FieldNode variable)
         {
             if(variables.ContainsKey(variable.identifier.Name))

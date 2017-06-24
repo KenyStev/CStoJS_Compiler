@@ -14,7 +14,11 @@ namespace Compiler.TreeNodes.Expressions.TypeTestingExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            throw new NotImplementedException();
+            TypeNode leftType = leftExpression.EvaluateType(api,type,isStatic);
+            if(leftType is PrimitiveTypeNode || toType is PrimitiveTypeNode)
+                Utils.ThrowError("Invalid expression 'is' with primitive types. " + token.getLine());
+            
+            return Singleton.typesTable[Utils.Bool];
         }
     }
 }

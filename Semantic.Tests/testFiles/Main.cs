@@ -41,7 +41,8 @@ namespace N1{
 
 		}
 		public myClase(int nuevo){
-			
+			// new myClase2(adios,5);
+			// var d = c as null;
 		}
 		public void getType(Circulo index, Types t){
 

@@ -108,5 +108,13 @@ namespace Compiler.TreeNodes
             }
             api.setCurrentNamespace(null);
         }
+
+        public override bool Equals (object obj)
+        {
+            if(!(obj is NamespaceNode))
+                return false;
+            var n = obj as NamespaceNode;
+            return n.Identifier.Equals(Identifier);
+        }
     }
 }

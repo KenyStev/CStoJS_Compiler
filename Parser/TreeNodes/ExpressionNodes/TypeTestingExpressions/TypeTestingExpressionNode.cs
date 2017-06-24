@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.TypeTestingExpressions
@@ -5,13 +6,15 @@ namespace Compiler.TreeNodes.Expressions.TypeTestingExpressions
     public abstract class TypeTestingExpressionNode : ExpressionNode
     {
         public ExpressionNode leftExpression;
-        public TypeNode type;
+        public TypeNode toType;
+        public List<string> rules;
 
         public TypeTestingExpressionNode(){}
         public TypeTestingExpressionNode(ExpressionNode leftExpression, TypeNode type,Token token)
         {
+            rules = new List<string>();
             this.leftExpression = leftExpression;
-            this.type = type;
+            this.toType = type;
             this.token = token;
         }
     }

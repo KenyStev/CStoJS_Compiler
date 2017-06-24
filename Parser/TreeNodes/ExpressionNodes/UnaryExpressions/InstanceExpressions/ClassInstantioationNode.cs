@@ -20,7 +20,23 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            throw new NotImplementedException();
+            TypeNode t = api.getTypeForIdentifier(this.type.ToString());
+            if(t==null)
+                Utils.ThrowError("The type or namespace name '"+this.type.ToString()
+                +"' could not be found (are you missing a using directive or an assembly reference?) ["
+                +api.currentNamespace.Identifier.Name+"]");
+            List<string> argumentsTypes = new List<string>();
+            foreach (var arg in arguments)
+            {
+                TypeNode argType = arg.expression.EvaluateType(api,null,true);
+                argumentsTypes.Add(arg.ToString());
+            }
+            String constructorSign = t.ToString() + "(" + string.Join(",",argumentsTypes) + ")";
+            var typeContext = api.buildContextForTypeDeclaration(t);
+            if(!typeContext.existConstructor(constructorSign))
+                Utils.ThrowError("'"+t.ToString()+"' does not contain a constructor that takes "+
+                argumentsTypes.Count+" arguments ["+api.currentNamespace.Identifier.Name+"] "+token.getLine());
+            return t;
         }
     }
 }
