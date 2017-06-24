@@ -42,7 +42,7 @@ namespace N1{
 		}
 		public myClase(int nuevo){
 			// new myClase2(adios,5);
-			// var d = c as null;
+			var d = c as Circulo;
 		}
 		public void getType(Circulo index, Types t){
 

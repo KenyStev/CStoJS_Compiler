@@ -45,13 +45,18 @@ namespace Compiler.SemanticAPI.ContextUtils
                         if(enc.Equals(variable.encapsulation))
                             Utils.ThrowError(""+contextName+"."+variable.identifier.Name
                             +"' is inaccessible due to its protection level ["
-                            +api.currentNamespace.Identifier.Name+"]");
+                            +api.currentNamespace.Identifier.Name+"] ");
                     }
                 }
                 return variable;
             }
             else if (parentContext.contextName!="Object")
-                return parentContext.findVariable(variableName,Utils.privateLevel);
+            {
+                if(this.type==ContextType.CLASS)
+                    return parentContext.findVariable(variableName,Utils.privateLevel);
+                else
+                    return parentContext.findVariable(variableName,null);
+            }
             return null;
         }
 

@@ -19,7 +19,15 @@ namespace Compiler.TreeNodes.Expressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            throw new NotImplementedException();
+            var tnull = nullableExpression.EvaluateType(api,null,true);
+            var rexp = rightExpression.EvaluateType(api,null,true);
+            if(tnull is PrimitiveTypeNode || rexp is PrimitiveTypeNode)
+                Utils.ThrowError("Operator '??' cannot be applied to operands of type '"+
+                tnull.ToString()+"' and '"+rexp.ToString()+"' ["+
+                api.currentNamespace.Identifier.Name+"]");
+            if(tnull is NullTypeNode)
+                return rexp;
+            return tnull;
         }
     }
 }

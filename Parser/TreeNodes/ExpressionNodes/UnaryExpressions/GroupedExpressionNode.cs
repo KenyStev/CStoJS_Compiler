@@ -17,7 +17,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            throw new NotImplementedException();
+            return expression.EvaluateType(api,null,true);
         }
     }
 }

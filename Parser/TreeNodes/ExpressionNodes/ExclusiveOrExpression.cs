@@ -1,3 +1,5 @@
+using Compiler.TreeNodes.Types;
+
 namespace Compiler.TreeNodes.Expressions
 {
     public class ExclusiveOrExpression : BinaryOperatorNode
@@ -6,6 +8,7 @@ namespace Compiler.TreeNodes.Expressions
         public ExclusiveOrExpression(ExpressionNode leftExpression, ExpressionNode bitsAnd,Token token) : 
         base(leftExpression,bitsAnd,token)
         {
+            rules[Utils.Bool + "," + Utils.Bool] = new BoolTypeNode();
         }
     }
 }

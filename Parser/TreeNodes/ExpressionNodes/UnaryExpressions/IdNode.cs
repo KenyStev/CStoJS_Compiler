@@ -39,31 +39,34 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            if(Name=="numero")
+            if(Name=="c")
                 Console.WriteLine();
             TypeNode t = null;
-            if(type==null)
-            {
-                FieldNode f = api.contextManager.findVariable(Name);
-                if(f!=null && f.isStatic == isStatic)
+            try{
+                if(type==null)
                 {
-                    t = f.type;
-                    isStatic = false;
+                    FieldNode f = api.contextManager.findVariable(Name);
+                    if(f!=null && f.isStatic == isStatic)
+                    {
+                        t = f.type;
+                        isStatic = false;
+                    }else{
+                        t = api.getTypeForIdentifier(Name);
+                        if(t!=null)
+                            isStatic=true;
+                    }
                 }else{
-                    t = api.getTypeForIdentifier(Name);
-                    if(t!=null)
-                        isStatic=true;
+                    Context staticContext = api.buildContextForTypeDeclaration(type);
+                    FieldNode f = staticContext.findVariable(Name,Utils.privateLevel,Utils.protectedLevel);
+                    if(f!=null && f.isStatic == isStatic)
+                        t = f.type;
                 }
-            }else{
-                Context staticContext = api.buildContextForTypeDeclaration(type);
-                FieldNode f = staticContext.findVariable(Name,Utils.privateLevel,Utils.protectedLevel);
-                if(f!=null && f.isStatic == isStatic)
-                    t = f.type;
+
+                if(t == null)
+                    Utils.ThrowError("Variable '" + Name + "' could not be found in the current context. "+ token.getLine());
+            }catch(Exception ex){
+                Utils.ThrowError(ex.Message+token.getLine());
             }
-
-            if(t == null)
-                Utils.ThrowError("Variable '" + Name + "' could not be found in the current context. "+ token.getLine());
-
             return t;
         }
     }
