@@ -40,6 +40,7 @@ namespace Compiler.TreeNodes.Types
             Methods = new List<MethodNode>();
             this.token = token;
             this.parents = new Dictionary<string, TypeNode>();
+            evaluated = false;
         }
 
         public void setInheritance(List<IdNode> inheritanceses)
@@ -69,6 +70,10 @@ namespace Compiler.TreeNodes.Types
 
         public override void Evaluate(API api)//TODO
         {
+            if(evaluated) return;
+            Console.WriteLine("evaluating: "+ToString());
+            if(ToString()=="Rectangulo")
+                Console.Write("");
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             NamespaceNode myNs = api.getNamespaceForType(this);
             if(!Utils.isValidEncapsulationForClass(this.encapsulation,TokenType.RW_PUBLIC))
@@ -82,6 +87,7 @@ namespace Compiler.TreeNodes.Types
             checkConstructors(api,myNs);
             checkMethods(api,myNs);
             api.contextManager.backContextToObject();
+            this.evaluated = true;
         }
 
         public bool checkRelationWith(API api, TypeNode target)
@@ -104,6 +110,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkFields(API api, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkFields");
             var path = api.getDeclarationPathForType(this);
             Dictionary<string,FieldNode> my_fields = api.getFieldsForClass(this,path+" "+Identifier.token.getLine());
             foreach (var field in my_fields)
@@ -124,7 +131,7 @@ namespace Compiler.TreeNodes.Types
                 if(typeNode is ClassTypeNode && Utils.isValidEncapsulationForClass(((ClassTypeNode)typeNode).encapsulation,TokenType.RW_PRIVATE))
                     Utils.ThrowError("The type '" + typeName + "' can't be reached due to encapsulation level. "+ f.type.token.getLine());
                 
-                // if (f.type is ArrayTypeNode)
+                // if (f.type is ArrayTypeNode)//CHANGE TYPE
                 //     ((ArrayTypeNode)f.type).DataType = typeNode;
                 // else
                 //     f.type = typeNode;
@@ -134,18 +141,47 @@ namespace Compiler.TreeNodes.Types
 
         private void checkFieldsAssignment(API api, Dictionary<string, FieldNode> my_fields, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkFieldsAssignment");
             foreach (var field in my_fields)
             {
                 if(field.Value.assigner!=null)
                 {
+                    var f = field.Value.type;//api.getTypeForIdentifier(field.Value.type.ToString());
+                    if(f==null)
+                        Console.Write("");
                     var assigner = field.Value.assigner;
-                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);//TODO
+                    TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);
+                    
+                    var tdn = typeAssignmentNode;
+                    var t = (f is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
+                    string rule = f.ToString() + "," + typeAssignmentNode.ToString();
+                    string rule2 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.ToString();
+                    string rule3 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.getComparativeType();
+                     if (!api.assignmentRules.Contains(rule)
+                        && !api.assignmentRules.Contains(rule2)
+                        && !api.assignmentRules.Contains(rule3)
+                        && f.ToString() != typeAssignmentNode.ToString()
+                        && !f.Equals(typeAssignmentNode))
+                    {
+                        f = (f is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
+                        if(f.getComparativeType() == Utils.Class && tdn.getComparativeType() == Utils.Class)
+                        {
+                            if(!api.checkRelationBetween(f, tdn))
+                                Utils.ThrowError("1Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ field.Value.identifier.token.getLine());
+                        }else if ((!(f.getComparativeType() == Utils.Class || f.getComparativeType() == Utils.String) && tdn is NullTypeNode))
+                        {
+                            Utils.ThrowError("2Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ field.Value.identifier.token.getLine());
+                        }
+                        else
+                            Utils.ThrowError("3Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ field.Value.identifier.token.getLine());
+                    }
                 }
             }
         }
 
         private void checkConstructors(API api, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkConstructors");
             var path = api.getDeclarationPathForType(this);
             var my_constructors = api.getConstructorsForClass(this,path+" "+Identifier.token.getLine());
             foreach (var ct in my_constructors)
@@ -159,6 +195,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkConstructorsBody(API api, Dictionary<string, ConstructorNode> my_constructors, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkConstructorsBody");
             foreach (var ctror in my_constructors)
             {
                 api.contextManager.pushContext(api.buildContextForConstructor(ctror));
@@ -174,21 +211,13 @@ namespace Compiler.TreeNodes.Types
                 if(!api.contextManager.existBaseConstructor(argsTypes))
                     Utils.ThrowError("'"+Identifier.Name+"' does not contain a constructor that takes "+argsTypes.Count
                     +" arguments ["+api.currentNamespace.Identifier.Name+"]");
-
-                // List<TypeNode> returns = api.contextManager.getReturns();//TODO
-                /*foreach (var r in returns)
-                {
-                    if(r.getComparativeType() != Utils.Void)
-                        Utils.ThrowError("Since '"+Identifier.Name+"."+ctror.Key
-                        +"' returns void, a return keyword must not be followed by an object expression ["
-                        +api.currentNamespace.Identifier.Name+"]");
-                }*/
                 api.contextManager.popContext();
             }
         }
 
         private void checkMethods(API api, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkMethods");
             var path = api.getDeclarationPathForType(this);
             var my_methods = api.getMethodsForType(this,path+" "+Identifier.token.getLine());
             foreach (var method in my_methods)
@@ -227,11 +256,19 @@ namespace Compiler.TreeNodes.Types
 
         private void checkMethodsBody(API api, Dictionary<string, MethodNode> my_methods, NamespaceNode myNs)
         {
-            // throw new NotImplementedException();//TODO
+            Console.WriteLine("evaluating: checkMethodsBody");
+            foreach (var method in my_methods)
+            {
+                api.contextManager.pushContext(api.buildContextForMethod(method));
+                if(method.Value.statemetBlock!=null)
+                    method.Value.statemetBlock.Evaluate(api);
+                api.contextManager.popContext();
+            }
         }
 
         private void checkParents(API api, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkParents");
             var path = api.getDeclarationPathForType(this);
             var my_methods = api.getMethodsForType(this,path+" "+Identifier.token.getLine());
             foreach (var parent in parents)
@@ -242,6 +279,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkParentMethods(API api, TypeNode parent, Dictionary<string,MethodNode> my_methods)
         {
+            Console.WriteLine("evaluating: checkParentMethods");
             var path = api.getDeclarationPathForType(this);
             var parent_methods = api.getMethodsForType(parent,path+" "+Identifier.token.getLine());
             foreach (var parent_method in parent_methods)
@@ -249,16 +287,22 @@ namespace Compiler.TreeNodes.Types
                 if(my_methods.ContainsKey(parent_method.Key))
                 {
                     api.checkParentMethodOnMe(my_methods[parent_method.Key],parent_method.Value,this,parent,api.getNamespaceForType(this));
-                }else if(parent is InterfaceTypeNode || (parent is ClassTypeNode && ((ClassTypeNode)parent).IsAbstract && !IsAbstract))
+                }else if(parent is InterfaceTypeNode)
                 {
                     Utils.ThrowError(Identifier.ToString()+" does not implement: "+parent.ToString()
                     +"."+parent_method.Key+" "+Identifier.token.getLine());
+                }else if(parent is ClassTypeNode && ((ClassTypeNode)parent).IsAbstract && !IsAbstract)
+                {
+                    if(parent_method.Value.statemetBlock==null)
+                        Utils.ThrowError(Identifier.ToString()+" does not implement: "+parent.ToString()
+                        +"."+parent_method.Key+" "+Identifier.token.getLine());
                 }
             }
         }
 
         private void verifyCycleInheritance(API api,NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: verifyCycleInheritance");
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             try{
                 api.hasCycleInheritance(Identifier.Name,parents);
@@ -269,18 +313,22 @@ namespace Compiler.TreeNodes.Types
 
         private void checkInheritance(API api, NamespaceNode myNs)
         {
+            Console.WriteLine("evaluating: checkInheritance");
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             ClassTypeNode classParent = null;
-            if(inheritanceses!=null)
+            if(inheritanceses!=null && parents.Count==0)
             {
+                int parentsCounter = 0;
                 foreach (var parent in inheritanceses)
                 {
+                    if(parent.Name=="ISortable")
+                        Console.Write("");
                     TypeNode parentTypeNode = api.getTypeForIdentifier(parent.Name);
                     if(parentTypeNode==null)
                         Utils.ThrowError("The type or namespace name '"+ parent.Name 
                         +"' could not be found (are you missing a using directive or an assembly reference?) ["
                         +myNs.Identifier.Name+"]: "+parent.token.getLine());
-                    if(parents.Count==0)
+                    if(parentsCounter==0)
                     {
                         if(parentTypeNode is ClassTypeNode)
                         {
@@ -293,6 +341,7 @@ namespace Compiler.TreeNodes.Types
                             Utils.ThrowError("Type '"+ parentTypeNode.Identifier.Name 
                             +"' in interface list is not an interface ["+ myNs.Identifier.Name +"]("
                             +thisDeclarationPath+")");
+                        parentsCounter++;
                     }else{
                         if(parentTypeNode is ClassTypeNode)
                         {

@@ -12,6 +12,8 @@ namespace Compiler.SemanticAPI.ContextUtils
         ATTRIBUTE,
         BASE,
         ITERATIVE,
-        ENUM
+        ENUM,
+        STATIC_METHOD,
+        METHOD
     }
 }

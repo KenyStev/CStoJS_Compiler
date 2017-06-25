@@ -1,5 +1,6 @@
 using System;
 using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Expressions.UnaryExpressions.ReferenceAccsess;
 using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Expressions.UnaryExpressions
@@ -20,9 +21,12 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
+            var isStaticNew = isStatic;
             TypeNode t = primary.EvaluateType(api,type,isStatic);
+            if(primary is BaseReferenceAccessNode || primary is ThisReferenceAccsessNode)
+                isStaticNew = false;
             if(nextExpression!=null)
-                t = nextExpression.EvaluateType(api,t,isStatic);
+                t = nextExpression.EvaluateType(api,t,isStaticNew);
             return t;
         }
     }

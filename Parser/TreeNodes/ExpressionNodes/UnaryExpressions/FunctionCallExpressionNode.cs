@@ -23,11 +23,21 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
+            if(identifier.ToString()=="ToString")
+                Console.Write("");
             TypeNode t = null;
             try{
                 if(type==null)
                 {
-                    MethodNode f = api.contextManager.findFunction(identifier.ToString());
+                    List<string> argumentsTypes = new List<string>();
+                    foreach (var arg in arguments)
+                    {
+                        TypeNode argType = arg.expression.EvaluateType(api,null,true);
+                        argumentsTypes.Add(argType.ToString());
+                    }
+
+                    string methodName = identifier.ToString()+"(" + string.Join(",",argumentsTypes) + ")";
+                    MethodNode f = api.contextManager.findFunction(methodName);
                     if(f!=null)
                     {
                         t = f.methodHeaderNode.returnType.DataType;
@@ -40,7 +50,16 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                     }
                 }else{
                     Context staticContext = api.buildContextForTypeDeclaration(type);
-                    MethodNode f = staticContext.findFunction(identifier.ToString(),Utils.privateLevel,Utils.protectedLevel);
+                    staticContext.setLastParent(api.contextManager.getObjectContext());
+                    List<string> argumentsTypes = new List<string>();
+                    foreach (var arg in arguments)
+                    {
+                        TypeNode argType = arg.expression.EvaluateType(api,null,true);
+                        argumentsTypes.Add(argType.ToString());
+                    }
+
+                    string methodName = identifier.ToString()+"(" + string.Join(",",argumentsTypes) + ")";
+                    MethodNode f = staticContext.findFunction(methodName,Utils.privateLevel,Utils.protectedLevel);
                     if(f!=null && api.validateModifier(f.Modifier,TokenType.RW_STATIC) == isStatic)
                         t = f.methodHeaderNode.returnType.DataType;
                 }

@@ -11,6 +11,7 @@ namespace Compiler.TreeNodes.Types
         public IdNode Identifier;
         public EncapsulationNode encapsulation;
         public Token token;
+        public bool evaluated;
         public TypeNode()
         {
             encapsulation = null;

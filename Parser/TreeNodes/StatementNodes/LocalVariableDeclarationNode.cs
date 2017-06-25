@@ -41,10 +41,10 @@ namespace Compiler.TreeNodes.Statements
                 if(typeNode is ClassTypeNode && Utils.isValidEncapsulationForClass(((ClassTypeNode)typeNode).encapsulation,TokenType.RW_PRIVATE))
                     Utils.ThrowError("The type '" + typeName + "' can't be reached due to encapsulation level. "+ f.type.token.getLine());
                 
-                if (f.type is ArrayTypeNode)
-                    ((ArrayTypeNode)f.type).DataType = typeNode;
-                else
-                    f.type = typeNode;
+                // if (f.type is ArrayTypeNode)//CHANGE TYPE
+                //     ((ArrayTypeNode)f.type).DataType = typeNode;
+                // else
+                //     f.type = typeNode;
             }
             checkFieldsAssignment(api,my_fields,myNs);
         }
@@ -55,8 +55,35 @@ namespace Compiler.TreeNodes.Statements
             {
                 if(field.Value.assigner!=null)
                 {
+                    var f = field.Value.type;
                     var assigner = field.Value.assigner;
                     TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);
+
+                    var tdn = typeAssignmentNode;
+                    var t = (f is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
+                    t = (t is VarTypeNode)?tdn:t;
+                    string rule = f.ToString() + "," + typeAssignmentNode.ToString();
+                    string rule2 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.ToString();
+                    string rule3 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.getComparativeType();
+                     if (!api.assignmentRules.Contains(rule)
+                        && !api.assignmentRules.Contains(rule2)
+                        && !api.assignmentRules.Contains(rule3)
+                        && f.ToString() != typeAssignmentNode.ToString()
+                        && !f.Equals(typeAssignmentNode))
+                    {
+                        f = (f is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
+                        f = (f is VarTypeNode)?tdn:f;
+                        if(f.getComparativeType() == Utils.Class && tdn.getComparativeType() == Utils.Class)
+                        {
+                            if(!api.checkRelationBetween(f, tdn))
+                                Utils.ThrowError("1Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ field.Value.identifier.token.getLine());
+                        }else if ((!(f.getComparativeType() == Utils.Class || f.getComparativeType() == Utils.String) && tdn is NullTypeNode))
+                        {
+                            Utils.ThrowError("2Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ field.Value.identifier.token.getLine());
+                        }
+                        else
+                            Utils.ThrowError("3Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ field.Value.identifier.token.getLine());
+                    }
                 }
             }
         }

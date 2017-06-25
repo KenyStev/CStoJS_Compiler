@@ -26,7 +26,7 @@ namespace Compiler.TreeNodes.Types
             this.Identifier = type.Identifier;
         }
 
-        public override void Evaluate(API api)//TODO
+        public override void Evaluate(API api)
         {
             throw new NotImplementedException();
         }

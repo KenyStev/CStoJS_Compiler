@@ -13,11 +13,12 @@ namespace Compiler.SemanticAPI.ContextUtils
         public ContextManager(API api)
         {
             this.api = api;
-            currentContext = api.buildContextForTypeDeclaration(Singleton.getTypeNode("Object"));
+            currentContext = getObjectContext();
         }
 
         public void pushContext(Context newCurrent)
         {
+            Console.WriteLine("evaluatint: pushContext -> "+newCurrent.contextName);
             var temp = newCurrent;
             while(temp.parentContext!=null)
             {
@@ -35,7 +36,7 @@ namespace Compiler.SemanticAPI.ContextUtils
                 temp = temp.parentContext;
             }
             temp = (contextType == ContextType.BASE)?temp.parentContext:temp;
-            return Singleton.getTypeNode(temp.contextName);
+            return api.getTypeForIdentifier(temp.contextName);//Singleton.getTypeNode(temp.contextName);
         }
 
         public void backContextToObject()
@@ -56,8 +57,14 @@ namespace Compiler.SemanticAPI.ContextUtils
             return currentContext.findVariable(name,null);
         }
 
+        public Context getObjectContext()
+        {
+            return api.buildContextForTypeDeclaration(Singleton.getTypeNode("Object"));
+        }
+
         public void popContext()
         {
+            Console.WriteLine("evaluatint: popContext -> "+currentContext.contextName);
             currentContext = currentContext.parentContext;
         }
 

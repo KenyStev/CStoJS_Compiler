@@ -14,7 +14,7 @@ namespace Compiler.TreeNodes.Types
             this.token = token;
         }
 
-        public override void Evaluate(API api) //TODO
+        public override void Evaluate(API api)
         {
             throw new NotImplementedException();
         }

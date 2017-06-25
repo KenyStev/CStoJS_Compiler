@@ -9,7 +9,7 @@ namespace Compiler.TreeNodes.Types
         public BoolTypeNode(){}
         public BoolTypeNode(Token type) : base(type){}
 
-        public override void Evaluate(API api) //TODO
+        public override void Evaluate(API api)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RaimProgram.Common.Sorting;
 
 namespace RaimProgram.Base

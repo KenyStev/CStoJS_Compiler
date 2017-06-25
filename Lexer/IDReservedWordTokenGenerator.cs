@@ -37,7 +37,7 @@ namespace Compiler
 
         public override bool validStart(Symbol currentSymbol)
         {
-            if(Char.IsLetter(currentSymbol.character))
+            if(Char.IsLetter(currentSymbol.character) || '_' == currentSymbol.character)
             {
                 return true;
             }

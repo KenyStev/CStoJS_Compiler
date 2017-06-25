@@ -101,7 +101,8 @@ namespace Compiler.TreeNodes
             {
                 try{
                     api.contextManager.backContextToObject();
-                    typeDef.Evaluate(api);
+                    if(!typeDef.evaluated)
+                        typeDef.Evaluate(api);
                 }catch(NotImplementedException ex){
                     Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+") -> "+ex.StackTrace);
                 }

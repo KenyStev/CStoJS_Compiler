@@ -151,7 +151,14 @@ namespace Compiler.SemanticAPI
                     {
                         if(parent.Value is ClassTypeNode)
                         {
-                            parentContext = buildContextForTypeDeclaration(parent.Value);
+                            var parentClass = (ClassTypeNode)parent.Value;
+                            if(parentClass.ToString()!="Object" && !parentClass.evaluated)
+                            {
+                                contextManager.pushContext(contextManager.getObjectContext());
+                                parentClass.Evaluate(this);
+                                contextManager.popContext();
+                            }
+                            parentContext = buildContextForTypeDeclaration(parentClass);
                             break;
                         }
                     }
@@ -168,7 +175,8 @@ namespace Compiler.SemanticAPI
                     if(c.parents!=null && c.parents.Count>0)
                     {
                         string key = c.parents.GetEnumerator().Current.Key;
-                        Context parentContextFirst=buildContextForTypeDeclaration(c.parents.GetEnumerator().Current.Value);
+                        var t = c.parents.GetEnumerator().Current.Value;
+                        Context parentContextFirst=buildContextForTypeDeclaration(t);
                         Context parentContext = parentContextFirst;
                         foreach(var parent in c.parents)
                         {
@@ -225,6 +233,7 @@ namespace Compiler.SemanticAPI
         {
             Context newContext = new Context(ctror.Key,ContextType.CONSTRUCTOR
                                 ,getFixedParameters(ctror.Value.parameters),null,null);
+            newContext.returnType = null;
             return newContext;
         }
 
@@ -283,6 +292,15 @@ namespace Compiler.SemanticAPI
                 ,new StatementBlockNode(),token);
             }
             return ctrs;
+        }
+
+        public Context buildContextForMethod(KeyValuePair<string, MethodNode> method)
+        {
+            Context newContext = new Context(method.Key,(method.Value.Modifier!=null 
+                                && method.Value.Modifier.token.type==TokenType.RW_STATIC)?ContextType.STATIC_METHOD:ContextType.METHOD
+                                ,getFixedParameters(method.Value.methodHeaderNode.fixedParams),null,null);
+            newContext.returnType = method.Value.methodHeaderNode.returnType.DataType;
+            return newContext;
         }
 
         public Dictionary<string, MethodNode> getMethodsForType(TypeNode typeNode,string path)
@@ -366,6 +384,7 @@ namespace Compiler.SemanticAPI
 
         public void checkParentMethodOnMe(MethodNode my_method, MethodNode parent_method,TypeNode child, TypeNode parent,NamespaceNode currentNamespace)
         {
+            if(my_method.evaluated)return;
             if(parent is InterfaceTypeNode)
             {
                 if(my_method.Modifier!=null)
@@ -421,7 +440,7 @@ namespace Compiler.SemanticAPI
             {
                 if(name == parent.Value.Identifier.Name)
                     Utils.ThrowError("Inherited class '"+parent.Value.Identifier.Name+"' causes a cycle in the class hierarchy of '"+ name +"'");
-                // hasCycleInheritance(name,((ClassTypeNode)parent.Value).parents);//TODO
+                hasCycleInheritance(name,((ClassTypeNode)parent.Value).parents);
             }
         }
 

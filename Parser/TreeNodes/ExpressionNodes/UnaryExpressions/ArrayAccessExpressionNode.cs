@@ -47,6 +47,34 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
                 if(arrayType == null)
                     Utils.ThrowError("Array variable '" + identifier.ToString() + "' could not be found in the current context. ");
+                
+                var arr = arrayType as ArrayTypeNode;
+                int arraysOfArraysCounter = 0;
+
+                while (arraysOfArraysCounter < arrayAccessList.Count)
+                {
+                    if(arraysOfArraysCounter>arr.multidimsArrays.Count)
+                        Utils.ThrowError("Cannot apply indexing with [] to an expression of type '"+arr.DataType.ToString()
+                        +"' ["+api.currentNamespace.Identifier.Name+"]");
+                    if(arr.multidimsArrays[arraysOfArraysCounter].dimensions!=arrayAccessList[arraysOfArraysCounter].Count)
+                        Utils.ThrowError("Wrong number of indices inside []; expected "+
+                        arr.multidimsArrays[arraysOfArraysCounter].dimensions+" ["+api.currentNamespace.Identifier.Name+"]");
+                    arraysOfArraysCounter++;
+                }
+
+                if(arraysOfArraysCounter==arr.multidimsArrays.Count)
+                {
+                    arrayType = arr.DataType;
+                }else{
+                    var dimensions = new List<MultidimensionArrayTypeNode>();
+                    while (arraysOfArraysCounter<arr.multidimsArrays.Count)
+                    {
+                        dimensions.Add(new MultidimensionArrayTypeNode(arr.multidimsArrays[arraysOfArraysCounter].dimensions,null));
+                        arraysOfArraysCounter++;
+                    }
+                    arrayType = new ArrayTypeNode(arr.DataType,dimensions,null);
+                }
+
             }catch(Exception ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }

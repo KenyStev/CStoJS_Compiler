@@ -16,7 +16,7 @@ namespace Compiler.TreeNodes.Statements
 
         public override void Evaluate(API api)
         {
-            throw new NotImplementedException();
+            expressionNode.EvaluateType(api,null,true);
         }
     }
 }

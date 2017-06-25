@@ -42,6 +42,7 @@ namespace Compiler.TreeNodes.Types
             checkInheritance(api,myNs);
             verifyCycleInheritance(api,myNs);
             checkMethods(api,myNs);
+            evaluated = true;
         }
 
         private void verifyCycleInheritance(API api,NamespaceNode myNs)

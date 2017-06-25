@@ -12,6 +12,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.ReferenceAccsess
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
+            isStatic = false;
             return api.contextManager.getTypeFromContext(ContextType.CLASS);
         }
     }

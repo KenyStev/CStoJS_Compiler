@@ -32,18 +32,26 @@ namespace Compiler
                 Token placehold = getNextLookAhead(counter);//look_ahead[look_ahead.Count() - 1];
                 int first = look_ahead.IndexOf(placehold);//look_ahead.Count() - 1;
                 bool accept = false;
+                Token placeholdArray = null;
+                bool capturar = false;
                 while (typesOptions.Contains(placehold.type) || placehold.type == TokenType.PUNT_ACCESOR
                     || placehold.type == TokenType.PUNT_SQUARE_BRACKET_OPEN || placehold.type == TokenType.PUNT_SQUARE_BRACKET_CLOSE
-                    || placehold.type == TokenType.OP_LESS_THAN || placehold.type == TokenType.OP_MORE_THAN
-                    || placehold.type == TokenType.PUNT_COMMA || placehold.type == TokenType.PUNT_PAREN_OPEN)
+                    // || placehold.type == TokenType.PUNT_COMMA || placehold.type == TokenType.PUNT_PAREN_OPEN
+                    )
                 {
-                    //if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
+                    if (capturar && placeholdArray.type != TokenType.PUNT_SQUARE_BRACKET_CLOSE)
+                        break;
                     counter++;
-                    placehold = getNextLookAhead(counter); //look_ahead[look_ahead.Count() - 1];
+                    if (placehold.type == TokenType.PUNT_SQUARE_BRACKET_OPEN)
+                        capturar = true;
+                    
+                    placehold = getNextLookAhead(counter);
+                    if(capturar)
+                        placeholdArray = placehold;
                     accept = true;
                 }
-                //if(counter>=look_ahead.Count)addLookAhead(lexer.GetNextToken());
-                Token after_close = getNextLookAhead(counter+1);//look_ahead[look_ahead.Count() - 1];
+                
+                Token after_close = getNextLookAhead(counter+1);
                 if (typesOptions.Contains(look_ahead[first].type) && accept && 
                     (placehold.type == TokenType.PUNT_PAREN_CLOSE)
                     && after_close.type != TokenType.OP_PLUS_PLUS

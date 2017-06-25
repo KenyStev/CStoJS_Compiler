@@ -14,6 +14,7 @@ namespace Compiler.SemanticAPI.ContextUtils
         public Dictionary<string,ConstructorNode> constructors;
         public Context parentContext;
         public API api;
+        public TypeNode returnType;
 
         public Context()
         {
@@ -61,9 +62,24 @@ namespace Compiler.SemanticAPI.ContextUtils
             return null;
         }
 
+        public void setLastParent(Context context)
+        {
+            if(parentContext==null)
+                parentContext = context;
+            else
+            {
+                Context temp = parentContext;
+                while (temp.parentContext!=null)
+                {
+                    temp = temp.parentContext;
+                }
+                temp.parentContext = context;
+            }
+        }
+
         public MethodNode findFunction(string methodName, params EncapsulationNode[] notToBeEncapsulation)
         {
-            if(methods.ContainsKey(methodName))
+            if(methods!=null && methods.ContainsKey(methodName))
             {
                 var method =  methods[methodName];
                 if(notToBeEncapsulation==null) return method;
@@ -79,7 +95,7 @@ namespace Compiler.SemanticAPI.ContextUtils
                 }
                 return method;
             }
-            else if (parentContext.contextName!="Object")
+            else if (parentContext.contextName!=null)
             {
                 if(this.type==ContextType.CLASS)
                     return parentContext.findFunction(methodName,Utils.privateLevel);

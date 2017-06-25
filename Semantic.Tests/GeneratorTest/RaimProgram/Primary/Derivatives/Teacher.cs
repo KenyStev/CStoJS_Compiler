@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RaimProgram.Base;
 namespace RaimProgram.Base.Derivatives
 {
