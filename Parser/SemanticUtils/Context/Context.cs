@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.SemanticAPI.ContextUtils
 {

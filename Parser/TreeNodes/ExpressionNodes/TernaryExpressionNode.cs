@@ -21,7 +21,15 @@ namespace Compiler.TreeNodes.Expressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            throw new NotImplementedException();
+            var tBool = conditionalExpression.EvaluateType(api,null,true);
+            if(!(tBool is BoolTypeNode))
+                Utils.ThrowError("Cannot implicitly convert type '"+tBool.ToString()+"' to 'bool' ["+api.currentNamespace.Identifier.Name+"]");
+            var rType = trueExpression.EvaluateType(api,null,true);
+            var lType = falseExpression.EvaluateType(api,null,true);
+            if(!api.assignmentRules.Contains(rType.ToString()+","+lType.ToString()))
+                Utils.ThrowError("Type of conditional expression cannot be determined because there is no implicit conversion between '"+
+                rType.ToString()+"' and '"+lType.ToString()+"' ["+api.currentNamespace.Identifier.Name+"]");
+            return rType;
         }
     }
 }

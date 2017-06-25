@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.SemanticAPI.ContextUtils
 {
@@ -24,6 +25,17 @@ namespace Compiler.SemanticAPI.ContextUtils
             }
             temp.parentContext = currentContext;
             currentContext = newCurrent;
+        }
+
+        public TypeNode getTypeFromContext(ContextType contextType)
+        {
+            Context temp = currentContext;
+            while (temp.type!=ContextType.CLASS)
+            {
+                temp = temp.parentContext;
+            }
+            temp = (contextType == ContextType.BASE)?temp.parentContext:temp;
+            return Singleton.getTypeNode(temp.contextName);
         }
 
         public void backContextToObject()

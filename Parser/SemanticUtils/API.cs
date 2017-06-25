@@ -37,6 +37,16 @@ namespace Compiler.SemanticAPI
             assignmentRules.Add(Utils.Enum + "," + Utils.Enum);
         }
 
+        public bool TokenPass(TokenType unaryOperator,params TokenType[] tokensTypes)
+        {
+            foreach(TokenType t in tokensTypes)
+            {
+                if (t == unaryOperator)
+                    return true;
+            }
+            return false;
+        }
+
         public Dictionary<string, FieldNode> getFieldsForContext(List<FieldNode> localVariables)
         {
             Dictionary<string, FieldNode> fields = new Dictionary<string, FieldNode>();
@@ -179,6 +189,36 @@ namespace Compiler.SemanticAPI
 
             newContext.api = this;
             return newContext;
+        }
+
+        public void checkArrays(TypeNode t1, TypeNode t2, Token token)
+        {
+            var array1 = t1 as ArrayTypeNode;
+            var array2 = t2 as ArrayTypeNode;
+            string rule = array1.DataType.ToString() + "," + array2.DataType.ToString();
+            string rule2 = array1.DataType.getComparativeType() + "," + array2.DataType.ToString();
+            string rule3 = array1.DataType.getComparativeType() + "," + array2.DataType.getComparativeType();
+            if (!assignmentRules.Contains(rule)
+                && !assignmentRules.Contains(rule2)
+                && !assignmentRules.Contains(rule3)
+                && !array1.DataType.Equals(array2.DataType))
+            {
+                if (array1.DataType.getComparativeType() == Utils.Class && array2.DataType.getComparativeType() == Utils.Class)
+                {
+                    if (!checkRelationBetween(array1.DataType, array2.DataType))
+                        Utils.ThrowError("Not a valid assignment. Trying to assign Array" + array2.DataType.ToString() + " to field with type Array" + array1.DataType.ToString()+" "+ token.getLine());
+                }
+                else if ((!(array1.DataType.getComparativeType() == Utils.Class || array1.DataType.getComparativeType() == Utils.String) && array2.DataType is NullTypeNode))
+                {
+                    Utils.ThrowError("Not a valid assignment. Trying to assign Array" + array2.DataType.ToString() + " to field with type Arrat" + array1.DataType.ToString()+" "+ token.getLine());
+                }
+                else if (array1.DataType.getComparativeType() == Utils.Var)
+                {
+                    Utils.ThrowError("Cannot make an array of var. "+ token.getLine());
+                }
+                else
+                    Utils.ThrowError("Not a valid assignment. Trying to assign " + array2.DataType.ToString() + " to field with type " + array1.DataType.ToString()+" "+ token.getLine());
+            }
         }
 
         public Context buildContextForConstructor(KeyValuePair<string, ConstructorNode> ctror)

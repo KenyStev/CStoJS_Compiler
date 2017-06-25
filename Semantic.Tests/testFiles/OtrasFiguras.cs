@@ -20,7 +20,22 @@ namespace Figuras
 
         public class Elipse
         {
+            public static int proyection = 5;
 
+            public float getArea()
+            {
+                float a = proyection*(2.1416f*20);
+                return a;
+            }
+        }
+
+        public class Ellipsiode
+        {
+            public float getArea()
+            {
+                float a = Elipse.proyection*(2.1416f*20);
+                return a;
+            }
         }
     }
 }
