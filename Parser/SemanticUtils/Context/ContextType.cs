@@ -14,6 +14,7 @@ namespace Compiler.SemanticAPI.ContextUtils
         ITERATIVE,
         ENUM,
         STATIC_METHOD,
-        METHOD
+        METHOD,
+        SWITCH
     }
 }

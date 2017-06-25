@@ -16,6 +16,67 @@ namespace Compiler.SemanticAPI.ContextUtils
             currentContext = getObjectContext();
         }
 
+        public bool existScopeForBreakAbove()
+        {
+            Context temp = currentContext;
+            while(temp.type!=ContextType.CLASS)
+            {
+                if(temp.type==ContextType.ITERATIVE || temp.type==ContextType.SWITCH)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool existScopeForReturnAbove()
+        {
+            Context temp = currentContext;
+            while(temp.type!=ContextType.CLASS)
+            {
+                if(temp.type==ContextType.CONSTRUCTOR 
+                    || temp.type==ContextType.METHOD
+                    || temp.type==ContextType.STATIC_METHOD)
+                    return true;
+            }
+            return false;
+        }
+
+        public string getContextNameFromReturnType()
+        {
+            Context temp = currentContext;
+            while(temp.type!=ContextType.CLASS)
+            {
+                if(temp.type==ContextType.CONSTRUCTOR 
+                    || temp.type==ContextType.METHOD
+                    || temp.type==ContextType.STATIC_METHOD)
+                    return temp.parentContext.contextName+"."+temp.contextName;
+            }
+            return "";
+        }
+
+        public TypeNode getReturnType()
+        {
+            Context temp = currentContext;
+            while(temp.type!=ContextType.CLASS)
+            {
+                if(temp.type==ContextType.CONSTRUCTOR 
+                    || temp.type==ContextType.METHOD
+                    || temp.type==ContextType.STATIC_METHOD)
+                    return temp.returnType;
+            }
+            return null;
+        }
+
+        public bool existScopeForContinueAbove()
+        {
+            Context temp = currentContext;
+            while(temp.type!=ContextType.CLASS)
+            {
+                if(temp.type==ContextType.ITERATIVE)
+                    return true;
+            }
+            return false;
+        }
+
         public void pushContext(Context newCurrent)
         {
             Console.WriteLine("evaluatint: pushContext -> "+newCurrent.contextName);

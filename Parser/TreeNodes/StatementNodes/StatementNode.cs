@@ -4,7 +4,7 @@ namespace Compiler.TreeNodes.Statements
 {
     public abstract class StatementNode
     {
-        Token token;
+        protected Token token;
         public StatementNode(){}
         public StatementNode(Token token)
         {

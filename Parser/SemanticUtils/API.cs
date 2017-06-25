@@ -37,6 +37,12 @@ namespace Compiler.SemanticAPI
             assignmentRules.Add(Utils.Enum + "," + Utils.Enum);
         }
 
+        public Context buildContext(string name, ContextType contextType, List<FieldNode> localVariables)
+        {
+            Context newContext = new Context(name,contextType,buildFieldsForLocalVariables(localVariables),null,null);
+            return newContext;
+        }
+
         public bool TokenPass(TokenType unaryOperator,params TokenType[] tokensTypes)
         {
             foreach(TokenType t in tokensTypes)
@@ -274,6 +280,20 @@ namespace Compiler.SemanticAPI
             return my_fields;
         }
 
+        public Dictionary<string, FieldNode> buildFieldsForLocalVariables(List<FieldNode> fields)
+        {
+            Dictionary<string, FieldNode> my_fields = new Dictionary<string, FieldNode>();
+            if(fields!=null)
+            foreach (var f in fields)
+            {
+                if(my_fields.ContainsKey(f.identifier.Name))
+                    Utils.ThrowError("The type '"+f.identifier.Name
+                    +"' already exist in this scope "+f.token.getLine());
+                my_fields[f.identifier.Name] = f;
+            }
+            return my_fields;
+        }
+
         public Dictionary<string, ConstructorNode> getConstructorsForClass(ClassTypeNode classType, string path)
         {
             Dictionary<string, ConstructorNode> ctrs = new Dictionary<string, ConstructorNode>();
@@ -397,15 +417,27 @@ namespace Compiler.SemanticAPI
             {
                 var childMethodName = child.Identifier.Name+"."+buildMethodName(my_method.methodHeaderNode);
                 var parentMethodName = parent.Identifier.Name+"."+buildMethodName(parent_method.methodHeaderNode);
-                if(!validateModifier(my_method.Modifier,TokenType.RW_OVERRIDE))
-                    Utils.ThrowError("'"+childMethodName+"' hides inherited member '"+parentMethodName+"'. To make the current member override that "+
-                    "implementation, add the override keyword. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
+                if(validateModifier(parent_method.Modifier, TokenType.RW_ABSTRACT, TokenType.RW_OVERRIDE, TokenType.RW_VIRTUAL)){
+                    if (validateModifier(my_method.Modifier, TokenType.RW_OVERRIDE)){
+                        if (my_method.encapsulation.token.type == parent_method.encapsulation.token.type)
+                            my_method.evaluated = true;
+                    } else{
+                        Utils.ThrowError("'"+childMethodName+"' hides inherited member '"+parentMethodName+"'. To make the current member override that "+
+                        "implementation, add the override keyword. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
+                    }
+                }else{
+
+                }
+                
+                // if(!validateModifier(my_method.Modifier,TokenType.RW_OVERRIDE))
+                //     Utils.ThrowError("'"+childMethodName+"' hides inherited member '"+parentMethodName+"'. To make the current member override that "+
+                //     "implementation, add the override keyword. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
                 if(my_method.statemetBlock==null)
                     Utils.ThrowError("'"+childMethodName+"' must declare a body because it is not marked abstract ["
                     +currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
-                if(!validateModifier(parent_method.Modifier,TokenType.RW_VIRTUAL,TokenType.RW_ABSTRACT))
-                    Utils.ThrowError("'"+childMethodName+"': cannot override inherited member '"+
-                    parentMethodName+"' because it is not marked virtual, abstract. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
+                // if(!validateModifier(parent_method.Modifier,TokenType.RW_VIRTUAL,TokenType.RW_ABSTRACT))
+                //     Utils.ThrowError("'"+childMethodName+"': cannot override inherited member '"+
+                //     parentMethodName+"' because it is not marked virtual, abstract. ["+currentNamespace.Identifier.Name+"] "+my_method.token.getLine());
                 if(parent_method.encapsulation.type==TokenType.RW_PRIVATE)
                     Utils.ThrowError("'"+childMethodName+"': no suitable method found to override. ["+currentNamespace.Identifier.Name+"] "+ my_method.token.getLine());
                 if(!my_method.encapsulation.Equals(parent_method.encapsulation))

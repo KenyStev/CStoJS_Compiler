@@ -13,7 +13,9 @@ namespace Compiler.TreeNodes.Statements
 
         public override void Evaluate(API api)
         {
-            throw new NotImplementedException();
+            if(!api.contextManager.existScopeForBreakAbove())
+                Utils.ThrowError("No enclosing loop out of which to break or continue ["
+                +api.currentNamespace.Identifier.Name+"] "+token.getLine());
         }
     }
 }
