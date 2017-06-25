@@ -46,7 +46,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                 }
 
                 if(arrayType == null)
-                    Utils.ThrowError("Array variable '" + identifier.ToString() + "' could not be found in the current context. "+ token.getLine());
+                    Utils.ThrowError("Array variable '" + identifier.ToString() + "' could not be found in the current context. ");
             }catch(Exception ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }

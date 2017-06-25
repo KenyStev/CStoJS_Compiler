@@ -64,7 +64,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                 }
 
                 if(t == null)
-                    Utils.ThrowError("Variable '" + Name + "' could not be found in the current context. "+ token.getLine());
+                    Utils.ThrowError("Variable '" + Name + "' could not be found in the current context. ");
             }catch(Exception ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }

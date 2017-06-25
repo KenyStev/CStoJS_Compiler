@@ -25,6 +25,7 @@ namespace N1{
 		bool r2 = c == null;
 		bool h = clase is Circulo;
 		int count = 0;
+		// int count2 = adios();
 
         public bool H;
 
@@ -35,6 +36,9 @@ namespace N1{
 			// (count)++;
 			// ((parent)child).print();
 			base.basePrueba = 5;
+			// adios();
+			// var r = new myClase();
+			// r.como();
 		}
 
 		public void getType(int index, bool maybe){

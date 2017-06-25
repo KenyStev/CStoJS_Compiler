@@ -34,6 +34,11 @@ namespace Compiler.SemanticAPI.ContextUtils
             currentContext = temp;
         }
 
+        public MethodNode findFunction(string methodName)
+        {
+            return currentContext.findFunction(methodName,null);
+        }
+
         public FieldNode findVariable(string name)
         {
             return currentContext.findVariable(name,null);

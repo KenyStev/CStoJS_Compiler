@@ -60,6 +60,34 @@ namespace Compiler.SemanticAPI.ContextUtils
             return null;
         }
 
+        public MethodNode findFunction(string methodName, params EncapsulationNode[] notToBeEncapsulation)
+        {
+            if(methods.ContainsKey(methodName))
+            {
+                var method =  methods[methodName];
+                if(notToBeEncapsulation==null) return method;
+                else
+                {
+                    foreach (var enc in notToBeEncapsulation)
+                    {
+                        if(enc.Equals(method.encapsulation))
+                            Utils.ThrowError(""+contextName+"."+method.ToString()
+                            +"' is inaccessible due to its protection level ["
+                            +api.currentNamespace.Identifier.Name+"] ");
+                    }
+                }
+                return method;
+            }
+            else if (parentContext.contextName!="Object")
+            {
+                if(this.type==ContextType.CLASS)
+                    return parentContext.findFunction(methodName,Utils.privateLevel);
+                else
+                    return parentContext.findFunction(methodName,null);
+            }
+            return null;
+        }
+
         public bool existConstructor(string constructorSign)
         {
             if(constructors!=null && constructors.ContainsKey(constructorSign))
