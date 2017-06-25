@@ -42,7 +42,7 @@ public class sort{
 
 
         string s = "a" + 1;
-        string s2 = "a" + 1.5;
+        string s2 = "a" + 1.5f;
         Console.WriteLine("Suma string-float " + s2);
         s2 += " fin";
 
@@ -123,7 +123,7 @@ public class sort{
         int n = int.Parse("5");
         for (i = 0; i < N - 1; i++)
         {
-            int k = this.IntArrayMin(data, i, size);
+            int k = IntArrayMin(data, i, size);
             if (i != k)
                 exchange(data, i, k);
         }

@@ -38,7 +38,7 @@ namespace Compiler.TreeNodes.Types
             {
                 arrayBrackets.Add(rank.ToString());
             }
-            return DataType.ToString()+string.Join(".",arrayBrackets);
+            return DataType.ToString()+string.Join("",arrayBrackets);
         }
 
         public override bool Equals(object obj)

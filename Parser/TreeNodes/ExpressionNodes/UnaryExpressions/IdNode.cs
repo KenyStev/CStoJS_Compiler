@@ -46,10 +46,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                 if(type==null)
                 {
                     FieldNode f = api.contextManager.findVariable(Name);
-                    if(f!=null && f.isStatic == isStatic)
+                    if(f!=null)
                     {
                         t = f.type;
-                        isStatic = false;
+                        if(f.isStatic == isStatic)
+                            isStatic = false;
                     }else{
                         t = api.getTypeForIdentifier(Name);
                         if(t!=null)
