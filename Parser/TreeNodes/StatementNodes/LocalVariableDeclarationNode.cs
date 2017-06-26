@@ -61,35 +61,6 @@ namespace Compiler.TreeNodes.Statements
                     TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);
 
                     api.validateRelationBetween(ref f,ref typeAssignmentNode);
-
-                    // var tdn = (typeAssignmentNode is ArrayTypeNode || typeAssignmentNode is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(typeAssignmentNode)):typeAssignmentNode;
-                    // var t = (f is AbstractTypeNode || f is ArrayTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
-                    // t = (t is VarTypeNode)?tdn:t;
-                    // string rule = f.ToString() + "," + typeAssignmentNode.ToString();
-                    // string rule2 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.ToString();
-                    // string rule3 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + tdn.getComparativeType();
-                    //  if (!api.assignmentRules.Contains(rule)
-                    //     && !api.assignmentRules.Contains(rule2)
-                    //     && !api.assignmentRules.Contains(rule3)
-                    //     && f.ToString() != typeAssignmentNode.ToString()
-                    //     && !f.Equals(typeAssignmentNode))
-                    // {
-                    //     f = (f is AbstractTypeNode || f is ArrayTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
-                    //     f = (f is VarTypeNode)?tdn:f;
-                    //     if(f.ToString()=="Person" && tdn.ToString()=="Student")
-                    //         Console.Write("");
-
-                    //     if(f.getComparativeType() == Utils.Class && tdn.getComparativeType() == Utils.Class)
-                    //     {
-                    //         if(!api.checkRelationBetween(f, tdn))
-                    //             Utils.ThrowError("1Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
-                    //     }else if ((!(f.getComparativeType() == Utils.Class || f.getComparativeType() == Utils.String) && tdn is NullTypeNode))
-                    //     {
-                    //         Utils.ThrowError("2Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
-                    //     }
-                    //     else
-                    //         Utils.ThrowError("3Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
-                    // }
                 }
             }
         }
