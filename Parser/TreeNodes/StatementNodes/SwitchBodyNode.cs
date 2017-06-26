@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Statements
 {
@@ -12,6 +15,15 @@ namespace Compiler.TreeNodes.Statements
         {
             this.switchSections = switchSections;
             this.token = token;
+        }
+
+        public void Evaluate(API api, TypeNode expType)
+        {
+            if(switchSections!=null)
+                foreach (var sect in switchSections)
+                {
+                    sect.Evaluate(api,expType);
+                }
         }
     }
 }
