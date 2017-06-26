@@ -21,22 +21,6 @@ namespace Compiler.TreeNodes.Statements
 
         public void Evaluate(API api, TypeNode expType)
         {
-            int x = 4;
-            // TypeNode x = new BoolTypeNode();
-            switch (x)
-            {
-            //     case new VarTypeNode(null) :
-            //         Console.Write("");
-            //         break;
-               case 5:
-                    {Console.Write("");
-                    break;}
-                    {
-                        Console.Write("");
-                    break;
-                    }
-            //     default: break;
-            }
             string caseLBL = switchLabels[switchLabels.Count-1].ToString();
             if(switchLabels!=null && stmts==null)
                 Utils.ThrowError("Control cannot fall out of switch from final case label "
@@ -61,6 +45,17 @@ namespace Compiler.TreeNodes.Statements
             if(breakCount==0)
                 Utils.ThrowError("Control cannot fall out of switch from final case label "
                 +caseLBL+" ["+api.currentNamespace.Identifier.Name+"]");
+        }
+
+        public void GenerateCode(Writer.Writer Writer, API api) {
+            if(this.switchLabels != null) {
+                foreach(var slabel in this.switchLabels) {
+                    slabel.GenerateCode(Writer, api);
+                }
+                foreach(var stmt in this.stmts) {
+                   stmt.GenerateCode(Writer, api);
+                }
+            }
         }
     }
 }

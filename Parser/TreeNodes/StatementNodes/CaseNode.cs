@@ -29,5 +29,15 @@ namespace Compiler.TreeNodes.Statements
                 api.validateRelationBetween(ref expType,ref expCaseType);
             }
         }
+
+        public void GenerateCode(Writer.Writer Writer, API api) {
+            if(this.caseType == TokenType.RW_CASE) {
+                Writer.WriteString("\t\t\tcase");
+                this.expression.GenerateCode(Writer, api);
+                Writer.WriteString(":");
+            }else if(caseType == TokenType.RW_DEFAULT) {
+                Writer.WriteString("\t\t\tdefault:");
+            }
+        }
     }
 }
