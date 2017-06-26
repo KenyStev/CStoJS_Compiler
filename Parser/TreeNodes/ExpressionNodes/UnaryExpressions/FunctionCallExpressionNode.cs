@@ -49,6 +49,12 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                             isStatic=true;
                     }
                 }else{
+                    bool accept = false;
+                    if(!(type is ClassTypeNode))
+                    {
+                        type = api.getTypeForIdentifier(type.ToString());
+                        accept = true;
+                    }
                     Context staticContext = api.buildContextForTypeDeclaration(type);
                     staticContext.setLastParent(api.contextManager.getObjectContext());
                     List<string> argumentsTypes = new List<string>();
@@ -58,15 +64,22 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                         argumentsTypes.Add(argType.ToString());
                     }
 
+                    if(identifier.ToString()=="Nextfloat")
+                        Console.Write("");
+
                     string methodName = identifier.ToString()+"(" + string.Join(",",argumentsTypes) + ")";
                     MethodNode f = staticContext.findFunction(methodName,Utils.privateLevel,Utils.protectedLevel);
-                    if(f!=null && api.validateModifier(f.Modifier,TokenType.RW_STATIC) == isStatic)
+                    bool passed = api.validateModifier(f.Modifier,TokenType.RW_STATIC) == isStatic;
+                    if(accept)
+                        passed = true;
+
+                    if(f!=null && passed)
                         t = f.methodHeaderNode.returnType.DataType;
                 }
 
                 if(t == null)
                     Utils.ThrowError("Function or method '" + identifier.ToString() + "' could not be found in the current context. ");
-            }catch(Exception ex){
+            }catch(SemanticException ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }
             return t;

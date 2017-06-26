@@ -34,7 +34,8 @@ namespace Compiler.TreeNodes.Types
             if(obj is AbstractTypeNode)
             {
                 var o = obj as AbstractTypeNode;
-                return o.Identifier.attributes[o.Identifier.attributes.Count-1].Name == Identifier.Name;
+                string oName = (o.Identifier.attributes!=null)?o.Identifier.attributes[o.Identifier.attributes.Count-1].Name:o.Identifier.Name;
+                return oName == Identifier.Name;
             }
             return false;
         }

@@ -140,6 +140,8 @@ namespace Compiler.SemanticAPI
 
         public Context buildContextForTypeDeclaration(TypeNode typeNode)
         {
+            if(typeNode.Identifier.Name=="Random")
+                Console.Write("");
             var path = getDeclarationPathForType(typeNode);
             Context newContext = null;
             if(typeNode is ClassTypeNode)
@@ -161,8 +163,10 @@ namespace Compiler.SemanticAPI
                             if(parentClass.ToString()!="Object" && !parentClass.evaluated)
                             {
                                 contextManager.pushContext(contextManager.getObjectContext());
+                                // var oldNS = currentNamespace;
                                 parentClass.Evaluate(this);
                                 contextManager.popContext();
+                                // currentNamespace = oldNS;
                             }
                             parentContext = buildContextForTypeDeclaration(parentClass);
                             break;
@@ -201,6 +205,7 @@ namespace Compiler.SemanticAPI
                                     null,null);
             }
 
+            // if(newContext!=null)
             newContext.api = this;
             return newContext;
         }

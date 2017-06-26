@@ -120,6 +120,8 @@ namespace Compiler.TreeNodes.Expressions
         {
             TypeNode t1 = leftExpression.EvaluateType(api,null,true);
             TypeNode t2 = rightExpression.EvaluateType(api,null,true);
+            t1 = (t1 is AbstractTypeNode || t1 is ArrayTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(t1)):t1;
+            t2 = (t2 is AbstractTypeNode || t2 is ArrayTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(t2)):t2;
             string rule = t1.ToString() + "," + t2.ToString();
             string rule2 = t1.getComparativeType() + "," + t2.ToString();
             string rule3 = t1.getComparativeType() + "," + t2.getComparativeType();

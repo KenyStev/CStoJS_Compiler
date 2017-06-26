@@ -28,7 +28,7 @@ namespace Compiler.TreeNodes.Types
 
         public override string getComparativeType()
         {
-            throw new NotImplementedException();
+            return "VarType";
         }
     }
 }

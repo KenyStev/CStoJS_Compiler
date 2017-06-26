@@ -39,9 +39,20 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                             isStatic=true;
                     }
                 }else{
+                    bool accept = false;
+                    if(!(type is ClassTypeNode))
+                    {
+                        type = api.getTypeForIdentifier(type.ToString());
+                        accept = true;
+                    }
+
                     Context staticContext = api.buildContextForTypeDeclaration(type);
                     FieldNode f = staticContext.findVariable(identifier.ToString(),Utils.privateLevel,Utils.protectedLevel);
-                    if(f!=null && f.isStatic == isStatic)
+                    bool passed = f.isStatic == isStatic;
+                    if(accept)
+                        passed = true;
+
+                    if(f!=null && passed)
                         arrayType = f.type;
                 }
 
@@ -75,7 +86,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                     arrayType = new ArrayTypeNode(arr.DataType,dimensions,null);
                 }
 
-            }catch(Exception ex){
+            }catch(SemanticException ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }
             return arrayType;

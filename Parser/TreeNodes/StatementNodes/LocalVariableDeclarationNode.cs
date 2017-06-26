@@ -59,20 +59,23 @@ namespace Compiler.TreeNodes.Statements
                     var assigner = field.Value.assigner;
                     TypeNode typeAssignmentNode = assigner.EvaluateType(api,null,true);
 
-                    var tdn = typeAssignmentNode;
-                    var t = (f is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
+                    var tdn = (typeAssignmentNode is ArrayTypeNode || typeAssignmentNode is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(typeAssignmentNode)):typeAssignmentNode;
+                    var t = (f is AbstractTypeNode || f is ArrayTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
                     t = (t is VarTypeNode)?tdn:t;
                     string rule = f.ToString() + "," + typeAssignmentNode.ToString();
                     string rule2 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.ToString();
-                    string rule3 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.getComparativeType();
+                    string rule3 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + tdn.getComparativeType();
                      if (!api.assignmentRules.Contains(rule)
                         && !api.assignmentRules.Contains(rule2)
                         && !api.assignmentRules.Contains(rule3)
                         && f.ToString() != typeAssignmentNode.ToString()
                         && !f.Equals(typeAssignmentNode))
                     {
-                        f = (f is AbstractTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
+                        f = (f is AbstractTypeNode || f is ArrayTypeNode)?api.getTypeForIdentifier(Utils.getNameForType(f)):f;
                         f = (f is VarTypeNode)?tdn:f;
+                        if(f.ToString()=="Person" && tdn.ToString()=="Student")
+                            Console.Write("");
+
                         if(f.getComparativeType() == Utils.Class && tdn.getComparativeType() == Utils.Class)
                         {
                             if(!api.checkRelationBetween(f, tdn))

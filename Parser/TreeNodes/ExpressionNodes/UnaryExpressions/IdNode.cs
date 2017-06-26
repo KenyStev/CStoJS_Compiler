@@ -57,15 +57,27 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                             isStatic=true;
                     }
                 }else{
+                    bool accept = false;
+                    if(!(type is ClassTypeNode))
+                    {
+                        type = api.getTypeForIdentifier(type.ToString());
+                        accept = true;
+                    }
+
                     Context staticContext = api.buildContextForTypeDeclaration(type);
                     FieldNode f = staticContext.findVariable(Name,Utils.privateLevel,Utils.protectedLevel);
-                    if(f!=null && f.isStatic == isStatic)
+                    
+                    bool passed = f.isStatic == isStatic;
+                    if(accept)
+                        passed = true;
+
+                    if(f!=null && passed)
                         t = f.type;
                 }
 
                 if(t == null)
                     Utils.ThrowError("Variable '" + Name + "' could not be found in the current context. ");
-            }catch(Exception ex){
+            }catch(SemanticException ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }
             return t;

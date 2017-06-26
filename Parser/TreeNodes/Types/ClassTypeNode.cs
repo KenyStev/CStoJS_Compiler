@@ -94,6 +94,15 @@ namespace Compiler.TreeNodes.Types
         {
             if(target.Identifier.Equals(Identifier) && api.getNamespaceForType(target).Equals(api.getNamespaceForType(this)))
                 return true;
+            if(ToString()!="Object" && !evaluated)
+            {
+                api.contextManager.pushContext(api.contextManager.getObjectContext());
+                var oldNS = api.currentNamespace;
+                api.currentNamespace = api.getNamespaceForType(this);
+                Evaluate(api);
+                api.contextManager.popContext();
+                api.currentNamespace = oldNS;
+            }
             if(parents!=null)
             foreach (var item in parents)
             {
@@ -222,6 +231,8 @@ namespace Compiler.TreeNodes.Types
             var my_methods = api.getMethodsForType(this,path+" "+Identifier.token.getLine());
             foreach (var method in my_methods)
             {
+                if(Identifier.Name=="GetRandomGrumpiness")
+                    Console.Write("");
                 var childMethodName = Identifier.Name+"."+api.buildMethodName(method.Value.methodHeaderNode);
                 if(!method.Value.evaluated)
                 {
@@ -246,7 +257,10 @@ namespace Compiler.TreeNodes.Types
                             Utils.ThrowError("'"+childMethodName+"' virtual or abstract members cannot be private ["
                             +myNs.Identifier.Name+"] "+method.Value.token.getLine());
                     }else if(api.validateModifier(method.Value.Modifier,TokenType.RW_OVERRIDE))
-                        Utils.ThrowError("Modifier 'override' can't be aplied to the method "+childMethodName+" "+method.Value.token.getLine());
+                    {
+                        if(api.contextManager.findFunction(api.buildMethodName(method.Value.methodHeaderNode))==null)
+                            Utils.ThrowError("Modifier 'override' can't be aplied to the method "+childMethodName+" "+method.Value.token.getLine());
+                    }
                     method.Value.evaluated=true;
                 }
                 api.checkFixedParametersForMethod(method.Value.methodHeaderNode,myNs);
