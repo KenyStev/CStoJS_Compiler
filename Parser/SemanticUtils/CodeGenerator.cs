@@ -27,22 +27,22 @@ namespace Compiler.CodeGenerator
 
 
             string currentFile = "";
+
+            var semantic = new Semantic(paths);
             try{
-                foreach(var csFile in paths)
-                {
-                    currentFile = csFile;
-                    lexer = new Lexer(new InputFile(csFile),Resources.getTokenGenerators());
-                    parser = new Parser(lexer);
-                    // trees.Add(parser.parse());
-                    trees[csFile] = parser.parse();
-                    trees[csFile].setOriginFile(csFile);
-                }
+                var trees = semantic.evaluate();
+                System.Console.Out.WriteLine("Success!");
             }catch(LexicalException ex){
-                throw new LexicalException(currentFile + ": "+ex.Message);
+                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
             }catch(SyntaxTokenExpectedException ex){
-                throw new SyntaxTokenExpectedException(currentFile + ": "+ex.Message);
+                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            }catch(SemanticException ex){
+                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
             }
-            this.api = new API(trees);
+            catch(Exception ex){
+                System.Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
+            }
+            this.api = semantic.getApi();//new API(trees);
             var _path = @"C:\Users\jobar\Documents\git\CStoJS_Compiler\GeneratedJs\generated.js";
             writer =  new Writer.Writer(_path);
         }
@@ -61,17 +61,24 @@ namespace Compiler.CodeGenerator
 
         public void GenerateCode()
         {
+            api.initContext();
             string currentFile = "";
+            //this.writer.WriteString(Utils.JsSystem);
+
+            foreach(var nsp in Singleton.namespacesTable) {
+                this.writer.WriteString($"GeneratedNamespace.{nsp.Key} = {{}}; \n");
+            }
+
             try{
                 foreach (var tree in api.trees)
                 {
                     currentFile = tree.Value.origin;
                     if(currentFile!="IncludesDefault")
                     {
-                        tree.Value.defaultNamespace.GenerateCode(writer);
+                        tree.Value.defaultNamespace.GenerateCode(writer, api);
                         foreach (var ns in tree.Value.namespaceDeclared)
                         {
-                            ns.Evaluate(api);
+                            ns.GenerateCode(writer, api);
                         }
                     }
                 }

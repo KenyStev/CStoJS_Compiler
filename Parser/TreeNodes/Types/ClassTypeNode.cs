@@ -90,6 +90,76 @@ namespace Compiler.TreeNodes.Types
             this.evaluated = true;
         }
 
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            if(this.generated)
+                return;
+            var name = api.getNamespaceForType(this).Identifier.ToString() == "default" ? this.Identifier.ToString() : $"{api.getNamespaceForType(this).Identifier}.{this.Identifier}";
+            
+            var parentName = "GeneratedNamespace.Object";
+
+            if(this.parents.Count != 0) {
+                foreach(var parent in parents) {
+                    if(parent.Value is ClassTypeNode)
+                    {
+                        parent.Value.GenerateCode(Writer, api);
+                        parentName = api.getFullName(this);
+                    }
+                }
+            }
+
+            Writer.WriteStringLine($"GeneratedNamespace.{name} = class extends {parentName} {{");
+
+            foreach(var constructor in Constructors) {
+                var paramNames = api.getParamNames(constructor.parameters);
+                var constructorName = api.buildFixedParams(constructor.parameters);
+                constructorName = constructorName.Replace("(", "");
+                constructorName = constructorName.Replace(")", "");
+                constructorName = constructorName.Replace(",", "_");
+                var constName = constructorName == "" ? constructorName : "_" + constructorName;
+                Writer.WriteString($"\t{this.Identifier}{constName}{paramNames} {{\n");
+                Writer.WriteString($"\t}}\n");
+
+            }
+
+            foreach(var method in Methods) {
+                var paramNames = api.getParamNames(method.methodHeaderNode.fixedParams);
+                var methodName = api.buildFixedParams(method.methodHeaderNode.fixedParams);
+                methodName = methodName.Replace("(", "");
+                methodName = methodName.Replace(")", "");
+                methodName = methodName.Replace(",", "_");
+                var methodHheaderName = methodName == "" ? methodName : "_" + methodName;
+                Writer.WriteString($"\t{method.methodHeaderNode.Identifier}{methodHheaderName}{paramNames} {{\n");
+                Writer.WriteString($"\t}}\n");
+
+            }
+
+            Writer.WriteString($"\tconstructor(){{\n");
+
+            foreach(var field in Fields) {
+                if(field.isStatic)
+                continue;
+                var val = "null";
+                Writer.WriteString($"\t\tthis.{field.identifier} = {val};\n");
+            }
+            var defaultArgs = @"
+        let argumentos = Array.from(arguments);
+        let argus = argumentos.slice(1);
+        if (argumentos.length >= 1) this[arguments[0]](...argus);";
+
+            Writer.WriteString(defaultArgs);
+
+            Writer.WriteString($"\n\t}}\n");
+            Writer.WriteString($"}}\n");
+
+            foreach(var field in Fields) {
+                if(!field.isStatic)
+                continue;
+                var val = "null";
+                Writer.WriteString($"{name}.{field.identifier} = {val};\n");
+            }
+            this.generated = true;
+        }
+
         public bool checkRelationWith(API api, TypeNode target)
         {
             if(target.Identifier.Equals(Identifier) && api.getNamespaceForType(target).Equals(api.getNamespaceForType(this)))

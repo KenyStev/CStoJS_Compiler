@@ -128,6 +128,13 @@ namespace Compiler.SemanticAPI
             }
         }
 
+        internal string getFullName(TypeNode typeNode)
+        {
+            var nsp = getNamespaceForType(typeNode).ToString();
+            var retString = nsp.Replace("default", "");
+            return $"GeneratedNamespace.{retString}";
+        }
+
         public void setCurrentNamespace(NamespaceNode namespaceNode)
         {
             this.currentNamespace = namespaceNode;
@@ -487,7 +494,7 @@ namespace Compiler.SemanticAPI
             return nameDefinition + buildFixedParams(methodDe.fixedParams);
         }
 
-        private string buildFixedParams(List<ParameterNode> fixedParams)
+        public string buildFixedParams(List<ParameterNode> fixedParams)
         {
             List<string> typesParams = new List<string>();
             if(fixedParams != null)
@@ -495,6 +502,19 @@ namespace Compiler.SemanticAPI
                 foreach (var parameter in fixedParams)
                 {
                     typesParams.Add(parameter.DataType.ToString());
+                }
+            }
+            return "(" + string.Join(",",typesParams) + ")";
+        }
+        
+        public string getParamNames(List<ParameterNode> fixedParams)
+        {
+            List<string> typesParams = new List<string>();
+            if(fixedParams != null)
+            {
+                foreach (var parameter in fixedParams)
+                {
+                    typesParams.Add(parameter.paramName.ToString());
                 }
             }
             return "(" + string.Join(",",typesParams) + ")";

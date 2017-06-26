@@ -38,6 +38,11 @@ namespace Compiler.TreeNodes
             this.usingDirectives = namespaceDirectives;
         }
 
+        public override string ToString()
+        {
+            return Identifier.ToString();
+        }
+
         public void addTypeList(List<TypeNode> listTypeDeclared)
         {
             this.typesDeclarations = this.typesDeclarations.Union(listTypeDeclared).ToList();
@@ -101,7 +106,7 @@ namespace Compiler.TreeNodes
             {
                 try{
                     api.contextManager.backContextToObject();
-                    if(!typeDef.evaluated)
+                    if(!typeDef.generated)
                         typeDef.Evaluate(api);
                 }catch(NotImplementedException ex){
                     Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+") -> "+ex.StackTrace);
@@ -110,12 +115,12 @@ namespace Compiler.TreeNodes
             api.setCurrentNamespace(null);
         }
 
-        public void GenerateCode(Writer.Writer writer) {
+        public void GenerateCode(Writer.Writer writer, API api) {
             foreach (var typeDef in typesDeclarations)
             {
                 try{
                     if(!typeDef.generated)
-                        typeDef.GenerateCode(writer);
+                        typeDef.GenerateCode(writer, api);
                 }catch(NotImplementedException ex){
                     Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+") -> "+ex.StackTrace);
                 }

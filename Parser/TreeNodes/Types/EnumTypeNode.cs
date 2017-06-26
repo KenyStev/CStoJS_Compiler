@@ -66,9 +66,10 @@ namespace Compiler.TreeNodes.Types
             return Utils.Enum;
         }
 
-        public override void GenerateCode(Writer.Writer writer)
+        public override void GenerateCode(Writer.Writer writer, API api)
         {
-            writer.WriteStringLine($"const {this.Identifier} = {{");
+            var name = api.getNamespaceForType(this).Identifier.ToString() == "default" ? this.Identifier.ToString() : $"{api.getNamespaceForType(this).Identifier}.{this.Identifier}";
+            writer.WriteStringLine($"GeneratedNamespace.{name} = {{");
 
             foreach(var _enum in this.EnumItems){
                 writer.WriteStringLine($"\t{_enum.Identifier} : {_enum.value},");

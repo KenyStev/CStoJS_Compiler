@@ -9,3 +9,31 @@ public enum CarOptions
     // The flag for TintedWindows is 1000.
     TintedWindows
 }
+
+public class ImplementationClass
+{
+    // public field (Generally not recommended.)
+    public string day;
+
+    public static string personName;
+
+    ImplementationClass(string day, string day2)
+    {
+    	this.day = day;
+    }
+
+    private ImplementationClass()
+    {
+        
+    }
+
+    void SampleMethod()
+    {
+        // Method implementation.
+    }
+
+    static void Main()
+    {
+        
+    }
+}

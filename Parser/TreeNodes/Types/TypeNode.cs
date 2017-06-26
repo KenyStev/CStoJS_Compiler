@@ -23,7 +23,7 @@ namespace Compiler.TreeNodes.Types
         }
 
         public abstract void Evaluate(API api);
-        public virtual void GenerateCode(Writer.Writer Writer) {
+        public virtual void GenerateCode(Writer.Writer Writer, API api) {
             Console.WriteLine($"Generating code for {this.Identifier}");
         }
         public abstract string getComparativeType();
