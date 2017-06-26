@@ -26,32 +26,42 @@ namespace Main
     {
         static void Main(string[] args)
         {
+            int projectCounter = 0;
             // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
-            // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\"};
-            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
-            string path = "./";
-            if (argumentos.Length > 0)
+            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
+                                    @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
+            // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
+            while(projectCounter<argumentos.Length)
             {
-                path = argumentos[0];
-            }
-            path = Path.GetDirectoryName(path);
-            List<string> paths = new List<string>();
-            if (Directory.Exists(path))
-            {
-                ProcessDirectory(ref paths, path);
+                Singleton.namespacesTable.Clear();
+                Singleton.typesTable.Clear();
+
+                string path = "./";
+                if (argumentos.Length > 0)
+                {
+                    path = argumentos[projectCounter];
+                }
+                path = Path.GetDirectoryName(path);
+                List<string> paths = new List<string>();
+                if (Directory.Exists(path))
+                {
+                    ProcessDirectory(ref paths, path);
+                }
+
+                try{
+                    var semantic = new Semantic(paths);
+                    var trees = semantic.evaluate();
+                    System.Console.Out.WriteLine("Success!");
+                }catch(LexicalException ex){
+                    System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                }catch(SyntaxTokenExpectedException ex){
+                    System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                }catch(SemanticException ex){
+                    System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                }
+                projectCounter++;
             }
 
-            try{
-                var semantic = new Semantic(paths);
-                var trees = semantic.evaluate();
-                System.Console.Out.WriteLine("Success!");
-            }catch(LexicalException ex){
-                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-            }catch(SyntaxTokenExpectedException ex){
-                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-            }catch(SemanticException ex){
-                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-            }
             // catch(Exception ex){
             //     System.Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
             // }
