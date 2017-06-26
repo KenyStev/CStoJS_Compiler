@@ -11,6 +11,8 @@ namespace Compiler.Writer
             if (!File.Exists(path_to_file)) {
                 Console.WriteLine($"file {path_to_file} does not exist");
             }
+            if(!File.Exists(path_to_file))
+                File.Create(path_to_file);
             this.writer = File.CreateText(path_to_file);
         }
 

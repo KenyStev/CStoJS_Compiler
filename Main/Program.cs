@@ -27,38 +27,46 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            //string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
-            //string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\"};
-            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\EnumTest\"};
-            string path = "./";
-            if (argumentos.Length > 0)
+            int projectCounter = 0;
+            // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
+            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\EnumTest\",
+                                    @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
+                                    @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
+            // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
+            while(projectCounter<1)
             {
-                path = argumentos[0];
-            }
-            path = Path.GetDirectoryName(path);
-            List<string> paths = new List<string>();
-            if (Directory.Exists(path))
-            {
-                ProcessDirectory(ref paths, path);
-            }
-            // var dir = @"..\Parser.Tests\testFiles\generationTree\";
-            // var TestingFile = @"compiiisseada";
-            // var inputString = new InputFile(dir+TestingFile+".txt");
-            // var tokenGenerators = Resources.getTokenGenerators();
+                Singleton.namespacesTable.Clear();
+                Singleton.typesTable.Clear();
 
-            // var lexer = new Lexer(inputString, tokenGenerators);
-            // var parser = new Parser(lexer);
-            // try{
-            //     var code = parser.parse();
-            //     serializeCode(code,dir+@"XMLs\"+TestingFile+".xml");
-                
-            //     System.Console.Out.WriteLine("Success!");
-            // }catch(SyntaxTokenExpectedException ex){
-            //     System.Console.Out.WriteLine(ex.Message);
-            // }
+                string path = "./";
+                if (argumentos.Length > 0)
+                {
+                    path = argumentos[projectCounter];
+                }
+                path = Path.GetDirectoryName(path);
+                List<string> paths = new List<string>();
+                if (Directory.Exists(path))
+                {
+                    Console.WriteLine(path);
+                    ProcessDirectory(ref paths, path);
+                }
 
-            var generator = new CodeGenerator(paths);
-            generator.GenerateCode();
+                // try{
+                //     var semantic = new Semantic(paths);
+                //     var trees = semantic.evaluate();
+                //     System.Console.Out.WriteLine("Success!");
+                // }catch(LexicalException ex){
+                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                // }catch(SyntaxTokenExpectedException ex){
+                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                // }catch(SemanticException ex){
+                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                // }
+                projectCounter++;
+
+                var generator = new CodeGenerator(paths);
+                generator.GenerateCode();
+            }
         }
 
         public static void ProcessDirectory(ref List<string> paths, string targetDirectory)

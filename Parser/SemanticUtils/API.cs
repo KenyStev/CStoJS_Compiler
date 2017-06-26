@@ -14,6 +14,7 @@ namespace Compiler.SemanticAPI
 
         public List<string> assignmentRules;
         public NamespaceNode currentNamespace;
+        internal bool isNextStaticContext;
 
         public API(Dictionary<string, CompilationUnitNode> trees)
         {
@@ -72,6 +73,41 @@ namespace Compiler.SemanticAPI
             bool found = ((ClassTypeNode)leftType).checkRelationWith(this,target);
             bool found2 = ((ClassTypeNode)target).checkRelationWith(this,leftType);
             return found||found2;
+        }
+
+        public void validateRelationBetween(ref TypeNode f, ref TypeNode typeAssignmentNode)
+        {
+            var ogiginalType = f;
+            var tdn = (typeAssignmentNode is ArrayTypeNode || typeAssignmentNode is AbstractTypeNode)?getTypeForIdentifier(Utils.getNameForType(typeAssignmentNode)):typeAssignmentNode;
+            var t = (f is AbstractTypeNode || f is ArrayTypeNode)?getTypeForIdentifier(Utils.getNameForType(f)):f;
+            t = (t is VarTypeNode)?tdn:t;
+            string rule = f.ToString() + "," + typeAssignmentNode.ToString();
+            string rule2 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + typeAssignmentNode.ToString();
+            string rule3 = (t is AbstractTypeNode)?"":t.getComparativeType() + "," + tdn.getComparativeType();
+                if (!assignmentRules.Contains(rule)
+                && !assignmentRules.Contains(rule2)
+                && !assignmentRules.Contains(rule3)
+                && f.ToString() != typeAssignmentNode.ToString()
+                && !f.Equals(typeAssignmentNode))
+            {
+                f = (f is AbstractTypeNode || f is ArrayTypeNode)?getTypeForIdentifier(Utils.getNameForType(f)):f;
+                f = (f is VarTypeNode)?tdn:f;
+                if(f.ToString()=="Person" && tdn.ToString()=="Student")
+                    Console.Write("");
+
+                if(f.getComparativeType() == Utils.Class && tdn.getComparativeType() == Utils.Class)
+                {
+                    if(!checkRelationBetween(f, tdn))
+                        Utils.ThrowError("1Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
+                }else if ((!(f.getComparativeType() == Utils.Class || f.getComparativeType() == Utils.String) && tdn is NullTypeNode))
+                {
+                    Utils.ThrowError("2Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
+                }
+                else
+                    Utils.ThrowError("3Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
+                if(ogiginalType is ArrayTypeNode)
+                    f = ogiginalType;
+            }
         }
 
         public void setNamespaces(KeyValuePair<string, CompilationUnitNode> tree)

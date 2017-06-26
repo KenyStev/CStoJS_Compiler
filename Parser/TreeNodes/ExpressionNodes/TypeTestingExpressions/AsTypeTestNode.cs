@@ -29,9 +29,9 @@ namespace Compiler.TreeNodes.Expressions.TypeTestingExpressions
                 Utils.ThrowError("Cannot use a primity type with this operation. "+token.getLine());
             if(toType is InterfaceTypeNode)
             {
-                Utils.ThrowError("Cannot implicity convert type "+leftType.ToString()+ " to interface "+target.ToString());
+                Utils.ThrowError("1Cannot implicity convert type "+leftType.ToString()+ " to interface "+target.ToString());
             }else if(leftType.getComparativeType()==Utils.Interface){
-                Utils.ThrowError("Cannot implicity convert type "+leftType.ToString()+ " to interface "+target.ToString());
+                Utils.ThrowError("2Cannot implicity convert type "+leftType.ToString()+ " to interface "+target.ToString());
             }
             target = api.getTypeForIdentifier(toType.ToString());
             if(!api.checkRelationBetween(leftType,target))

@@ -21,7 +21,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
-            if(identifier.ToString()=="n7")
+            if(identifier.ToString()=="students")
                 Console.Write("");
             TypeNode arrayType = null;
             try{
@@ -32,11 +32,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                     {
                         arrayType = f.type;
                         if(f.isStatic == isStatic)
-                            isStatic = false;
+                            api.isNextStaticContext = false;
                     }else{
                         arrayType = api.getTypeForIdentifier(identifier.ToString());
                         if(arrayType!=null)
-                            isStatic=true;
+                            api.isNextStaticContext=true;
                     }
                 }else{
                     bool accept = false;
@@ -58,7 +58,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
                 if(arrayType == null)
                     Utils.ThrowError("Array variable '" + identifier.ToString() + "' could not be found in the current context. ");
-                
+
                 var arr = arrayType as ArrayTypeNode;
                 int arraysOfArraysCounter = 0;
 

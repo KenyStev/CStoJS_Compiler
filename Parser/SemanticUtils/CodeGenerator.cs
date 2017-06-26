@@ -39,11 +39,9 @@ namespace Compiler.CodeGenerator
             }catch(SemanticException ex){
                 System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
             }
-            catch(Exception ex){
-                System.Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
-            }
-            this.api = semantic.getApi();//new API(trees);
-            var _path = @"C:\Users\jobar\Documents\git\CStoJS_Compiler\GeneratedJs\generated.js";
+            this.api = new API(trees);
+            // var _path = @"C:\Users\jobar\Documents\git\CStoJS_Compiler\GeneratedJs\generated.js";
+            var _path = @"..\GeneratedJs\generated.js";
             writer =  new Writer.Writer(_path);
         }
 

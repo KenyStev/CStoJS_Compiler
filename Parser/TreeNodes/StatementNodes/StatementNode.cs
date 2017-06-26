@@ -11,6 +11,10 @@ namespace Compiler.TreeNodes.Statements
             this.token = token;
         }
 
+        public virtual void GenerateCode(Writer.Writer Writer, API api)
+        {
+            Writer.WriteString($"{token.lexeme} not generated");
+        }
         public abstract void Evaluate(API api);
     }
 }
