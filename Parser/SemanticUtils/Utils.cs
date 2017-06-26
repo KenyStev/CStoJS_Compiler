@@ -232,5 +232,29 @@ GeneratedCode.System.IO.TextReader = class {
         {
             return (type is ArrayTypeNode)?((ArrayTypeNode)type).DataType.ToString():type.ToString();
         }
+
+        public static TokenType[] assignmentOperatorOptions = {
+            TokenType.OP_ASSIGN,
+            TokenType.OP_ASSIGN_SUM,
+            TokenType.OP_ASSIGN_SUBSTRACT,
+            TokenType.OP_ASSIGN_MULTIPLICATION,
+            TokenType.OP_ASSIGN_DIVISION,
+            TokenType.OP_ASSIGN_MODULO,
+            TokenType.OP_ASSIGN_BITWISE_AND,
+            TokenType.OP_ASSIGN_BITWISE_OR,
+            TokenType.OP_ASSIGN_XOR,
+            TokenType.OP_ASSIGN_SHIFT_LEFT,
+            TokenType.OP_ASSIGN_SHIFT_RIGHT,
+        };
+
+        public static bool passAssignExpression(Token token)
+        {
+            foreach (var item in assignmentOperatorOptions)
+            {
+                if(item == token.type)
+                    return true;
+            }
+            return false;
+        }
     }
 }

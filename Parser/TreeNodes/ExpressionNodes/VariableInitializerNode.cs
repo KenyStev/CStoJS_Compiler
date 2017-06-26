@@ -6,6 +6,7 @@ namespace Compiler.TreeNodes.Expressions
     public abstract class VariableInitializerNode
     {
         public Token token;
+        public TypeNode returnType=null;
 
         public VariableInitializerNode(){}
         public VariableInitializerNode(Token token)
