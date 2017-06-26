@@ -22,5 +22,14 @@ namespace Compiler.TreeNodes.Statements
                 stmt.Evaluate(api);
             }
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api)
+        {
+            if(statements!=null)
+            foreach (var stmt in statements)
+            {
+                stmt.GenerateCode(Writer,api);
+            }
+        }
     }
 }

@@ -117,6 +117,7 @@ namespace Compiler.TreeNodes.Types
                 constructorName = constructorName.Replace(",", "_");
                 var constName = constructorName == "" ? constructorName : "_" + constructorName;
                 Writer.WriteString($"\t{this.Identifier}{constName}{paramNames} {{\n");
+                constructor.statementBlock.GenerateCode(Writer,api);
                 Writer.WriteString($"\t}}\n");
 
             }
@@ -129,6 +130,7 @@ namespace Compiler.TreeNodes.Types
                 methodName = methodName.Replace(",", "_");
                 var methodHheaderName = methodName == "" ? methodName : "_" + methodName;
                 Writer.WriteString($"\t{method.methodHeaderNode.Identifier}{methodHheaderName}{paramNames} {{\n");
+                if(method.statemetBlock!=null)method.statemetBlock.GenerateCode(Writer,api);
                 Writer.WriteString($"\t}}\n");
 
             }

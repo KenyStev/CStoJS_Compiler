@@ -16,5 +16,10 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
         {
             return new NullTypeNode();
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api)
+        {
+            Writer.WriteString("null");
+        }
     }
 }
