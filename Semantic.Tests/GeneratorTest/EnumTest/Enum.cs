@@ -36,8 +36,11 @@ public class ImplementationClass
     {
     	int day = 0;
     	int day2 = 0;
+    	string [] variables;
     	if(day == day2) {
-    		
+    		foreach(var variable in variables) {
+
+    		}
     	}
     }
 }
