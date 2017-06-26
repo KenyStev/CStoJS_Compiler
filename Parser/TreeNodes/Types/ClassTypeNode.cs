@@ -68,7 +68,7 @@ namespace Compiler.TreeNodes.Types
             this.Constructors.Add(contructoreDeclaration);
         }
 
-        public override void Evaluate(API api)//TODO
+        public override void Evaluate(API api)
         {
             if(evaluated) return;
             Console.WriteLine("evaluating: "+ToString());

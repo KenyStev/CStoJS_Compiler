@@ -30,7 +30,9 @@ namespace Compiler.CodeGenerator
 
             var semantic = new Semantic(paths);
             try{
-                var trees = semantic.evaluate();
+                var tempTrees = semantic.evaluate();
+                foreach (var tree in tempTrees)
+                    trees[tree.Key] = tree.Value;
                 System.Console.Out.WriteLine("Success!");
             }catch(LexicalException ex){
                 System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
@@ -71,7 +73,7 @@ namespace Compiler.CodeGenerator
                 foreach (var tree in api.trees)
                 {
                     currentFile = tree.Value.origin;
-                    if(currentFile!="IncludesDefault")
+                    if(currentFile!="IncludesDefault")//TODO: quit this condition
                     {
                         tree.Value.defaultNamespace.GenerateCode(writer, api);
                         foreach (var ns in tree.Value.namespaceDeclared)
