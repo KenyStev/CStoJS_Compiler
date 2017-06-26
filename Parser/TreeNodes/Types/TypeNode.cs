@@ -12,6 +12,7 @@ namespace Compiler.TreeNodes.Types
         public EncapsulationNode encapsulation;
         public Token token;
         public bool evaluated;
+        public bool generated;
         public TypeNode()
         {
             encapsulation = null;
@@ -22,6 +23,9 @@ namespace Compiler.TreeNodes.Types
         }
 
         public abstract void Evaluate(API api);
+        public virtual void GenerateCode(Writer.Writer Writer) {
+            Console.WriteLine($"Generating code for {this.Identifier}");
+        }
         public abstract string getComparativeType();
     }
 }

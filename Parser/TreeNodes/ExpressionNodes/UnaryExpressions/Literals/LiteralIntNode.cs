@@ -23,5 +23,9 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.Literals
         {
             return new IntTypeNode();
         }
+
+        public override string ToString() {
+            return Value.ToString();
+        }
     }
 }

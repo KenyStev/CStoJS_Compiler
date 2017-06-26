@@ -9,7 +9,7 @@ namespace Compiler.SemanticAPI
 {
     public class API
     {
-        private Dictionary<string, CompilationUnitNode> trees;
+        public Dictionary<string, CompilationUnitNode> trees;
         public ContextManager contextManager;
 
         public List<string> assignmentRules;

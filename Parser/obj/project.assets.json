@@ -7197,22 +7197,22 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj",
+      "projectUniqueName": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj",
       "projectName": "Parser",
-      "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj",
-      "outputPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\obj\\",
+      "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj",
+      "outputPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Parser.dll": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\bin\\placeholder\\netcoreapp1.1\\Parser.dll"
+        "lib/netcoreapp1.1/Parser.dll": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\bin\\placeholder\\netcoreapp1.1\\Parser.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj": {
-              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj"
+            "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj": {
+              "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Lexer\\Lexer.csproj"
             }
           }
         }

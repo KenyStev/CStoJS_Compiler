@@ -12,3 +12,17 @@ C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcorea
 C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Parser.pdb
 c:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Semantic.dll
 c:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Semantic.pdb
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.deps.json
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.runtimeconfig.json
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.runtimeconfig.dev.json
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.dll
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Main.pdb
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Lexer.dll
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Parser.dll
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Semantic.dll
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Lexer.pdb
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Parser.pdb
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\bin\Debug\netcoreapp1.1\Semantic.pdb
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.AssemblyInfo.cs
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.dll
+c:\Users\jobar\Documents\git\CStoJS_Compiler\Main\obj\Debug\netcoreapp1.1\Main.pdb

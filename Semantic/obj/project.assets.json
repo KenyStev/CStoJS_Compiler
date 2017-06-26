@@ -7216,22 +7216,22 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj",
+      "projectUniqueName": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj",
       "projectName": "Semantic",
-      "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj",
-      "outputPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\obj\\",
+      "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\Semantic.csproj",
+      "outputPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
       "files": {
-        "lib/netcoreapp1.1/Semantic.dll": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\bin\\placeholder\\netcoreapp1.1\\Semantic.dll"
+        "lib/netcoreapp1.1/Semantic.dll": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Semantic\\bin\\placeholder\\netcoreapp1.1\\Semantic.dll"
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj": {
-              "projectPath": "C:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj"
+            "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj": {
+              "projectPath": "c:\\Users\\Kenystev\\Documents\\Compiladores\\CStoJS_Compiler\\Parser\\Parser.csproj"
             }
           }
         }

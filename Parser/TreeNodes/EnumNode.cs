@@ -15,6 +15,11 @@ namespace Compiler.TreeNodes
         public ExpressionNode value;
         public Token token;
 
+        public override string ToString()
+        {
+            return value.ToString();
+        }
+
         private EnumNode(){}
         public EnumNode(IdNode name, ExpressionNode value,Token token)
         {

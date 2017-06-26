@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Compiler;
+using Compiler.CodeGenerator;
 using Compiler.TreeNodes;
 using Compiler.TreeNodes.Types;
 using Compiler.TreeNodes.Statements;
@@ -28,10 +29,11 @@ namespace Main
         {
             int projectCounter = 0;
             // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
-            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
+            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\EnumTest\",
+                                    @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
                                     @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
             // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
-            while(projectCounter<argumentos.Length)
+            while(projectCounter<1)
             {
                 Singleton.namespacesTable.Clear();
                 Singleton.typesTable.Clear();
@@ -48,39 +50,22 @@ namespace Main
                     ProcessDirectory(ref paths, path);
                 }
 
-                try{
-                    var semantic = new Semantic(paths);
-                    var trees = semantic.evaluate();
-                    System.Console.Out.WriteLine("Success!");
-                }catch(LexicalException ex){
-                    System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-                }catch(SyntaxTokenExpectedException ex){
-                    System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-                }catch(SemanticException ex){
-                    System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-                }
+                // try{
+                //     var semantic = new Semantic(paths);
+                //     var trees = semantic.evaluate();
+                //     System.Console.Out.WriteLine("Success!");
+                // }catch(LexicalException ex){
+                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                // }catch(SyntaxTokenExpectedException ex){
+                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                // }catch(SemanticException ex){
+                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+                // }
                 projectCounter++;
+
+                var generator = new CodeGenerator(paths);
+                generator.GenerateCode();
             }
-
-            // catch(Exception ex){
-            //     System.Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
-            // }
-
-            // var dir = @"..\Parser.Tests\testFiles\generationTree\";
-            // var TestingFile = @"compiiisseada";
-            // var inputString = new InputFile(dir+TestingFile+".txt");
-            // var tokenGenerators = Resources.getTokenGenerators();
-
-            // var lexer = new Lexer(inputString, tokenGenerators);
-            // var parser = new Parser(lexer);
-            // try{
-            //     var code = parser.parse();
-            //     serializeCode(code,dir+@"XMLs\"+TestingFile+".xml");
-                
-            //     System.Console.Out.WriteLine("Success!");
-            // }catch(SyntaxTokenExpectedException ex){
-            //     System.Console.Out.WriteLine(ex.Message);
-            // }
         }
 
         public static void ProcessDirectory(ref List<string> paths, string targetDirectory)
