@@ -18,5 +18,9 @@ namespace Compiler.TreeNodes.Statements
         {
             expressionNode.EvaluateType(api,null,true);
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            this.expressionNode.GenerateCode(Writer, api);
+        }
     }
 }

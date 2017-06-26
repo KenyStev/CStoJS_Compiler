@@ -32,5 +32,18 @@ namespace Compiler.TreeNodes.Statements
             if(elseBock!=null)
                 elseBock.Evaluate(api);
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api)
+        {
+            Writer.WriteString($"\tif( ");
+            this.expression.GenerateCode(Writer, api);
+            Writer.WriteString($") {{\n ");
+            this.statements.GenerateCode(Writer, api);
+            Writer.WriteString($"\n\telse {{\n");
+            elseBock.GenerateCode(Writer, api);
+            Writer.WriteString($"}}\n ");
+
+
+        }
     }
 }

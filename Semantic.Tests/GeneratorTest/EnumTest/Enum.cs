@@ -34,6 +34,10 @@ public class ImplementationClass
 
     static void Main()
     {
-        
+    	int day = 0;
+    	int day2 = 0;
+    	if(day == day2) {
+    		
+    	}
     }
 }
