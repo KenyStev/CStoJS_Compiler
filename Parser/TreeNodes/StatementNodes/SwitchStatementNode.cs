@@ -21,7 +21,7 @@ namespace Compiler.TreeNodes.Statements
         public override void Evaluate(API api)
         {
             var expType = expression.EvaluateType(api,null,true);
-            if(expType is VoidTypeNode)
+            if(expType is VoidTypeNode && !(expType is PrimitiveTypeNode))
                 Utils.ThrowError("The switch expression must be a value; found void. ["
                 +api.currentNamespace.Identifier.Name+"] "+expression.token.getLine());
             api.contextManager.pushContext(api.buildContext("switch:"+token.getLine(),ContextType.SWITCH,null));

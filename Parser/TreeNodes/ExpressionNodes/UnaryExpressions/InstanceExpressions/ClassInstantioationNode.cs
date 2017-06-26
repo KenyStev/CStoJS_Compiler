@@ -29,8 +29,10 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.InstanceExpressions
             foreach (var arg in arguments)
             {
                 TypeNode argType = arg.expression.EvaluateType(api,null,true);
-                argumentsTypes.Add(arg.ToString());
+                argumentsTypes.Add(argType.ToString());
             }
+            if(t.ToString()=="Student")
+                Console.Write("");
             String constructorSign = t.ToString() + "(" + string.Join(",",argumentsTypes) + ")";
             var typeContext = api.buildContextForTypeDeclaration(t);
             if(!typeContext.existConstructor(constructorSign))

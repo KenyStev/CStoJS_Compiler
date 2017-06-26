@@ -42,11 +42,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                     {
                         t = f.methodHeaderNode.returnType.DataType;
                         if(api.validateModifier(f.Modifier,TokenType.RW_STATIC) == isStatic)
-                            isStatic = false;
+                            api.isNextStaticContext = false;
                     }else{
                         t = api.getTypeForIdentifier(identifier.ToString());
                         if(t!=null)
-                            isStatic=true;
+                            api.isNextStaticContext=true;
                     }
                 }else{
                     bool accept = false;

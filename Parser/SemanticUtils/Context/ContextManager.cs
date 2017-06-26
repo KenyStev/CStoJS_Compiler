@@ -85,7 +85,7 @@ namespace Compiler.SemanticAPI.ContextUtils
         public void pushContext(Context newCurrent)
         {
             Console.WriteLine("evaluatint: pushContext -> "+newCurrent.contextName);
-            if(newCurrent.contextName=="IntArraySelectionSort(IntType[],IntType)")
+            if(newCurrent.contextName=="if:line(58,17)")
                 Console.Write("");
             var temp = newCurrent;
             while(temp.parentContext!=null)

@@ -15,7 +15,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions.ReferenceAccsess
             // var referenceType = (ClassTypeNode)api.contextManager.getTypeFromContext(ContextType.BASE);
             // if(!referenceType.evaluated)
             //     referenceType.Eva
-            isStatic = false;
+            api.isNextStaticContext = false;
             return api.contextManager.getTypeFromContext(ContextType.BASE);
         }
     }

@@ -25,7 +25,7 @@ namespace Compiler.TreeNodes.Statements
         {
             api.contextManager.pushContext(api.buildContext("if:"+token.getLine(),ContextType.SELECTION,null));
             var expType = expression.EvaluateType(api,null,true);
-            if(!(expType is BoolTypeNode))
+            if(!(expType is BoolTypeNode || expType.ToString() == "BoolType"))
                 Utils.ThrowError("Cannot implicitly convert type '"+expType.ToString()+"' to 'bool' ["+api.currentNamespace.Identifier.Name+"]");
             statements.Evaluate(api);
             api.contextManager.popContext();

@@ -49,12 +49,13 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                     if(f!=null)
                     {
                         t = f.type;
-                        if(f.isStatic == isStatic)
-                            isStatic = false;
+                        api.isNextStaticContext = false;
+                        // if(f.isStatic == isStatic)
+                        //     Utils.ThrowError("here shoul crash for static");
                     }else{
                         t = api.getTypeForIdentifier(Name);
                         if(t!=null)
-                            isStatic=true;
+                            api.isNextStaticContext=true;
                     }
                 }else{
                     bool accept = false;

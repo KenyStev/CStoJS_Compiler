@@ -14,6 +14,7 @@ namespace Compiler.SemanticAPI
 
         public List<string> assignmentRules;
         public NamespaceNode currentNamespace;
+        internal bool isNextStaticContext;
 
         public API(Dictionary<string, CompilationUnitNode> trees)
         {
@@ -76,6 +77,7 @@ namespace Compiler.SemanticAPI
 
         public void validateRelationBetween(ref TypeNode f, ref TypeNode typeAssignmentNode)
         {
+            var ogiginalType = f;
             var tdn = (typeAssignmentNode is ArrayTypeNode || typeAssignmentNode is AbstractTypeNode)?getTypeForIdentifier(Utils.getNameForType(typeAssignmentNode)):typeAssignmentNode;
             var t = (f is AbstractTypeNode || f is ArrayTypeNode)?getTypeForIdentifier(Utils.getNameForType(f)):f;
             t = (t is VarTypeNode)?tdn:t;
@@ -103,6 +105,8 @@ namespace Compiler.SemanticAPI
                 }
                 else
                     Utils.ThrowError("3Not a valid assignment. Trying to assign " + tdn.ToString() + " to field with type " + f.ToString()+" "+ f.token.getLine());
+                if(ogiginalType is ArrayTypeNode)
+                    f = ogiginalType;
             }
         }
 
