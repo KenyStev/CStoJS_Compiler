@@ -26,9 +26,9 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            // string[] argumentos = { @"C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Semantic.Tests\testFiles\"};
-            // string[] argumentos = { @"C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Semantic.Tests\GeneratorTest\MergeProgram\"};
-            string[] argumentos = { @"C:\Users\Kenystev\Documents\Compiladores\CStoJS_Compiler\Semantic.Tests\GeneratorTest\RaimProgram\"};
+            // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
+            // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\"};
+            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
             string path = "./";
             if (argumentos.Length > 0)
             {
