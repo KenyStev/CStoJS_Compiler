@@ -22,5 +22,9 @@ namespace Compiler.TreeNodes.Statements
             statements.Evaluate(api);
             api.contextManager.popContext();
         }
+
+        public void GenerateCode(Writer.Writer Writer, API api) {
+            statements.GenerateCode(Writer, api);
+        }
     }
 }

@@ -63,5 +63,14 @@ namespace Compiler.TreeNodes.Statements
 
             api.contextManager.popContext();
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+
+            Writer.WriteStringLine($"\t\tfor {identifier} of ");
+            expression.GenerateCode(Writer, api);
+            Writer.WriteStringLine(") {");
+            this.body.GenerateCode(Writer, api);
+            Writer.WriteStringLine("\t\t}");
+        }
     }
 }
