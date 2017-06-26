@@ -29,5 +29,15 @@ namespace Compiler.TreeNodes.Statements
                 switchBodyNode.Evaluate(api,expType);
             api.contextManager.popContext();
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            Writer.WriteString($"\t\tswitch(");
+            this.expression.GenerateCode(Writer, api);
+            Writer.WriteString($") {{");
+            if(this.switchBodyNode != null) {
+                switchBodyNode.GenerateCode(Writer, api);
+            }
+            Writer.WriteString($"\t\t}}");
+        }
     }
 }

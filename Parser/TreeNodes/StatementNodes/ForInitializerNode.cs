@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using Compiler.SemanticAPI;
+using Compiler.Writer;
 
 namespace Compiler.TreeNodes.Statements
 {
@@ -22,6 +24,18 @@ namespace Compiler.TreeNodes.Statements
             this.localVariables = null;
             this.statementExpresions = stmtsExpList;
             this.token = token;
+        }
+
+        internal void GenerateCode(Writer.Writer writer, API api)
+        {
+            if(localVariables != null) {
+                localVariables.GenerateCode(writer, api);
+            }
+            else if(localVariables != null) {
+                foreach (var stmnt in statementExpresions) {
+                    stmnt.GenerateCode(writer, api);
+                }
+            }
         }
     }
 }

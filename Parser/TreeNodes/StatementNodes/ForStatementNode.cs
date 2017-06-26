@@ -37,5 +37,22 @@ namespace Compiler.TreeNodes.Statements
             StatementBlock.Evaluate(api);
             api.contextManager.popContext();
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            Writer.WriteStringLine($"\t\tfor (");
+            if(this.Initializer != null) {
+                this.Initializer.GenerateCode(Writer, api);
+            }
+            Writer.WriteString(";");
+            if(this.expression != null) {
+                expression.GenerateCode(Writer, api);
+            }
+            Writer.WriteString(";");
+            Writer.WriteStringLine(") {");
+            if (this.StatementBlock != null) {
+                StatementBlock.GenerateCode(Writer, api);
+            }
+            Writer.WriteStringLine("\t\t}");
+        }
     }
 }

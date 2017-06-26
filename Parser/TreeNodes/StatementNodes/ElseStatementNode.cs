@@ -24,7 +24,8 @@ namespace Compiler.TreeNodes.Statements
         }
 
         public void GenerateCode(Writer.Writer Writer, API api) {
-            statements.GenerateCode(Writer, api);
+            if(statements != null)
+                statements.GenerateCode(Writer, api);
         }
     }
 }

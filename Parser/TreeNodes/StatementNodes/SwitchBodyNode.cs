@@ -25,5 +25,11 @@ namespace Compiler.TreeNodes.Statements
                     sect.Evaluate(api,expType);
                 }
         }
+
+        public void GenerateCode(Writer.Writer Writer, API api) {
+            foreach(var sect in this.switchSections) {
+                sect.GenerateCode(Writer, api);
+            }
+        }
     }
 }
