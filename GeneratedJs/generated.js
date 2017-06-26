@@ -8,14 +8,14 @@ GeneratedNamespace.CarOptions = {
 }
 GeneratedNamespace.ImplementationClass = class extends GeneratedNamespace.Object {
 	ImplementationClass_StringType_StringType(day,day2) {
-= not generated	}
+=	}
 	ImplementationClass() {
 	}
 	SampleMethod() {
 	}
 	Main() {
-		let day0 not generated;
-		let day20 not generated;
+		let day = ;
+		let day2 = ;
 		let variables;
 		if( ()) {
  		}

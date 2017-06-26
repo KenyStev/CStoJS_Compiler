@@ -102,7 +102,7 @@ namespace Compiler.TreeNodes.Types
                     if(parent.Value is ClassTypeNode)
                     {
                         parent.Value.GenerateCode(Writer, api);
-                        parentName = api.getFullName(this);
+                        parentName = api.getFullName(parent.Value) + "." + parent.Key;
                     }
                 }
             }

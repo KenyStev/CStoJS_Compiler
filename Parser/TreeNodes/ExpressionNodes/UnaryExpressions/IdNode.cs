@@ -16,6 +16,9 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
         [XmlArray("Attributes"),
         XmlArrayItem("Identifier", Type = typeof(IdNode))]
         public List<IdNode> attributes;
+        private bool wasFoundStatic;
+        private bool isVariable;
+        private bool isFirst;
 
         private IdNode(){}
         public IdNode(string idValue,Token token)
@@ -23,6 +26,9 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             this.Name = idValue;
             this.attributes = new List<IdNode>();
             this.token = token;
+            this.wasFoundStatic=false;
+            this.isVariable=false;
+            this.isFirst=false;
         }
 
         public IdNode(string id, List<IdNode> attr,Token token)
@@ -30,6 +36,9 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             this.Name = id;
             this.attributes = attr;
             this.token = token;
+            this.wasFoundStatic=false;
+            this.isVariable=false;
+            this.isFirst=false;
         }
 
         public override string ToString()
@@ -45,11 +54,14 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             try{
                 if(type==null)
                 {
+                    this.isFirst=true;
                     FieldNode f = api.contextManager.findVariable(Name);
                     if(f!=null)
                     {
                         t = f.type;
                         api.isNextStaticContext = false;
+                        this.isVariable = true;
+                        this.wasFoundStatic = f.isStatic;
                         // if(f.isStatic == isStatic)
                         //     Utils.ThrowError("here shoul crash for static");
                     }else{
@@ -58,6 +70,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                             api.isNextStaticContext=true;
                     }
                 }else{
+                    this.isFirst=false;
                     bool accept = false;
                     if(!(type is ClassTypeNode))
                     {
@@ -81,7 +94,25 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             }catch(SemanticException ex){
                 Utils.ThrowError(ex.Message+token.getLine());
             }
+            returnType = t;
             return t;
+        }
+
+        public override void GenerateCode(Writer.Writer Writer, API api)
+        {
+            string fullPath = "";
+            if(isFirst)
+                fullPath = api.getFullName(returnType);
+            
+            if(isVariable && wasFoundStatic)
+                fullPath += returnType.ToString();
+            else if(isVariable && !wasFoundStatic)
+                fullPath = "this";
+
+            if(!isVariable)
+                fullPath += Name;
+
+            Writer.WriteString(fullPath);
         }
     }
 }

@@ -25,15 +25,22 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             if(api.contextManager.currentContext.contextName=="if:line(58,17)" && this.primary.ToString() == "Name")
                 Console.Write("");
             var isStaticNew = isStatic;
-            // if(!api.isNextStaticContext)
-            //     isStaticNew = false;
             TypeNode t = primary.EvaluateType(api,type,isStatic);
-            // if(primary is BaseReferenceAccessNode || primary is ThisReferenceAccsessNode)
-            // if(!api.isNextStaticContext)
-            //     isStaticNew = false;
             if(nextExpression!=null)
                 t = nextExpression.EvaluateType(api,t,api.isNextStaticContext);
+
+            returnType = t;
             return t;
+        }
+
+        public override void GenerateCode(Writer.Writer Writer, API api)
+        {
+            primary.GenerateCode(Writer,api);
+            if(nextExpression!=null)
+            {
+                Writer.WriteString(".");
+                nextExpression.GenerateCode(Writer,api);
+            }
         }
     }
 }
