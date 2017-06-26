@@ -23,6 +23,7 @@ namespace Compiler.SemanticAPI.ContextUtils
             {
                 if(temp.type==ContextType.ITERATIVE || temp.type==ContextType.SWITCH)
                     return true;
+                temp = temp.parentContext;
             }
             return false;
         }
@@ -36,6 +37,7 @@ namespace Compiler.SemanticAPI.ContextUtils
                     || temp.type==ContextType.METHOD
                     || temp.type==ContextType.STATIC_METHOD)
                     return true;
+                temp = temp.parentContext;
             }
             return false;
         }
@@ -49,6 +51,7 @@ namespace Compiler.SemanticAPI.ContextUtils
                     || temp.type==ContextType.METHOD
                     || temp.type==ContextType.STATIC_METHOD)
                     return temp.parentContext.contextName+"."+temp.contextName;
+                temp = temp.parentContext;
             }
             return "";
         }
@@ -62,6 +65,7 @@ namespace Compiler.SemanticAPI.ContextUtils
                     || temp.type==ContextType.METHOD
                     || temp.type==ContextType.STATIC_METHOD)
                     return temp.returnType;
+                temp = temp.parentContext;
             }
             return null;
         }
@@ -73,6 +77,7 @@ namespace Compiler.SemanticAPI.ContextUtils
             {
                 if(temp.type==ContextType.ITERATIVE)
                     return true;
+                temp = temp.parentContext;
             }
             return false;
         }
@@ -80,6 +85,8 @@ namespace Compiler.SemanticAPI.ContextUtils
         public void pushContext(Context newCurrent)
         {
             Console.WriteLine("evaluatint: pushContext -> "+newCurrent.contextName);
+            if(newCurrent.contextName=="IntArraySelectionSort(IntType[],IntType)")
+                Console.Write("");
             var temp = newCurrent;
             while(temp.parentContext!=null)
             {

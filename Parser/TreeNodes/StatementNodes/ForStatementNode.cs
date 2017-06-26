@@ -26,7 +26,7 @@ namespace Compiler.TreeNodes.Statements
 
         public override void Evaluate(API api)
         {
-            api.contextManager.pushContext(api.buildContext("for:"+token.getLine(),ContextType.ITERATIVE,this.Initializer.localVariables.localVariables));
+            api.contextManager.pushContext(api.buildContext("for:"+token.getLine(),ContextType.ITERATIVE,(Initializer.localVariables!=null)?Initializer.localVariables.localVariables:null));
             if(expression!=null)
             {
                 var expType = expression.EvaluateType(api,null,true);

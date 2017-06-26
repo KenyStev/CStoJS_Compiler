@@ -196,7 +196,7 @@ namespace Compiler
             }else if(pass(typesOptions))
             {
                 var type = types();
-                var inline = new InlineExpressionNode(type.Identifier,type.token);
+                var inline = new InlineExpressionNode(new IdNode(type.ToString(),type.token),type.token);
                 primary_expression_p(ref inline);
                 return inline;
             }else{

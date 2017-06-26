@@ -1,3 +1,7 @@
+using System;
+using Compiler.SemanticAPI;
+using Compiler.SemanticAPI.ContextUtils;
+
 namespace Compiler.TreeNodes.Statements
 {
     public class ElseStatementNode
@@ -10,6 +14,13 @@ namespace Compiler.TreeNodes.Statements
         {
             this.statements = stmts;
             this.token = token;
+        }
+
+        public void Evaluate(API api)
+        {
+            api.contextManager.pushContext(api.buildContext("else:"+token.getLine(),ContextType.SELECTION,null));
+            statements.Evaluate(api);
+            api.contextManager.popContext();
         }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using Compiler.SemanticAPI;
+using Compiler.SemanticAPI.ContextUtils;
 using Compiler.TreeNodes.Expressions;
+using Compiler.TreeNodes.Types;
 
 namespace Compiler.TreeNodes.Statements
 {
@@ -21,7 +23,14 @@ namespace Compiler.TreeNodes.Statements
 
         public override void Evaluate(API api)
         {
-            throw new NotImplementedException();
+            api.contextManager.pushContext(api.buildContext("if:"+token.getLine(),ContextType.SELECTION,null));
+            var expType = expression.EvaluateType(api,null,true);
+            if(!(expType is BoolTypeNode))
+                Utils.ThrowError("Cannot implicitly convert type '"+expType.ToString()+"' to 'bool' ["+api.currentNamespace.Identifier.Name+"]");
+            statements.Evaluate(api);
+            api.contextManager.popContext();
+            if(elseBock!=null)
+                elseBock.Evaluate(api);
         }
     }
 }
