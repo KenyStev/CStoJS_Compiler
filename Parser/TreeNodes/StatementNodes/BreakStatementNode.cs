@@ -17,5 +17,9 @@ namespace Compiler.TreeNodes.Statements
                 Utils.ThrowError("No enclosing loop out of which to break or continue ["
                 +api.currentNamespace.Identifier.Name+"] "+token.getLine());
         }
+        
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            
+        }
     }
 }

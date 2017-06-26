@@ -38,7 +38,7 @@ namespace Compiler.TreeNodes.Statements
             Writer.WriteString($"\t\tif( ");
             this.expression.GenerateCode(Writer, api);
             Writer.WriteString($") {{\n ");
-            if(this.statements == null) {
+            if(this.statements != null) {
                 this.statements.GenerateCode(Writer, api);
             }
             Writer.WriteString($"\t\t}}\n\t\telse {{\n");

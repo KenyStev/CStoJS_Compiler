@@ -32,5 +32,11 @@ namespace Compiler.TreeNodes.Statements
 
             api.validateRelationBetween(ref f,ref typeAssignmentNode);
         }
+        
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            Writer.WriteString("\t\treturn");
+            this.expression.GenerateCode(Writer, api);
+            Writer.WriteString(";");
+        }
     }
 }

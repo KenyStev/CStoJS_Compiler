@@ -18,7 +18,9 @@ GeneratedNamespace.ImplementationClass = class extends GeneratedNamespace.Object
 		let day20 not generated;
 		let variables;
 		if( ()) {
- 		}
+ 		for (variable of variables not generated) {
+		}
+		}
 		else {
 		}
  	}
