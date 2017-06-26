@@ -28,5 +28,16 @@ namespace Compiler.TreeNodes.Statements
                 Utils.ThrowError("Cannot implicitly convert type '"+expType.ToString()+"' to 'bool' ["+api.currentNamespace.Identifier.Name+"]");
             api.contextManager.popContext();
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            Writer.WriteString("\t\tdo {");
+            if(this.body != null) {
+                this.body.GenerateCode(Writer, api);
+            }
+            Writer.WriteString("\t\t}");
+            Writer.WriteString("\t\twhile(");
+            this.expression.GenerateCode(Writer, api);
+            Writer.WriteString(") {\n");
+        }
     }
 }
