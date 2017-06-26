@@ -19,7 +19,7 @@ namespace Compiler.TreeNodes.Statements
         }
         
         public override void GenerateCode(Writer.Writer Writer, API api) {
-            
+            Writer.WriteString("break");
         }
     }
 }

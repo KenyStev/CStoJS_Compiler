@@ -32,9 +32,9 @@ namespace Compiler.TreeNodes.Statements
 
         public void GenerateCode(Writer.Writer Writer, API api) {
             if(this.caseType == TokenType.RW_CASE) {
-                Writer.WriteString("\t\t\tcase");
+                Writer.WriteString("\t\t\tcase ");
                 this.expression.GenerateCode(Writer, api);
-                Writer.WriteString(":");
+                Writer.WriteString(" :\n");
             }else if(caseType == TokenType.RW_DEFAULT) {
                 Writer.WriteString("\t\t\tdefault:");
             }

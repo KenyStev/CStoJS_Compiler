@@ -8,22 +8,31 @@ GeneratedNamespace.CarOptions = {
 }
 GeneratedNamespace.ImplementationClass = class extends GeneratedNamespace.Object {
 	ImplementationClass_StringType_StringType(day,day2) {
-= not generated	}
+=	}
 	ImplementationClass() {
 	}
 	SampleMethod() {
 	}
 	Main() {
-		let day0 not generated;
-		let day20 not generated;
+		let day0;
+		let day20;
+		let testtrue;
 		let variables;
 		if( ()) {
- 		for (variable of variables not generated) {
+ 		for (variable of variables) {
 		}
 		}
 		else {
 		}
- 	}
+ 		do {
+		} while(test)
+		while (test) {
+		}
+		switch(day) {
+			case 0 :
+=break			case 1 :
+=break		}
+	}
 	constructor(){
 		this.day = null;
 

@@ -36,11 +36,33 @@ public class ImplementationClass
     {
     	int day = 0;
     	int day2 = 0;
-    	string [] variables;
+    	bool test = true;
+		string [] variables;
+
     	if(day == day2) {
+
     		foreach(var variable in variables) {
 
     		}
+    	}
+
+
+    	do {
+
+    	} while (test);
+
+
+    	while(test) {
+
+    	}
+
+    	switch(day) {
+    		case 0:
+    			day2 = 1;
+    			break;
+    		case 1:
+    			day = 0;
+    			break;
     	}
     }
 }

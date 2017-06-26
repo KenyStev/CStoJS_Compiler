@@ -17,7 +17,7 @@ namespace Compiler.TreeNodes.Expressions
         public abstract TypeNode EvaluateType(API api, TypeNode type, bool isStatic);
 
         public virtual void GenerateCode(Writer.Writer Writer, API api) {
-            Writer.WriteString($"{token.lexeme} not generated");
+            Writer.WriteString($"{token.lexeme}");
         }
     }
 }
