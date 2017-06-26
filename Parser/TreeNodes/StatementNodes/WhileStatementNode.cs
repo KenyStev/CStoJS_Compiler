@@ -28,5 +28,15 @@ namespace Compiler.TreeNodes.Statements
                 body.Evaluate(api);
             api.contextManager.popContext();
         }
+
+        public override void GenerateCode(Writer.Writer Writer, API api) {
+            Writer.WriteString("\t\twhile (");
+            this.expression.GenerateCode(Writer, api);
+            Writer.WriteString(") {\n");
+            if(this.body != null) {
+                this.body.GenerateCode(Writer, api);
+            }
+            Writer.WriteString("\t\t}");
+        }
     }
 }
