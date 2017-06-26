@@ -5,6 +5,7 @@ using Compiler.TreeNodes.Expressions.UnaryExpressions;
 using Compiler.SemanticAPI;
 using System;
 using Compiler.TreeNodes.Expressions.UnaryExpressions.Literals;
+using Compiler;
 
 namespace Compiler.TreeNodes.Types
 {
@@ -63,6 +64,18 @@ namespace Compiler.TreeNodes.Types
         public override string getComparativeType()
         {
             return Utils.Enum;
+        }
+
+        public override void GenerateCode(Writer.Writer writer)
+        {
+            writer.WriteStringLine($"const {this.Identifier} = {{");
+
+            foreach(var _enum in this.EnumItems){
+                writer.WriteStringLine($"\t{_enum.Identifier} : {_enum.value},");
+            }
+
+            writer.WriteStringLine($"}}");
+            this.generated = true;
         }
     }
 }

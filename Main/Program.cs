@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Serialization;
 using Compiler;
+using Compiler.CodeGenerator;
 using Compiler.TreeNodes;
 using Compiler.TreeNodes.Types;
 using Compiler.TreeNodes.Statements;
@@ -26,9 +27,9 @@ namespace Main
     {
         static void Main(string[] args)
         {
-            // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
-            // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\"};
-            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
+            //string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
+            //string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\MergeProgram\"};
+            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\EnumTest\"};
             string path = "./";
             if (argumentos.Length > 0)
             {
@@ -41,17 +42,17 @@ namespace Main
                 ProcessDirectory(ref paths, path);
             }
 
-            try{
-                var semantic = new Semantic(paths);
-                var trees = semantic.evaluate();
-                System.Console.Out.WriteLine("Success!");
-            }catch(LexicalException ex){
-                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-            }catch(SyntaxTokenExpectedException ex){
-                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-            }catch(SemanticException ex){
-                System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-            }
+            // try{
+            //     var semantic = new Semantic(paths);
+            //     var trees = semantic.evaluate();
+            //     System.Console.Out.WriteLine("Success!");
+            // }catch(LexicalException ex){
+            //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            // }catch(SyntaxTokenExpectedException ex){
+            //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            // }catch(SemanticException ex){
+            //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
+            // }
             // catch(Exception ex){
             //     System.Console.Out.WriteLine(ex.Message + ": " + ex.StackTrace);
             // }
@@ -71,6 +72,9 @@ namespace Main
             // }catch(SyntaxTokenExpectedException ex){
             //     System.Console.Out.WriteLine(ex.Message);
             // }
+
+            var generator = new CodeGenerator(paths);
+            generator.GenerateCode();
         }
 
         public static void ProcessDirectory(ref List<string> paths, string targetDirectory)

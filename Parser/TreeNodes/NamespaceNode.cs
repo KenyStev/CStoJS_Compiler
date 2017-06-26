@@ -110,6 +110,18 @@ namespace Compiler.TreeNodes
             api.setCurrentNamespace(null);
         }
 
+        public void GenerateCode(Writer.Writer writer) {
+            foreach (var typeDef in typesDeclarations)
+            {
+                try{
+                    if(!typeDef.generated)
+                        typeDef.GenerateCode(writer);
+                }catch(NotImplementedException ex){
+                    Console.WriteLine("TODO: ["+typeDef.GetType().Name+"]("+ex.Message+") -> "+ex.StackTrace);
+                }
+            }
+        }
+
         public override bool Equals (object obj)
         {
             if(!(obj is NamespaceNode))
