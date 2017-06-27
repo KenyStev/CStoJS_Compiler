@@ -166,8 +166,15 @@ namespace Compiler.SemanticAPI
 
         internal string getFullName(TypeNode typeNode)
         {
-            var nsp = getNamespaceForTypeByName(typeNode).ToString();
+            var nsp = getNamespaceForType(typeNode).ToString();
             var retString = nsp.Replace("default", "");
+            return $"GeneratedNamespace.{retString}";
+        }
+
+        internal string getFullNameByName(TypeNode typeNode)
+        {
+            var nsp = getNamespaceForTypeByName(typeNode);
+            var retString = (nsp!=null)?nsp.ToString().Replace("default", ""):".";
             return $"GeneratedNamespace.{retString}";
         }
 

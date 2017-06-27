@@ -73,14 +73,14 @@ namespace Compiler.CodeGenerator
                 foreach (var tree in api.trees)
                 {
                     currentFile = tree.Value.origin;
-                    if(currentFile!="IncludesDefault")//TODO: quit this condition
-                    {
+                    // if(currentFile!="IncludesDefault")//TODO: quit this condition
+                    // {
                         tree.Value.defaultNamespace.GenerateCode(writer, api);
                         foreach (var ns in tree.Value.namespaceDeclared)
                         {
                             ns.GenerateCode(writer, api);
                         }
-                    }
+                    // }
                 }
             }catch(SemanticException ex){
                 throw new SemanticException(currentFile + ": "+ex.Message);

@@ -71,7 +71,7 @@ namespace Compiler.TreeNodes.Types
         public override void Evaluate(API api)
         {
             if(evaluated) return;
-            Console.WriteLine("evaluating: "+ToString());
+            //Console.WriteLine("evaluating: "+ToString());
             if(ToString()=="Rectangulo")
                 Console.Write("");
             var thisDeclarationPath = api.getDeclarationPathForType(this);
@@ -191,7 +191,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkFields(API api, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkFields");
+            //Console.WriteLine("evaluating: checkFields");
             var path = api.getDeclarationPathForType(this);
             Dictionary<string,FieldNode> my_fields = api.getFieldsForClass(this,path+" "+Identifier.token.getLine());
             foreach (var field in my_fields)
@@ -222,7 +222,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkFieldsAssignment(API api, Dictionary<string, FieldNode> my_fields, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkFieldsAssignment");
+            //Console.WriteLine("evaluating: checkFieldsAssignment");
             foreach (var field in my_fields)
             {
                 if(field.Value.assigner!=null)
@@ -262,7 +262,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkConstructors(API api, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkConstructors");
+            //Console.WriteLine("evaluating: checkConstructors");
             var path = api.getDeclarationPathForType(this);
             var my_constructors = api.getConstructorsForClass(this,path+" "+Identifier.token.getLine());
             foreach (var ct in my_constructors)
@@ -276,7 +276,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkConstructorsBody(API api, Dictionary<string, ConstructorNode> my_constructors, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkConstructorsBody");
+            //Console.WriteLine("evaluating: checkConstructorsBody");
             foreach (var ctror in my_constructors)
             {
                 api.contextManager.pushContext(api.buildContextForConstructor(ctror));
@@ -298,7 +298,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkMethods(API api, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkMethods");
+            //Console.WriteLine("evaluating: checkMethods");
             var path = api.getDeclarationPathForType(this);
             var my_methods = api.getMethodsForType(this,path+" "+Identifier.token.getLine());
             foreach (var method in my_methods)
@@ -342,7 +342,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkMethodsBody(API api, Dictionary<string, MethodNode> my_methods, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkMethodsBody");
+            //Console.WriteLine("evaluating: checkMethodsBody");
             foreach (var method in my_methods)
             {
                 api.contextManager.pushContext(api.buildContextForMethod(method));
@@ -354,7 +354,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkParents(API api, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkParents");
+            //Console.WriteLine("evaluating: checkParents");
             var path = api.getDeclarationPathForType(this);
             var my_methods = api.getMethodsForType(this,path+" "+Identifier.token.getLine());
             foreach (var parent in parents)
@@ -365,7 +365,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkParentMethods(API api, TypeNode parent, Dictionary<string,MethodNode> my_methods)
         {
-            Console.WriteLine("evaluating: checkParentMethods");
+            //Console.WriteLine("evaluating: checkParentMethods");
             var path = api.getDeclarationPathForType(this);
             var parent_methods = api.getMethodsForType(parent,path+" "+Identifier.token.getLine());
             foreach (var parent_method in parent_methods)
@@ -388,7 +388,7 @@ namespace Compiler.TreeNodes.Types
 
         private void verifyCycleInheritance(API api,NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: verifyCycleInheritance");
+            //Console.WriteLine("evaluating: verifyCycleInheritance");
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             try{
                 api.hasCycleInheritance(Identifier.Name,parents);
@@ -399,7 +399,7 @@ namespace Compiler.TreeNodes.Types
 
         private void checkInheritance(API api, NamespaceNode myNs)
         {
-            Console.WriteLine("evaluating: checkInheritance");
+            //Console.WriteLine("evaluating: checkInheritance");
             var thisDeclarationPath = api.getDeclarationPathForType(this);
             ClassTypeNode classParent = null;
             if(inheritanceses!=null && parents.Count==0)

@@ -73,6 +73,10 @@ namespace Compiler.TreeNodes.Expressions
                 Writer.WriteString("CharToInt(");
                 rightOperand.GenerateCode(Writer, api);
                 Writer.WriteString(")");
+            }else{
+                leftOperand.GenerateCode(Writer, api);
+                Writer.WriteString($" {token.lexeme} ");
+                rightOperand.GenerateCode(Writer, api);
             }
 
             if(returnType is IntTypeNode)

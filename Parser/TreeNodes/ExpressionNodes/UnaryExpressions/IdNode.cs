@@ -54,7 +54,7 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
         public override TypeNode EvaluateType(API api, TypeNode type, bool isStatic)
         {
             reset();
-            if(Name=="c")
+            if(Name=="start")
                 Console.WriteLine();
             TypeNode t = null;
             try{
@@ -111,11 +111,11 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
 
         public override void GenerateCode(Writer.Writer Writer, API api)
         {
-            if(returnType.ToString()=="IntType")
+            if(returnType==null)
                 Console.Write("");
             string fullPath = "";
             if(isFirst)
-                fullPath = api.getFullName(returnType);
+                fullPath = api.getFullNameByName(returnType);
             
             if(isVariable && wasFoundStatic)
             {
@@ -125,7 +125,12 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
                 fullPath = this.parentName+Name;
 
             if(!isVariable)
-                fullPath += (fullPath[fullPath.Length-1]=='.')?Name:"."+Name;
+            {
+                if(fullPath.Length>0)
+                    fullPath += (fullPath[fullPath.Length-1]=='.')?Name:"."+Name;
+                else
+                    fullPath += "."+Name;
+            }
                 // fullPath += Name;
                 
 

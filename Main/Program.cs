@@ -30,7 +30,9 @@ namespace Main
             int projectCounter = 0;
             // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
             string[] argumentos = { 
-                                    // @"..\Semantic.Tests\GeneratorTest\EnumTest\",
+                                    // @"..\Semantic.Tests\GeneratorTest\CompiTests\CarlosProgram\",
+                                    @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
+                                    @"..\Semantic.Tests\GeneratorTest\EnumTest\",
                                     @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
                                     @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
             // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
@@ -51,18 +53,6 @@ namespace Main
                     Console.WriteLine(path);
                     ProcessDirectory(ref paths, path);
                 }
-
-                // try{
-                //     var semantic = new Semantic(paths);
-                //     var trees = semantic.evaluate();
-                //     System.Console.Out.WriteLine("Success!");
-                // }catch(LexicalException ex){
-                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-                // }catch(SyntaxTokenExpectedException ex){
-                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-                // }catch(SemanticException ex){
-                //     System.Console.Out.WriteLine(ex.GetType().Name + " -> " + ex.Message);
-                // }
                 projectCounter++;
 
                 var generator = new CodeGenerator(paths);

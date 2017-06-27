@@ -89,7 +89,7 @@ namespace Compiler.SemanticAPI.ContextUtils
 
         public void pushContext(Context newCurrent)
         {
-            Console.WriteLine("evaluatint: pushContext -> "+newCurrent.contextName);
+            //Console.WriteLine("evaluatint: pushContext -> "+newCurrent.contextName);
             if(newCurrent.contextName=="if:line(58,17)")
                 Console.Write("");
             var temp = newCurrent;
@@ -137,7 +137,7 @@ namespace Compiler.SemanticAPI.ContextUtils
 
         public void popContext()
         {
-            Console.WriteLine("evaluatint: popContext -> "+currentContext.contextName);
+            //Console.WriteLine("evaluatint: popContext -> "+currentContext.contextName);
             currentContext = currentContext.parentContext;
         }
 
