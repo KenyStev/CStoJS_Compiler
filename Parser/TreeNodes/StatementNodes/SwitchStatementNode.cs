@@ -33,11 +33,11 @@ namespace Compiler.TreeNodes.Statements
         public override void GenerateCode(Writer.Writer Writer, API api) {
             Writer.WriteString($"\t\tswitch(");
             this.expression.GenerateCode(Writer, api);
-            Writer.WriteString($") {{");
+            Writer.WriteString($") {{\n");
             if(this.switchBodyNode != null) {
                 switchBodyNode.GenerateCode(Writer, api);
             }
-            Writer.WriteString($"\t\t}}");
+            Writer.WriteString($"\t\t}}\n");
         }
     }
 }

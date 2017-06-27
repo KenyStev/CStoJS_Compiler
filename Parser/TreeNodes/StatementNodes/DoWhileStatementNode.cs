@@ -30,14 +30,14 @@ namespace Compiler.TreeNodes.Statements
         }
 
         public override void GenerateCode(Writer.Writer Writer, API api) {
-            Writer.WriteString("\t\tdo {");
+            Writer.WriteString("\t\tdo {\n");
             if(this.body != null) {
                 this.body.GenerateCode(Writer, api);
             }
             Writer.WriteString("\t\t}");
-            Writer.WriteString("\t\twhile(");
+            Writer.WriteString(" while(");
             this.expression.GenerateCode(Writer, api);
-            Writer.WriteString(") {\n");
+            Writer.WriteString(");\n");
         }
     }
 }

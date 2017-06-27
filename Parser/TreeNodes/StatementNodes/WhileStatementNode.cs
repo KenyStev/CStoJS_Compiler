@@ -36,7 +36,7 @@ namespace Compiler.TreeNodes.Statements
             if(this.body != null) {
                 this.body.GenerateCode(Writer, api);
             }
-            Writer.WriteString("\t\t}");
+            Writer.WriteString("\t\t}\n");
         }
     }
 }
