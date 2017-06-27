@@ -25,7 +25,7 @@ GeneratedNamespace.ImplementationClass = class extends GeneratedNamespace.Object
 		else {
 		}
  		do {
-		} while(test)
+		} while(test);
 		while (test) {
 		}
 		switch(day) {
@@ -41,4 +41,4 @@ GeneratedNamespace.ImplementationClass = class extends GeneratedNamespace.Object
         if (argumentos.length >= 1) this[arguments[0]](...argus);
 	}
 }
-ImplementationClass.personName = null;
+GeneratedNamespace.ImplementationClass.personName = null;

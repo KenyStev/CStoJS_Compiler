@@ -157,7 +157,7 @@ namespace Compiler.TreeNodes.Types
                 if(!field.isStatic)
                 continue;
                 var val = "null";
-                Writer.WriteString($"{name}.{field.identifier} = {val};\n");
+                Writer.WriteString($"GeneratedNamespace.{name}.{field.identifier} = {val};\n");
             }
             this.generated = true;
         }
