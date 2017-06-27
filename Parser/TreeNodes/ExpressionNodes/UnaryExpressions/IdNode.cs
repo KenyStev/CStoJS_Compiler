@@ -119,13 +119,15 @@ namespace Compiler.TreeNodes.Expressions.UnaryExpressions
             
             if(isVariable && wasFoundStatic)
             {
-                fullPath += this.parentName+"."+Name;
+                fullPath += ((this.parentName.Length>0)?this.parentName+".":"")+Name;
             }
             else if(isVariable && !wasFoundStatic)
                 fullPath = this.parentName+Name;
 
             if(!isVariable)
                 fullPath += (fullPath[fullPath.Length-1]=='.')?Name:"."+Name;
+                // fullPath += Name;
+                
 
             Writer.WriteString(fullPath);
         }

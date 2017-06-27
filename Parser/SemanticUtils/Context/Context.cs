@@ -93,7 +93,7 @@ namespace Compiler.SemanticAPI.ContextUtils
             if(f!=null)
             {
                 if(type==ContextType.CLASS && !f.isStatic)
-                    contextNameFound = "this";
+                    contextNameFound = "this.";
                 else if(type==ContextType.CLASS && f.isStatic)
                     contextNameFound = contextName;
             }

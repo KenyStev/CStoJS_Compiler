@@ -5,11 +5,14 @@ public class probar{
 }
 public class sort{
     static int adios = 5;
+    int adios2 = 5;
     public static void Main(string[] args)
     {
         int otra = adios;
         int otra2 = probar.mostrar;
         int otra3 = otra;
+        int otra4 = adios2;
+        // int otra5 = this.adios;
         int c7 = 'a'+ 1;
         int c = 20 + 30;
         int c1 = ((20 + 30 - 10 * 50) / 5) * 10;
