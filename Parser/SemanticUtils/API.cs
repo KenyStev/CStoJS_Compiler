@@ -166,7 +166,7 @@ namespace Compiler.SemanticAPI
 
         internal string getFullName(TypeNode typeNode)
         {
-            var nsp = getNamespaceForType(typeNode).ToString();
+            var nsp = getNamespaceForTypeByName(typeNode).ToString();
             var retString = nsp.Replace("default", "");
             return $"GeneratedNamespace.{retString}";
         }
@@ -586,6 +586,31 @@ namespace Compiler.SemanticAPI
                     foreach (var entry in ns.typesDeclarations)
                     {
                         if(entry == typeNode)
+                        {
+                            return ns;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public NamespaceNode getNamespaceForTypeByName(TypeNode typeNode)
+        {
+            foreach (var tree in trees)
+            {
+                foreach (var entry in tree.Value.defaultNamespace.typesDeclarations)
+                {
+                    if(entry.ToString() == typeNode.ToString())
+                    {
+                        return tree.Value.defaultNamespace;
+                    }
+                }
+                foreach (var ns in tree.Value.namespaceDeclared)
+                {
+                    foreach (var entry in ns.typesDeclarations)
+                    {
+                        if(entry.ToString() == typeNode.ToString())
                         {
                             return ns;
                         }

@@ -62,6 +62,45 @@ namespace Compiler.SemanticAPI.ContextUtils
             return null;
         }
 
+        public string getParentName(string variableName,params EncapsulationNode[] notToBeEncapsulation)
+        {
+            FieldNode f=null;
+            if(variables.ContainsKey(variableName))
+            {
+                var variable =  variables[variableName];
+                if(notToBeEncapsulation==null) f = variable;
+                else
+                {
+                    foreach (var enc in notToBeEncapsulation)
+                    {
+                        if(enc.Equals(variable.encapsulation))
+                            Utils.ThrowError(""+contextName+"."+variable.identifier.Name
+                            +"' is inaccessible due to its protection level ["
+                            +api.currentNamespace.Identifier.Name+"] ");
+                    }
+                }
+                f = variable;
+            }
+            else if (parentContext.contextName!="Object")
+            {
+                if(this.type==ContextType.CLASS)
+                    return parentContext.getParentName(variableName,Utils.privateLevel);
+                else
+                    return parentContext.getParentName(variableName,null);
+            }
+
+            string contextNameFound ="";
+            if(f!=null)
+            {
+                if(type==ContextType.CLASS && !f.isStatic)
+                    contextNameFound = "this";
+                else if(type==ContextType.CLASS && f.isStatic)
+                    contextNameFound = contextName;
+            }
+            
+            return contextNameFound;
+        }
+
         public void setLastParent(Context context)
         {
             if(parentContext==null)

@@ -1,8 +1,15 @@
 using System;
+
+public class probar{
+    public static int mostrar = 5;
+}
 public class sort{
-    
+    static int adios = 5;
     public static void Main(string[] args)
     {
+        int otra = adios;
+        int otra2 = probar.mostrar;
+        int otra3 = otra;
         int c7 = 'a'+ 1;
         int c = 20 + 30;
         int c1 = ((20 + 30 - 10 * 50) / 5) * 10;

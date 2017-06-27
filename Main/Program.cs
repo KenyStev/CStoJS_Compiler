@@ -29,7 +29,8 @@ namespace Main
         {
             int projectCounter = 0;
             // string[] argumentos = { @"..\Semantic.Tests\testFiles\"};
-            string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\EnumTest\",
+            string[] argumentos = { 
+                                    // @"..\Semantic.Tests\GeneratorTest\EnumTest\",
                                     @"..\Semantic.Tests\GeneratorTest\MergeProgram\",
                                     @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};
             // string[] argumentos = { @"..\Semantic.Tests\GeneratorTest\RaimProgram\"};

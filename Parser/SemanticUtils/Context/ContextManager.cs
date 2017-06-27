@@ -70,6 +70,11 @@ namespace Compiler.SemanticAPI.ContextUtils
             return null;
         }
 
+        public string getParentName(string name)
+        {
+            return currentContext.getParentName(name,null);
+        }
+
         public bool existScopeForContinueAbove()
         {
             Context temp = currentContext;
