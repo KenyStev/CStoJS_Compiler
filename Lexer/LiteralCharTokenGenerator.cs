@@ -35,7 +35,10 @@ namespace Compiler
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();
                 tokenToReturn = new Token(TokenType.LIT_CHAR,lexeme.ToString(),lexemeRow,lexemeCol);
-            }else if(Char.IsLetterOrDigit(currentSymbol.character) || Char.IsPunctuation(currentSymbol.character) && !("\\\'".IndexOf(currentSymbol.character)>=0))
+            }else if(Char.IsLetterOrDigit(currentSymbol.character) 
+            || Char.IsPunctuation(currentSymbol.character) 
+            || currentSymbol.character==' '
+            && !("\\\'".IndexOf(currentSymbol.character)>=0))
             {
                 lexeme.Append(currentSymbol.character);
                 currentSymbol = inputString.GetNextSymbol();

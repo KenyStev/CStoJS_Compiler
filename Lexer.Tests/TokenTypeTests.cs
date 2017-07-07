@@ -373,7 +373,6 @@ namespace Lexer.Tests
             // var expectedLexemes = new string[]{"'a'", "'b'","'\\a'","'\\b'"};
             var lexer = new Compiler.Lexer(inputString,Resources.getTokenGenerators());
             var currentToken = lexer.GetNextToken();
-            int i =0;
             do{
                 // Assert.True(currentToken.type == TokenType.LIT_CHAR);
                 // Assert.True(currentToken.lexeme == expectedLexemes[i++]);

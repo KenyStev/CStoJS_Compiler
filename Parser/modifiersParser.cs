@@ -1,4 +1,5 @@
 using System;
+using Compiler.TreeNodes;
 
 namespace Compiler
 {
@@ -9,15 +10,17 @@ namespace Compiler
             | "protected"
             | "private"
             | EPSILON */
-        private void encapsulation_modifier()
+        private EncapsulationNode encapsulation_modifier()
         {
             printIfDebug("encapsulation_modifier");
             if(pass(encapsulationOptions))
             {
+                var encapMod = new EncapsulationNode(token.type,token);
                 consumeToken();
+                return encapMod;
             }else
             {
-                //EPSILON
+                return new EncapsulationNode(TokenType.RW_PRIVATE,null);
             }
         }
     }

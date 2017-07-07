@@ -1,0 +1,14 @@
+interface Iterable
+{
+    int[] getSec(timeset[,,][] nowDays);
+}
+
+namespace Hola
+{
+    private interface IGently : Iterable, IOtra
+    {
+        void saludar();
+        int getSize();
+        Adios getIn(Language language,string name);
+    }
+}

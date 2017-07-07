@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CompilationUnitNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UsingDirectives />
+  <defaultNamespace>
+    <Identifier>
+      <Name>default</Name>
+      <Attributes />
+    </Identifier>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>nuevaClase</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses>
+        <BaseItem>
+          <Name>viejaClase</Name>
+          <Attributes />
+        </BaseItem>
+      </Inheritanceses>
+      <Fields>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>edad</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+        </Field>
+        <Field IsStatic="true">
+          <identifier>
+            <Name>saldo</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PRIVATE" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>MARTES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>x</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>kevin</Name>
+            <Attributes />
+          </identifier>
+          <AbstractTypeNode>
+            <Identifier>
+              <Name>Kevin</Name>
+              <Attributes />
+            </Identifier>
+          </AbstractTypeNode>
+          <encapsulation type="RW_PROTECTED" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="true">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="true">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PRIVATE" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>otro</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>otro</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>otro</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>otro</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>LUNES</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>boleano</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_BOOL" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>otro</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>nuevo</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>t</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>mana</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>mana</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>funcion</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>f</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>persona</Name>
+            <Attributes />
+          </identifier>
+          <AbstractTypeNode>
+            <Identifier>
+              <Name>Persona</Name>
+              <Attributes />
+            </Identifier>
+          </AbstractTypeNode>
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>persona</Name>
+            <Attributes />
+          </identifier>
+          <AbstractTypeNode>
+            <Identifier>
+              <Name>Persona</Name>
+              <Attributes />
+            </Identifier>
+          </AbstractTypeNode>
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>mana</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_FLOAT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>arreglo</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>arreglo</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>arreglo</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>arreglo</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ArrayInitializerNode>
+            <ArrayInitializers>
+              <VariableInitializer xsi:type="LiteralIntNode">
+                <Value>11</Value>
+              </VariableInitializer>
+              <VariableInitializer xsi:type="LiteralIntNode">
+                <Value>11</Value>
+              </VariableInitializer>
+              <VariableInitializer xsi:type="LiteralIntNode">
+                <Value>11</Value>
+              </VariableInitializer>
+            </ArrayInitializers>
+          </ArrayInitializerNode>
+        </Field>
+        <Field IsStatic="false">
+          <identifier>
+            <Name>value</Name>
+            <Attributes />
+          </identifier>
+          <PrimitiveTypeNode type="RW_INT" />
+          <encapsulation type="RW_PUBLIC" />
+          <ExpressionNode xsi:type="LiteralIntNode">
+            <Value>11</Value>
+          </ExpressionNode>
+        </Field>
+      </Fields>
+      <Constructors>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters />
+          <initializer>
+            <Arguments>
+              <Argument>
+                <LiteralIntNode>
+                  <Value>11</Value>
+                </LiteralIntNode>
+              </Argument>
+            </Arguments>
+          </initializer>
+        </Contructor>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters>
+            <Param>
+              <ArrayType>
+                <PrimitiveTypeNode type="RW_FLOAT" />
+                <MultiDimArrays>
+                  <MultiDimArray dimensions="1" />
+                  <MultiDimArray dimensions="1" />
+                  <MultiDimArray dimensions="1" />
+                </MultiDimArrays>
+              </ArrayType>
+              <paramName>
+                <Name>vectors</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+            <Param>
+              <AbstractTypeNode>
+                <Identifier>
+                  <Name>Sapo</Name>
+                  <Attributes />
+                </Identifier>
+              </AbstractTypeNode>
+              <paramName>
+                <Name>ass</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+          </Parameters>
+        </Contructor>
+        <Contructor>
+          <encapsulation type="RW_PRIVATE" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters>
+            <Param>
+              <PrimitiveTypeNode type="RW_INT" />
+              <paramName>
+                <Name>hola</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+            <Param>
+              <AbstractTypeNode>
+                <Identifier>
+                  <Name>Persona</Name>
+                  <Attributes />
+                </Identifier>
+              </AbstractTypeNode>
+              <paramName>
+                <Name>persona</Name>
+                <Attributes />
+              </paramName>
+            </Param>
+          </Parameters>
+        </Contructor>
+      </Constructors>
+      <Methods />
+    </Class>
+  </defaultNamespace>
+  <Namespaceses />
+</CompilationUnitNode>

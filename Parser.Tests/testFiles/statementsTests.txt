@@ -100,6 +100,10 @@ class stmtTests
         hola[2] = "adios";
         Console.WriteLine("Hello!");
 
+        ((Parent)Child).HolaMundo();
+        ((Parent)Parent2.Child).HolaMundo();
+        (((Parent)Parent2.Child).Attr).HolaMundo();
+
         namespace1.namespace2.namespace3.MuClass[0] = "Ing.";
         namespace1.namespace2.MuClass[1] = "no";
         namespace1.MuClass[2] = "nos";

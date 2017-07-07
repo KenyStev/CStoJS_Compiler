@@ -91,6 +91,7 @@ namespace Compiler
         RW_BASE,
         RW_VAR,
         RW_IN,
-        RW_DEFAULT
+        RW_DEFAULT,
+        RW_NULL
     }
 }

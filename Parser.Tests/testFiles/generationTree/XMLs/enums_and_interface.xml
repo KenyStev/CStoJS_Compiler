@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CompilationUnitNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UsingDirectives>
+    <Directive>
+      <Identifier>
+        <Name>Kenystev</Name>
+        <Attributes />
+      </Identifier>
+    </Directive>
+    <Directive>
+      <Identifier>
+        <Name>Kenystev</Name>
+        <Attributes>
+          <Identifier>
+            <Name>Collection</Name>
+            <Attributes />
+          </Identifier>
+        </Attributes>
+      </Identifier>
+    </Directive>
+  </UsingDirectives>
+  <defaultNamespace>
+    <Identifier>
+      <Name>default</Name>
+      <Attributes />
+    </Identifier>
+    <Enum>
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>miEnum</Name>
+        <Attributes />
+      </Identifier>
+      <Items>
+        <EnumItem>
+          <Name>
+            <Name>ONE</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>0</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Name>TWO</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>1</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Name>THREE</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>2</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Name>FOUR</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>3</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Name>FIVE</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>4</Value>
+          </LiteralIntNode>
+        </EnumItem>
+      </Items>
+    </Enum>
+    <Enum>
+      <encapsulation type="RW_PRIVATE" />
+      <Identifier>
+        <Name>otroMas</Name>
+        <Attributes />
+      </Identifier>
+      <Items>
+        <EnumItem>
+          <Name>
+            <Name>promise</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>0</Value>
+          </LiteralIntNode>
+        </EnumItem>
+        <EnumItem>
+          <Name>
+            <Name>nadaMas</Name>
+            <Attributes />
+          </Name>
+          <LiteralIntNode>
+            <Value>1</Value>
+          </LiteralIntNode>
+        </EnumItem>
+      </Items>
+    </Enum>
+  </defaultNamespace>
+  <Namespaceses>
+    <Namespace>
+      <Identifier>
+        <Name>Hola</Name>
+        <Attributes />
+      </Identifier>
+      <Enum>
+        <encapsulation type="RW_PUBLIC" />
+        <Identifier>
+          <Name>dentroDe</Name>
+          <Attributes />
+        </Identifier>
+        <Items>
+          <EnumItem>
+            <Name>
+              <Name>Hola</Name>
+              <Attributes />
+            </Name>
+            <LiteralIntNode>
+              <Value>0</Value>
+            </LiteralIntNode>
+          </EnumItem>
+          <EnumItem>
+            <Name>
+              <Name>adios</Name>
+              <Attributes />
+            </Name>
+            <LiteralIntNode>
+              <Value>1</Value>
+            </LiteralIntNode>
+          </EnumItem>
+        </Items>
+      </Enum>
+    </Namespace>
+    <Namespace>
+      <Identifier>
+        <Name>Kevin</Name>
+        <Attributes />
+      </Identifier>
+      <UsingDirectives>
+        <Directive>
+          <Identifier>
+            <Name>Hola</Name>
+            <Attributes />
+          </Identifier>
+        </Directive>
+      </UsingDirectives>
+    </Namespace>
+    <Namespace>
+      <Identifier>
+        <Name>Javier</Name>
+        <Attributes />
+      </Identifier>
+      <Interface>
+        <encapsulation type="RW_PUBLIC" />
+        <Identifier>
+          <Name>Iterable</Name>
+          <Attributes />
+        </Identifier>
+        <MethodHeaders>
+          <MethodHeader>
+            <returnType>
+              <ArrayType>
+                <PrimitiveTypeNode type="RW_INT" />
+                <MultiDimArrays>
+                  <MultiDimArray dimensions="1" />
+                </MultiDimArrays>
+              </ArrayType>
+              <IsVoid>false</IsVoid>
+            </returnType>
+            <Identifier>
+              <Name>getSec</Name>
+              <Attributes />
+            </Identifier>
+            <Parameters>
+              <Param>
+                <ArrayType>
+                  <AbstractTypeNode>
+                    <Identifier>
+                      <Name>timeset</Name>
+                      <Attributes />
+                    </Identifier>
+                  </AbstractTypeNode>
+                  <MultiDimArrays>
+                    <MultiDimArray dimensions="3" />
+                    <MultiDimArray dimensions="1" />
+                  </MultiDimArrays>
+                </ArrayType>
+                <paramName>
+                  <Name>nowDays</Name>
+                  <Attributes />
+                </paramName>
+              </Param>
+            </Parameters>
+          </MethodHeader>
+        </MethodHeaders>
+        <Inheritanceses />
+      </Interface>
+    </Namespace>
+    <Namespace>
+      <Identifier>
+        <Name>Hola</Name>
+        <Attributes />
+      </Identifier>
+      <Interface>
+        <encapsulation type="RW_PRIVATE" />
+        <Identifier>
+          <Name>IGently</Name>
+          <Attributes />
+        </Identifier>
+        <MethodHeaders>
+          <MethodHeader>
+            <returnType>
+              <VoidType />
+              <IsVoid>true</IsVoid>
+            </returnType>
+            <Identifier>
+              <Name>saludar</Name>
+              <Attributes />
+            </Identifier>
+          </MethodHeader>
+          <MethodHeader>
+            <returnType>
+              <PrimitiveType type="RW_INT" />
+              <IsVoid>false</IsVoid>
+            </returnType>
+            <Identifier>
+              <Name>getSize</Name>
+              <Attributes />
+            </Identifier>
+          </MethodHeader>
+          <MethodHeader>
+            <returnType>
+              <AbstractType>
+                <Identifier>
+                  <Name>Adios</Name>
+                  <Attributes />
+                </Identifier>
+              </AbstractType>
+              <IsVoid>false</IsVoid>
+            </returnType>
+            <Identifier>
+              <Name>getIn</Name>
+              <Attributes />
+            </Identifier>
+            <Parameters>
+              <Param>
+                <AbstractTypeNode>
+                  <Identifier>
+                    <Name>Language</Name>
+                    <Attributes />
+                  </Identifier>
+                </AbstractTypeNode>
+                <paramName>
+                  <Name>language</Name>
+                  <Attributes />
+                </paramName>
+              </Param>
+              <Param>
+                <PrimitiveTypeNode type="RW_STRING" />
+                <paramName>
+                  <Name>name</Name>
+                  <Attributes />
+                </paramName>
+              </Param>
+            </Parameters>
+          </MethodHeader>
+        </MethodHeaders>
+        <Inheritanceses>
+          <BaseItem>
+            <Name>Iterable</Name>
+            <Attributes />
+          </BaseItem>
+          <BaseItem>
+            <Name>IOtra</Name>
+            <Attributes />
+          </BaseItem>
+        </Inheritanceses>
+      </Interface>
+    </Namespace>
+  </Namespaceses>
+</CompilationUnitNode>

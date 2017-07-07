@@ -72,4 +72,7 @@ public class kevin : Javier
     int arreglo = new int[2][]{ new int[5],new int[8]};
     int arreglo = { new int[5], new int[4], array };
     int value = new Persona(x,y,w).array[2];
+
+    //tryParse
+    int dimension = int.Parse("5");
 }

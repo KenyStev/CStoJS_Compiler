@@ -1,0 +1,1544 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CompilationUnitNode xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <UsingDirectives />
+  <defaultNamespace>
+    <Identifier>
+      <Name>default</Name>
+      <Attributes />
+    </Identifier>
+    <Class IsAbstract="false">
+      <encapsulation type="RW_PUBLIC" />
+      <Identifier>
+        <Name>nuevaClase</Name>
+        <Attributes />
+      </Identifier>
+      <Inheritanceses />
+      <Fields />
+      <Constructors>
+        <Contructor>
+          <encapsulation type="RW_PUBLIC" />
+          <identifier>
+            <Name>nuevaClase</Name>
+            <Attributes />
+          </identifier>
+          <Parameters />
+          <statementBlock>
+            <statements>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>edad</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                  </Variable>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>sexo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                  </Variable>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>largo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>saldo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>MARTES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>MIERCOLES</Name>
+                      <Attributes />
+                    </identifier>
+                    <TypeNode xsi:type="VarTypeNode" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>x</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>kevin</Name>
+                      <Attributes />
+                    </identifier>
+                    <AbstractTypeNode>
+                      <Identifier>
+                        <Name>Kevin</Name>
+                        <Attributes />
+                      </Identifier>
+                    </AbstractTypeNode>
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <TypeNode xsi:type="VarTypeNode" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>nuevo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>t</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>mana</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>mana</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>funcion</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>persona</Name>
+                      <Attributes />
+                    </identifier>
+                    <AbstractTypeNode>
+                      <Identifier>
+                        <Name>Persona</Name>
+                        <Attributes />
+                      </Identifier>
+                    </AbstractTypeNode>
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>persona</Name>
+                      <Attributes />
+                    </identifier>
+                    <AbstractTypeNode>
+                      <Identifier>
+                        <Name>Persona</Name>
+                        <Attributes />
+                      </Identifier>
+                    </AbstractTypeNode>
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>mana</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ArrayInitializerNode>
+                      <ArrayInitializers>
+                        <VariableInitializer xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </VariableInitializer>
+                      </ArrayInitializers>
+                    </ArrayInitializerNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>value</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+            </statements>
+          </statementBlock>
+        </Contructor>
+      </Constructors>
+      <Methods>
+        <Method>
+          <encapsulation type="RW_PUBLIC" />
+          <Modifier type="RW_STATIC" />
+          <methodHeaderNode>
+            <returnType>
+              <VoidType />
+              <IsVoid>true</IsVoid>
+            </returnType>
+            <Identifier>
+              <Name>Main</Name>
+              <Attributes />
+            </Identifier>
+            <Parameters />
+          </methodHeaderNode>
+          <statemetBlock>
+            <statements>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>edad</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>saldo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>MARTES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>MIERCOLES</Name>
+                      <Attributes />
+                    </identifier>
+                    <TypeNode xsi:type="VarTypeNode" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>x</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>kevin</Name>
+                      <Attributes />
+                    </identifier>
+                    <AbstractTypeNode>
+                      <Identifier>
+                        <Name>Kevin</Name>
+                        <Attributes />
+                      </Identifier>
+                    </AbstractTypeNode>
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <TypeNode xsi:type="VarTypeNode" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>LUNES</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>boleano</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_BOOL" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>otro</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>nuevo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>t</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>mana</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>mana</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>funcion</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>f</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>persona</Name>
+                      <Attributes />
+                    </identifier>
+                    <AbstractTypeNode>
+                      <Identifier>
+                        <Name>Persona</Name>
+                        <Attributes />
+                      </Identifier>
+                    </AbstractTypeNode>
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>persona</Name>
+                      <Attributes />
+                    </identifier>
+                    <AbstractTypeNode>
+                      <Identifier>
+                        <Name>Persona</Name>
+                        <Attributes />
+                      </Identifier>
+                    </AbstractTypeNode>
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>mana</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_FLOAT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>arreglo</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ArrayInitializerNode>
+                      <ArrayInitializers>
+                        <VariableInitializer xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </VariableInitializer>
+                        <VariableInitializer xsi:type="LiteralIntNode">
+                          <Value>11</Value>
+                        </VariableInitializer>
+                      </ArrayInitializers>
+                    </ArrayInitializerNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+              <StatementNode xsi:type="LocalVariableDeclarationNode">
+                <LocalVariables>
+                  <Variable IsStatic="false">
+                    <identifier>
+                      <Name>value</Name>
+                      <Attributes />
+                    </identifier>
+                    <PrimitiveTypeNode type="RW_INT" />
+                    <ExpressionNode xsi:type="LiteralIntNode">
+                      <Value>11</Value>
+                    </ExpressionNode>
+                  </Variable>
+                </LocalVariables>
+              </StatementNode>
+            </statements>
+          </statemetBlock>
+        </Method>
+      </Methods>
+    </Class>
+  </defaultNamespace>
+  <Namespaceses />
+</CompilationUnitNode>

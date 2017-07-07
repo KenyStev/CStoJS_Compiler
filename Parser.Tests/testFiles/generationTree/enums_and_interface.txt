@@ -1,0 +1,42 @@
+using Kenystev;
+using Kenystev.Collection;
+
+namespace Kevin
+{
+    using Hola;
+    namespace Javier
+    {
+        interface Iterable
+        {
+            int[] getSec(timeset[,,][] nowDays);
+        }
+
+        namespace Hola
+        {
+            private interface IGently : Iterable, IOtra
+            {
+                void saludar();
+                int getSize();
+                Adios getIn(Language language,string name);
+            }
+        }
+    }
+}
+enum miEnum 
+{
+    ONE,TWO,THREE,FOUR,FIVE
+}
+namespace Hola
+{
+    enum dentroDe
+    {
+        Hola,
+        adios
+    }
+}
+
+private enum otroMas
+{
+    promise,
+    nadaMas
+}

@@ -1,5 +1,13 @@
 using System;
 using System.Linq;
+using Compiler.TreeNodes.Expressions;
+using Compiler.TreeNodes.Expressions.EqualityExpressions;
+using Compiler.TreeNodes.Expressions.RelationalExpressions;
+using Compiler.TreeNodes.Expressions.TypeTestingExpressions;
+using Compiler.TreeNodes.Expressions.ShiftExpressions;
+using Compiler.TreeNodes.Expressions.AdditiveExpressions;
+using Compiler.TreeNodes.Expressions.MultipicativeExpressions;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler
 {
@@ -7,373 +15,392 @@ namespace Compiler
     {
         /*expression:
             | conditional-expression */
-        private void expression()
+        private ExpressionNode expression()
         {
             printIfDebug("expression");
             if(!pass(expressionOptions()))
                 throwError("Operator, identifier or literal in expression expected");
-            conditional_expression();
+            return conditional_expression();
         }
 
         /*conditional-expression:
 	        | null-coalescing-expression conditional-expression-p */
-        private void conditional_expression()
+        private ExpressionNode conditional_expression()
         {
             printIfDebug("conditional_expression");
-            null_coalescing_expression();
-            if(pass(TokenType.OP_TERNARY))
-            {
-                conditional_expression_p();
-            }
+            var exp = null_coalescing_expression();
+            return conditional_expression_p(exp);
         }
 
         /*conditional-expression-p:
             | '?' expression ':' expression 
             | EPSILON */
-        private void conditional_expression_p()
+        private ExpressionNode conditional_expression_p(ExpressionNode conditionalExpression)
         {
             printIfDebug("conditional_expression_p");
             if(pass(TokenType.OP_TERNARY))
             {
+                var ternaryToken = token;
                 consumeToken();
-                expression();
+                var trueExpression = expression();
                 if(!pass(TokenType.PUNT_COLON))
                     throwError(": expected");
                 consumeToken();
-                expression();
+                var falseExpression = expression();
+                return new TernaryExpressionNode(conditionalExpression,trueExpression,falseExpression,ternaryToken);
             }else{
-                //EPSILON
+                return conditionalExpression;
             }
         }
 
         /*null-coalescing-expression:
 	        | conditional-or-expression null-coalescing-expression-p */
-        private void null_coalescing_expression()
+        private ExpressionNode null_coalescing_expression()
         {
             printIfDebug("null_coalescing_expression");
-            conditional_or_expression();
-            if(pass(TokenType.OP_NULL_COALESCING))
-            {
-                null_coalescing_expression_p();
-            }
+            var expCondOr = conditional_or_expression();
+            return null_coalescing_expression_p(expCondOr);
         }
 
         /*null-coalescing-expression-p:
             | "??" null-coalescing-expression
             | EPSILON */
-        private void null_coalescing_expression_p()
+        private ExpressionNode null_coalescing_expression_p(ExpressionNode nullableExpression)
         {
             printIfDebug("null_coalescing_expression_p");
             if(pass(TokenType.OP_NULL_COALESCING))
             {
+                var nullCoToken = token;
                 consumeToken();
-                null_coalescing_expression();
+                var rightExpression = null_coalescing_expression();
+                return new NullCoalescingExpressionNode(nullableExpression,rightExpression,nullCoToken);
             }else{
-                //EPSILON
+                return nullableExpression;
             }
         }
 
         /*conditional-or-expression:
 	        | conditional-and-expression conditional-or-expression-p */
-        private void conditional_or_expression()
+        private ExpressionNode conditional_or_expression()
         {
             printIfDebug("conditional_or_expression");
-            conditional_and_expression();
-            if(pass(TokenType.OP_OR))
-            {
-                conditional_or_expression_p();
-            }
+            var ConditionOr = conditional_and_expression();
+            return conditional_or_expression_p(ConditionOr);
         }
 
         /*conditional-or-expression-p:
             | "||" conditional-and-expression conditional-or-expression-p 
             | EPSILON */
-        private void conditional_or_expression_p()
+        private ExpressionNode conditional_or_expression_p(ExpressionNode OrExpression)
         {
             printIfDebug("conditional_or_expression_p");
             if(pass(TokenType.OP_OR))
             {
+                var orToken = token;
                 consumeToken();
-                conditional_and_expression();
-                if(pass(TokenType.OP_OR))
-                    conditional_or_expression_p();
+                var AndExpression = conditional_and_expression();
+                return conditional_or_expression_p(new ConditionalOrExpressionNode(OrExpression,AndExpression,orToken));
             }else{
-                //EPSILON
+                return OrExpression;
             }
         }
 
         /*conditional-and-expression:
 	        | inclusive-or-expression conditional-and-expression-p */
-        private void conditional_and_expression()
+        private ExpressionNode conditional_and_expression()
         {
             printIfDebug("conditional_and_expression");
-            inclusive_or_expression();
-            if(pass(TokenType.OP_AND))
-            {
-                conditional_and_expression_p();
-            }
+            var bitsOr = inclusive_or_expression();
+            return conditional_and_expression_p(bitsOr);
         }
 
         /*conditional-and-expression-p:
             | "&&" inclusive-or-expression conditional-and-expression-p
             | EPSILON  */
-        private void conditional_and_expression_p()
+        private ExpressionNode conditional_and_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("conditional_and_expression_p");
             if(pass(TokenType.OP_AND))
             {
+                var andToken = token;
                 consumeToken();
-                inclusive_or_expression();
-                if(pass(TokenType.OP_AND))
-                    conditional_and_expression_p();
+                var bitsOt = inclusive_or_expression();
+                return conditional_and_expression_p(new ConditionalAndExpressionNode(leftExpression,bitsOt,andToken));
             }else{
-                //EPSILON
+                return leftExpression;
             }
         }
 
         /*inclusive-or-expression:
 	        | exclusive-or-expression inclusive-or-expression-p */
-        private void inclusive_or_expression()
+        private ExpressionNode inclusive_or_expression()
         {
             printIfDebug("inclusive_or_expression");
-            exclusive_or_expression();
-            if(pass(TokenType.OP_BITWISE_OR))
-            {
-                inclusive_or_expression_p();
-            }
+            var exclusiveOrExpression = exclusive_or_expression();
+            return inclusive_or_expression_p(exclusiveOrExpression);
         }
 
         /*inclusive-or-expression-p:
             | "|" exclusive-or-expression inclusive-or-expression-p
             | EPSILON */
-        private void inclusive_or_expression_p()
+        private ExpressionNode inclusive_or_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("inclusive_or_expression_p");
             if(pass(TokenType.OP_BITWISE_OR))
             {
+                var orToken = token;
                 consumeToken();
-                exclusive_or_expression();
-                if(pass(TokenType.OP_BITWISE_OR))
-                    inclusive_or_expression_p();
+                var exclusiveOrExpression = exclusive_or_expression();
+                return inclusive_or_expression_p(new BitwiseOrExpressionNode(leftExpression,exclusiveOrExpression,orToken));
+            }else{
+                return leftExpression;
             }
         }
 
         /*exclusive-or-expression:
 	        | and-expression exclusive-or-expression-p */
-        private void exclusive_or_expression()
+        private ExpressionNode exclusive_or_expression()
         {
             printIfDebug("exclusive_or_expression");
-            and_expression();
-            if(pass(TokenType.OP_XOR))
-            {
-                exclusive_or_expression_p();
-            }
+            var bitsAnd = and_expression();
+            return exclusive_or_expression_p(bitsAnd);
         }
 
         /*exclusive-or-expression-p:
             | "^" and-expression exclusive-or-expression-p
             | EPSILON  */
-        private void exclusive_or_expression_p()
+        private ExpressionNode exclusive_or_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("exclusive_or_expression_p");
             if(pass(TokenType.OP_XOR))
             {
+                var xorToken = token;
                 consumeToken();
-                and_expression();
-                if(pass(TokenType.OP_XOR))
-                    exclusive_or_expression_p();
+                var bitsAnd = and_expression();
+                return exclusive_or_expression_p(new ExclusiveOrExpression(leftExpression,bitsAnd,xorToken));
             }else{
-                //EPSILON
+                return leftExpression;
             }
         }
 
         /*and-expression:
 	        | equality-expression and-expression-p */
-        private void and_expression()
+        private ExpressionNode and_expression()
         {
             printIfDebug("and_expression");
-            equality_expression();
-            if(pass(TokenType.OP_BITWISE_AND))
-            {
-                and_expression_p();
-            }
+            var equalityExpression = equality_expression();
+            return and_expression_p(equalityExpression);
         }
 
         /*and-expression-p:
             | "&" equality-expression and-expression-p
             | EPSILON */
-        private void and_expression_p()
+        private ExpressionNode and_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("and_expression_p");
             if(pass(TokenType.OP_BITWISE_AND))
             {
+                var andToken = token;
                 consumeToken();
-                equality_expression();
-                if(pass(TokenType.OP_BITWISE_AND))
-                    and_expression_p();
+                var equalityExpression = equality_expression();
+                return and_expression_p(new BitwiseAndExpressionNode(leftExpression,equalityExpression,andToken));
             }else{
-                //EPSILON
+                return leftExpression;
             }
         }
 
         /*equality-expression:
 	        | relational-expression equality-expression-p */
-        private void equality_expression()
+        private ExpressionNode equality_expression()
         {
             printIfDebug("equality_expression");
-            relational_expression();
-            if(pass(equalityOperatorOptions))
-            {
-                equality_expression_p();
-            }
+            var relationalExpression = relational_expression();
+            return equality_expression_p(relationalExpression);
         }
 
         /*equality-expression-p:
             | expression-equality-operator relational-expression equality-expression-p
             | EPSILON */
-        private void equality_expression_p()
+        private ExpressionNode equality_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("equality_expression_p");
             if(pass(equalityOperatorOptions))
             {
+                Token equalityOperation = token;
                 consumeToken();
-                relational_expression();
-                if(pass(equalityOperatorOptions))
-                    equality_expression_p();
+                var relationalExpression = relational_expression();
+                ExpressionNode resultExpression = null;
+                if(equalityOperation.type==TokenType.OP_EQUAL)
+                    resultExpression = new EqualExpressionNode(leftExpression,relationalExpression,equalityOperation);
+                else
+                    resultExpression = new DistinctExpressionNode(leftExpression,relationalExpression,equalityOperation);
+
+                return equality_expression_p(resultExpression);
             }else{
-                //EPSILON
+                return leftExpression;
             }
         }
 
         /*relational-expression:
 	        | shift-expression relational-expression-p */
-        private void relational_expression()
+        private ExpressionNode relational_expression()
         {
             printIfDebug("relational_expression");
-            shift_expression();
-            if(pass(relationalOperatorOptions,Is_AsOperatorOptions))
-            {
-                relational_expression_p();
-            }
+            var shiftExpression = shift_expression();
+            return relational_expression_p(shiftExpression);
         }
 
         /*relational-expression-p:
             | expression-relational-operator shift-expression relational-expression-p
             | is-as-operators type relational-expression-p
             | EPSILON  */
-        private void relational_expression_p()
+        private ExpressionNode relational_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("relational_expression_p");
             if(pass(relationalOperatorOptions))
             {
+                Token relationalOperator = token;
                 consumeToken();
-                shift_expression();
-                if(pass(relationalOperatorOptions,Is_AsOperatorOptions))
-                    relational_expression_p();
+                var shiftExpression = shift_expression();
+                ExpressionNode resultExpression = null;
+                if(relationalOperator.type == TokenType.OP_LESS_THAN)
+                    resultExpression = new LessThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
+                else if(relationalOperator.type == TokenType.OP_MORE_THAN)
+                    resultExpression = new GreaterThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
+                else if(relationalOperator.type == TokenType.OP_LESS_AND_EQUAL_THAN)
+                    resultExpression = new LessOrEqualThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
+                else
+                    resultExpression = new GreaterOrEqualThanExpressionNode(leftExpression,shiftExpression,relationalOperator);
+                return relational_expression_p(resultExpression);
             }else if(pass(Is_AsOperatorOptions))
             {
+                Token typeTestOperator = token;
                 consumeToken();
                 if(!pass(typesOptions))
                     throwError("type expected");
-                types();
-                if(pass(relationalOperatorOptions,Is_AsOperatorOptions))
-                    relational_expression_p();
+                var type = types();
+                TypeTestingExpressionNode resultExpression = null;
+                if(typeTestOperator.type==TokenType.OP_IS)
+                    resultExpression = new IsTypeTestNode(leftExpression,type,typeTestOperator);
+                else
+                    resultExpression = new AsTypeTestNode(leftExpression,type,typeTestOperator);
+                return relational_expression_p(resultExpression);
             }else{
-                //EPSILON
+                return leftExpression;
             }
         }
 
         /*shift-expression:
 	        | additive-expression shift-expression-p */
-        private void shift_expression()
+        private ExpressionNode shift_expression()
         {
             printIfDebug("shift_expression");
-            additive_expression();
-            if(pass(shiftOperatorOptions))
-                shift_expression_p();
+            var additiveExpression = additive_expression();
+            return shift_expression_p(additiveExpression);
         }
 
         /* shift-expression-p:
             | expression-shift-operator additive-expression shift-expression-p
             | EPSILON */
-        private void shift_expression_p()
+        private ExpressionNode shift_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("shift_expression_p");
             if(pass(shiftOperatorOptions))
             {
+                Token shiftOperator = token;
                 consumeToken();
-                additive_expression();
-                if(pass(shiftOperatorOptions))
-                    shift_expression_p();
+                var additiveExpression = additive_expression();
+                ExpressionNode resultExpression = null;
+                if(shiftOperator.type==TokenType.OP_SHIFT_LEFT)
+                    resultExpression = new ShiftLeftNode(leftExpression,additiveExpression,shiftOperator);
+                else
+                    resultExpression = new ShiftRightNode(leftExpression,additiveExpression,shiftOperator);
+                return shift_expression_p(resultExpression);
             }else{
-                //EPSILON
+                return leftExpression;
             }
         }
 
         /*additive-expression:
 	        | multiplicative-expression additive-expression-p */
-        private void additive_expression()
+        private ExpressionNode additive_expression()
         {
             printIfDebug("additive_expression");
-            multiplicative_expression();
-            if(pass(additiveOperatorOptions))
-                additive_expression_p();
+            var multExpression = multiplicative_expression();
+            return additive_expression_p(multExpression);
         }
 
         /*additive-expression-p:
             | additive-operators multiplicative-expression additive-expression-p
             | EPSILON */
-        private void additive_expression_p()
+        private ExpressionNode additive_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("additive_expression_p");
             if(pass(additiveOperatorOptions))
             {
+                Token additiveOperatior = token;
                 consumeToken();
-                multiplicative_expression();
-                if(pass(additiveOperatorOptions))
-                    additive_expression_p();
+                var multExpression = multiplicative_expression();
+                ExpressionNode resultExpression = null;
+                if(additiveOperatior.type==TokenType.OP_SUM)
+                    resultExpression = new SumExpressionNode(leftExpression,multExpression,additiveOperatior);
+                else
+                    resultExpression = new SubExpressionNode(leftExpression,multExpression,additiveOperatior);
+
+                return additive_expression_p(resultExpression);
+            }else{
+                return leftExpression;
             }
         }
 
         /*multiplicative-expression:
 	        | unary-expression multiplicative-expression-factorized */
-        private void multiplicative_expression()
+        private ExpressionNode multiplicative_expression()
         {
             printIfDebug("multiplicative_expression");
-            unary_expression();
-            multiplicative_expression_factorized();
+            var unaryExpression = unary_expression();
+            return multiplicative_expression_factorized(unaryExpression);
         }
 
         /*multiplicative-expression-factorized:
             | assignment-operator expression multiplicative-expression-p
             | multiplicative-expression-p */
-        private void multiplicative_expression_factorized()
+        private ExpressionNode multiplicative_expression_factorized(ExpressionNode unaryExpression)
         {
             printIfDebug("multiplicative_expression_factorized");
             if(pass(assignmentOperatorOptions))
             {
+                TokenType assignType = token.type;
+                var assignToken = token;
                 consumeToken();
-                expression();
-                if(pass(multiplicativeOperatorOptions))
-                    multiplicative_expression_p();
+                var assignExpression = expression();
+                return multiplicative_expression_p(new AssignExpressionNode(unaryExpression,assignType,assignExpression,assignToken));
             }else{
-                multiplicative_expression_p();
+                return multiplicative_expression_p(unaryExpression);
             }
         }
 
         /*multiplicative-expression-p:
             | multiplicative-operators unary-expression multiplicative-expression-p
             | EPSILON */
-        private void multiplicative_expression_p()
+        private ExpressionNode multiplicative_expression_p(ExpressionNode leftExpression)
         {
             printIfDebug("multiplicative_expression_p");
             if(pass(multiplicativeOperatorOptions))
             {
+                Token multiplicativeOperator = token;
                 consumeToken();
-                unary_expression();
-                if(pass(multiplicativeOperatorOptions))
-                    multiplicative_expression_p();
+                var unaryExpression = unary_expression();
+                ExpressionNode resultExpression = null;
+                if(multiplicativeOperator.type==TokenType.OP_MULTIPLICATION)
+                    resultExpression = new MultNode(leftExpression,unaryExpression,multiplicativeOperator);
+                else if(multiplicativeOperator.type==TokenType.OP_DIVISION)
+                    resultExpression = new DivNode(leftExpression,unaryExpression,multiplicativeOperator);
+                else
+                    resultExpression = new ModNode(leftExpression,unaryExpression,multiplicativeOperator);
+                return multiplicative_expression_p(resultExpression);
             }
+            return leftExpression;
         }
     }
 }

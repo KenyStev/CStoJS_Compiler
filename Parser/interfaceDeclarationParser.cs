@@ -1,5 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler
 {
@@ -7,115 +11,132 @@ namespace Compiler
     {
         /*interface-declaration: 
 	        | "interface" identifier inheritance-base interface-body optional-body-end */
-        private void interface_declaration()
+        private InterfaceTypeNode interface_declaration()
         {
             printIfDebug("interface_declaration");
             if(!pass(TokenType.RW_INTERFACE))
-                throwError("'interface' expected");
+                throwError("'interface' reserved word expected");
             consumeToken();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var interfaceID = new IdNode(token.lexeme,token);
             consumeToken();
-            inheritance_base();
-            interface_body();
+            var inheritanceses = inheritance_base();
+            var newInterfaceType = interface_body(interfaceID);
+            newInterfaceType.setInheritance(inheritanceses);
             optional_body_end();
+            return newInterfaceType;
         }
 
         /*interface-body:
 	        | '{' interface-method-declaration-list '}' */
-        private void interface_body()
+        private InterfaceTypeNode interface_body(IdNode name)
         {
             printIfDebug("interface_body");
             if(!pass(TokenType.PUNT_CURLY_BRACKET_OPEN))
                 throwError("'{' expected");
             consumeToken();
-            interface_method_declaration_list();
+            var methodDeclarationList = interface_method_declaration_list();
             if(!pass(TokenType.PUNT_CURLY_BRACKET_CLOSE))
                 throwError("'}' expected");
             consumeToken();
+            return new InterfaceTypeNode(name,methodDeclarationList,name.token);
         }
 
         /*interface-method-declaration-list:
             | interface-method-header ';' interface-method-declaration-list
             | EPSILON */
-        private void interface_method_declaration_list()
+        private List<MethodHeaderNode> interface_method_declaration_list()
         {
             printIfDebug("interface_method_declaration_list");
-            if(pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(pass(typesOptions,voidOption))
             {
-                interface_method_header();
+                var methodHeader = interface_method_header();
                 if(!pass(TokenType.PUNT_END_STATEMENT_SEMICOLON))
                     throwError("; expected");
                 consumeToken();
-                interface_method_declaration_list();
+                var methodList = interface_method_declaration_list();
+                methodList.Insert(0,methodHeader);
+                return methodList;
             }else{
-                //EPSILON
+                return new List<MethodHeaderNode>();
             }
         }
 
         /*interface-method-header:
 	        | type-or-void identifier '(' fixed-parameters ')'  */
-        private void interface_method_header()
+        private MethodHeaderNode interface_method_header()
         {
             printIfDebug("interface_method_header");
-            if(!pass(typesOptions,new TokenType[]{TokenType.RW_VOID}))
+            if(!pass(typesOptions,voidOption))
                 throwError("type-or-void expected");
-            type_or_void();
+            var typeNode = type_or_void();
+            var returnType = new ReturnTypeNode(typeNode,typeNode is VoidTypeNode,typeNode.token);
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var name = new IdNode(token.lexeme,token);
             consumeToken();
             if(!pass(TokenType.PUNT_PAREN_OPEN))
                 throwError("'(' expected");
+            var methodHeaderToken = token;
             consumeToken();
+            List<ParameterNode> fixedParams = null;
             if(pass(typesOptions))
-                fixed_parameters();
+                fixedParams = fixed_parameters();
             if(!pass(TokenType.PUNT_PAREN_CLOSE))
                 throwError("')' expected");
             consumeToken();
+            return new MethodHeaderNode(returnType,name,fixedParams,methodHeaderToken);
         }
 
         /*fixed-parameters:
             | fixed-parameter fixed-paramaters-p
             | EPSILON */
-        private void fixed_parameters()
+        private List<ParameterNode> fixed_parameters()
         {
             printIfDebug("fixed_parameters");
             if(pass(typesOptions))
             {
-                fixed_parameter();
-                fixed_paramaters_p();
+                var param = fixed_parameter();
+                var parameters = fixed_paramaters_p();
+                parameters.Insert(0,param);
+                return parameters;
             }else{
-                //EPSILON
+                return new List<ParameterNode>();
             }
         }
 
         /*fixed-parameters-p:
             | ',' fixed-parameter fixed-parameters-p
             | EPSILON */
-        private void fixed_paramaters_p()
+        private List<ParameterNode> fixed_paramaters_p()
         {
             printIfDebug("fixed_paramaters_p");
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                fixed_parameter();
-                fixed_paramaters_p();
+                var param = fixed_parameter();
+                var parameters = fixed_paramaters_p();
+                parameters.Insert(0,param);
+                return parameters;
             }else{
-                //EPSILON
+                return new List<ParameterNode>();
             }
         }
 
         /*fixed-parameter:
 	        | type identifier */
-        private void fixed_parameter()
+        private ParameterNode fixed_parameter()
         {
             printIfDebug("fixed_parameter");
             if(!pass(typesOptions))
                 throwError("type expected");
-            types();
+            var type = types();
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var paramName = new IdNode(token.lexeme,token);
             consumeToken();
+            return new ParameterNode(type,paramName,type.token);
         }
     }
 }

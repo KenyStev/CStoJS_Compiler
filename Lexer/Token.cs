@@ -1,3 +1,5 @@
+using System;
+
 namespace Compiler
 {
     public class Token
@@ -7,6 +9,7 @@ namespace Compiler
         public int row;
         public string lexeme;
         
+        public Token(){}
         public Token(TokenType type, string lexeme, int row, int column)
         {
             this.type = type;
@@ -18,6 +21,11 @@ namespace Compiler
         public override string ToString()
         {
             return lexeme + " of type " + type + " line("+row+","+column+")";
+        }
+
+        public string getLine()
+        {
+            return "line("+row+","+column+")";
         }
     }
 }

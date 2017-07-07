@@ -1,0 +1,29 @@
+using Kenystev;
+using Kenystev.Collection;
+
+namespace Kevin
+{
+    using Hola;
+    namespace Javier
+    {
+
+    }
+}
+enum miEnum 
+{
+    ONE,TWO,THREE,FOUR,FIVE
+}
+namespace Hola
+{
+    enum dentroDe
+    {
+        Hola,
+        adios
+    }
+}
+
+private enum otroMas
+{
+    promise,
+    nadaMas
+}

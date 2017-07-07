@@ -37,7 +37,7 @@ namespace Compiler
 
         public override bool validStart(Symbol currentSymbol)
         {
-            if(Char.IsLetter(currentSymbol.character))
+            if(Char.IsLetter(currentSymbol.character) || '_' == currentSymbol.character)
             {
                 return true;
             }
@@ -58,6 +58,7 @@ namespace Compiler
             //Literals
             reservedWordsDict["true"] = TokenType.LIT_BOOL;
             reservedWordsDict["false"] = TokenType.LIT_BOOL;
+            reservedWordsDict["null"] = TokenType.RW_NULL;
 
             //Operators
             reservedWordsDict["sizeof"] = TokenType.OP_SIZEOF;

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Compiler.TreeNodes;
+using Compiler.TreeNodes.Types;
+using Compiler.TreeNodes.Expressions.UnaryExpressions;
 
 namespace Compiler
 {
@@ -25,103 +28,99 @@ namespace Compiler
             look_ahead = new List<Token>();
         }
 
-        public void parse(){
+        public CompilationUnitNode parse(){
             printIfDebug("parse");
-            compilation_unit();
+            var compilationNode = compilation_unit();
             if(!pass(TokenType.EOF))
             {
                 throwError("end of file token expected.");
             }
+            return compilationNode;
         }
 
         /*compilation-unit:
-            | optional-using-directive optional-namespace-member-declaration
-            | optional-namespace-member-declaration
+            | optional-using-directive optional-namespace-or-type-member-declaration
+            | optional-namespace-or-type-member-declaration
             | EPSILON */
-        private void compilation_unit()
+        private CompilationUnitNode compilation_unit()
         {
             printIfDebug("compilation_unit");
-            if(pass(TokenType.RW_USING))
-            {
-                optional_using_directive();
-            }
-            TokenType[] namespaceType = {TokenType.RW_NAMESPACE};
-            if(pass(namespaceType,encapsulationOptions,typesDeclarationOptions))
-            {
-                optional_namespace_member_declaration();
-            }else{
-                //EPSILON
-            }
+            var usingList = optional_using_directive();
+            var compilation = new CompilationUnitNode(usingList);
+            optional_namespace_or_type_member_declaration(ref compilation,ref compilation.defaultNamespace);
+            return compilation;
         }
 
 
         /*optional-using-directive:
             | using-directive
             | EPSILON */
-        private void optional_using_directive()
+        private List<UsingNode> optional_using_directive()
         {
             printIfDebug("optional_using_directive");
             if(pass(TokenType.RW_USING))
             {
-                using_directive();
+                return using_directive();
             }else{
-                //EPSILON
+                return new List<UsingNode>();
             }
         }
 
         /*type-declaration-list:
             | type-declaration type-declaration-list
             | EPSILON */
-        private void type_declaration_list()
+        private List<TypeNode> type_declaration_list()
         {
             printIfDebug("type_declaration_list");
             if(pass(encapsulationOptions,typesDeclarationOptions))
             {
-                type_declaration();
-                type_declaration_list();
+                var declaredType = type_declaration();
+                var listTypesDeclared = type_declaration_list();
+                listTypesDeclared.Insert(0,declaredType);
+                return listTypesDeclared;
             }else{
-                //EPSILON
+                return new List<TypeNode>();
             }
         }
 
         /*type-declaration:
 	        | encapsulation-modifier group-declaration */
-        private void type_declaration()
+        private TypeNode type_declaration()
         {
             printIfDebug("type_declaration");
-             if(!pass(encapsulationOptions,typesDeclarationOptions))
+            if(!pass(encapsulationOptions,typesDeclarationOptions))
             {
                 throwError("expected member declaration");
             }
-            if(pass(encapsulationOptions))
-            {
-                encapsulation_modifier();
-            }
-            if(pass(typesDeclarationOptions))
-            {
-                group_declaration();
-            }
+            
+            var encapMod = encapsulation_modifier();
+            
+            return group_declaration(encapMod);
         }
 
         /*group-declaration:
             | class-declaration
             | interface-declaration
             | enum-declaration */
-        private void group_declaration()
+        private TypeNode group_declaration(EncapsulationNode encapMod)
         {
             printIfDebug("group_declaration");
+            TypeNode typeDeclaration = null;
             if(pass(TokenType.RW_ABSTRACT,TokenType.RW_CLASS))
             {
-                class_declaration();
+                typeDeclaration = class_declaration();
             }else if(pass(TokenType.RW_INTERFACE))
             {
-                interface_declaration();
+                typeDeclaration = interface_declaration();
             }else if(pass(TokenType.RW_ENUM))
             {
-                enum_declaration();
+                typeDeclaration = enum_declaration();
             }else{
                 throwError("group-declaration expected [class|interface|enum]");
             }
+            if(typeDeclaration!=null)
+                typeDeclaration.setEncapsulationMode(encapMod);
+            return typeDeclaration;
         }
 
         /*optional-body-end:
@@ -141,18 +140,26 @@ namespace Compiler
 
         /*qualified-identifier:
 	        | identifier identifier-attribute */
-        private void qualified_identifier()
+        private IdNode qualified_identifier()
         {
             if(!pass(TokenType.ID))
                 throwError("identifier expected");
+            var id = token.lexeme;
+            var idToken = token;
             consumeToken();
-            identifier_attribute();
+            var attr = identifier_attribute();
+            string fullIdName = id;
+            foreach(var a in attr)
+            {
+                fullIdName += "." + a.Name;
+            }
+            return new IdNode(fullIdName,null,idToken);
         }
 
         /*identifier-attribute:
             | '.' identifier identifier-attribute
             | EPSILON */
-        private void identifier_attribute()
+        private List<IdNode> identifier_attribute()
         {
             printIfDebug("identifier_attribute");
             if(pass(TokenType.PUNT_ACCESOR))
@@ -160,53 +167,75 @@ namespace Compiler
                 consumeToken();
                 if(!pass(TokenType.ID))
                     throwError("identifier expected");
+                var idValue = token.lexeme;
+                var idToken = token;
                 consumeToken();
-                identifier_attribute();
+                var listIdNod = identifier_attribute();
+                listIdNod.Insert(0,new IdNode(idValue,idToken));
+                return listIdNod;
             }else{
-                //EPSILON
+                return new List<IdNode>();
             }
         }
 
         /*identifiers-list:
 	        | qualified-identifier identifiers-list-p */
-        private void identifiers_list()
+        private List<IdNode> identifiers_list()
         {
-            qualified_identifier();
-            identifiers_list_p();
+            var idnode = qualified_identifier();
+            // idnode = getFullIdentifierName(idnode);
+            var lisIdNodes = identifiers_list_p();
+            lisIdNodes.Insert(0,idnode);
+            return lisIdNodes;
         }
 
         /*identifiers-list-p:
             | ',' qualified-identifier identifiers-list-p
             | EPSILON */
-        private void identifiers_list_p()
+        private List<IdNode> identifiers_list_p()
         {
             if(pass(TokenType.PUNT_COMMA))
             {
                 consumeToken();
-                qualified_identifier();
-                identifiers_list_p();
+                var idnode = qualified_identifier();
+                // idnode = getFullIdentifierName(idnode);
+                var listIdNode = identifiers_list_p();
+                listIdNode.Insert(0,idnode);
+                return listIdNode;
             }else{
-                //EPSILON
+                return new List<IdNode>();
             }
         }
 
         /*type:
             | built-in-type optional-rank-specifier-list
             | qualified-identifier optional-rank-specifier-list */
-        private void types()
+        private TypeNode types()
         {
             printIfDebug("types");
             if(pass(typesOptions) && !pass(TokenType.ID))
             {
-                built_in_type();
-                optional_rank_specifier_list();
+                var typeToken = token;
+                var primitiveType = built_in_type();
+                var newMultArrayTypeList = optional_rank_specifier_list();
+                if(newMultArrayTypeList.Count>0)
+                    return new ArrayTypeNode(primitiveType,newMultArrayTypeList,typeToken);
+                else
+                    return primitiveType;
             }else if(pass(TokenType.ID))
             {
-                qualified_identifier();
-                optional_rank_specifier_list();
+                var typeToken = token;
+                var typeName = qualified_identifier();
+                var abstractType = new AbstractTypeNode(typeName,typeToken);
+                var newMultArrayTypeList = optional_rank_specifier_list();
+                if(newMultArrayTypeList.Count>0)
+                    return new ArrayTypeNode(abstractType,newMultArrayTypeList,typeToken);
+                else
+                    return abstractType;
             }else{
                 throwError("type expected");
             }
+            return null;
         }
 
         /*built-in-type:
@@ -215,36 +244,53 @@ namespace Compiler
             | "string"
             | "bool"
             | "float" */
-        private void built_in_type()
+        private PrimitiveTypeNode built_in_type()
         {
             printIfDebug("built_in_type");
             if(!pass(typesOptions))
                 throwError("primary type expected");
+            var type = token;
             consumeToken();
+            
+            switch (type.type)
+            {
+                case TokenType.RW_BOOL: return new BoolTypeNode(type);
+                case TokenType.RW_INT: return new IntTypeNode(type);
+                case TokenType.RW_CHAR: return new CharTypeNode(type);
+                case TokenType.RW_FLOAT: return new FloatTypeNode(type);
+                case TokenType.RW_STRING: return new StringTypeNode(type);
+                default: return null;
+            }
         }
 
         /*type-or-void:
             | type
             | "void" */
-        private void type_or_void()
+        private TypeNode type_or_void()
         {
             printIfDebug("type_or_void");
             if(pass(TokenType.RW_VOID))
+            {
+                var voidToken = token;
                 consumeToken();
-            else
-                types();
+                return new VoidTypeNode(voidToken);
+            }
+            return types();
         }
 
         /*type-or-var:
             | type
             | "var" */
-        private void type_or_var()
+        private TypeNode type_or_var()
         {
             printIfDebug("type_or_var");
             if(pass(TokenType.RW_VAR))
+            {
+                var varToken = token;
                 consumeToken();
-            else
-                types();
+                return new VarTypeNode(varToken);
+            }
+            return types();
         }
     }
 }
